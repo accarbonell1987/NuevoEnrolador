@@ -1,0 +1,23 @@
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorAccesoDatos\bin\Debug\Dlls\System.Data.SQLite.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorAccesoDatos\bin\Debug\Dlls\System.Data.SQLite.EF6.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorAccesoDatos\bin\Debug\EnroladorAccesoDatos.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorAccesoDatos\bin\Debug\EnroladorAccesoDatos.pdb
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorAccesoDatos\bin\Debug\EntityFramework.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorAccesoDatos\bin\Debug\EntityFramework.SqlServer.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorAccesoDatos\bin\Debug\System.Data.SQLite.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorAccesoDatos\bin\Debug\System.Data.SQLite.EF6.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\OUTPUT\EnroladorAccesoDatos.dll.config
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\OUTPUT\EnroladorAccesoDatos.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\OUTPUT\EnroladorAccesoDatos.pdb
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.g.resources
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.csproj.CoreCompileInputs.cache
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.pdb
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.csprojResolveAssemblyReference.cache
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\OUTPUT\EnroladorAccesoDatos.dll.config
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\OUTPUT\EnroladorAccesoDatos.dll
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\OUTPUT\EnroladorAccesoDatos.pdb
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.g.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.csproj.CoreCompileInputs.cache
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.dll
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.pdb

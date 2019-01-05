@@ -1,0 +1,96 @@
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\Dlls\System.Data.SQLite.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\Dlls\System.Data.SQLite.EF6.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\EnroladorStandAloneV2.exe.config
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\EnroladorStandAloneV2.exe
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\EnroladorStandAloneV2.pdb
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\DevExpress.BonusSkins.v16.2.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\DevExpress.Data.v16.2.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\DevExpress.Printing.v16.2.Core.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\DevExpress.Sparkline.v16.2.Core.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\DevExpress.Utils.v16.2.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\DevExpress.XtraBars.v16.2.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\DevExpress.XtraEditors.v16.2.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\EnroladorAccesoDatos.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\EntityFramework.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\System.Data.SQLite.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\DevExpress.Pdf.v16.2.Core.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\EnroladorAccesoDatos.pdb
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\DevExpress.Data.v16.2.xml
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\DevExpress.Printing.v16.2.Core.xml
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\DevExpress.Utils.v16.2.xml
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\DevExpress.XtraBars.v16.2.xml
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\DevExpress.Sparkline.v16.2.Core.xml
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\DevExpress.XtraEditors.v16.2.xml
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\DevExpress.Pdf.v16.2.Core.xml
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\de\DevExpress.Data.v16.2.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\es\DevExpress.Data.v16.2.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\ja\DevExpress.Data.v16.2.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\ru\DevExpress.Data.v16.2.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\de\DevExpress.Printing.v16.2.Core.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\es\DevExpress.Printing.v16.2.Core.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\ja\DevExpress.Printing.v16.2.Core.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\ru\DevExpress.Printing.v16.2.Core.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\de\DevExpress.Utils.v16.2.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\es\DevExpress.Utils.v16.2.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\ja\DevExpress.Utils.v16.2.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\ru\DevExpress.Utils.v16.2.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\de\DevExpress.XtraBars.v16.2.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\es\DevExpress.XtraBars.v16.2.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\ja\DevExpress.XtraBars.v16.2.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\ru\DevExpress.XtraBars.v16.2.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\de\DevExpress.Sparkline.v16.2.Core.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\es\DevExpress.Sparkline.v16.2.Core.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\ja\DevExpress.Sparkline.v16.2.Core.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\ru\DevExpress.Sparkline.v16.2.Core.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\de\DevExpress.XtraEditors.v16.2.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\es\DevExpress.XtraEditors.v16.2.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\ja\DevExpress.XtraEditors.v16.2.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\ru\DevExpress.XtraEditors.v16.2.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\de\DevExpress.Pdf.v16.2.Core.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\es\DevExpress.Pdf.v16.2.Core.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\ja\DevExpress.Pdf.v16.2.Core.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\bin\Debug\ru\DevExpress.Pdf.v16.2.Core.resources.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\OUTPUT\EnroladorStandAloneV2.exe.config
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\OUTPUT\EnroladorStandAloneV2.exe
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\OUTPUT\EnroladorStandAloneV2.pdb
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csprojResolveAssemblyReference.cache
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\obj\Debug\Interop.ZKFPEngXControl.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\obj\Debug\AxInterop.ZKFPEngXControl.dll
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csproj.ResolveComReference.cache
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.FrmAutenticacionUsuario.resources
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.FrmAutorizacion.resources
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.FrmNotificaciones.resources
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.UCCargarDatos.resources
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.UCGridDatos.resources
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.UCNotificaciones.resources
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.FrmPrincipal.resources
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.Properties.Resources.resources
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csproj.GenerateResource.Cache
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.exe.licenses
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csproj.CoreCompileInputs.cache
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.exe
+E:\Trabajo\Chile\Trabajo 2\Nuevo Enrolador\EnroladorStandAloneV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.pdb
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\OUTPUT\EnroladorStandAloneV2.exe.config
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\OUTPUT\EnroladorStandAloneV2.exe
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\OUTPUT\EnroladorStandAloneV2.pdb
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csprojResolveAssemblyReference.cache
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\Interop.ZKFPEngXControl.dll
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\AxInterop.ZKFPEngXControl.dll
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csproj.ResolveComReference.cache
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar.UCEnrolarClave.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar.UCEnrolarContratos.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.FrmAutenticacionUsuario.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.FrmAutorizacion.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.FrmNotificaciones.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.UCCargarDatos.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar.UCEnrolarDatosEmpleado.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar.UCEnrolar.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.UCGridDatos.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.UCNotificaciones.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.FrmPrincipal.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.Properties.Resources.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csproj.GenerateResource.Cache
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.exe.licenses
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csproj.CoreCompileInputs.cache
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.exe
+E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.pdb
