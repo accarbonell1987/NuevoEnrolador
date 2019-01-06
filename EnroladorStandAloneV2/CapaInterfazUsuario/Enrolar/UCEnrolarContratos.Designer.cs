@@ -160,6 +160,7 @@
             // 
             // colCodigoContrato
             // 
+            this.colCodigoContrato.Caption = "Codigo";
             this.colCodigoContrato.FieldName = "CodigoContrato";
             this.colCodigoContrato.Name = "colCodigoContrato";
             this.colCodigoContrato.Visible = true;
@@ -277,6 +278,7 @@
             this.DevCheckEditManejaAsistencia.Size = new System.Drawing.Size(346, 19);
             this.DevCheckEditManejaAsistencia.StyleController = this.DevLayoutControlDatosDelContacto;
             this.DevCheckEditManejaAsistencia.TabIndex = 9;
+            this.DevCheckEditManejaAsistencia.EditValueChanged += new System.EventHandler(this.DevCheckEditManejaAsistencia_EditValueChanged);
             // 
             // DevTextEditCodigo
             // 
@@ -301,6 +303,7 @@
             // 
             // DevLookUpEditCargo
             // 
+            this.DevLookUpEditCargo.Enabled = false;
             this.DevLookUpEditCargo.Location = new System.Drawing.Point(86, 60);
             this.DevLookUpEditCargo.Name = "DevLookUpEditCargo";
             this.DevLookUpEditCargo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -323,6 +326,7 @@
             // 
             // DevLookUpEditCuenta
             // 
+            this.DevLookUpEditCuenta.Enabled = false;
             this.DevLookUpEditCuenta.Location = new System.Drawing.Point(86, 36);
             this.DevLookUpEditCuenta.Name = "DevLookUpEditCuenta";
             this.DevLookUpEditCuenta.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {

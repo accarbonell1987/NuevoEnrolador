@@ -149,11 +149,19 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                         var dispEmpleado = todosEmpleadosDispositivos.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
 
                         var dispositivos = todosDispositivos.Where(p => dispEmpleado.Any(a => a.GuidDispositivo == p.GuidDispositivo)).Select(p => p).ToList();
+                        //var dispositivos = ObtenerTodosDispositivos().Where(p => dispEmpleado.Any(a => a.GuidDispositivo == p.GuidDispositivo.ToString())).Select(p => p).ToList();
 
                         //adicionar dispositivos al empleado
-                        List<POCODispositivo> lPOCODispositivos = new List<POCODispositivo>();
                         foreach (var dispositivo in dispositivos) {
-                            pocoEmpleado.Dispositivos.Add(TransformacionDatos.DeDispositivoAPOCODispositivo(dispositivo));
+                            var pocoDispositivo = TransformacionDatos.DeDispositivoAPOCODispositivo(dispositivo);
+
+                            var instalacion = ObtenerInstalacionDelDispositivo(pocoDispositivo.GuidInstalacion);
+                            var cadena = ObtenerCadenaDeInstalacion(instalacion.GuidCadena);
+
+                            pocoDispositivo.NombreCadena = cadena.NombreCadena;
+                            pocoDispositivo.NombreInstalacion = instalacion.NombreInstalacion;
+
+                            pocoEmpleado.Dispositivos.Add(pocoDispositivo);
                         }
 
                         lPOCOEmpleados.Add(pocoEmpleado);
@@ -214,6 +222,146 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
 
                 return lPOCOCargos;
 
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                return null;
+            }
+        }
+
+        public List<POCOCadena> ObtenerTodasCadenas() {
+            try {
+                List<POCOCadena> lPOCOCadenas = new List<POCOCadena>();
+                var cadenas = mContext.Cadena.ToList();
+
+                foreach (var cadena in cadenas) {
+                    var pocoCadena = TransformacionDatos.DeCadenaAPOCOCadena(cadena);
+                    //buscar todas las intalaciones de la cadena
+                    pocoCadena.Instalaciones = ObtenerTodasInstalacionesDeCadena(pocoCadena.GuidCadena);
+                    lPOCOCadenas.Add(pocoCadena);
+                }
+
+                return lPOCOCadenas;
+
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                return null;
+            }
+        }
+        public POCOCadena ObtenerCadenaDeInstalacion(Guid GuidCadena) {
+            try {
+                var cadena = mContext.Cadena.FirstOrDefault(p => p.GuidCadena == GuidCadena.ToString());
+                if (cadena == null) return null;
+
+                return TransformacionDatos.DeCadenaAPOCOCadena(cadena);
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                return null;
+            }
+        }
+
+        public List<POCOInstalacion> ObtenerTodasInstalaciones() {
+            try {
+                List<POCOInstalacion> lPOCOInstalacions = new List<POCOInstalacion>();
+                var instalacions = mContext.Instalacion.ToList();
+
+                foreach (var instalacion in instalacions) {
+                    var pocoInstalacion = TransformacionDatos.DeInstalacionAPOCOInstalacion(instalacion);
+                    //buscar nombre de cadena que pertenece la instalacion
+                    pocoInstalacion.NombreCadena = ObtenerCadenaDeInstalacion(pocoInstalacion.GuidCadena).NombreCadena;
+                    //buscar todos los dispositivos de la instalacion
+                    pocoInstalacion.Dispositivos = ObtenerTodosDispositivosDeInstalacion(pocoInstalacion.GuidInstalacion);
+                    lPOCOInstalacions.Add(pocoInstalacion);
+                }
+
+                return lPOCOInstalacions;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                return null;
+            }
+        }
+        public List<POCOInstalacion> ObtenerTodasInstalacionesDeCadena(Guid GuidCadena) {
+            try {
+                List<POCOInstalacion> lPOCOInstalacions = new List<POCOInstalacion>();
+                var instalaciones = mContext.Instalacion.Where(p => p.GuidCadena == GuidCadena.ToString()).ToList();
+
+                foreach (var instalacion in instalaciones) {
+                    var pocoInstalacion = TransformacionDatos.DeInstalacionAPOCOInstalacion(instalacion);
+                    //buscar nombre de cadena que pertenece la instalacion
+                    pocoInstalacion.NombreCadena = ObtenerCadenaDeInstalacion(pocoInstalacion.GuidCadena).NombreCadena;
+                    //buscar todos los dispositivos de la instalacion
+                    pocoInstalacion.Dispositivos = ObtenerTodosDispositivosDeInstalacion(pocoInstalacion.GuidInstalacion);
+                    lPOCOInstalacions.Add(pocoInstalacion);
+                }
+
+                return lPOCOInstalacions;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                return null;
+            }
+        }
+        public POCOInstalacion ObtenerInstalacion(Guid GuidInstalacion) {
+            try {
+                var instalacion = mContext.Instalacion.FirstOrDefault(p => p.GuidInstalacion == GuidInstalacion.ToString());
+                if (instalacion == null) return null;
+
+                var pocoInstalacion = TransformacionDatos.DeInstalacionAPOCOInstalacion(instalacion);
+                //buscar nombre de cadena que pertenece la instalacion
+                pocoInstalacion.NombreCadena = ObtenerCadenaDeInstalacion(pocoInstalacion.GuidCadena).NombreCadena;
+                //buscar todos los dispositivos de la instalacion
+                pocoInstalacion.Dispositivos = ObtenerTodosDispositivosDeInstalacion(pocoInstalacion.GuidInstalacion);
+
+                return pocoInstalacion;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                return null;
+            }
+        }
+        public POCOInstalacion ObtenerInstalacionDelDispositivo(Guid GuidInstalacion) {
+            try {
+                var instalacion = mContext.Instalacion.FirstOrDefault(p => p.GuidInstalacion == GuidInstalacion.ToString());
+                if (instalacion == null) return null;
+
+                var pocoInstalacion = TransformacionDatos.DeInstalacionAPOCOInstalacion(instalacion);
+                //buscar nombre de cadena que pertenece la instalacion
+                pocoInstalacion.NombreCadena = ObtenerCadenaDeInstalacion(pocoInstalacion.GuidCadena).NombreCadena;
+                //buscar todos los dispositivos de la instalacion
+                pocoInstalacion.Dispositivos = ObtenerTodosDispositivosDeInstalacion(pocoInstalacion.GuidInstalacion);
+
+                return pocoInstalacion;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                return null;
+            }
+        }
+
+        public List<POCODispositivo> ObtenerTodosDispositivos() {
+            try {
+                List<POCODispositivo> lPOCODispositivos = new List<POCODispositivo>();
+                var dispositivos = mContext.Dispositivo.ToList();
+
+                foreach (var dispositivo in dispositivos) {
+                    var pocoDispositivo = TransformacionDatos.DeDispositivoAPOCODispositivo(dispositivo);
+                    lPOCODispositivos.Add(pocoDispositivo);
+                }
+
+                return lPOCODispositivos;
+
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                return null;
+            }
+        }
+        public List<POCODispositivo> ObtenerTodosDispositivosDeInstalacion(Guid GuidInstalacion) {
+            try {
+                List<POCODispositivo> lPOCODispositivos = new List<POCODispositivo>();
+                var dispositivos = mContext.Dispositivo.Where(p => p.GuidInstalacion == GuidInstalacion.ToString()).ToList();
+
+                foreach (var dispositivo in dispositivos) {
+                    var pocoDispositivo = TransformacionDatos.DeDispositivoAPOCODispositivo(dispositivo);
+                    lPOCODispositivos.Add(pocoDispositivo);
+                }
+
+                return lPOCODispositivos;
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
                 return null;
