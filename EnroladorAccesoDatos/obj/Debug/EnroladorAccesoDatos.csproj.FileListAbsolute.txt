@@ -21,3 +21,11 @@ E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorAccesoDatos\obj\Debug\Enr
 E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.csproj.CoreCompileInputs.cache
 E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.dll
 E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.pdb
+D:\Usuarios\Leandro\_NewEnroller\REPO\OUTPUT\EnroladorAccesoDatos.dll.config
+D:\Usuarios\Leandro\_NewEnroller\REPO\OUTPUT\EnroladorAccesoDatos.dll
+D:\Usuarios\Leandro\_NewEnroller\REPO\OUTPUT\EnroladorAccesoDatos.pdb
+D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.csprojResolveAssemblyReference.cache
+D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.g.resources
+D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.csproj.CoreCompileInputs.cache
+D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.dll
+D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.pdb

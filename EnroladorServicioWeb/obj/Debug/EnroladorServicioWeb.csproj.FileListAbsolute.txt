@@ -22,3 +22,15 @@ E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorServicioWeb\obj\Debug\Enr
 E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorServicioWeb\obj\Debug\EnroladorServicioWeb.csproj.CoreCompileInputs.cache
 E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorServicioWeb\obj\Debug\EnroladorServicioWeb.dll
 E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorServicioWeb\obj\Debug\EnroladorServicioWeb.pdb
+D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorServicioWeb\bin\EnroladorServicioWeb.dll.config
+D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorServicioWeb\bin\EnroladorServicioWeb.dll
+D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorServicioWeb\bin\EnroladorServicioWeb.pdb
+D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorServicioWeb\bin\EnroladorAccesoDatos.dll
+D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorServicioWeb\bin\EntityFramework.dll
+D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorServicioWeb\bin\EnroladorAccesoDatos.pdb
+D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorServicioWeb\bin\EnroladorAccesoDatos.dll.config
+D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorServicioWeb\bin\EntityFramework.xml
+D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorServicioWeb\obj\Debug\EnroladorServicioWeb.csprojResolveAssemblyReference.cache
+D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorServicioWeb\obj\Debug\EnroladorServicioWeb.csproj.CoreCompileInputs.cache
+D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorServicioWeb\obj\Debug\EnroladorServicioWeb.dll
+D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorServicioWeb\obj\Debug\EnroladorServicioWeb.pdb
