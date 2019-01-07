@@ -48,8 +48,6 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         private void CargarDatos() {
             bsContratos.DataSource = empleado.Contratos;
             bsEmpresas.DataSource = Negocio.ObtenerTodasEmpresas();
-            bsCuentas.DataSource = Negocio.ObtenerTodasCuentas();
-            bsCargos.DataSource = Negocio.ObtenerTodosCargos();
         }
 
         private void DevGridControlContratos_Click(object sender, EventArgs e) {
@@ -72,5 +70,26 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             }
         }
         #endregion
+
+        private void DevLookUpEditEmpresa_EditValueChanged(object sender, EventArgs e) {
+            try {
+                var GuidEmpresa = DevLookUpEditEmpresa.GetColumnValue("GuidEmpresa");
+                if (GuidEmpresa == null) {
+                    DevLookUpEditCuenta.Enabled = false;
+                    DevLookUpEditCargo.Enabled = false;
+                }
+                var empresa = Negocio.ObtenerEmpresa((Guid)GuidEmpresa);
+
+                if (empresa == null) return;
+
+                bsCuentas.DataSource = empresa.Cuentas;
+                bsCargos.DataSource = empresa.Cargos;
+
+                DevLookUpEditCuenta.Enabled = true;
+                DevLookUpEditCargo.Enabled = true;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+            }
+        }
     }
 }

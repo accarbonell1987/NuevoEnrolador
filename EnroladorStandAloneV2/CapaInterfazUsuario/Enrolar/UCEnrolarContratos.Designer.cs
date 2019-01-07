@@ -364,6 +364,7 @@
             this.DevLookUpEditEmpresa.Size = new System.Drawing.Size(272, 20);
             this.DevLookUpEditEmpresa.StyleController = this.DevLayoutControlDatosDelContacto;
             this.DevLookUpEditEmpresa.TabIndex = 4;
+            this.DevLookUpEditEmpresa.EditValueChanged += new System.EventHandler(this.DevLookUpEditEmpresa_EditValueChanged);
             // 
             // bsEmpresas
             // 
