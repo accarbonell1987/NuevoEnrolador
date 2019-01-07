@@ -403,6 +403,8 @@ namespace EnroladorStandAloneV2.Herramientas {
                 var GuidCuenta = Guid.Parse(cuenta.GuidCuenta);
                 var GuidEmpresa = Guid.Parse(cuenta.GuidEmpresa);
 
+
+
                 var pocoCuenta = new POCOCuenta() {
                     GuidCuenta = GuidCuenta,
                     GuidEmpresa = GuidEmpresa,
