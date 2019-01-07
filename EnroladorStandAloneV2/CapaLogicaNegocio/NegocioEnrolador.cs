@@ -176,6 +176,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 return null;
             }
         }
+
         public List<POCOEmpresa> ObtenerTodasEmpresas() {
             try {
                 List<POCOEmpresa> lPOCOEmpresas = new List<POCOEmpresa>();
@@ -183,11 +184,32 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
 
                 foreach (var empresa in empresas) {
                     var pocoEmpresa = TransformacionDatos.DeEmpresaAPOCOEmpresa(empresa);
+
+                    pocoEmpresa.Cuentas = ObtenerTodasCuentas().Where(p => p.GuidEmpresa == pocoEmpresa.GuidEmpresa).ToList();
+                    pocoEmpresa.Cargos = ObtenerTodosCargos().Where(p => p.GuidEmpresa == pocoEmpresa.GuidEmpresa).ToList();
+
                     lPOCOEmpresas.Add(pocoEmpresa);
                 }
 
                 return lPOCOEmpresas;
 
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                return null;
+            }
+        }
+        public POCOEmpresa ObtenerEmpresa(Guid GuidEmpresa) {
+            try {
+                var empresa = mContext.Empresa.FirstOrDefault(p => p.GuidEmpresa == GuidEmpresa.ToString());
+
+                if (empresa == null) return null;
+
+                var pocoEmpresa = TransformacionDatos.DeEmpresaAPOCOEmpresa(empresa);
+                
+                pocoEmpresa.Cuentas = ObtenerTodasCuentas().Where(p => p.GuidEmpresa == pocoEmpresa.GuidEmpresa).ToList();
+                pocoEmpresa.Cargos = ObtenerTodosCargos().Where(p => p.GuidEmpresa == pocoEmpresa.GuidEmpresa).ToList();
+
+                return pocoEmpresa;
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
                 return null;

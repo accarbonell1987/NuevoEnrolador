@@ -125,6 +125,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CapaInterfazUsuario\Enrolar\UCEnrolarAsistencia.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CapaInterfazUsuario\Enrolar\UCEnrolarAsistencia.Designer.cs">
+      <DependentUpon>UCEnrolarAsistencia.cs</DependentUpon>
+    </Compile>
     <Compile Include="CapaInterfazUsuario\Enrolar\UCEnrolarClave.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -208,6 +214,9 @@
     <Compile Include="Herramientas\ValidadorRUT.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CapaInterfazUsuario\Enrolar\UCEnrolarAsistencia.resx">
+      <DependentUpon>UCEnrolarAsistencia.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CapaInterfazUsuario\Enrolar\UCEnrolarClave.resx">
       <DependentUpon>UCEnrolarClave.cs</DependentUpon>
     </EmbeddedResource>

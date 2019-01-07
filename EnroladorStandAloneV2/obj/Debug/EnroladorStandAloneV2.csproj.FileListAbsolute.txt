@@ -94,27 +94,28 @@ E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\En
 E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csproj.CoreCompileInputs.cache
 E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.exe
 E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.pdb
-D:\Usuarios\Leandro\_NewEnroller\REPO\OUTPUT\EnroladorStandAloneV2.exe.config
-D:\Usuarios\Leandro\_NewEnroller\REPO\OUTPUT\EnroladorStandAloneV2.exe
-D:\Usuarios\Leandro\_NewEnroller\REPO\OUTPUT\EnroladorStandAloneV2.pdb
-D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csprojResolveAssemblyReference.cache
-D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\Interop.ZKFPEngXControl.dll
-D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\AxInterop.ZKFPEngXControl.dll
-D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csproj.ResolveComReference.cache
-D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar.UCEnrolarClave.resources
-D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar.UCEnrolarContratos.resources
-D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.FrmAutenticacionUsuario.resources
-D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.FrmAutorizacion.resources
-D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.FrmNotificaciones.resources
-D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.UCCargarDatos.resources
-D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar.UCEnrolarDatosEmpleado.resources
-D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar.UCEnrolar.resources
-D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.UCGridDatos.resources
-D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.UCNotificaciones.resources
-D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.FrmPrincipal.resources
-D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.Properties.Resources.resources
-D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csproj.GenerateResource.Cache
-D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.exe.licenses
-D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csproj.CoreCompileInputs.cache
-D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.exe
-D:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.pdb
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\OUTPUT\EnroladorStandAloneV2.exe.config
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\OUTPUT\EnroladorStandAloneV2.exe
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\OUTPUT\EnroladorStandAloneV2.pdb
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csprojResolveAssemblyReference.cache
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\Interop.ZKFPEngXControl.dll
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\AxInterop.ZKFPEngXControl.dll
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csproj.ResolveComReference.cache
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar.UCEnrolarClave.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar.UCEnrolarContratos.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.FrmAutenticacionUsuario.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.FrmAutorizacion.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.FrmNotificaciones.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.UCCargarDatos.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar.UCEnrolarDatosEmpleado.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar.UCEnrolar.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.UCGridDatos.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.UCNotificaciones.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.FrmPrincipal.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.Properties.Resources.resources
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csproj.GenerateResource.Cache
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.exe.licenses
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csproj.CoreCompileInputs.cache
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.exe
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.pdb
+E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar.UCEnrolarAsistencia.resources
