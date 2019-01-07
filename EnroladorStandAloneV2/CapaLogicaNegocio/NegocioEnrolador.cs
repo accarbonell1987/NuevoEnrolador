@@ -830,7 +830,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 mensaje += " - " + mensajeAdicional;
             }
 
-            Notificacion notificacion = new Notificacion() {
+            Notificacion notificacion = new Notificacion() {    
                 IdNotificacion = ahora.ToBinary().ToString(),
                 FechaNotificacion = ahora,
                 MensajeNotificacion = mensaje,
