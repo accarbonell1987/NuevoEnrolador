@@ -65,8 +65,8 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
                         }; break;
 
                     default: {
-                            var lEmpleadosContratosActivos = Negocio.ObtenerListaContratosEmpleado(false);
-                            bsEmpleados.DataSource = new BindingList<POCOEmpleado>(lEmpleadosContratosActivos);
+                            var lEmpleadosContratosVencidos = Negocio.ObtenerListaContratosEmpleado(false);
+                            bsEmpleados.DataSource = new BindingList<POCOEmpleado>(lEmpleadosContratosVencidos);
                             DevGridControlEmpleados.DataSource = bsEmpleados;
                         }; break;
                 }

@@ -22,15 +22,3 @@ E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorServicioWeb\obj\Debug\Enr
 E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorServicioWeb\obj\Debug\EnroladorServicioWeb.csproj.CoreCompileInputs.cache
 E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorServicioWeb\obj\Debug\EnroladorServicioWeb.dll
 E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorServicioWeb\obj\Debug\EnroladorServicioWeb.pdb
-E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorServicioWeb\bin\EnroladorServicioWeb.dll.config
-E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorServicioWeb\bin\EnroladorServicioWeb.dll
-E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorServicioWeb\bin\EnroladorServicioWeb.pdb
-E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorServicioWeb\bin\EnroladorAccesoDatos.dll
-E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorServicioWeb\bin\EntityFramework.dll
-E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorServicioWeb\bin\EnroladorAccesoDatos.pdb
-E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorServicioWeb\bin\EnroladorAccesoDatos.dll.config
-E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorServicioWeb\bin\EntityFramework.xml
-E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorServicioWeb\obj\Debug\EnroladorServicioWeb.csprojResolveAssemblyReference.cache
-E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorServicioWeb\obj\Debug\EnroladorServicioWeb.csproj.CoreCompileInputs.cache
-E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorServicioWeb\obj\Debug\EnroladorServicioWeb.dll
-E:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorServicioWeb\obj\Debug\EnroladorServicioWeb.pdb

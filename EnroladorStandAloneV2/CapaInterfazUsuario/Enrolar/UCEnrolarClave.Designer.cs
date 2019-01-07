@@ -23,19 +23,22 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.DevLayoutControlComponentesAcceso = new DevExpress.XtraLayout.LayoutControl();
-            this.DevLayoutControlGroup = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.DevTextClave = new DevExpress.XtraEditors.TextEdit();
-            this.DevLayoutControlItemClave = new DevExpress.XtraLayout.LayoutControlItem();
             this.DevTextEditRevalidarClave = new DevExpress.XtraEditors.TextEdit();
+            this.DevTextClave = new DevExpress.XtraEditors.TextEdit();
+            this.DevLayoutControlGroup = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.DevLayoutControlItemClave = new DevExpress.XtraLayout.LayoutControlItem();
             this.DevLayoutControlItemRevalidarClave = new DevExpress.XtraLayout.LayoutControlItem();
+            this.dxErrorProvider = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlComponentesAcceso)).BeginInit();
             this.DevLayoutControlComponentesAcceso.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlGroup)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DevTextClave.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemClave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevTextEditRevalidarClave.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevTextClave.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlGroup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemClave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemRevalidarClave)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // DevLayoutControlComponentesAcceso
@@ -51,6 +54,28 @@
             this.DevLayoutControlComponentesAcceso.TabIndex = 0;
             this.DevLayoutControlComponentesAcceso.Text = "layoutControl1";
             // 
+            // DevTextEditRevalidarClave
+            // 
+            this.DevTextEditRevalidarClave.EditValue = "";
+            this.DevTextEditRevalidarClave.Location = new System.Drawing.Point(94, 36);
+            this.DevTextEditRevalidarClave.Name = "DevTextEditRevalidarClave";
+            this.DevTextEditRevalidarClave.Properties.PasswordChar = '*';
+            this.DevTextEditRevalidarClave.Size = new System.Drawing.Size(118, 20);
+            this.DevTextEditRevalidarClave.StyleController = this.DevLayoutControlComponentesAcceso;
+            this.DevTextEditRevalidarClave.TabIndex = 4;
+            this.DevTextEditRevalidarClave.Validated += new System.EventHandler(this.DevTextEditRevalidarClave_Validated);
+            // 
+            // DevTextClave
+            // 
+            this.DevTextClave.EditValue = "";
+            this.DevTextClave.Location = new System.Drawing.Point(94, 12);
+            this.DevTextClave.Name = "DevTextClave";
+            this.DevTextClave.Properties.PasswordChar = '*';
+            this.DevTextClave.Size = new System.Drawing.Size(118, 20);
+            this.DevTextClave.StyleController = this.DevLayoutControlComponentesAcceso;
+            this.DevTextClave.TabIndex = 0;
+            this.DevTextClave.EditValueChanged += new System.EventHandler(this.DevTextClave_EditValueChanged);
+            // 
             // DevLayoutControlGroup
             // 
             this.DevLayoutControlGroup.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -63,16 +88,6 @@
             this.DevLayoutControlGroup.Size = new System.Drawing.Size(224, 69);
             this.DevLayoutControlGroup.TextVisible = false;
             // 
-            // DevTextClave
-            // 
-            this.DevTextClave.EditValue = "";
-            this.DevTextClave.Location = new System.Drawing.Point(95, 12);
-            this.DevTextClave.Name = "DevTextClave";
-            this.DevTextClave.Properties.PasswordChar = '*';
-            this.DevTextClave.Size = new System.Drawing.Size(117, 20);
-            this.DevTextClave.StyleController = this.DevLayoutControlComponentesAcceso;
-            this.DevTextClave.TabIndex = 0;
-            // 
             // DevLayoutControlItemClave
             // 
             this.DevLayoutControlItemClave.Control = this.DevTextClave;
@@ -81,16 +96,6 @@
             this.DevLayoutControlItemClave.Size = new System.Drawing.Size(204, 24);
             this.DevLayoutControlItemClave.Text = "Clave:";
             this.DevLayoutControlItemClave.TextSize = new System.Drawing.Size(79, 13);
-            // 
-            // DevTextEditRevalidarClave
-            // 
-            this.DevTextEditRevalidarClave.EditValue = "";
-            this.DevTextEditRevalidarClave.Location = new System.Drawing.Point(95, 36);
-            this.DevTextEditRevalidarClave.Name = "DevTextEditRevalidarClave";
-            this.DevTextEditRevalidarClave.Properties.PasswordChar = '*';
-            this.DevTextEditRevalidarClave.Size = new System.Drawing.Size(117, 20);
-            this.DevTextEditRevalidarClave.StyleController = this.DevLayoutControlComponentesAcceso;
-            this.DevTextEditRevalidarClave.TabIndex = 4;
             // 
             // DevLayoutControlItemRevalidarClave
             // 
@@ -102,21 +107,26 @@
             this.DevLayoutControlItemRevalidarClave.Text = "Revalidar Clave:";
             this.DevLayoutControlItemRevalidarClave.TextSize = new System.Drawing.Size(79, 13);
             // 
-            // UCClave
+            // dxErrorProvider
+            // 
+            this.dxErrorProvider.ContainerControl = this;
+            // 
+            // UCEnrolarClave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.DevLayoutControlComponentesAcceso);
             this.MinimumSize = new System.Drawing.Size(224, 69);
-            this.Name = "UCClave";
+            this.Name = "UCEnrolarClave";
             this.Size = new System.Drawing.Size(224, 69);
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlComponentesAcceso)).EndInit();
             this.DevLayoutControlComponentesAcceso.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlGroup)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DevTextClave.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemClave)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevTextEditRevalidarClave.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevTextClave.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlGroup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemClave)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemRevalidarClave)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -129,5 +139,6 @@
         private DevExpress.XtraLayout.LayoutControlItem DevLayoutControlItemClave;
         private DevExpress.XtraEditors.TextEdit DevTextEditRevalidarClave;
         private DevExpress.XtraLayout.LayoutControlItem DevLayoutControlItemRevalidarClave;
+        private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider;
     }
 }

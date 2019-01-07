@@ -29,7 +29,6 @@
             this.DevButtonCancelar = new DevExpress.XtraEditors.SimpleButton();
             this.DevTextUsuario = new DevExpress.XtraEditors.TextEdit();
             this.DevTextClave = new DevExpress.XtraEditors.TextEdit();
-            this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
             this.DevButtonCambiarUsuario = new DevExpress.XtraEditors.SimpleButton();
             this.separatorControl1 = new DevExpress.XtraEditors.SeparatorControl();
             this.dxErrorProvider = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
@@ -40,7 +39,6 @@
             this.ribbonPage3 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             ((System.ComponentModel.ISupportInitialize)(this.DevTextUsuario.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevTextClave.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.separatorControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -167,7 +165,6 @@
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.LogInDialog_KeyPress);
             ((System.ComponentModel.ISupportInitialize)(this.DevTextUsuario.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevTextClave.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.separatorControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
@@ -183,7 +180,6 @@
         private DevExpress.XtraEditors.SimpleButton DevButtonCancelar;
         private DevExpress.XtraEditors.TextEdit DevTextUsuario;
         private DevExpress.XtraEditors.TextEdit DevTextClave;
-        private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
         private DevExpress.XtraEditors.SimpleButton DevButtonCambiarUsuario;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider;
         private DevExpress.XtraEditors.SeparatorControl separatorControl1;

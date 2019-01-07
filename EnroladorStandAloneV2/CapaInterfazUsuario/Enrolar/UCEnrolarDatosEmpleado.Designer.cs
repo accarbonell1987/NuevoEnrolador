@@ -242,7 +242,7 @@
             this.DevGroupControlAcceso.Name = "DevGroupControlAcceso";
             this.DevGroupControlAcceso.Size = new System.Drawing.Size(337, 222);
             this.DevGroupControlAcceso.TabIndex = 3;
-            this.DevGroupControlAcceso.Text = "Autenticacion del Usuario por Clave";
+            this.DevGroupControlAcceso.Text = "Autenticacion del Usuario";
             // 
             // DevPanelControlAcceso
             // 

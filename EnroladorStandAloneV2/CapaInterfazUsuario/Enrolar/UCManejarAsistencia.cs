@@ -17,7 +17,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
     #region Atributos
 
     #endregion
-    public partial class UCEnrolarAsistencia : DevExpress.XtraEditors.XtraUserControl {
+    public partial class UCManejarAsistencia : DevExpress.XtraEditors.XtraUserControl {
         #region Atributos
         UCEnrolarContratos Padre;
         NegocioEnrolador Negocio;
@@ -25,9 +25,10 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         #endregion
 
         #region Constructor
-        public UCEnrolarAsistencia(UCEnrolarContratos Padre, NegocioEnrolador Negocio, POCOEmpleado empleado) {
+        public UCManejarAsistencia(UCEnrolarContratos Padre, NegocioEnrolador Negocio, POCOEmpleado empleado) {
             InitializeComponent();
-            
+            Dock = DockStyle.Fill;
+
             try {
                 this.Padre = Padre;
                 this.Negocio = Negocio;

@@ -1,5 +1,5 @@
 ﻿namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
-    partial class UCEnrolarAsistencia {
+    partial class UCManejarAsistencia {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -27,6 +27,14 @@
             this.DevGridControlAsistencias = new DevExpress.XtraGrid.GridControl();
             this.bsEmpleadoDispositivos = new System.Windows.Forms.BindingSource(this.components);
             this.DevGridViewAsistencias = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colGuidDispositivo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colGuidInstalacion = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNombreCadena = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNombreInstalacion = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNombreDispositivo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colHost = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colPuerto = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTipo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DevGroupControlAsistencia = new DevExpress.XtraEditors.GroupControl();
             this.DevSimpleButtonAdicionar = new DevExpress.XtraEditors.SimpleButton();
             this.DevLayoutControl = new DevExpress.XtraLayout.LayoutControl();
@@ -37,14 +45,6 @@
             this.DevLayoutControlGroup = new DevExpress.XtraLayout.LayoutControlGroup();
             this.DevLayoutControlItemInstalacion = new DevExpress.XtraLayout.LayoutControlItem();
             this.DevLayoutControlItemDispositivo = new DevExpress.XtraLayout.LayoutControlItem();
-            this.colGuidDispositivo = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colGuidInstalacion = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colNombreDispositivo = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colHost = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colPuerto = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colTipo = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colNombreInstalacion = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colNombreCadena = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlAsistencias)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEmpleadoDispositivos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewAsistencias)).BeginInit();
@@ -63,6 +63,9 @@
             // 
             // DevGridControlAsistencias
             // 
+            this.DevGridControlAsistencias.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DevGridControlAsistencias.DataSource = this.bsEmpleadoDispositivos;
             this.DevGridControlAsistencias.Location = new System.Drawing.Point(3, 3);
             this.DevGridControlAsistencias.MainView = this.DevGridViewAsistencias;
@@ -89,9 +92,67 @@
             this.colTipo});
             this.DevGridViewAsistencias.GridControl = this.DevGridControlAsistencias;
             this.DevGridViewAsistencias.Name = "DevGridViewAsistencias";
+            this.DevGridViewAsistencias.OptionsBehavior.Editable = false;
+            // 
+            // colGuidDispositivo
+            // 
+            this.colGuidDispositivo.FieldName = "GuidDispositivo";
+            this.colGuidDispositivo.Name = "colGuidDispositivo";
+            // 
+            // colGuidInstalacion
+            // 
+            this.colGuidInstalacion.FieldName = "GuidInstalacion";
+            this.colGuidInstalacion.Name = "colGuidInstalacion";
+            // 
+            // colNombreCadena
+            // 
+            this.colNombreCadena.Caption = "Cadena";
+            this.colNombreCadena.FieldName = "NombreCadena";
+            this.colNombreCadena.Name = "colNombreCadena";
+            this.colNombreCadena.Visible = true;
+            this.colNombreCadena.VisibleIndex = 0;
+            // 
+            // colNombreInstalacion
+            // 
+            this.colNombreInstalacion.Caption = "Instalacion";
+            this.colNombreInstalacion.FieldName = "NombreInstalacion";
+            this.colNombreInstalacion.Name = "colNombreInstalacion";
+            this.colNombreInstalacion.Visible = true;
+            this.colNombreInstalacion.VisibleIndex = 1;
+            // 
+            // colNombreDispositivo
+            // 
+            this.colNombreDispositivo.Caption = "Dispositivo";
+            this.colNombreDispositivo.FieldName = "NombreDispositivo";
+            this.colNombreDispositivo.Name = "colNombreDispositivo";
+            this.colNombreDispositivo.Visible = true;
+            this.colNombreDispositivo.VisibleIndex = 2;
+            // 
+            // colHost
+            // 
+            this.colHost.FieldName = "Host";
+            this.colHost.Name = "colHost";
+            this.colHost.Visible = true;
+            this.colHost.VisibleIndex = 3;
+            // 
+            // colPuerto
+            // 
+            this.colPuerto.FieldName = "Puerto";
+            this.colPuerto.Name = "colPuerto";
+            this.colPuerto.Visible = true;
+            this.colPuerto.VisibleIndex = 4;
+            // 
+            // colTipo
+            // 
+            this.colTipo.FieldName = "Tipo";
+            this.colTipo.Name = "colTipo";
+            this.colTipo.Visible = true;
+            this.colTipo.VisibleIndex = 5;
             // 
             // DevGroupControlAsistencia
             // 
+            this.DevGroupControlAsistencia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DevGroupControlAsistencia.Controls.Add(this.DevSimpleButtonAdicionar);
             this.DevGroupControlAsistencia.Controls.Add(this.DevLayoutControl);
             this.DevGroupControlAsistencia.Location = new System.Drawing.Point(3, 243);
@@ -102,6 +163,7 @@
             // 
             // DevSimpleButtonAdicionar
             // 
+            this.DevSimpleButtonAdicionar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.DevSimpleButtonAdicionar.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             this.DevSimpleButtonAdicionar.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.DevSimpleButtonAdicionar.ImageUri.Uri = "Add;Size16x16;Office2013";
@@ -112,6 +174,7 @@
             // 
             // DevLayoutControl
             // 
+            this.DevLayoutControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.DevLayoutControl.Controls.Add(this.DevLookUpEditDispositivo);
             this.DevLayoutControl.Controls.Add(this.DevLookUpEditInstalacion);
             this.DevLayoutControl.Location = new System.Drawing.Point(5, 23);
@@ -201,61 +264,6 @@
             this.DevLayoutControlItemDispositivo.Size = new System.Drawing.Size(411, 26);
             this.DevLayoutControlItemDispositivo.Text = "Dispositivo:";
             this.DevLayoutControlItemDispositivo.TextSize = new System.Drawing.Size(56, 13);
-            // 
-            // colGuidDispositivo
-            // 
-            this.colGuidDispositivo.FieldName = "GuidDispositivo";
-            this.colGuidDispositivo.Name = "colGuidDispositivo";
-            // 
-            // colGuidInstalacion
-            // 
-            this.colGuidInstalacion.FieldName = "GuidInstalacion";
-            this.colGuidInstalacion.Name = "colGuidInstalacion";
-            // 
-            // colNombreDispositivo
-            // 
-            this.colNombreDispositivo.Caption = "Dispositivo";
-            this.colNombreDispositivo.FieldName = "NombreDispositivo";
-            this.colNombreDispositivo.Name = "colNombreDispositivo";
-            this.colNombreDispositivo.Visible = true;
-            this.colNombreDispositivo.VisibleIndex = 2;
-            // 
-            // colHost
-            // 
-            this.colHost.FieldName = "Host";
-            this.colHost.Name = "colHost";
-            this.colHost.Visible = true;
-            this.colHost.VisibleIndex = 3;
-            // 
-            // colPuerto
-            // 
-            this.colPuerto.FieldName = "Puerto";
-            this.colPuerto.Name = "colPuerto";
-            this.colPuerto.Visible = true;
-            this.colPuerto.VisibleIndex = 4;
-            // 
-            // colTipo
-            // 
-            this.colTipo.FieldName = "Tipo";
-            this.colTipo.Name = "colTipo";
-            this.colTipo.Visible = true;
-            this.colTipo.VisibleIndex = 5;
-            // 
-            // colNombreInstalacion
-            // 
-            this.colNombreInstalacion.Caption = "Instalacion";
-            this.colNombreInstalacion.FieldName = "NombreInstalacion";
-            this.colNombreInstalacion.Name = "colNombreInstalacion";
-            this.colNombreInstalacion.Visible = true;
-            this.colNombreInstalacion.VisibleIndex = 1;
-            // 
-            // colNombreCadena
-            // 
-            this.colNombreCadena.Caption = "Cadena";
-            this.colNombreCadena.FieldName = "NombreCadena";
-            this.colNombreCadena.Name = "colNombreCadena";
-            this.colNombreCadena.Visible = true;
-            this.colNombreCadena.VisibleIndex = 0;
             // 
             // UCEnrolarAsistencia
             // 

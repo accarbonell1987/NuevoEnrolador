@@ -15,14 +15,6 @@ namespace EnroladorStandAloneV2 {
         static void Main() {
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("es-Cl");
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es");
-
-            //var x = new CapaLogicaNegocio.NegocioEnrolador();
-            //x.mContext = new EnroladorAccesoDatos.SQLite.SQLiteEnrollEntities();
-            //var y = x.mContext.Hardware.ToList();
-            //y.ForEach(p => x.mContext.Hardware.Remove(p));
-            //x.mContext.SaveChanges();
-
-
             BonusSkins.Register();
             SkinManager.EnableFormSkins();
 

@@ -125,11 +125,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CapaInterfazUsuario\Enrolar\UCEnrolarAsistencia.cs">
+    <Compile Include="CapaInterfazUsuario\Enrolar\UCManejarCasino.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CapaInterfazUsuario\Enrolar\UCEnrolarAsistencia.Designer.cs">
-      <DependentUpon>UCEnrolarAsistencia.cs</DependentUpon>
+    <Compile Include="CapaInterfazUsuario\Enrolar\UCManejarCasino.Designer.cs">
+      <DependentUpon>UCManejarCasino.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CapaInterfazUsuario\Enrolar\UCManejarAsistencia.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CapaInterfazUsuario\Enrolar\UCManejarAsistencia.Designer.cs">
+      <DependentUpon>UCManejarAsistencia.cs</DependentUpon>
     </Compile>
     <Compile Include="CapaInterfazUsuario\Enrolar\UCEnrolarClave.cs">
       <SubType>UserControl</SubType>
@@ -214,8 +220,11 @@
     <Compile Include="Herramientas\ValidadorRUT.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CapaInterfazUsuario\Enrolar\UCEnrolarAsistencia.resx">
-      <DependentUpon>UCEnrolarAsistencia.cs</DependentUpon>
+    <EmbeddedResource Include="CapaInterfazUsuario\Enrolar\UCManejarCasino.resx">
+      <DependentUpon>UCManejarCasino.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CapaInterfazUsuario\Enrolar\UCManejarAsistencia.resx">
+      <DependentUpon>UCManejarAsistencia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CapaInterfazUsuario\Enrolar\UCEnrolarClave.resx">
       <DependentUpon>UCEnrolarClave.cs</DependentUpon>

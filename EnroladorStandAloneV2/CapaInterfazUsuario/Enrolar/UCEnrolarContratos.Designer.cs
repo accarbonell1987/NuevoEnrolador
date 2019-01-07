@@ -132,6 +132,7 @@
             this.colNombreCargo});
             this.DevGridViewContratos.GridControl = this.DevGridControlContratos;
             this.DevGridViewContratos.Name = "DevGridViewContratos";
+            this.DevGridViewContratos.OptionsBehavior.Editable = false;
             // 
             // colGuidContrato
             // 

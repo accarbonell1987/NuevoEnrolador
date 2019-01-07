@@ -17,14 +17,16 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         #region Atributos
         NegocioEnrolador Negocio;
         POCOEmpleado empleado;
+        UCEnrolar Padre;
         #endregion
 
         #region Constructor
-        public UCEnrolarDatosEmpleado(NegocioEnrolador Negocio, POCOEmpleado empleado) {
+        public UCEnrolarDatosEmpleado(UCEnrolar Padre, NegocioEnrolador Negocio, POCOEmpleado empleado) {
             InitializeComponent();
-            this.empleado = empleado;
             try {
+                this.Padre = Padre;
                 this.Negocio = Negocio;
+                this.empleado = empleado;
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
@@ -47,13 +49,16 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             DevTextEditApellidos.Text = empleado.Apellidos;
             DevTextEditCorreo.Text = empleado.Correo;
             DevTextEditTelefono.Text = empleado.NumeroTelefono;
+
+            if (empleado.TieneContraseña) DevRadioGroupAcceso.EditValue = 0;
+            else DevRadioGroupAcceso.EditValue = 1;
         }
 
         private void DevRadioGroupAcceso_EditValueChanged(object sender, EventArgs e) {
             int valor = Convert.ToInt16(DevRadioGroupAcceso.EditValue);
             DevPanelControlAcceso.Controls.Clear();
             if (valor == 0) {
-                UCEnrolarClave uC = new UCEnrolarClave() {
+                UCEnrolarClave uC = new UCEnrolarClave(Padre, Negocio, empleado) {
                     Dock = DockStyle.Fill
                 };
 
