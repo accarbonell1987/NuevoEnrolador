@@ -50,7 +50,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             DevTextEditCorreo.Text = empleado.Correo;
             DevTextEditTelefono.Text = empleado.NumeroTelefono;
 
-            if (empleado.TieneContraseña) DevRadioGroupAcceso.EditValue = 0;
+            if (empleado.TieneContraseña) DevRadioGroupAcceso.EditValue
             else DevRadioGroupAcceso.EditValue = 1;
         }
 
