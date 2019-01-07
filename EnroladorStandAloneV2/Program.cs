@@ -13,6 +13,8 @@ namespace EnroladorStandAloneV2 {
         /// </summary>
         [STAThread]
         static void Main() {
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("es-Cl");
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es");
             BonusSkins.Register();
             SkinManager.EnableFormSkins();
 

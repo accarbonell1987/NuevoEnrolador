@@ -34,7 +34,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         #region Metodos y Atributos
         private void UCEnrolar_Load(object sender, EventArgs e) {
             try {
-                DevSplitContainerControlAccesos.SplitterPosition = DevSplitContainerControlAccesos.Height / 2;
+                
 
                 bsEmpleados.DataSource = Negocio.lEmpleados;
                 //seleccionar el RUT en el textbox
@@ -43,7 +43,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
 
                     var empleado = Negocio.ObtenerEmpleadoDeLista(RUT);
 
-                    UCEnrolarDatosEmpleado uCEmpleados = new UCEnrolarDatosEmpleado(Negocio, empleado) {
+                    UCEnrolarDatosEmpleado uCEmpleados = new UCEnrolarDatosEmpleado(this, Negocio, empleado) {
                         Dock = DockStyle.Fill
                     };
                     UCEnrolarContratos uCContratos = new UCEnrolarContratos(this, Negocio, empleado) {
@@ -58,7 +58,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             }
         }
 
-        public void AdicionarUCAsistencia(UCEnrolarAsistencia uCAsistencia) {
+        public void AdicionarUCAsistencia(UCManejarAsistencia uCAsistencia) {
             DevPanelControlAsistencia.Controls.Add(uCAsistencia);
         }
 

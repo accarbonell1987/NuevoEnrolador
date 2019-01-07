@@ -88,8 +88,10 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
                                 DialogResult = DialogResult.OK;
                                 return;
                             }
-                        } catch (Exception) {
+
+                        } catch (Exception eX) {
                             XtraMessageBox.Show("Ocurrió un problema al intentar iniciar sesión. Compruebe la conexión con el servidor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
                             return;
                         }
                     } else {
