@@ -14,16 +14,20 @@ using System.Reflection;
 using DevExpress.XtraEditors;
 
 namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
-    public partial class UCEnrolarContratos : DevExpress.XtraEditors.XtraUserControl {
+    #region Atributos
+
+    #endregion
+    public partial class UCEnrolarAsistencia : DevExpress.XtraEditors.XtraUserControl {
         #region Atributos
-        UCEnrolar Padre;
+        UCEnrolarContratos Padre;
         NegocioEnrolador Negocio;
         POCOEmpleado empleado;
         #endregion
 
         #region Constructor
-        public UCEnrolarContratos(UCEnrolar Padre, NegocioEnrolador Negocio, POCOEmpleado empleado) {
+        public UCEnrolarAsistencia(UCEnrolarContratos Padre, NegocioEnrolador Negocio, POCOEmpleado empleado) {
             InitializeComponent();
+            
             try {
                 this.Padre = Padre;
                 this.Negocio = Negocio;
@@ -35,7 +39,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         #endregion
 
         #region Metodos y Eventos
-        private void UCEnrolarContratos_Load(object sender, EventArgs e) {
+        private void UCEnrolarAsistencia_Load(object sender, EventArgs e) {
             try {
                 if (empleado != null) {
                     CargarDatos();
@@ -45,32 +49,24 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             }
         }
 
-        private void CargarDatos() {
-            bsContratos.DataSource = empleado.Contratos;
-            bsEmpresas.DataSource = Negocio.ObtenerTodasEmpresas();
-            bsCuentas.DataSource = Negocio.ObtenerTodasCuentas();
-            bsCargos.DataSource = Negocio.ObtenerTodosCargos();
+        public void CargarDatos() {
+            bsEmpleadoDispositivos.DataSource = empleado.Dispositivos;
+            bsInstalaciones.DataSource = Negocio.ObtenerTodasInstalaciones();
         }
+        #endregion
 
-        private void DevGridControlContratos_Click(object sender, EventArgs e) {
+        private void DevLookUpEditInstalacion_EditValueChanged(object sender, EventArgs e) {
             try {
-                //string RUT = (string)DevGridViewEmpleados.GetFocusedRowCellValue("RUT");
-                //if (!string.IsNullOrEmpty(RUT)) {
-                //    (FindForm() as FrmPrincipal).CrearPaginaNavegacion("Enrolar", RUT);
-                //}
+                var GuidInstalacion = DevLookUpEditInstalacion.GetColumnValue("GuidInstalacion");
+                if (GuidInstalacion == null) {
+                    DevLookUpEditDispositivo.Enabled = false;
+                }
+
+                bsDispositivos.DataSource = Negocio.ObtenerInstalacion((Guid)GuidInstalacion).Dispositivos;
+                DevLookUpEditDispositivo.Enabled = true;
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
-
-        private void DevCheckEditManejaAsistencia_EditValueChanged(object sender, EventArgs e) {
-            if (DevCheckEditManejaAsistencia.Checked) {
-                UCEnrolarAsistencia uC = new UCEnrolarAsistencia(this, Negocio, empleado);
-                Padre.AdicionarUCAsistencia(uC);
-            } else {
-                Padre.EliminarUCAsistencia();
-            }
-        }
-        #endregion
     }
 }

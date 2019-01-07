@@ -8,5 +8,6 @@ namespace EnroladorAccesoDatos.Dominio {
     public class POCOCadena {
         public Guid GuidCadena { get; set; }
         public string NombreCadena { get; set; }
+        public List<POCOInstalacion> Instalaciones { get; set; }
     }
 }

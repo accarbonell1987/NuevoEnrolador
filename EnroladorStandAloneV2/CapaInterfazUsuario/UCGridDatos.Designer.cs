@@ -51,12 +51,6 @@
             this.colTipo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colData = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DevGridViewDispositivos = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colGuidDispositivo = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colGuidInstalacion = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colNombreDispositivo = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colHost = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colPuerto = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colTipo1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DevGridViewEmpleados = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colGuidEmpleado = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colRUT = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -70,6 +64,14 @@
             this.colNumeroTelefono = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DevGroupControlFiltroContratos = new DevExpress.XtraEditors.GroupControl();
             this.DevRadioGroupFiltroContratos = new DevExpress.XtraEditors.RadioGroup();
+            this.colGuidDispositivo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colGuidInstalacion = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNombreDispositivo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colHost = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colPuerto = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTipo1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNombreInstalacion = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNombreCadena = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewContratos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlEmpleados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEmpleados)).BeginInit();
@@ -266,6 +268,8 @@
             this.DevGridViewDispositivos.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colGuidDispositivo,
             this.colGuidInstalacion,
+            this.colNombreCadena,
+            this.colNombreInstalacion,
             this.colNombreDispositivo,
             this.colHost,
             this.colPuerto,
@@ -274,44 +278,6 @@
             this.DevGridViewDispositivos.Name = "DevGridViewDispositivos";
             this.DevGridViewDispositivos.OptionsBehavior.Editable = false;
             this.DevGridViewDispositivos.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Never;
-            // 
-            // colGuidDispositivo
-            // 
-            this.colGuidDispositivo.FieldName = "GuidDispositivo";
-            this.colGuidDispositivo.Name = "colGuidDispositivo";
-            // 
-            // colGuidInstalacion
-            // 
-            this.colGuidInstalacion.FieldName = "GuidInstalacion";
-            this.colGuidInstalacion.Name = "colGuidInstalacion";
-            // 
-            // colNombreDispositivo
-            // 
-            this.colNombreDispositivo.FieldName = "NombreDispositivo";
-            this.colNombreDispositivo.Name = "colNombreDispositivo";
-            this.colNombreDispositivo.Visible = true;
-            this.colNombreDispositivo.VisibleIndex = 0;
-            // 
-            // colHost
-            // 
-            this.colHost.FieldName = "Host";
-            this.colHost.Name = "colHost";
-            this.colHost.Visible = true;
-            this.colHost.VisibleIndex = 1;
-            // 
-            // colPuerto
-            // 
-            this.colPuerto.FieldName = "Puerto";
-            this.colPuerto.Name = "colPuerto";
-            this.colPuerto.Visible = true;
-            this.colPuerto.VisibleIndex = 2;
-            // 
-            // colTipo1
-            // 
-            this.colTipo1.FieldName = "Tipo";
-            this.colTipo1.Name = "colTipo1";
-            this.colTipo1.Visible = true;
-            this.colTipo1.VisibleIndex = 3;
             // 
             // DevGridViewEmpleados
             // 
@@ -419,6 +385,58 @@
             this.DevRadioGroupFiltroContratos.TabIndex = 0;
             this.DevRadioGroupFiltroContratos.EditValueChanged += new System.EventHandler(this.DevRadioGroupFiltroContratos_EditValueChanged);
             // 
+            // colGuidDispositivo
+            // 
+            this.colGuidDispositivo.FieldName = "GuidDispositivo";
+            this.colGuidDispositivo.Name = "colGuidDispositivo";
+            // 
+            // colGuidInstalacion
+            // 
+            this.colGuidInstalacion.FieldName = "GuidInstalacion";
+            this.colGuidInstalacion.Name = "colGuidInstalacion";
+            // 
+            // colNombreDispositivo
+            // 
+            this.colNombreDispositivo.FieldName = "NombreDispositivo";
+            this.colNombreDispositivo.Name = "colNombreDispositivo";
+            this.colNombreDispositivo.Visible = true;
+            this.colNombreDispositivo.VisibleIndex = 2;
+            // 
+            // colHost
+            // 
+            this.colHost.FieldName = "Host";
+            this.colHost.Name = "colHost";
+            this.colHost.Visible = true;
+            this.colHost.VisibleIndex = 3;
+            // 
+            // colPuerto
+            // 
+            this.colPuerto.FieldName = "Puerto";
+            this.colPuerto.Name = "colPuerto";
+            this.colPuerto.Visible = true;
+            this.colPuerto.VisibleIndex = 4;
+            // 
+            // colTipo1
+            // 
+            this.colTipo1.FieldName = "Tipo";
+            this.colTipo1.Name = "colTipo1";
+            this.colTipo1.Visible = true;
+            this.colTipo1.VisibleIndex = 5;
+            // 
+            // colNombreInstalacion
+            // 
+            this.colNombreInstalacion.FieldName = "NombreInstalacion";
+            this.colNombreInstalacion.Name = "colNombreInstalacion";
+            this.colNombreInstalacion.Visible = true;
+            this.colNombreInstalacion.VisibleIndex = 1;
+            // 
+            // colNombreCadena
+            // 
+            this.colNombreCadena.FieldName = "NombreCadena";
+            this.colNombreCadena.Name = "colNombreCadena";
+            this.colNombreCadena.Visible = true;
+            this.colNombreCadena.VisibleIndex = 0;
+            // 
             // UCGridDatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -454,12 +472,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colTipo;
         private DevExpress.XtraGrid.Columns.GridColumn colData;
         private DevExpress.XtraGrid.Views.Grid.GridView DevGridViewDispositivos;
-        private DevExpress.XtraGrid.Columns.GridColumn colGuidDispositivo;
-        private DevExpress.XtraGrid.Columns.GridColumn colGuidInstalacion;
-        private DevExpress.XtraGrid.Columns.GridColumn colNombreDispositivo;
-        private DevExpress.XtraGrid.Columns.GridColumn colHost;
-        private DevExpress.XtraGrid.Columns.GridColumn colPuerto;
-        private DevExpress.XtraGrid.Columns.GridColumn colTipo1;
         private DevExpress.XtraGrid.Columns.GridColumn colGuidEmpleado;
         private DevExpress.XtraGrid.Columns.GridColumn colRUT;
         private DevExpress.XtraGrid.Columns.GridColumn colEnrollId;
@@ -485,5 +497,13 @@
         private DevExpress.XtraGrid.Columns.GridColumn colNombreEmpresa;
         private DevExpress.XtraGrid.Columns.GridColumn colNombreCuenta;
         private DevExpress.XtraGrid.Columns.GridColumn colNombreCargo;
+        private DevExpress.XtraGrid.Columns.GridColumn colGuidDispositivo;
+        private DevExpress.XtraGrid.Columns.GridColumn colGuidInstalacion;
+        private DevExpress.XtraGrid.Columns.GridColumn colNombreCadena;
+        private DevExpress.XtraGrid.Columns.GridColumn colNombreInstalacion;
+        private DevExpress.XtraGrid.Columns.GridColumn colNombreDispositivo;
+        private DevExpress.XtraGrid.Columns.GridColumn colHost;
+        private DevExpress.XtraGrid.Columns.GridColumn colPuerto;
+        private DevExpress.XtraGrid.Columns.GridColumn colTipo1;
     }
 }
