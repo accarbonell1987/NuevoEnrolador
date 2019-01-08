@@ -58,6 +58,12 @@ namespace EnroladorAccesoDatos {
         Activo,
         Vencido
     }
+    public enum TipoSincronizacion {
+        Insertar = 0,
+        Modificar = 1,
+        Eliminar = 2,
+        SinModificacion = 3
+    }
     #endregion
 
     #region Clases

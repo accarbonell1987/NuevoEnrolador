@@ -28,12 +28,11 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
             Negocio = negocio;
 
             Dock = DockStyle.Fill;
-            bsEmpleados.DataSource = GetDataSourceEmpleados();
         }
         #endregion
 
         #region Metodos y Eventos
-        private BindingList<POCOEmpleado> GetDataSourceEmpleados() {
+        private async Task<BindingList<POCOEmpleado>> GetDataSourceEmpleados() {
             try {
                 var pocoEmpleados = Negocio.ObtenerTodosEmpleados();
                 //mostrar si la identificacion es por huellas o por claves
@@ -50,9 +49,9 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
         /// Para el filtrado de la grid
         /// </summary>
         /// <param name="tipoLlenado">int tipoLlenado Contratos Activos o Vencidos</param>
-        private void ProcesarGrid(int tipoLlenado) {
+        private async Task ProcesarGrid(int tipoLlenado) {
             try {
-                var lEmpleados = GetDataSourceEmpleados();
+                var lEmpleados = await GetDataSourceEmpleados();
 
                 switch (tipoLlenado) {
                     case 0:
@@ -89,8 +88,11 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
+
         #endregion
 
-
+        private async void UCGridDatos_Load(object sender, EventArgs e) {
+            bsEmpleados.DataSource = await GetDataSourceEmpleados();
+        }
     }
 }

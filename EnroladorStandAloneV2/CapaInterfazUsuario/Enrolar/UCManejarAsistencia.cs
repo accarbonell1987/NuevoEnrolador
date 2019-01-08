@@ -62,7 +62,17 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                     DevLookUpEditDispositivo.Enabled = false;
                 }
 
-                bsDispositivos.DataSource = Negocio.ObtenerInstalacion((Guid)GuidInstalacion).Dispositivos;
+                var instalacion = Negocio.ObtenerInstalacion((Guid)GuidInstalacion);
+                var dispositivos = instalacion.Dispositivos;
+
+                //chequear que existan servicios para la instalacion escogida
+                if (dispositivos.Count > 0) {
+                    bsDispositivos.DataSource = dispositivos;
+                    DevLookUpEditDispositivo.Enabled = true;
+                } else {
+                    Negocio.AdicionarNotificacionListadoVacio("No existen dispositivos para la instalacion: " + instalacion.NombreInstalacion);
+                    DevLookUpEditDispositivo.Enabled = false;
+                }
                 DevLookUpEditDispositivo.Enabled = true;
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);

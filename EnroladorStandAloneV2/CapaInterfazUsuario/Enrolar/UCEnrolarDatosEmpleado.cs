@@ -49,6 +49,9 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             DevTextEditApellidos.Text = empleado.Apellidos;
             DevTextEditCorreo.Text = empleado.Correo;
             DevTextEditTelefono.Text = empleado.NumeroTelefono;
+
+            if (empleado.TieneContraseña) DevRadioGroupAcceso.SelectedIndex = 0;
+            else DevRadioGroupAcceso.SelectedIndex = 1;
         }
 
         private void DevRadioGroupAcceso_EditValueChanged(object sender, EventArgs e) {
