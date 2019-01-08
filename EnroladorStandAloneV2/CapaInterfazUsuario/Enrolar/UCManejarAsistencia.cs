@@ -54,7 +54,6 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             bsEmpleadoDispositivos.DataSource = empleado.Dispositivos;
             bsInstalaciones.DataSource = Negocio.ObtenerTodasInstalaciones();
         }
-        #endregion
 
         private void DevLookUpEditInstalacion_EditValueChanged(object sender, EventArgs e) {
             try {
@@ -69,5 +68,15 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
+
+        private void DevLookUpEditDispositivo_EditValueChanged(object sender, EventArgs e) {
+            //ver si hay alguno escogido
+            //ver si este ya no esta en la lista
+            //SI
+            //activar el boton adicionar
+            //NO
+            //desactivar
+        }
+        #endregion
     }
 }

@@ -270,6 +270,7 @@
             this.DevCheckEditManejaCasino.Size = new System.Drawing.Size(346, 19);
             this.DevCheckEditManejaCasino.StyleController = this.DevLayoutControlDatosDelContacto;
             this.DevCheckEditManejaCasino.TabIndex = 10;
+            this.DevCheckEditManejaCasino.EditValueChanged += new System.EventHandler(this.DevCheckEditManejaCasino_EditValueChanged);
             // 
             // DevCheckEditManejaAsistencia
             // 

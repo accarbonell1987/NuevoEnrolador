@@ -61,9 +61,15 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         public void AdicionarUCAsistencia(UCManejarAsistencia uCAsistencia) {
             DevPanelControlAsistencia.Controls.Add(uCAsistencia);
         }
-
         public void EliminarUCAsistencia() {
             DevPanelControlAsistencia.Controls.Clear();
+        }
+
+        public void AdicionarUCCasino(UCManejarCasino uCAsistencia) {
+            DevPanelControlCasinos.Controls.Add(uCAsistencia);
+        }
+        public void EliminarUCCasino() {
+            DevPanelControlCasinos.Controls.Clear();
         }
         #endregion
     }

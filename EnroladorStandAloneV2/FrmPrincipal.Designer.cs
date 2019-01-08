@@ -37,6 +37,7 @@
             this.DevGroupControlNotificacionesAcciones = new DevExpress.XtraEditors.GroupControl();
             this.DevPanelControlPrincipal = new DevExpress.XtraEditors.PanelControl();
             this.DevNavigationPanePrincipal = new DevExpress.XtraBars.Navigation.NavigationPane();
+            this.backgroundWorkerChequeoNotificaciones = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.DevRibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlNotificacionesAcciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevPanelControlPrincipal)).BeginInit();
@@ -166,6 +167,12 @@
             this.DevNavigationPanePrincipal.SelectedPageChanged += new DevExpress.XtraBars.Navigation.SelectedPageChangedEventHandler(this.DevNavigationPanePrincipal_SelectedPageChanged);
             this.DevNavigationPanePrincipal.QueryControl += new DevExpress.XtraBars.Navigation.QueryControlEventHandler(this.DevNavigationPanePrincipal_QueryControl);
             // 
+            // backgroundWorkerChequeoNotificaciones
+            // 
+            this.backgroundWorkerChequeoNotificaciones.WorkerReportsProgress = true;
+            this.backgroundWorkerChequeoNotificaciones.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorkerChequeoNotificaciones_DoWork);
+            this.backgroundWorkerChequeoNotificaciones.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BackgroundWorkerChequeoNotificaciones_ProgressChanged);
+            // 
             // FrmPrincipal
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
@@ -206,6 +213,7 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup DevRibbonPageGroupEnrolar;
         private DevExpress.XtraBars.BarButtonItem DevBarButtonItemGuardar;
         private DevExpress.XtraBars.BarButtonItem DevBarButtonItemDescartar;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerChequeoNotificaciones;
     }
 }
 

@@ -33,7 +33,8 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
 
         public Huellero mHuellero { get; set; }
         public SQLiteEnrollEntities mContext { get; set; }
-        public List<Notificacion> lNotificaciones { get; set; }
+        public List<POCONotificacion> lNotificaciones { get; set; }
+        public int CantidadElementosNotificaciones { get; set; }
 
         public List<POCOEmpleado> lEmpleados { get; set; }
         #endregion
@@ -41,7 +42,8 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
         #region Constructor
         public NegocioEnrolador() {
             mContext = new SQLiteEnrollEntities();
-            lNotificaciones = new List<Notificacion>();
+            lNotificaciones = new List<POCONotificacion>();
+            CantidadElementosNotificaciones = 0;
 
             Online = false;
             ExistenDatos = false;
@@ -168,7 +170,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                     }
                 }
 
-                lEmpleados = lPOCOEmpleados;                
+                lEmpleados = lPOCOEmpleados;
                 return lPOCOEmpleados;
 
             } catch (Exception eX) {
@@ -205,7 +207,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 if (empresa == null) return null;
 
                 var pocoEmpresa = TransformacionDatos.DeEmpresaAPOCOEmpresa(empresa);
-                
+
                 pocoEmpresa.Cuentas = ObtenerTodasCuentas().Where(p => p.GuidEmpresa == pocoEmpresa.GuidEmpresa).ToList();
                 pocoEmpresa.Cargos = ObtenerTodosCargos().Where(p => p.GuidEmpresa == pocoEmpresa.GuidEmpresa).ToList();
 
@@ -215,6 +217,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 return null;
             }
         }
+
         public List<POCOCuenta> ObtenerTodasCuentas() {
             try {
                 List<POCOCuenta> lPOCOCuentas = new List<POCOCuenta>();
@@ -232,6 +235,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 return null;
             }
         }
+
         public List<POCOCargo> ObtenerTodosCargos() {
             try {
                 List<POCOCargo> lPOCOCargos = new List<POCOCargo>();
@@ -269,6 +273,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 return null;
             }
         }
+
         public POCOCadena ObtenerCadenaDeInstalacion(Guid GuidCadena) {
             try {
                 var cadena = mContext.Cadena.FirstOrDefault(p => p.GuidCadena == GuidCadena.ToString());
@@ -292,6 +297,8 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                     pocoInstalacion.NombreCadena = ObtenerCadenaDeInstalacion(pocoInstalacion.GuidCadena).NombreCadena;
                     //buscar todos los dispositivos de la instalacion
                     pocoInstalacion.Dispositivos = ObtenerTodosDispositivosDeInstalacion(pocoInstalacion.GuidInstalacion);
+                    //buscar todos los servicios de la instalacion
+                    pocoInstalacion.ServiciosDelCasino = ObtenerTodosServiciosDelCasino(pocoInstalacion.GuidInstalacion);
                     lPOCOInstalacions.Add(pocoInstalacion);
                 }
 
@@ -303,7 +310,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
         }
         public List<POCOInstalacion> ObtenerTodasInstalacionesDeCadena(Guid GuidCadena) {
             try {
-                List<POCOInstalacion> lPOCOInstalacions = new List<POCOInstalacion>();
+                List<POCOInstalacion> lPOCOInstalaciones = new List<POCOInstalacion>();
                 var instalaciones = mContext.Instalacion.Where(p => p.GuidCadena == GuidCadena.ToString()).ToList();
 
                 foreach (var instalacion in instalaciones) {
@@ -312,10 +319,13 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                     pocoInstalacion.NombreCadena = ObtenerCadenaDeInstalacion(pocoInstalacion.GuidCadena).NombreCadena;
                     //buscar todos los dispositivos de la instalacion
                     pocoInstalacion.Dispositivos = ObtenerTodosDispositivosDeInstalacion(pocoInstalacion.GuidInstalacion);
-                    lPOCOInstalacions.Add(pocoInstalacion);
+                    //buscar todos los servicios de la instalacion
+                    pocoInstalacion.ServiciosDelCasino = ObtenerTodosServiciosDelCasino(pocoInstalacion.GuidInstalacion);
+
+                    lPOCOInstalaciones.Add(pocoInstalacion);
                 }
 
-                return lPOCOInstalacions;
+                return lPOCOInstalaciones;
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
                 return null;
@@ -331,6 +341,8 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 pocoInstalacion.NombreCadena = ObtenerCadenaDeInstalacion(pocoInstalacion.GuidCadena).NombreCadena;
                 //buscar todos los dispositivos de la instalacion
                 pocoInstalacion.Dispositivos = ObtenerTodosDispositivosDeInstalacion(pocoInstalacion.GuidInstalacion);
+                //buscar todos los servicios de la instalacion
+                pocoInstalacion.ServiciosDelCasino = ObtenerTodosServiciosDelCasino(pocoInstalacion.GuidInstalacion);
 
                 return pocoInstalacion;
             } catch (Exception eX) {
@@ -350,6 +362,103 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 pocoInstalacion.Dispositivos = ObtenerTodosDispositivosDeInstalacion(pocoInstalacion.GuidInstalacion);
 
                 return pocoInstalacion;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Obtener todos los servicios del casino (Casino = Instalacion)
+        /// </summary>
+        /// <param name="Casino">Guid Casino</param>
+        /// <returns>List<POCOServicioCasino></returns>
+        public List<POCOServicioCasino> ObtenerTodosServiciosDelCasino(Guid GuidCasino) {
+            try {
+                List<POCOServicioCasino> lPOCOServicios = new List<POCOServicioCasino>();
+                var servicios = mContext.ServicioCasino.Where(p => p.GuidCasino == GuidCasino.ToString()).ToList();
+
+                foreach (var servicio in servicios) {
+                    var pocoServicio = TransformacionDatos.DeServicioCasinoAPOCOServicioCasino(servicio);
+                    pocoServicio.TurnosDelServicio = ObtenerTodosLosTurnosDelServicio(pocoServicio.GuidServicioCasino);
+
+                    lPOCOServicios.Add(pocoServicio);
+                }
+
+                return lPOCOServicios;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                return null;
+            }
+        }
+        public POCOServicioCasino ObtenerServicio(Guid GuidServicio) {
+            try {
+                var servicio = mContext.ServicioCasino.FirstOrDefault(p => p.GuidServicioCasino == GuidServicio.ToString());
+                if (servicio == null) return null;
+
+                var pocoServicio = TransformacionDatos.DeServicioCasinoAPOCOServicioCasino(servicio);
+                //buscar turnos del servicio
+                pocoServicio.TurnosDelServicio = ObtenerTodosLosTurnosDelServicio(pocoServicio.GuidServicioCasino);
+
+                return pocoServicio;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                return null;
+            }
+        }
+
+        public List<POCOTurnoServicio> ObtenerTodosLosTurnosDelServicio(Guid GuidServicio) {
+            try {
+                List<POCOTurnoServicio> lPOCOTurnos = new List<POCOTurnoServicio>();
+                var turnos = mContext.TurnoServicio.Where(p => p.GuidServicio == GuidServicio.ToString()).ToList();
+
+                foreach (var turno in turnos) {
+                    var pocoTurno = TransformacionDatos.DeTurnoServicioAPOCOTurnoServicio(turno);
+                    lPOCOTurnos.Add(pocoTurno);
+                }
+
+                return lPOCOTurnos;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                return null;
+            }
+        }
+        public POCOTurnoServicio ObtenerTurnoServicio(Guid GuidTurno) {
+            try {
+                var turnoServicio = mContext.TurnoServicio.FirstOrDefault(p => p.GuidTurnoServicio == GuidTurno.ToString());
+                if (turnoServicio == null) return null;
+
+                var pocoTurnoServicio = TransformacionDatos.DeTurnoServicioAPOCOTurnoServicio(turnoServicio);
+                return pocoTurnoServicio;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                return null;
+            }
+        }
+
+        public List<POCOEmpleadoTurnoServicioCasino> ObtenerTodosEmpleadoTurnoServicioCasinoDelEmpleado(Guid GuidEmpleado) {
+            try {
+                List<POCOEmpleadoTurnoServicioCasino> lPOCOEmpleadoTurnoServicioCasino = new List<POCOEmpleadoTurnoServicioCasino>();
+                var empleadoTurnoServicioCasino = mContext.EmpleadoTurnoServicioCasino.Where(p => p.GuidEmpleado == GuidEmpleado.ToString()).ToList();
+
+                foreach (var eTSC in empleadoTurnoServicioCasino) {
+                    var pocoETSC = TransformacionDatos.DeEmpleadoTurnoServicioCasinoAPOCOEmpleadoTurnoServicioCasino(eTSC);
+
+                    var turno = ObtenerTurnoServicio(pocoETSC.GuidTurnoServicio);
+                    var servicio = ObtenerServicio(turno.GuidServicio);
+                    var casino = ObtenerInstalacion(servicio.GuidCasino); //Casino = Instalacion
+
+                    pocoETSC.NombreTurno = turno.NombreTurnoServicio;
+                    pocoETSC.NombreServicio = servicio.NombreServicioCasino;
+                    pocoETSC.NombreCasino = casino.NombreInstalacion;
+                    pocoETSC.HoraInicio = turno.HoraInicio;
+                    pocoETSC.HoraFin = turno.HoraFin;
+                    pocoETSC.Vigente = turno.Vigente;
+
+                    lPOCOEmpleadoTurnoServicioCasino.Add(pocoETSC);
+                }
+
+                return lPOCOEmpleadoTurnoServicioCasino;
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
                 return null;
@@ -805,7 +914,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 mensaje += " - " + mensajeAdicional;
             }
 
-            Notificacion notificacion = new Notificacion() {
+            POCONotificacion notificacion = new POCONotificacion() {
                 IdNotificacion = ahora.ToBinary().ToString(),
                 FechaNotificacion = ahora,
                 MensajeNotificacion = mensaje,
@@ -830,7 +939,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 mensaje += " - " + mensajeAdicional;
             }
 
-            Notificacion notificacion = new Notificacion() {    
+            POCONotificacion notificacion = new POCONotificacion() {    
                 IdNotificacion = ahora.ToBinary().ToString(),
                 FechaNotificacion = ahora,
                 MensajeNotificacion = mensaje,

@@ -31,7 +31,7 @@ namespace EnroladorAccesoDatos.Ayudantes {
         /// <param name="ex">Exception ex</param>
         /// <param name="nombreArchivo">string nombreArchivo</param>
         /// <returns>Exception</returns>
-        public static Exception Log(this Exception ex, string nombreArchivo, string nombreProcedimiento, List<Notificacion> lNotificaciones) {
+        public static Exception Log(this Exception ex, string nombreArchivo, string nombreProcedimiento, List<POCONotificacion> lNotificaciones) {
             string mensaje = string.Concat(ex.InnerExceptions().Select(e => e.Message + "\n"));
 
             DateTime ahora = DateTime.Now;
@@ -41,7 +41,7 @@ namespace EnroladorAccesoDatos.Ayudantes {
 
             string idNotificacion = ahora.ToBinary().ToString();
 
-            lNotificaciones.Add(new Notificacion() {
+            lNotificaciones.Add(new POCONotificacion() {
                 IdNotificacion = idNotificacion,
                 FechaNotificacion = ahora,
                 MensajeNotificacion = textoError,

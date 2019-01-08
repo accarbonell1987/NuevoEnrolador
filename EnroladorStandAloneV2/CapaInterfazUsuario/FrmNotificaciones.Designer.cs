@@ -24,6 +24,7 @@
         /// </summary>
         ///
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmNotificaciones));
             this.DevLayoutControl = new DevExpress.XtraLayout.LayoutControl();
             this.DevLabelControlNotificaciones = new DevExpress.XtraEditors.LabelControl();
@@ -34,6 +35,7 @@
             this.DevItemGrid = new DevExpress.XtraLayout.LayoutControlItem();
             this.DevSeparatorControl = new DevExpress.XtraEditors.SeparatorControl();
             this.DevButtonCancelar = new DevExpress.XtraEditors.SimpleButton();
+            this.bsNotificaciones = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControl)).BeginInit();
             this.DevLayoutControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlNotificaciones)).BeginInit();
@@ -42,6 +44,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DevIemLabelNotificaciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevItemGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevSeparatorControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsNotificaciones)).BeginInit();
             this.SuspendLayout();
             // 
             // DevLayoutControl
@@ -79,6 +82,7 @@
             // 
             // DevGridControlNotificaciones
             // 
+            this.DevGridControlNotificaciones.DataSource = this.bsNotificaciones;
             this.DevGridControlNotificaciones.Location = new System.Drawing.Point(10, 34);
             this.DevGridControlNotificaciones.MainView = this.DevGridViewNotificaciones;
             this.DevGridControlNotificaciones.Name = "DevGridControlNotificaciones";
@@ -175,6 +179,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DevIemLabelNotificaciones)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevItemGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevSeparatorControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsNotificaciones)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -190,5 +195,6 @@
         private DevExpress.XtraLayout.LayoutControlItem DevItemGrid;
         private DevExpress.XtraEditors.SeparatorControl DevSeparatorControl;
         private DevExpress.XtraEditors.SimpleButton DevButtonCancelar;
+        private System.Windows.Forms.BindingSource bsNotificaciones;
     }
 }

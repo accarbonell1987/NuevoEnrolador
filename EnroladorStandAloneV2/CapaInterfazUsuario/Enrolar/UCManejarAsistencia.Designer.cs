@@ -165,6 +165,7 @@
             // 
             this.DevSimpleButtonAdicionar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.DevSimpleButtonAdicionar.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.DevSimpleButtonAdicionar.Enabled = false;
             this.DevSimpleButtonAdicionar.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.DevSimpleButtonAdicionar.ImageUri.Uri = "Add;Size16x16;Office2013";
             this.DevSimpleButtonAdicionar.Location = new System.Drawing.Point(382, 86);
@@ -207,6 +208,7 @@
             this.DevLookUpEditDispositivo.Size = new System.Drawing.Size(348, 20);
             this.DevLookUpEditDispositivo.StyleController = this.DevLayoutControl;
             this.DevLookUpEditDispositivo.TabIndex = 5;
+            this.DevLookUpEditDispositivo.EditValueChanged += new System.EventHandler(this.DevLookUpEditDispositivo_EditValueChanged);
             // 
             // bsDispositivos
             // 
@@ -265,13 +267,13 @@
             this.DevLayoutControlItemDispositivo.Text = "Dispositivo:";
             this.DevLayoutControlItemDispositivo.TextSize = new System.Drawing.Size(56, 13);
             // 
-            // UCEnrolarAsistencia
+            // UCManejarAsistencia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.DevGroupControlAsistencia);
             this.Controls.Add(this.DevGridControlAsistencias);
-            this.Name = "UCEnrolarAsistencia";
+            this.Name = "UCManejarAsistencia";
             this.Size = new System.Drawing.Size(447, 361);
             this.Load += new System.EventHandler(this.UCEnrolarAsistencia_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlAsistencias)).EndInit();

@@ -25,40 +25,43 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.DevGridControlAsistencias = new DevExpress.XtraGrid.GridControl();
-            this.bsEmpleadoDispositivos = new System.Windows.Forms.BindingSource(this.components);
+            this.bsEmpleadoTurnoServicioCasino = new System.Windows.Forms.BindingSource(this.components);
             this.DevGridViewAsistencias = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colGuidDispositivo = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colGuidInstalacion = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colNombreCadena = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colNombreInstalacion = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colNombreDispositivo = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colHost = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colPuerto = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colTipo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colGuidEmpleado = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colGuidTurnoServicio = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNombreServicio = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNombreTurno = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNombreCasino = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DevGroupControlAsistencia = new DevExpress.XtraEditors.GroupControl();
             this.DevSimpleButtonAdicionar = new DevExpress.XtraEditors.SimpleButton();
             this.DevLayoutControl = new DevExpress.XtraLayout.LayoutControl();
-            this.DevLookUpEditDispositivo = new DevExpress.XtraEditors.LookUpEdit();
-            this.bsDispositivos = new System.Windows.Forms.BindingSource(this.components);
-            this.DevLookUpEditInstalacion = new DevExpress.XtraEditors.LookUpEdit();
+            this.DevLookUpEditTurno = new DevExpress.XtraEditors.LookUpEdit();
+            this.bsTurnos = new System.Windows.Forms.BindingSource(this.components);
+            this.DevLookUpEditServicio = new DevExpress.XtraEditors.LookUpEdit();
+            this.bsServicios = new System.Windows.Forms.BindingSource(this.components);
+            this.DevLookUpEditCasino = new DevExpress.XtraEditors.LookUpEdit();
             this.bsInstalaciones = new System.Windows.Forms.BindingSource(this.components);
             this.DevLayoutControlGroup = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.DevLayoutControlItemInstalacion = new DevExpress.XtraLayout.LayoutControlItem();
-            this.DevLayoutControlItemDispositivo = new DevExpress.XtraLayout.LayoutControlItem();
+            this.DevLayoutControlItemCasino = new DevExpress.XtraLayout.LayoutControlItem();
+            this.DevLayoutControlItemServicio = new DevExpress.XtraLayout.LayoutControlItem();
+            this.DevLayoutControlItemTurno = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlAsistencias)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsEmpleadoDispositivos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsEmpleadoTurnoServicioCasino)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewAsistencias)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlAsistencia)).BeginInit();
             this.DevGroupControlAsistencia.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControl)).BeginInit();
             this.DevLayoutControl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DevLookUpEditDispositivo.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsDispositivos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DevLookUpEditInstalacion.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevLookUpEditTurno.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsTurnos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevLookUpEditServicio.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsServicios)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevLookUpEditCasino.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsInstalaciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlGroup)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemInstalacion)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemDispositivo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemCasino)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemServicio)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemTurno)).BeginInit();
             this.SuspendLayout();
             // 
             // DevGridControlAsistencias
@@ -66,7 +69,7 @@
             this.DevGridControlAsistencias.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.DevGridControlAsistencias.DataSource = this.bsEmpleadoDispositivos;
+            this.DevGridControlAsistencias.DataSource = this.bsEmpleadoTurnoServicioCasino;
             this.DevGridControlAsistencias.Location = new System.Drawing.Point(3, 3);
             this.DevGridControlAsistencias.MainView = this.DevGridViewAsistencias;
             this.DevGridControlAsistencias.Name = "DevGridControlAsistencias";
@@ -75,79 +78,52 @@
             this.DevGridControlAsistencias.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.DevGridViewAsistencias});
             // 
-            // bsEmpleadoDispositivos
+            // bsEmpleadoTurnoServicioCasino
             // 
-            this.bsEmpleadoDispositivos.DataSource = typeof(EnroladorAccesoDatos.Dominio.POCODispositivo);
+            this.bsEmpleadoTurnoServicioCasino.DataSource = typeof(EnroladorAccesoDatos.Dominio.POCOEmpleadoTurnoServicioCasino);
             // 
             // DevGridViewAsistencias
             // 
             this.DevGridViewAsistencias.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colGuidDispositivo,
-            this.colGuidInstalacion,
-            this.colNombreCadena,
-            this.colNombreInstalacion,
-            this.colNombreDispositivo,
-            this.colHost,
-            this.colPuerto,
-            this.colTipo});
+            this.colGuidEmpleado,
+            this.colGuidTurnoServicio,
+            this.colNombreServicio,
+            this.colNombreTurno,
+            this.colNombreCasino});
             this.DevGridViewAsistencias.GridControl = this.DevGridControlAsistencias;
             this.DevGridViewAsistencias.Name = "DevGridViewAsistencias";
             this.DevGridViewAsistencias.OptionsBehavior.Editable = false;
             // 
-            // colGuidDispositivo
+            // colGuidEmpleado
             // 
-            this.colGuidDispositivo.FieldName = "GuidDispositivo";
-            this.colGuidDispositivo.Name = "colGuidDispositivo";
+            this.colGuidEmpleado.FieldName = "GuidEmpleado";
+            this.colGuidEmpleado.Name = "colGuidEmpleado";
             // 
-            // colGuidInstalacion
+            // colGuidTurnoServicio
             // 
-            this.colGuidInstalacion.FieldName = "GuidInstalacion";
-            this.colGuidInstalacion.Name = "colGuidInstalacion";
+            this.colGuidTurnoServicio.FieldName = "GuidTurnoServicio";
+            this.colGuidTurnoServicio.Name = "colGuidTurnoServicio";
             // 
-            // colNombreCadena
+            // colNombreServicio
             // 
-            this.colNombreCadena.Caption = "Cadena";
-            this.colNombreCadena.FieldName = "NombreCadena";
-            this.colNombreCadena.Name = "colNombreCadena";
-            this.colNombreCadena.Visible = true;
-            this.colNombreCadena.VisibleIndex = 0;
+            this.colNombreServicio.FieldName = "NombreServicio";
+            this.colNombreServicio.Name = "colNombreServicio";
+            this.colNombreServicio.Visible = true;
+            this.colNombreServicio.VisibleIndex = 0;
             // 
-            // colNombreInstalacion
+            // colNombreTurno
             // 
-            this.colNombreInstalacion.Caption = "Instalacion";
-            this.colNombreInstalacion.FieldName = "NombreInstalacion";
-            this.colNombreInstalacion.Name = "colNombreInstalacion";
-            this.colNombreInstalacion.Visible = true;
-            this.colNombreInstalacion.VisibleIndex = 1;
+            this.colNombreTurno.FieldName = "NombreTurno";
+            this.colNombreTurno.Name = "colNombreTurno";
+            this.colNombreTurno.Visible = true;
+            this.colNombreTurno.VisibleIndex = 1;
             // 
-            // colNombreDispositivo
+            // colNombreCasino
             // 
-            this.colNombreDispositivo.Caption = "Dispositivo";
-            this.colNombreDispositivo.FieldName = "NombreDispositivo";
-            this.colNombreDispositivo.Name = "colNombreDispositivo";
-            this.colNombreDispositivo.Visible = true;
-            this.colNombreDispositivo.VisibleIndex = 2;
-            // 
-            // colHost
-            // 
-            this.colHost.FieldName = "Host";
-            this.colHost.Name = "colHost";
-            this.colHost.Visible = true;
-            this.colHost.VisibleIndex = 3;
-            // 
-            // colPuerto
-            // 
-            this.colPuerto.FieldName = "Puerto";
-            this.colPuerto.Name = "colPuerto";
-            this.colPuerto.Visible = true;
-            this.colPuerto.VisibleIndex = 4;
-            // 
-            // colTipo
-            // 
-            this.colTipo.FieldName = "Tipo";
-            this.colTipo.Name = "colTipo";
-            this.colTipo.Visible = true;
-            this.colTipo.VisibleIndex = 5;
+            this.colNombreCasino.FieldName = "NombreCasino";
+            this.colNombreCasino.Name = "colNombreCasino";
+            this.colNombreCasino.Visible = true;
+            this.colNombreCasino.VisibleIndex = 2;
             // 
             // DevGroupControlAsistencia
             // 
@@ -155,81 +131,106 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DevGroupControlAsistencia.Controls.Add(this.DevSimpleButtonAdicionar);
             this.DevGroupControlAsistencia.Controls.Add(this.DevLayoutControl);
-            this.DevGroupControlAsistencia.Location = new System.Drawing.Point(3, 243);
+            this.DevGroupControlAsistencia.Location = new System.Drawing.Point(3, 244);
             this.DevGroupControlAsistencia.Name = "DevGroupControlAsistencia";
-            this.DevGroupControlAsistencia.Size = new System.Drawing.Size(441, 114);
+            this.DevGroupControlAsistencia.Size = new System.Drawing.Size(441, 145);
             this.DevGroupControlAsistencia.TabIndex = 1;
             this.DevGroupControlAsistencia.Text = "Adicionar Asistencia";
             // 
             // DevSimpleButtonAdicionar
             // 
-            this.DevSimpleButtonAdicionar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.DevSimpleButtonAdicionar.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.DevSimpleButtonAdicionar.Enabled = false;
             this.DevSimpleButtonAdicionar.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.DevSimpleButtonAdicionar.ImageUri.Uri = "Add;Size16x16;Office2013";
-            this.DevSimpleButtonAdicionar.Location = new System.Drawing.Point(382, 86);
+            this.DevSimpleButtonAdicionar.Location = new System.Drawing.Point(382, 111);
             this.DevSimpleButtonAdicionar.Name = "DevSimpleButtonAdicionar";
             this.DevSimpleButtonAdicionar.Size = new System.Drawing.Size(43, 23);
             this.DevSimpleButtonAdicionar.TabIndex = 1;
             // 
             // DevLayoutControl
             // 
-            this.DevLayoutControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.DevLayoutControl.Controls.Add(this.DevLookUpEditDispositivo);
-            this.DevLayoutControl.Controls.Add(this.DevLookUpEditInstalacion);
-            this.DevLayoutControl.Location = new System.Drawing.Point(5, 23);
+            this.DevLayoutControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DevLayoutControl.Controls.Add(this.DevLookUpEditTurno);
+            this.DevLayoutControl.Controls.Add(this.DevLookUpEditServicio);
+            this.DevLayoutControl.Controls.Add(this.DevLookUpEditCasino);
+            this.DevLayoutControl.Location = new System.Drawing.Point(5, 20);
             this.DevLayoutControl.Name = "DevLayoutControl";
             this.DevLayoutControl.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(600, 459, 450, 400);
             this.DevLayoutControl.Root = this.DevLayoutControlGroup;
-            this.DevLayoutControl.Size = new System.Drawing.Size(431, 70);
+            this.DevLayoutControl.Size = new System.Drawing.Size(431, 94);
             this.DevLayoutControl.TabIndex = 0;
             this.DevLayoutControl.Text = "layoutControl1";
             // 
-            // DevLookUpEditDispositivo
+            // DevLookUpEditTurno
             // 
-            this.DevLookUpEditDispositivo.Enabled = false;
-            this.DevLookUpEditDispositivo.Location = new System.Drawing.Point(71, 36);
-            this.DevLookUpEditDispositivo.Name = "DevLookUpEditDispositivo";
-            this.DevLookUpEditDispositivo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.DevLookUpEditTurno.Enabled = false;
+            this.DevLookUpEditTurno.Location = new System.Drawing.Point(56, 60);
+            this.DevLookUpEditTurno.Name = "DevLookUpEditTurno";
+            this.DevLookUpEditTurno.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.DevLookUpEditDispositivo.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("GuidDispositivo", "Guid Dispositivo", 98, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("GuidInstalacion", "Guid Instalacion", 86, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NombreDispositivo", "Nombre Dispositivo", 101, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Host", "Host", 32, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Puerto", "Puerto", 42, DevExpress.Utils.FormatType.Numeric, "", true, DevExpress.Utils.HorzAlignment.Far),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Tipo", "Tipo", 30, DevExpress.Utils.FormatType.Numeric, "", true, DevExpress.Utils.HorzAlignment.Far),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NombreInstalacion", "Nombre Instalacion", 102, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NombreCadena", "Nombre Cadena", 87, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near)});
-            this.DevLookUpEditDispositivo.Properties.DataSource = this.bsDispositivos;
-            this.DevLookUpEditDispositivo.Properties.DisplayMember = "NombreDispositivo";
-            this.DevLookUpEditDispositivo.Properties.ValueMember = "GuidDispositivo";
-            this.DevLookUpEditDispositivo.Size = new System.Drawing.Size(348, 20);
-            this.DevLookUpEditDispositivo.StyleController = this.DevLayoutControl;
-            this.DevLookUpEditDispositivo.TabIndex = 5;
+            this.DevLookUpEditTurno.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("GuidTurnoServicio", "Guid Turno Servicio", 115, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("GuidServicio", "Guid Servicio", 71, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NombreTurnoServicio", "Nombre Turno Servicio", 118, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("HoraInicio", "Hora Inicio", 61, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("HoraFin", "Hora Fin", 50, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Vigente", "Vigente", 46, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near)});
+            this.DevLookUpEditTurno.Properties.DataSource = this.bsTurnos;
+            this.DevLookUpEditTurno.Properties.DisplayMember = "NombreTurnoServicio";
+            this.DevLookUpEditTurno.Properties.ValueMember = "GuidTurnoServicio";
+            this.DevLookUpEditTurno.Size = new System.Drawing.Size(363, 20);
+            this.DevLookUpEditTurno.StyleController = this.DevLayoutControl;
+            this.DevLookUpEditTurno.TabIndex = 4;
+            this.DevLookUpEditTurno.EditValueChanged += new System.EventHandler(this.DevLookUpEditTurno_EditValueChanged);
             // 
-            // bsDispositivos
+            // bsTurnos
             // 
-            this.bsDispositivos.DataSource = typeof(EnroladorAccesoDatos.Dominio.POCODispositivo);
+            this.bsTurnos.DataSource = typeof(EnroladorAccesoDatos.Dominio.POCOTurnoServicio);
             // 
-            // DevLookUpEditInstalacion
+            // DevLookUpEditServicio
             // 
-            this.DevLookUpEditInstalacion.Location = new System.Drawing.Point(71, 12);
-            this.DevLookUpEditInstalacion.Name = "DevLookUpEditInstalacion";
-            this.DevLookUpEditInstalacion.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.DevLookUpEditServicio.Enabled = false;
+            this.DevLookUpEditServicio.Location = new System.Drawing.Point(56, 36);
+            this.DevLookUpEditServicio.Name = "DevLookUpEditServicio";
+            this.DevLookUpEditServicio.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.DevLookUpEditInstalacion.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            this.DevLookUpEditServicio.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("GuidServicioCasino", "Guid Servicio Casino", 119, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("GuidCasino", "Guid Casino", 66, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NombreServicioCasino", "Nombre Servicio Casino", 122, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Vigente", "Vigente", 46, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near)});
+            this.DevLookUpEditServicio.Properties.DataSource = this.bsServicios;
+            this.DevLookUpEditServicio.Properties.DisplayMember = "NombreServicioCasino";
+            this.DevLookUpEditServicio.Properties.ValueMember = "GuidServicioCasino";
+            this.DevLookUpEditServicio.Size = new System.Drawing.Size(363, 20);
+            this.DevLookUpEditServicio.StyleController = this.DevLayoutControl;
+            this.DevLookUpEditServicio.TabIndex = 2;
+            this.DevLookUpEditServicio.EditValueChanged += new System.EventHandler(this.DevLookUpEditServicio_EditValueChanged);
+            // 
+            // bsServicios
+            // 
+            this.bsServicios.DataSource = typeof(EnroladorAccesoDatos.Dominio.POCOServicioCasino);
+            // 
+            // DevLookUpEditCasino
+            // 
+            this.DevLookUpEditCasino.Location = new System.Drawing.Point(56, 12);
+            this.DevLookUpEditCasino.Name = "DevLookUpEditCasino";
+            this.DevLookUpEditCasino.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.DevLookUpEditCasino.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("GuidInstalacion", "Guid Instalacion", 99, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("GuidCadena", "Guid Cadena", 71, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NombreCadena", "Nombre Cadena", 87, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NombreInstalacion", "Nombre Instalacion", 102, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near)});
-            this.DevLookUpEditInstalacion.Properties.DataSource = this.bsInstalaciones;
-            this.DevLookUpEditInstalacion.Properties.DisplayMember = "NombreInstalacion";
-            this.DevLookUpEditInstalacion.Properties.ValueMember = "GuidInstalacion";
-            this.DevLookUpEditInstalacion.Size = new System.Drawing.Size(348, 20);
-            this.DevLookUpEditInstalacion.StyleController = this.DevLayoutControl;
-            this.DevLookUpEditInstalacion.TabIndex = 4;
-            this.DevLookUpEditInstalacion.EditValueChanged += new System.EventHandler(this.DevLookUpEditInstalacion_EditValueChanged);
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NombreInstalacion", "Nombre Instalacion", 102, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NombreCadena", "Nombre Cadena", 87, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near)});
+            this.DevLookUpEditCasino.Properties.DataSource = this.bsInstalaciones;
+            this.DevLookUpEditCasino.Properties.DisplayMember = "NombreInstalacion";
+            this.DevLookUpEditCasino.Properties.ValueMember = "GuidInstalacion";
+            this.DevLookUpEditCasino.Size = new System.Drawing.Size(363, 20);
+            this.DevLookUpEditCasino.StyleController = this.DevLayoutControl;
+            this.DevLookUpEditCasino.TabIndex = 0;
+            this.DevLookUpEditCasino.EditValueChanged += new System.EventHandler(this.DevLookUpEditInstalacion_EditValueChanged);
             // 
             // bsInstalaciones
             // 
@@ -240,54 +241,67 @@
             this.DevLayoutControlGroup.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.DevLayoutControlGroup.GroupBordersVisible = false;
             this.DevLayoutControlGroup.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.DevLayoutControlItemInstalacion,
-            this.DevLayoutControlItemDispositivo});
+            this.DevLayoutControlItemCasino,
+            this.DevLayoutControlItemServicio,
+            this.DevLayoutControlItemTurno});
             this.DevLayoutControlGroup.Location = new System.Drawing.Point(0, 0);
-            this.DevLayoutControlGroup.Name = "DevLayoutControlGroup";
-            this.DevLayoutControlGroup.Size = new System.Drawing.Size(431, 70);
+            this.DevLayoutControlGroup.Name = "Root";
+            this.DevLayoutControlGroup.Size = new System.Drawing.Size(431, 94);
             this.DevLayoutControlGroup.TextVisible = false;
             // 
-            // DevLayoutControlItemInstalacion
+            // DevLayoutControlItemCasino
             // 
-            this.DevLayoutControlItemInstalacion.Control = this.DevLookUpEditInstalacion;
-            this.DevLayoutControlItemInstalacion.Location = new System.Drawing.Point(0, 0);
-            this.DevLayoutControlItemInstalacion.Name = "DevLayoutControlItemInstalacion";
-            this.DevLayoutControlItemInstalacion.Size = new System.Drawing.Size(411, 24);
-            this.DevLayoutControlItemInstalacion.Text = "Instalacion:";
-            this.DevLayoutControlItemInstalacion.TextSize = new System.Drawing.Size(56, 13);
+            this.DevLayoutControlItemCasino.Control = this.DevLookUpEditCasino;
+            this.DevLayoutControlItemCasino.Location = new System.Drawing.Point(0, 0);
+            this.DevLayoutControlItemCasino.Name = "DevLayoutControlItemCasino";
+            this.DevLayoutControlItemCasino.Size = new System.Drawing.Size(411, 24);
+            this.DevLayoutControlItemCasino.Text = "Casino:";
+            this.DevLayoutControlItemCasino.TextSize = new System.Drawing.Size(41, 13);
             // 
-            // DevLayoutControlItemDispositivo
+            // DevLayoutControlItemServicio
             // 
-            this.DevLayoutControlItemDispositivo.Control = this.DevLookUpEditDispositivo;
-            this.DevLayoutControlItemDispositivo.Location = new System.Drawing.Point(0, 24);
-            this.DevLayoutControlItemDispositivo.Name = "DevLayoutControlItemDispositivo";
-            this.DevLayoutControlItemDispositivo.Size = new System.Drawing.Size(411, 26);
-            this.DevLayoutControlItemDispositivo.Text = "Dispositivo:";
-            this.DevLayoutControlItemDispositivo.TextSize = new System.Drawing.Size(56, 13);
+            this.DevLayoutControlItemServicio.Control = this.DevLookUpEditServicio;
+            this.DevLayoutControlItemServicio.Location = new System.Drawing.Point(0, 24);
+            this.DevLayoutControlItemServicio.Name = "DevLayoutControlItemServicio";
+            this.DevLayoutControlItemServicio.Size = new System.Drawing.Size(411, 24);
+            this.DevLayoutControlItemServicio.Text = "Servicio:";
+            this.DevLayoutControlItemServicio.TextSize = new System.Drawing.Size(41, 13);
             // 
-            // UCEnrolarAsistencia
+            // DevLayoutControlItemTurno
+            // 
+            this.DevLayoutControlItemTurno.Control = this.DevLookUpEditTurno;
+            this.DevLayoutControlItemTurno.Location = new System.Drawing.Point(0, 48);
+            this.DevLayoutControlItemTurno.Name = "DevLayoutControlItemTurno";
+            this.DevLayoutControlItemTurno.Size = new System.Drawing.Size(411, 26);
+            this.DevLayoutControlItemTurno.Text = "Turnos:";
+            this.DevLayoutControlItemTurno.TextSize = new System.Drawing.Size(41, 13);
+            // 
+            // UCManejarCasino
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.DevGroupControlAsistencia);
             this.Controls.Add(this.DevGridControlAsistencias);
-            this.Name = "UCEnrolarAsistencia";
-            this.Size = new System.Drawing.Size(447, 361);
-            this.Load += new System.EventHandler(this.UCEnrolarAsistencia_Load);
+            this.Name = "UCManejarCasino";
+            this.Size = new System.Drawing.Size(447, 395);
+            this.Load += new System.EventHandler(this.UCManejarCasino_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlAsistencias)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsEmpleadoDispositivos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsEmpleadoTurnoServicioCasino)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewAsistencias)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlAsistencia)).EndInit();
             this.DevGroupControlAsistencia.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControl)).EndInit();
             this.DevLayoutControl.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DevLookUpEditDispositivo.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsDispositivos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DevLookUpEditInstalacion.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevLookUpEditTurno.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsTurnos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevLookUpEditServicio.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsServicios)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevLookUpEditCasino.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsInstalaciones)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlGroup)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemInstalacion)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemDispositivo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemCasino)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemServicio)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemTurno)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -298,22 +312,22 @@
         private DevExpress.XtraGrid.Views.Grid.GridView DevGridViewAsistencias;
         private DevExpress.XtraEditors.GroupControl DevGroupControlAsistencia;
         private DevExpress.XtraLayout.LayoutControl DevLayoutControl;
-        private DevExpress.XtraEditors.LookUpEdit DevLookUpEditInstalacion;
+        private DevExpress.XtraEditors.LookUpEdit DevLookUpEditCasino;
         private DevExpress.XtraLayout.LayoutControlGroup DevLayoutControlGroup;
-        private DevExpress.XtraLayout.LayoutControlItem DevLayoutControlItemInstalacion;
-        private DevExpress.XtraEditors.LookUpEdit DevLookUpEditDispositivo;
-        private DevExpress.XtraLayout.LayoutControlItem DevLayoutControlItemDispositivo;
+        private DevExpress.XtraLayout.LayoutControlItem DevLayoutControlItemCasino;
+        private DevExpress.XtraEditors.LookUpEdit DevLookUpEditServicio;
+        private DevExpress.XtraLayout.LayoutControlItem DevLayoutControlItemServicio;
         private DevExpress.XtraEditors.SimpleButton DevSimpleButtonAdicionar;
-        private System.Windows.Forms.BindingSource bsDispositivos;
         private System.Windows.Forms.BindingSource bsInstalaciones;
-        private System.Windows.Forms.BindingSource bsEmpleadoDispositivos;
-        private DevExpress.XtraGrid.Columns.GridColumn colGuidDispositivo;
-        private DevExpress.XtraGrid.Columns.GridColumn colGuidInstalacion;
-        private DevExpress.XtraGrid.Columns.GridColumn colNombreCadena;
-        private DevExpress.XtraGrid.Columns.GridColumn colNombreInstalacion;
-        private DevExpress.XtraGrid.Columns.GridColumn colNombreDispositivo;
-        private DevExpress.XtraGrid.Columns.GridColumn colHost;
-        private DevExpress.XtraGrid.Columns.GridColumn colPuerto;
-        private DevExpress.XtraGrid.Columns.GridColumn colTipo;
+        private System.Windows.Forms.BindingSource bsEmpleadoTurnoServicioCasino;
+        private DevExpress.XtraEditors.LookUpEdit DevLookUpEditTurno;
+        private DevExpress.XtraLayout.LayoutControlItem DevLayoutControlItemTurno;
+        private DevExpress.XtraGrid.Columns.GridColumn colGuidEmpleado;
+        private DevExpress.XtraGrid.Columns.GridColumn colGuidTurnoServicio;
+        private DevExpress.XtraGrid.Columns.GridColumn colNombreServicio;
+        private DevExpress.XtraGrid.Columns.GridColumn colNombreTurno;
+        private DevExpress.XtraGrid.Columns.GridColumn colNombreCasino;
+        private System.Windows.Forms.BindingSource bsServicios;
+        private System.Windows.Forms.BindingSource bsTurnos;
     }
 }

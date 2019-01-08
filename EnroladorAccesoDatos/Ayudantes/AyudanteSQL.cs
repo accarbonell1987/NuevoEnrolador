@@ -16,7 +16,7 @@ namespace EnroladorAccesoDatos.Ayudantes {
         /// <param name="consulta">string consulta</param>
         /// <param name="connectionString">string connectionString</param>
         /// <param name="lNotificaciones">List<Notificacion> lNotificaciones</param>
-        public static void EjecutarConsulta(string consulta, string connectionString, List<Notificacion> lNotificaciones) {
+        public static void EjecutarConsulta(string consulta, string connectionString, List<POCONotificacion> lNotificaciones) {
             try {
 
                 SqlConnection SQLCnx = new SqlConnection(connectionString);
@@ -57,7 +57,7 @@ namespace EnroladorAccesoDatos.Ayudantes {
         /// <param name="consulta">string consulta</param>
         /// <param name="contexto">DbContext contexto</param>
         /// <param name="lNotificaciones">List<Notificacion> lNotificaciones</param>
-        public static void EjecutarConsulta(string consulta, DbContext contexto, List<Notificacion> lNotificaciones) {
+        public static void EjecutarConsulta(string consulta, DbContext contexto, List<POCONotificacion> lNotificaciones) {
             try {
                 if (contexto != null) 
                     contexto.Database.ExecuteSqlCommand(consulta);
