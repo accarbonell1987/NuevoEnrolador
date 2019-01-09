@@ -235,7 +235,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="InsertHuella">
+  <xs:element name="InsertarHuella">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q30="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="responsable" type="q30:guid" />
@@ -243,14 +243,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="InsertHuellaResponse">
+  <xs:element name="InsertarHuellaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="InsertHuellaResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="InsertarHuellaResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="UpdateHuella">
+  <xs:element name="ActualizarHuella">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q32="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="responsable" type="q32:guid" />
@@ -258,14 +258,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="UpdateHuellaResponse">
+  <xs:element name="ActualizarHuellaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="UpdateHuellaResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ActualizarHuellaResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="InsertEmpleado">
+  <xs:element name="InsertarEmpleado">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q34="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="responsable" type="q34:guid" />
@@ -273,14 +273,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="InsertEmpleadoResponse">
+  <xs:element name="InsertarEmpleadoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="InsertEmpleadoResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="InsertarEmpleadoResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="UpdateEmpleado">
+  <xs:element name="ActualizarEmpleado">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q36="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="responsable" type="q36:guid" />
@@ -288,14 +288,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="UpdateEmpleadoResponse">
+  <xs:element name="ActualizarEmpleadoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="UpdateEmpleadoResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ActualizarEmpleadoResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="InsertTurnoServicioCasino">
+  <xs:element name="InsertarEmpleadoTurnoServicioCasino">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q38="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="responsable" type="q38:guid" />
@@ -303,14 +303,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="InsertTurnoServicioCasinoResponse">
+  <xs:element name="InsertarEmpleadoTurnoServicioCasinoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="InsertTurnoServicioCasinoResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="InsertarEmpleadoTurnoServicioCasinoResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="DeleteTurnoServicioCasino">
+  <xs:element name="EliminarEmpleadoTurnoServicioCasino">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q40="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="responsable" type="q40:guid" />
@@ -318,14 +318,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="DeleteTurnoServicioCasinoResponse">
+  <xs:element name="EliminarEmpleadoTurnoServicioCasinoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="DeleteTurnoServicioCasinoResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="EliminarEmpleadoTurnoServicioCasinoResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="UpdateContratos">
+  <xs:element name="ActualizarContrato">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q42="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="responsable" type="q42:guid" />
@@ -333,14 +333,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="UpdateContratosResponse">
+  <xs:element name="ActualizarContratoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="UpdateContratosResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ActualizarContratoResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="InsertarContratos">
+  <xs:element name="InsertarContrato">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q44="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="responsable" type="q44:guid" />
@@ -348,14 +348,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="InsertarContratosResponse">
+  <xs:element name="InsertarContratoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="InsertarContratosResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="InsertarContratoResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="InsertarEmpleadosDispositivos">
+  <xs:element name="InsertarEmpleadoDispositivo">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q46="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="responsable" type="q46:guid" />
@@ -363,10 +363,10 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="InsertarEmpleadosDispositivosResponse">
+  <xs:element name="InsertarEmpleadoDispositivoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="InsertarEmpleadosDispositivosResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="InsertarEmpleadoDispositivoResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

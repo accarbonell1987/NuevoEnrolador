@@ -53,6 +53,7 @@
       <xs:element minOccurs="0" name="GuidInstalacion" type="ser:guid" />
       <xs:element minOccurs="0" name="NombreCadena" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NombreInstalacion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServiciosDelCasino" nillable="true" type="tns:ArrayOfPOCOServicioCasino" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="POCOInstalacion" nillable="true" type="tns:POCOInstalacion" />
@@ -75,6 +76,39 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="POCODispositivo" nillable="true" type="tns:POCODispositivo" />
+  <xs:complexType name="ArrayOfPOCOServicioCasino">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="POCOServicioCasino" nillable="true" type="tns:POCOServicioCasino" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPOCOServicioCasino" nillable="true" type="tns:ArrayOfPOCOServicioCasino" />
+  <xs:complexType name="POCOServicioCasino">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GuidCasino" type="ser:guid" />
+      <xs:element minOccurs="0" name="GuidServicioCasino" type="ser:guid" />
+      <xs:element minOccurs="0" name="NombreServicioCasino" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TurnosDelServicio" nillable="true" type="tns:ArrayOfPOCOTurnoServicio" />
+      <xs:element minOccurs="0" name="Vigente" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="POCOServicioCasino" nillable="true" type="tns:POCOServicioCasino" />
+  <xs:complexType name="ArrayOfPOCOTurnoServicio">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="POCOTurnoServicio" nillable="true" type="tns:POCOTurnoServicio" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPOCOTurnoServicio" nillable="true" type="tns:ArrayOfPOCOTurnoServicio" />
+  <xs:complexType name="POCOTurnoServicio">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GuidServicio" type="ser:guid" />
+      <xs:element minOccurs="0" name="GuidTurnoServicio" type="ser:guid" />
+      <xs:element minOccurs="0" name="HoraFin" type="ser:duration" />
+      <xs:element minOccurs="0" name="HoraInicio" type="ser:duration" />
+      <xs:element minOccurs="0" name="NombreTurnoServicio" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Vigente" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="POCOTurnoServicio" nillable="true" type="tns:POCOTurnoServicio" />
   <xs:complexType name="ArrayOfPOCOCargo">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="POCOCargo" nillable="true" type="tns:POCOCargo" />
@@ -182,38 +216,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="POCOEmpleado" nillable="true" type="tns:POCOEmpleado" />
-  <xs:complexType name="ArrayOfPOCOServicioCasino">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="POCOServicioCasino" nillable="true" type="tns:POCOServicioCasino" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfPOCOServicioCasino" nillable="true" type="tns:ArrayOfPOCOServicioCasino" />
-  <xs:complexType name="POCOServicioCasino">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="GuidCasino" type="ser:guid" />
-      <xs:element minOccurs="0" name="GuidServicioCasino" type="ser:guid" />
-      <xs:element minOccurs="0" name="NombreServicioCasino" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Vigente" type="xs:boolean" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="POCOServicioCasino" nillable="true" type="tns:POCOServicioCasino" />
-  <xs:complexType name="ArrayOfPOCOTurnoServicio">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="POCOTurnoServicio" nillable="true" type="tns:POCOTurnoServicio" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfPOCOTurnoServicio" nillable="true" type="tns:ArrayOfPOCOTurnoServicio" />
-  <xs:complexType name="POCOTurnoServicio">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="GuidServicio" type="ser:guid" />
-      <xs:element minOccurs="0" name="GuidTurnoServicio" type="ser:guid" />
-      <xs:element minOccurs="0" name="HoraFin" type="ser:duration" />
-      <xs:element minOccurs="0" name="HoraInicio" type="ser:duration" />
-      <xs:element minOccurs="0" name="NombreTurnoServicio" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Vigente" type="xs:boolean" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="POCOTurnoServicio" nillable="true" type="tns:POCOTurnoServicio" />
   <xs:complexType name="ArrayOfPOCOEmpleadoTurnoServicioCasino">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="POCOEmpleadoTurnoServicioCasino" nillable="true" type="tns:POCOEmpleadoTurnoServicioCasino" />
@@ -224,6 +226,12 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="GuidEmpleado" type="ser:guid" />
       <xs:element minOccurs="0" name="GuidTurnoServicio" type="ser:guid" />
+      <xs:element minOccurs="0" name="HoraFin" type="ser:duration" />
+      <xs:element minOccurs="0" name="HoraInicio" type="ser:duration" />
+      <xs:element minOccurs="0" name="NombreCasino" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreServicio" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreTurno" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Vigente" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="POCOEmpleadoTurnoServicioCasino" nillable="true" type="tns:POCOEmpleadoTurnoServicioCasino" />

@@ -5,6 +5,8 @@ using System.Windows.Forms;
 using DevExpress.UserSkins;
 using DevExpress.Skins;
 using EnroladorStandAloneV2.Herramientas;
+using EnroladorStandAloneV2.CapaLogicaNegocio;
+using EnroladorAccesoDatos.SQLite;
 
 namespace EnroladorStandAloneV2 {
     static class Program {
@@ -17,6 +19,11 @@ namespace EnroladorStandAloneV2 {
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es");
             BonusSkins.Register();
             SkinManager.EnableFormSkins();
+
+            var x = new NegocioEnrolador();
+            var y = x.mContext.Contrato.FirstOrDefault();
+            y.Sincronizado = 1;
+            x.EjecutarAccion(y, Guid.NewGuid());
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
