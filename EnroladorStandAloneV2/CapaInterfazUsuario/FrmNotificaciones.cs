@@ -16,18 +16,18 @@ using EnroladorAccesoDatos.Dominio;
 namespace EnroladorStandAloneV2.CapaInterfazUsuario {
     public partial class FrmNotificaciones : XtraForm {
         #region Atributos
-        public List<Notificacion> ListaNotificaciones { get; set; }
+        public List<POCONotificacion> ListaNotificaciones { get; set; }
         #endregion
 
         #region Constructor
         public FrmNotificaciones() {
             InitializeComponent();
-            ListaNotificaciones = new List<Notificacion>();
+            ListaNotificaciones = new List<POCONotificacion>();
 
             DevGridControlNotificaciones.DataSource = GetDataSource();
         }
 
-        public FrmNotificaciones(List<Notificacion> lNotificaciones) {
+        public FrmNotificaciones(List<POCONotificacion> lNotificaciones) {
             InitializeComponent();
             ListaNotificaciones = lNotificaciones;
 
@@ -36,14 +36,14 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
         #endregion
 
         #region Metodos y Eventos
-        public BindingList<Notificacion> GetDataSource() {
+        public BindingList<POCONotificacion> GetDataSource() {
             //setearle el icono porque las que vienen desde las Excepciones no se le agrega alla
             foreach (var notificacion in ListaNotificaciones) {
                 if (notificacion.Tipo == EnroladorAccesoDatos.TipoNotificacion.Critica) {
                     notificacion.ImagenDeNotificacion = Properties.Resources.error_32x32;
                 }
             }
-            BindingList<Notificacion> blNotificaciones = new BindingList<Notificacion>(ListaNotificaciones);
+            BindingList<POCONotificacion> blNotificaciones = new BindingList<POCONotificacion>(ListaNotificaciones);
             return blNotificaciones;
         }
         #endregion

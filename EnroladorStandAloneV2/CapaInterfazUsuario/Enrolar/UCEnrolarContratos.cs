@@ -60,6 +60,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
+
         private void DevCheckEditManejaAsistencia_EditValueChanged(object sender, EventArgs e) {
             if (DevCheckEditManejaAsistencia.Checked) {
                 UCManejarAsistencia uC = new UCManejarAsistencia(this, Negocio, empleado);
@@ -69,6 +70,17 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 Padre.EliminarUCAsistencia();
             }
         }
+
+        private void DevCheckEditManejaCasino_EditValueChanged(object sender, EventArgs e) {
+            if (DevCheckEditManejaCasino.Checked) {
+                UCManejarCasino uC = new UCManejarCasino(this, Negocio, empleado);
+
+                Padre.AdicionarUCCasino(uC);
+            } else {
+                Padre.EliminarUCCasino();
+            }
+        }
+
         private void DevLookUpEditEmpresa_EditValueChanged(object sender, EventArgs e) {
             try {
                 var GuidEmpresa = DevLookUpEditEmpresa.GetColumnValue("GuidEmpresa");
@@ -90,5 +102,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             }
         }
         #endregion
+
+        
     }
 }

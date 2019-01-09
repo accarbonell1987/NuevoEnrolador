@@ -723,6 +723,7 @@ namespace EnroladorStandAloneV2.Herramientas {
                 var pocoServicioCasino = new POCOServicioCasino() {
                     GuidServicioCasino = GuidServicioCasino,
                     GuidCasino = GuidCasino,
+                    NombreServicioCasino = servicioCasino.NombreServicioCasino,
                     Vigente = Vigente
                 };
 

@@ -34,6 +34,8 @@ namespace EnroladorStandAloneV2 {
         public FrmPrincipal() {
             InitializeComponent();
             Negocio = new NegocioEnrolador();
+
+            backgroundWorkerChequeoNotificaciones.RunWorkerAsync();
         }
         #endregion
 
@@ -1036,16 +1038,6 @@ namespace EnroladorStandAloneV2 {
             }
         }
 
-        /// <summary>
-        /// Mostar las notificaciones
-        /// </summary>
-        private void MostrarNotificaciones() {
-            if (Negocio.lNotificaciones.Count > 0) {
-                DevGroupControlNotificacionesAcciones.Controls.Clear();
-                DevGroupControlNotificacionesAcciones.Controls.Add(Negocio.ObtenerUCNotificaciones(String.Empty));
-            }
-        }
-
         private void DevBarButtonItemDescartar_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
             try {
                 var framePage = DevNavigationPanePrincipal.SelectedPage;
@@ -1065,6 +1057,30 @@ namespace EnroladorStandAloneV2 {
                 DevRibbonPageGroupEnrolar.Visible = false;
             else
                 DevRibbonPageGroupEnrolar.Visible = true;
+        }
+
+        //Estos metodos se usan para chequear cada 2 seg si hay alguna notificacion nueva y mostrarlas
+        private void BackgroundWorkerChequeoNotificaciones_DoWork(object sender, DoWorkEventArgs e) {
+            while (true) {
+                backgroundWorkerChequeoNotificaciones.ReportProgress(Negocio.lNotificaciones.Count);
+                Thread.Sleep(2000);
+                Console.WriteLine("Chequeado");
+            }
+        }
+        private void BackgroundWorkerChequeoNotificaciones_ProgressChanged(object sender, ProgressChangedEventArgs e) {
+            if (e.ProgressPercentage > Negocio.CantidadElementosNotificaciones) {
+                Negocio.CantidadElementosNotificaciones = Negocio.lNotificaciones.Count;
+                MostrarNotificaciones();
+            }
+        }
+        /// <summary>
+        /// Mostar las notificaciones
+        /// </summary>
+        public void MostrarNotificaciones() {
+            if (Negocio.lNotificaciones.Count > 0) {
+                DevGroupControlNotificacionesAcciones.Controls.Clear();
+                DevGroupControlNotificacionesAcciones.Controls.Add(Negocio.ObtenerUCNotificaciones(String.Empty));
+            }
         }
         #endregion
 
@@ -1164,5 +1180,7 @@ namespace EnroladorStandAloneV2 {
         #endregion
 
         #endregion
+
+        
     }
 }

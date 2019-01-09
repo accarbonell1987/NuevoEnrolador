@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace EnroladorAccesoDatos.Dominio {
-    public class Notificacion {
+    public class POCONotificacion {
         public string IdNotificacion { get; set; }
         public DateTime FechaNotificacion { get; set; }
         public string MensajeNotificacion { get; set; }
