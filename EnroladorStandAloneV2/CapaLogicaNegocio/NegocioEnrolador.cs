@@ -953,19 +953,45 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
 
         #region Acciones
 
-        public void EjecutarAccion(object elemento)
+        public void EjecutarAccion(object elemento, Guid responsable)
         {
-            var nombreClase = elemento.GetType().Name;
+            var TipoOperacion = Convert.ToInt32((elemento as dynamic).Sincronizado);
 
-            var nombreFuncionEjecutar = string.Format("De{0}APOCO{0}", nombreClase);
+            string NombreOperacion = string.Empty;
 
-            object[] arregloParametros = new object[] { elemento };
+            switch (TipoOperacion)
+            {
+                case 1 : //Insert
+                    NombreOperacion = "Insertar"; 
+                    break;
+                case 2: //Delete
+                    NombreOperacion = "Eliminar";
+                    break;
+                case 3: //Update
+                    NombreOperacion = "Actualizar";
+                    break;
+                default:
+                    break;
+            }
 
-            var metodo = typeof(TransformacionDatos).GetMethod(nombreFuncionEjecutar, BindingFlags.Static);
+            if (string.IsNullOrEmpty(NombreOperacion)) return;
 
-            // The invoke does NOT work;
-            // it throws "Object does not match target type"             
-            //dynamic PocoResultante = metodo.Invoke(arregloParametros);
+            var NombreMetodo = NombreOperacion + elemento.GetType().Name;
+            var tipoWS = typeof(EnroladorServicioWebClient);
+            var WS = new EnroladorServicioWebClient();
+            var metodo = typeof(EnroladorServicioWebClient).GetMethod(NombreMetodo);
+
+            try
+            {
+                var ElementoPOCO = TransformacionDatos.Convertir(elemento);
+                object[] arregloParametros = new object[2] { responsable, ElementoPOCO };
+
+                var res = metodo.Invoke(WS, arregloParametros);
+            }
+            catch(Exception Ex)
+            {
+                throw new Exception("Error sincronizando la acción", Ex);
+            }
         }
 
         #endregion

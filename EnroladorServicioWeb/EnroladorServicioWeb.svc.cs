@@ -800,7 +800,7 @@ namespace EnroladorServicioWeb {
         /// <param name="responsable">Usuario del sistema</param>
         /// <param name="pocoHuella">Huella</param>
         /// <returns>Mensaje de error o en blanco si no existe</returns>
-        public string InsertHuella(Guid responsable, POCOHuella pocoHuella)
+        public string InsertarHuella(Guid responsable, POCOHuella pocoHuella)
         {
             try
             {
@@ -839,7 +839,7 @@ namespace EnroladorServicioWeb {
         /// <param name="responsable">Usuario del sistema</param>
         /// <param name="pocoHuella">Huella</param>
         /// <returns>Mensaje de error o en blanco si no existe</returns>
-        public string UpdateHuella(Guid responsable, POCOHuella pocoHuella)
+        public string ActualizarHuella(Guid responsable, POCOHuella pocoHuella)
         {
             try
             {
@@ -878,7 +878,7 @@ namespace EnroladorServicioWeb {
         /// <param name="responsable">Usuario del sistema</param>
         /// <param name="pocoHuella">Huella</param>
         /// <returns>Mensaje de error o en blanco si no existe</returns>
-        public string InsertEmpleado(Guid responsable, POCOEmpleado pocoEmpleado)
+        public string InsertarEmpleado(Guid responsable, POCOEmpleado pocoEmpleado)
         {
             try
             {
@@ -921,7 +921,7 @@ namespace EnroladorServicioWeb {
         /// <param name="responsable">Usuario del sistema</param>
         /// <param name="pocoHuella">Huella</param>
         /// <returns>Mensaje de error o en blanco si no existe</returns>
-        public string UpdateEmpleado(Guid responsable, POCOEmpleado pocoEmpleado)
+        public string ActualizarEmpleado(Guid responsable, POCOEmpleado pocoEmpleado)
         {
             try
             {
@@ -985,7 +985,7 @@ namespace EnroladorServicioWeb {
         /// <param name="responsable">Usuario del sistema</param>
         /// <param name="pocoHuella">Huella</param>
         /// <returns>Mensaje de error o en blanco si no existe</returns>
-        public string InsertTurnoServicioCasino(Guid responsable, POCOEmpleadoTurnoServicioCasino empleadoTurnoServicioCasino)
+        public string InsertarEmpleadoTurnoServicioCasino(Guid responsable, POCOEmpleadoTurnoServicioCasino empleadoTurnoServicioCasino)
         {
             try
             {
@@ -1027,7 +1027,7 @@ namespace EnroladorServicioWeb {
         /// <param name="responsable">Usuario del sistema</param>
         /// <param name="pocoHuella">Huella</param>
         /// <returns>Mensaje de error o en blanco si no existe</returns>
-        public string DeleteTurnoServicioCasino(Guid responsable, POCOEmpleadoTurnoServicioCasino empleadoTurnoServicioCasino)
+        public string EliminarEmpleadoTurnoServicioCasino(Guid responsable, POCOEmpleadoTurnoServicioCasino empleadoTurnoServicioCasino)
         {
             try
             {
@@ -1072,7 +1072,7 @@ namespace EnroladorServicioWeb {
         /// <param name="responsable">Usuario del sistema</param>
         /// <param name="pocoHuella">Huella</param>
         /// <returns>Mensaje de error o en blanco si no existe</returns>
-        public string UpdateContratos(Guid responsable, POCOContrato pocoContrato)
+        public string ActualizarContrato(Guid responsable, POCOContrato pocoContrato)
         {
             try
             {
@@ -1116,7 +1116,7 @@ namespace EnroladorServicioWeb {
         /// <param name="responsable">Usuario del sistema</param>
         /// <param name="pocoHuella">Huella</param>
         /// <returns>Mensaje de error o en blanco si no existe</returns>
-        public string InsertarContratos(Guid responsable, POCOContrato pocoContrato)
+        public string InsertarContrato(Guid responsable, POCOContrato pocoContrato)
         {
             try
             {
@@ -1168,7 +1168,7 @@ namespace EnroladorServicioWeb {
         #region Empleados Dispositivos
 
 
-        public string InsertarEmpleadosDispositivos(Guid responsable, POCOEmpleadoDispositivo pocoEmpleadoDispositivo)
+        public string InsertarEmpleadoDispositivo(Guid responsable, POCOEmpleadoDispositivo pocoEmpleadoDispositivo)
         {
             try
             {

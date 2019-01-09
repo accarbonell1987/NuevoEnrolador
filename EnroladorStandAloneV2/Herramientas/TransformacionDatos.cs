@@ -799,5 +799,37 @@ namespace EnroladorStandAloneV2.Herramientas {
             }
         }
         #endregion
+
+        #region Globales
+        /// <summary>
+        /// Convierte cualquier objeto a POCO y viceversa
+        /// </summary>
+        /// <param name="elemento">Elemento a convertir</param>
+        /// <returns>Elemento convertido</returns>
+        public static object Convertir(object elemento)
+        {
+            var nombreClase = elemento.GetType().Name;
+
+            string nombreFuncionEjecutar;
+
+            if (nombreClase.StartsWith("POCO"))
+            {
+                nombreClase = nombreClase.Substring(4);
+                nombreFuncionEjecutar = string.Format("DePOCO{0}A{0}", nombreClase);
+            }
+            else
+            {
+                nombreFuncionEjecutar = string.Format("De{0}APOCO{0}", nombreClase);
+            }
+
+            object[] arregloParametros = new object[] { elemento };
+
+            var metodo = typeof(TransformacionDatos).GetMethod(nombreFuncionEjecutar);
+
+            var res = metodo.Invoke(null, arregloParametros);
+
+            return res;
+        }
+        #endregion
     }
 }
