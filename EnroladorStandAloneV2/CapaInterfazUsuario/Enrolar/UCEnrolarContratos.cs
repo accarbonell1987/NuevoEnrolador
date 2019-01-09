@@ -48,6 +48,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         private void CargarDatos() {
             bsContratos.DataSource = empleado.Contratos;
             bsEmpresas.DataSource = Negocio.ObtenerTodasEmpresas();
+
         }
 
         private void DevGridControlContratos_Click(object sender, EventArgs e) {

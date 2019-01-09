@@ -34,8 +34,6 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         #region Metodos y Atributos
         private void UCEnrolar_Load(object sender, EventArgs e) {
             try {
-                
-
                 bsEmpleados.DataSource = Negocio.lEmpleados;
                 //seleccionar el RUT en el textbox
                 if (RUT != String.Empty) {

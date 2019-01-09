@@ -54,7 +54,6 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             bsEmpleadoTurnoServicioCasino.DataSource = Negocio.ObtenerTodosEmpleadoTurnoServicioCasinoDelEmpleado(empleado.GuidEmpleado);
             bsInstalaciones.DataSource = Negocio.ObtenerTodasInstalaciones();
         }
-        #endregion
 
         private void DevLookUpEditInstalacion_EditValueChanged(object sender, EventArgs e) {
             try {
@@ -80,7 +79,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
 
         private void DevLookUpEditServicio_EditValueChanged(object sender, EventArgs e) {
             try {
-                var GuidServicio = DevLookUpEditCasino.GetColumnValue("GuidServicioCasino");
+                var GuidServicio = DevLookUpEditServicio.GetColumnValue("GuidServicioCasino");
                 if (GuidServicio == null) {
                     DevLookUpEditTurno.Enabled = false;
                 }
@@ -109,5 +108,6 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             //NO
             //desactivar
         }
+        #endregion
     }
 }
