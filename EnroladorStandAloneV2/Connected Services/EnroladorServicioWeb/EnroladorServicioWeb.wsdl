@@ -110,6 +110,60 @@
   <wsdl:message name="IEnroladorServicioWeb_LeeEmpleadoTurnoServicioCasino_OutputMessage">
     <wsdl:part name="parameters" element="tns:LeeEmpleadoTurnoServicioCasinoResponse" />
   </wsdl:message>
+  <wsdl:message name="IEnroladorServicioWeb_InsertHuella_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertHuella" />
+  </wsdl:message>
+  <wsdl:message name="IEnroladorServicioWeb_InsertHuella_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertHuellaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEnroladorServicioWeb_UpdateHuella_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateHuella" />
+  </wsdl:message>
+  <wsdl:message name="IEnroladorServicioWeb_UpdateHuella_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateHuellaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEnroladorServicioWeb_InsertEmpleado_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertEmpleado" />
+  </wsdl:message>
+  <wsdl:message name="IEnroladorServicioWeb_InsertEmpleado_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertEmpleadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEnroladorServicioWeb_UpdateEmpleado_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateEmpleado" />
+  </wsdl:message>
+  <wsdl:message name="IEnroladorServicioWeb_UpdateEmpleado_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateEmpleadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEnroladorServicioWeb_InsertTurnoServicioCasino_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertTurnoServicioCasino" />
+  </wsdl:message>
+  <wsdl:message name="IEnroladorServicioWeb_InsertTurnoServicioCasino_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertTurnoServicioCasinoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEnroladorServicioWeb_DeleteTurnoServicioCasino_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTurnoServicioCasino" />
+  </wsdl:message>
+  <wsdl:message name="IEnroladorServicioWeb_DeleteTurnoServicioCasino_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTurnoServicioCasinoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEnroladorServicioWeb_UpdateContratos_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateContratos" />
+  </wsdl:message>
+  <wsdl:message name="IEnroladorServicioWeb_UpdateContratos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateContratosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEnroladorServicioWeb_InsertarContratos_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertarContratos" />
+  </wsdl:message>
+  <wsdl:message name="IEnroladorServicioWeb_InsertarContratos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertarContratosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEnroladorServicioWeb_InsertarEmpleadosDispositivos_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertarEmpleadosDispositivos" />
+  </wsdl:message>
+  <wsdl:message name="IEnroladorServicioWeb_InsertarEmpleadosDispositivos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertarEmpleadosDispositivosResponse" />
+  </wsdl:message>
   <wsdl:portType name="IEnroladorServicioWeb">
     <wsdl:operation name="IdentificarHardware">
       <wsdl:input wsaw:Action="http://tempuri.org/IEnroladorServicioWeb/IdentificarHardware" message="tns:IEnroladorServicioWeb_IdentificarHardware_InputMessage" />
@@ -178,6 +232,42 @@
     <wsdl:operation name="LeeEmpleadoTurnoServicioCasino">
       <wsdl:input wsaw:Action="http://tempuri.org/IEnroladorServicioWeb/LeeEmpleadoTurnoServicioCasino" message="tns:IEnroladorServicioWeb_LeeEmpleadoTurnoServicioCasino_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IEnroladorServicioWeb/LeeEmpleadoTurnoServicioCasinoResponse" message="tns:IEnroladorServicioWeb_LeeEmpleadoTurnoServicioCasino_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertHuella">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEnroladorServicioWeb/InsertHuella" message="tns:IEnroladorServicioWeb_InsertHuella_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEnroladorServicioWeb/InsertHuellaResponse" message="tns:IEnroladorServicioWeb_InsertHuella_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateHuella">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEnroladorServicioWeb/UpdateHuella" message="tns:IEnroladorServicioWeb_UpdateHuella_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEnroladorServicioWeb/UpdateHuellaResponse" message="tns:IEnroladorServicioWeb_UpdateHuella_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertEmpleado">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEnroladorServicioWeb/InsertEmpleado" message="tns:IEnroladorServicioWeb_InsertEmpleado_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEnroladorServicioWeb/InsertEmpleadoResponse" message="tns:IEnroladorServicioWeb_InsertEmpleado_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEmpleado">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEnroladorServicioWeb/UpdateEmpleado" message="tns:IEnroladorServicioWeb_UpdateEmpleado_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEnroladorServicioWeb/UpdateEmpleadoResponse" message="tns:IEnroladorServicioWeb_UpdateEmpleado_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertTurnoServicioCasino">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEnroladorServicioWeb/InsertTurnoServicioCasino" message="tns:IEnroladorServicioWeb_InsertTurnoServicioCasino_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEnroladorServicioWeb/InsertTurnoServicioCasinoResponse" message="tns:IEnroladorServicioWeb_InsertTurnoServicioCasino_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTurnoServicioCasino">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEnroladorServicioWeb/DeleteTurnoServicioCasino" message="tns:IEnroladorServicioWeb_DeleteTurnoServicioCasino_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEnroladorServicioWeb/DeleteTurnoServicioCasinoResponse" message="tns:IEnroladorServicioWeb_DeleteTurnoServicioCasino_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContratos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEnroladorServicioWeb/UpdateContratos" message="tns:IEnroladorServicioWeb_UpdateContratos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEnroladorServicioWeb/UpdateContratosResponse" message="tns:IEnroladorServicioWeb_UpdateContratos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertarContratos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEnroladorServicioWeb/InsertarContratos" message="tns:IEnroladorServicioWeb_InsertarContratos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEnroladorServicioWeb/InsertarContratosResponse" message="tns:IEnroladorServicioWeb_InsertarContratos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertarEmpleadosDispositivos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEnroladorServicioWeb/InsertarEmpleadosDispositivos" message="tns:IEnroladorServicioWeb_InsertarEmpleadosDispositivos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEnroladorServicioWeb/InsertarEmpleadosDispositivosResponse" message="tns:IEnroladorServicioWeb_InsertarEmpleadosDispositivos_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IEnroladorServicioWeb" type="tns:IEnroladorServicioWeb">
@@ -328,6 +418,87 @@
     </wsdl:operation>
     <wsdl:operation name="LeeEmpleadoTurnoServicioCasino">
       <soap:operation soapAction="http://tempuri.org/IEnroladorServicioWeb/LeeEmpleadoTurnoServicioCasino" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertHuella">
+      <soap:operation soapAction="http://tempuri.org/IEnroladorServicioWeb/InsertHuella" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateHuella">
+      <soap:operation soapAction="http://tempuri.org/IEnroladorServicioWeb/UpdateHuella" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertEmpleado">
+      <soap:operation soapAction="http://tempuri.org/IEnroladorServicioWeb/InsertEmpleado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEmpleado">
+      <soap:operation soapAction="http://tempuri.org/IEnroladorServicioWeb/UpdateEmpleado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertTurnoServicioCasino">
+      <soap:operation soapAction="http://tempuri.org/IEnroladorServicioWeb/InsertTurnoServicioCasino" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTurnoServicioCasino">
+      <soap:operation soapAction="http://tempuri.org/IEnroladorServicioWeb/DeleteTurnoServicioCasino" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContratos">
+      <soap:operation soapAction="http://tempuri.org/IEnroladorServicioWeb/UpdateContratos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertarContratos">
+      <soap:operation soapAction="http://tempuri.org/IEnroladorServicioWeb/InsertarContratos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertarEmpleadosDispositivos">
+      <soap:operation soapAction="http://tempuri.org/IEnroladorServicioWeb/InsertarEmpleadosDispositivos" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

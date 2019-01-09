@@ -116,6 +116,60 @@ namespace EnroladorStandAloneV2.EnroladorServicioWeb {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnroladorServicioWeb/LeeEmpleadoTurnoServicioCasino", ReplyAction="http://tempuri.org/IEnroladorServicioWeb/LeeEmpleadoTurnoServicioCasinoResponse")]
         System.Threading.Tasks.Task<EnroladorAccesoDatos.Dominio.POCOEmpleadoTurnoServicioCasino[]> LeeEmpleadoTurnoServicioCasinoAsync(System.Guid GuidUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnroladorServicioWeb/InsertHuella", ReplyAction="http://tempuri.org/IEnroladorServicioWeb/InsertHuellaResponse")]
+        string InsertHuella(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOHuella pocoHuella);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnroladorServicioWeb/InsertHuella", ReplyAction="http://tempuri.org/IEnroladorServicioWeb/InsertHuellaResponse")]
+        System.Threading.Tasks.Task<string> InsertHuellaAsync(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOHuella pocoHuella);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnroladorServicioWeb/UpdateHuella", ReplyAction="http://tempuri.org/IEnroladorServicioWeb/UpdateHuellaResponse")]
+        string UpdateHuella(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOHuella pocoHuella);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnroladorServicioWeb/UpdateHuella", ReplyAction="http://tempuri.org/IEnroladorServicioWeb/UpdateHuellaResponse")]
+        System.Threading.Tasks.Task<string> UpdateHuellaAsync(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOHuella pocoHuella);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnroladorServicioWeb/InsertEmpleado", ReplyAction="http://tempuri.org/IEnroladorServicioWeb/InsertEmpleadoResponse")]
+        string InsertEmpleado(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOEmpleado pocoEmpleado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnroladorServicioWeb/InsertEmpleado", ReplyAction="http://tempuri.org/IEnroladorServicioWeb/InsertEmpleadoResponse")]
+        System.Threading.Tasks.Task<string> InsertEmpleadoAsync(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOEmpleado pocoEmpleado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnroladorServicioWeb/UpdateEmpleado", ReplyAction="http://tempuri.org/IEnroladorServicioWeb/UpdateEmpleadoResponse")]
+        string UpdateEmpleado(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOEmpleado pocoEmpleado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnroladorServicioWeb/UpdateEmpleado", ReplyAction="http://tempuri.org/IEnroladorServicioWeb/UpdateEmpleadoResponse")]
+        System.Threading.Tasks.Task<string> UpdateEmpleadoAsync(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOEmpleado pocoEmpleado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnroladorServicioWeb/InsertTurnoServicioCasino", ReplyAction="http://tempuri.org/IEnroladorServicioWeb/InsertTurnoServicioCasinoResponse")]
+        string InsertTurnoServicioCasino(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOEmpleadoTurnoServicioCasino empleadoTurnoServicioCasino);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnroladorServicioWeb/InsertTurnoServicioCasino", ReplyAction="http://tempuri.org/IEnroladorServicioWeb/InsertTurnoServicioCasinoResponse")]
+        System.Threading.Tasks.Task<string> InsertTurnoServicioCasinoAsync(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOEmpleadoTurnoServicioCasino empleadoTurnoServicioCasino);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnroladorServicioWeb/DeleteTurnoServicioCasino", ReplyAction="http://tempuri.org/IEnroladorServicioWeb/DeleteTurnoServicioCasinoResponse")]
+        string DeleteTurnoServicioCasino(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOEmpleadoTurnoServicioCasino empleadoTurnoServicioCasino);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnroladorServicioWeb/DeleteTurnoServicioCasino", ReplyAction="http://tempuri.org/IEnroladorServicioWeb/DeleteTurnoServicioCasinoResponse")]
+        System.Threading.Tasks.Task<string> DeleteTurnoServicioCasinoAsync(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOEmpleadoTurnoServicioCasino empleadoTurnoServicioCasino);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnroladorServicioWeb/UpdateContratos", ReplyAction="http://tempuri.org/IEnroladorServicioWeb/UpdateContratosResponse")]
+        string UpdateContratos(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOContrato pocoContrato);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnroladorServicioWeb/UpdateContratos", ReplyAction="http://tempuri.org/IEnroladorServicioWeb/UpdateContratosResponse")]
+        System.Threading.Tasks.Task<string> UpdateContratosAsync(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOContrato pocoContrato);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnroladorServicioWeb/InsertarContratos", ReplyAction="http://tempuri.org/IEnroladorServicioWeb/InsertarContratosResponse")]
+        string InsertarContratos(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOContrato pocoContrato);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnroladorServicioWeb/InsertarContratos", ReplyAction="http://tempuri.org/IEnroladorServicioWeb/InsertarContratosResponse")]
+        System.Threading.Tasks.Task<string> InsertarContratosAsync(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOContrato pocoContrato);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnroladorServicioWeb/InsertarEmpleadosDispositivos", ReplyAction="http://tempuri.org/IEnroladorServicioWeb/InsertarEmpleadosDispositivosResponse")]
+        string InsertarEmpleadosDispositivos(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOEmpleadoDispositivo pocoEmpleadoDispositivo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnroladorServicioWeb/InsertarEmpleadosDispositivos", ReplyAction="http://tempuri.org/IEnroladorServicioWeb/InsertarEmpleadosDispositivosResponse")]
+        System.Threading.Tasks.Task<string> InsertarEmpleadosDispositivosAsync(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOEmpleadoDispositivo pocoEmpleadoDispositivo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -279,6 +333,78 @@ namespace EnroladorStandAloneV2.EnroladorServicioWeb {
         
         public System.Threading.Tasks.Task<EnroladorAccesoDatos.Dominio.POCOEmpleadoTurnoServicioCasino[]> LeeEmpleadoTurnoServicioCasinoAsync(System.Guid GuidUsuario) {
             return base.Channel.LeeEmpleadoTurnoServicioCasinoAsync(GuidUsuario);
+        }
+        
+        public string InsertHuella(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOHuella pocoHuella) {
+            return base.Channel.InsertHuella(responsable, pocoHuella);
+        }
+        
+        public System.Threading.Tasks.Task<string> InsertHuellaAsync(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOHuella pocoHuella) {
+            return base.Channel.InsertHuellaAsync(responsable, pocoHuella);
+        }
+        
+        public string UpdateHuella(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOHuella pocoHuella) {
+            return base.Channel.UpdateHuella(responsable, pocoHuella);
+        }
+        
+        public System.Threading.Tasks.Task<string> UpdateHuellaAsync(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOHuella pocoHuella) {
+            return base.Channel.UpdateHuellaAsync(responsable, pocoHuella);
+        }
+        
+        public string InsertEmpleado(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOEmpleado pocoEmpleado) {
+            return base.Channel.InsertEmpleado(responsable, pocoEmpleado);
+        }
+        
+        public System.Threading.Tasks.Task<string> InsertEmpleadoAsync(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOEmpleado pocoEmpleado) {
+            return base.Channel.InsertEmpleadoAsync(responsable, pocoEmpleado);
+        }
+        
+        public string UpdateEmpleado(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOEmpleado pocoEmpleado) {
+            return base.Channel.UpdateEmpleado(responsable, pocoEmpleado);
+        }
+        
+        public System.Threading.Tasks.Task<string> UpdateEmpleadoAsync(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOEmpleado pocoEmpleado) {
+            return base.Channel.UpdateEmpleadoAsync(responsable, pocoEmpleado);
+        }
+        
+        public string InsertTurnoServicioCasino(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOEmpleadoTurnoServicioCasino empleadoTurnoServicioCasino) {
+            return base.Channel.InsertTurnoServicioCasino(responsable, empleadoTurnoServicioCasino);
+        }
+        
+        public System.Threading.Tasks.Task<string> InsertTurnoServicioCasinoAsync(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOEmpleadoTurnoServicioCasino empleadoTurnoServicioCasino) {
+            return base.Channel.InsertTurnoServicioCasinoAsync(responsable, empleadoTurnoServicioCasino);
+        }
+        
+        public string DeleteTurnoServicioCasino(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOEmpleadoTurnoServicioCasino empleadoTurnoServicioCasino) {
+            return base.Channel.DeleteTurnoServicioCasino(responsable, empleadoTurnoServicioCasino);
+        }
+        
+        public System.Threading.Tasks.Task<string> DeleteTurnoServicioCasinoAsync(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOEmpleadoTurnoServicioCasino empleadoTurnoServicioCasino) {
+            return base.Channel.DeleteTurnoServicioCasinoAsync(responsable, empleadoTurnoServicioCasino);
+        }
+        
+        public string UpdateContratos(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOContrato pocoContrato) {
+            return base.Channel.UpdateContratos(responsable, pocoContrato);
+        }
+        
+        public System.Threading.Tasks.Task<string> UpdateContratosAsync(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOContrato pocoContrato) {
+            return base.Channel.UpdateContratosAsync(responsable, pocoContrato);
+        }
+        
+        public string InsertarContratos(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOContrato pocoContrato) {
+            return base.Channel.InsertarContratos(responsable, pocoContrato);
+        }
+        
+        public System.Threading.Tasks.Task<string> InsertarContratosAsync(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOContrato pocoContrato) {
+            return base.Channel.InsertarContratosAsync(responsable, pocoContrato);
+        }
+        
+        public string InsertarEmpleadosDispositivos(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOEmpleadoDispositivo pocoEmpleadoDispositivo) {
+            return base.Channel.InsertarEmpleadosDispositivos(responsable, pocoEmpleadoDispositivo);
+        }
+        
+        public System.Threading.Tasks.Task<string> InsertarEmpleadosDispositivosAsync(System.Guid responsable, EnroladorAccesoDatos.Dominio.POCOEmpleadoDispositivo pocoEmpleadoDispositivo) {
+            return base.Channel.InsertarEmpleadosDispositivosAsync(responsable, pocoEmpleadoDispositivo);
         }
     }
 }

@@ -203,7 +203,7 @@
   <xs:element name="LeeServicioCasinoDelUsuarioResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos.Dominio" minOccurs="0" name="LeeServicioCasinoDelUsuarioResult" nillable="true" type="q25:ArrayOfPOCOServicioInstalacion" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos.Dominio" minOccurs="0" name="LeeServicioCasinoDelUsuarioResult" nillable="true" type="q25:ArrayOfPOCOServicioCasino" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -232,6 +232,141 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos.Dominio" minOccurs="0" name="LeeEmpleadoTurnoServicioCasinoResult" nillable="true" type="q29:ArrayOfPOCOEmpleadoTurnoServicioCasino" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertHuella">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q30="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="responsable" type="q30:guid" />
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos.Dominio" minOccurs="0" name="pocoHuella" nillable="true" type="q31:POCOHuella" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertHuellaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="InsertHuellaResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateHuella">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q32="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="responsable" type="q32:guid" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos.Dominio" minOccurs="0" name="pocoHuella" nillable="true" type="q33:POCOHuella" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateHuellaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateHuellaResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertEmpleado">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q34="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="responsable" type="q34:guid" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos.Dominio" minOccurs="0" name="pocoEmpleado" nillable="true" type="q35:POCOEmpleado" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertEmpleadoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="InsertEmpleadoResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateEmpleado">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q36="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="responsable" type="q36:guid" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos.Dominio" minOccurs="0" name="pocoEmpleado" nillable="true" type="q37:POCOEmpleado" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateEmpleadoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateEmpleadoResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertTurnoServicioCasino">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q38="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="responsable" type="q38:guid" />
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos.Dominio" minOccurs="0" name="empleadoTurnoServicioCasino" nillable="true" type="q39:POCOEmpleadoTurnoServicioCasino" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertTurnoServicioCasinoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="InsertTurnoServicioCasinoResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteTurnoServicioCasino">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q40="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="responsable" type="q40:guid" />
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos.Dominio" minOccurs="0" name="empleadoTurnoServicioCasino" nillable="true" type="q41:POCOEmpleadoTurnoServicioCasino" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteTurnoServicioCasinoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteTurnoServicioCasinoResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateContratos">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q42="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="responsable" type="q42:guid" />
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos.Dominio" minOccurs="0" name="pocoContrato" nillable="true" type="q43:POCOContrato" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateContratosResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateContratosResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertarContratos">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q44="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="responsable" type="q44:guid" />
+        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos.Dominio" minOccurs="0" name="pocoContrato" nillable="true" type="q45:POCOContrato" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertarContratosResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="InsertarContratosResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertarEmpleadosDispositivos">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q46="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="responsable" type="q46:guid" />
+        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos.Dominio" minOccurs="0" name="pocoEmpleadoDispositivo" nillable="true" type="q47:POCOEmpleadoDispositivo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertarEmpleadosDispositivosResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="InsertarEmpleadosDispositivosResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

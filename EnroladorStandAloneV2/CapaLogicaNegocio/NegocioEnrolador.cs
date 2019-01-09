@@ -841,6 +841,26 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
             lNotificaciones.Add(notificacion);
         }
         #endregion
+
+        #region Acciones
+
+        public void EjecutarAccion(object elemento)
+        {
+            var nombreClase = elemento.GetType().Name;
+
+            var nombreFuncionEjecutar = string.Format("De{0}APOCO{0}", nombreClase);
+
+            object[] arregloParametros = new object[] { elemento };
+
+            var metodo = typeof(TransformacionDatos).GetMethod(nombreFuncionEjecutar, BindingFlags.Static);
+
+            // The invoke does NOT work;
+            // it throws "Object does not match target type"             
+            //dynamic PocoResultante = metodo.Invoke(arregloParametros);
+        }
+
+        #endregion
+
         #endregion
     }
 }

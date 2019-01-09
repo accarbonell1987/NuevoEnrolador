@@ -67,5 +67,53 @@ namespace EnroladorServicioWeb {
         [OperationContract]
         IList<POCOEmpleadoTurnoServicioCasino> LeeEmpleadoTurnoServicioCasino(Guid GuidUsuario);
         #endregion
+
+        #region Acciones
+
+        #region Huellas
+
+        [OperationContract]
+        string InsertHuella(Guid responsable, POCOHuella pocoHuella);
+
+        [OperationContract]
+
+        string UpdateHuella(Guid responsable, POCOHuella pocoHuella);
+        #endregion
+
+        #region Empleados
+        [OperationContract]
+        string InsertEmpleado(Guid responsable, POCOEmpleado pocoEmpleado);
+
+        [OperationContract]
+        string UpdateEmpleado(Guid responsable, POCOEmpleado pocoEmpleado);
+
+        #endregion
+
+        #region Turno Servicio Casino
+        [OperationContract]
+        string InsertTurnoServicioCasino(Guid responsable, POCOEmpleadoTurnoServicioCasino empleadoTurnoServicioCasino);
+
+        [OperationContract]
+        string DeleteTurnoServicioCasino(Guid responsable, POCOEmpleadoTurnoServicioCasino empleadoTurnoServicioCasino);
+        #endregion
+
+        #region Contratos
+
+        [OperationContract]
+        string UpdateContratos(Guid responsable, POCOContrato pocoContrato);
+
+        [OperationContract]
+        string InsertarContratos(Guid responsable, POCOContrato pocoContrato);
+
+        #endregion
+
+        #region EmpleadosDispositivos
+
+        [OperationContract]
+        string InsertarEmpleadosDispositivos(Guid responsable, POCOEmpleadoDispositivo pocoEmpleadoDispositivo);
+
+        #endregion
+
+        #endregion
     }
 }

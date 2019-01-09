@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="TipoHuella">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="MENIZQ" />
+      <xs:enumeration value="ANUIZQ" />
+      <xs:enumeration value="MEDIZQ" />
+      <xs:enumeration value="INDIZQ" />
+      <xs:enumeration value="PULIZQ" />
+      <xs:enumeration value="PULDER" />
+      <xs:enumeration value="INDDER" />
+      <xs:enumeration value="MEDDER" />
+      <xs:enumeration value="ANUDER" />
+      <xs:enumeration value="MENDER" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TipoHuella" nillable="true" type="tns:TipoHuella" />
   <xs:simpleType name="TipoDispositivo">
     <xs:restriction base="xs:string">
       <xs:enumeration value="Invalido" />
@@ -8,4 +23,11 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="TipoDispositivo" nillable="true" type="tns:TipoDispositivo" />
+  <xs:simpleType name="EstadoContrato">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Activo" />
+      <xs:enumeration value="Vencido" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EstadoContrato" nillable="true" type="tns:EstadoContrato" />
 </xs:schema>
