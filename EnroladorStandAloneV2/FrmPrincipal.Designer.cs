@@ -61,7 +61,7 @@
             this.DevRibbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.DevRibbonPageMenu});
             this.DevRibbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010;
-            this.DevRibbonControl.Size = new System.Drawing.Size(1275, 143);
+            this.DevRibbonControl.Size = new System.Drawing.Size(1333, 143);
             // 
             // DevBarButtonSalir
             // 
@@ -139,9 +139,9 @@
             // DevGroupControlNotificacionesAcciones
             // 
             this.DevGroupControlNotificacionesAcciones.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.DevGroupControlNotificacionesAcciones.Location = new System.Drawing.Point(0, 555);
+            this.DevGroupControlNotificacionesAcciones.Location = new System.Drawing.Point(0, 884);
             this.DevGroupControlNotificacionesAcciones.Name = "DevGroupControlNotificacionesAcciones";
-            this.DevGroupControlNotificacionesAcciones.Size = new System.Drawing.Size(1275, 77);
+            this.DevGroupControlNotificacionesAcciones.Size = new System.Drawing.Size(1333, 77);
             this.DevGroupControlNotificacionesAcciones.TabIndex = 1;
             this.DevGroupControlNotificacionesAcciones.Text = "Notificaciones y Acciones";
             // 
@@ -151,7 +151,7 @@
             this.DevPanelControlPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DevPanelControlPrincipal.Location = new System.Drawing.Point(0, 143);
             this.DevPanelControlPrincipal.Name = "DevPanelControlPrincipal";
-            this.DevPanelControlPrincipal.Size = new System.Drawing.Size(1275, 412);
+            this.DevPanelControlPrincipal.Size = new System.Drawing.Size(1333, 741);
             this.DevPanelControlPrincipal.TabIndex = 3;
             // 
             // DevNavigationPanePrincipal
@@ -159,9 +159,9 @@
             this.DevNavigationPanePrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DevNavigationPanePrincipal.Location = new System.Drawing.Point(2, 2);
             this.DevNavigationPanePrincipal.Name = "DevNavigationPanePrincipal";
-            this.DevNavigationPanePrincipal.RegularSize = new System.Drawing.Size(1271, 408);
+            this.DevNavigationPanePrincipal.RegularSize = new System.Drawing.Size(1329, 737);
             this.DevNavigationPanePrincipal.SelectedPage = null;
-            this.DevNavigationPanePrincipal.Size = new System.Drawing.Size(1271, 408);
+            this.DevNavigationPanePrincipal.Size = new System.Drawing.Size(1329, 737);
             this.DevNavigationPanePrincipal.TabIndex = 0;
             this.DevNavigationPanePrincipal.Text = "navigationPane1";
             this.DevNavigationPanePrincipal.SelectedPageChanged += new DevExpress.XtraBars.Navigation.SelectedPageChangedEventHandler(this.DevNavigationPanePrincipal_SelectedPageChanged);
@@ -178,10 +178,12 @@
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1275, 632);
+            this.ClientSize = new System.Drawing.Size(1333, 961);
             this.Controls.Add(this.DevPanelControlPrincipal);
             this.Controls.Add(this.DevGroupControlNotificacionesAcciones);
             this.Controls.Add(this.DevRibbonControl);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(1343, 966);
             this.Name = "FrmPrincipal";
             this.Ribbon = this.DevRibbonControl;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

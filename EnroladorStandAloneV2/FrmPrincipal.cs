@@ -28,6 +28,7 @@ namespace EnroladorStandAloneV2 {
     public partial class FrmPrincipal : DevExpress.XtraBars.Ribbon.RibbonForm {
         #region Atributos
         private NegocioEnrolador Negocio;
+        private FrmSplashScreen frmSplashScreen;
         #endregion
 
         #region Constructor
@@ -35,6 +36,11 @@ namespace EnroladorStandAloneV2 {
             InitializeComponent();
             Negocio = new NegocioEnrolador();
 
+            //mostar splash
+            frmSplashScreen = new FrmSplashScreen();
+            frmSplashScreen.Show(this);
+
+            //inicializar el hilo de chequeo de notificaciones
             backgroundWorkerChequeoNotificaciones.RunWorkerAsync();
         }
         #endregion
@@ -66,9 +72,6 @@ namespace EnroladorStandAloneV2 {
         }
 
         private async void FrmPrincipal_Load(object sender, EventArgs e) {
-            //Primero recupera las acciones pendientes de enviar que estan guardadas en el archivo
-            //Incializar Sistema
-
             DevGroupControlNotificacionesAcciones.Controls.Clear();
             DevGroupControlNotificacionesAcciones.Controls.Add(Negocio.ObtenerUCNotificaciones("Inicializando el sistema, espere por favor..."));
 
@@ -93,6 +96,8 @@ namespace EnroladorStandAloneV2 {
 #if DEBUG
             Negocio.MyHardwareId = new Guid("f6a74090-e0d1-daf9-e8c4-7d7497f4c9ad");
 #endif
+            //mostar form y esconder Splash
+            frmSplashScreen.Hide();
 
             if (!Negocio.IdentificarLocal()) {
                 if (XtraMessageBox.Show("No existe autorización almacenada para este equipo. Se conectará al servidor para solicitar autorización. Asegurese de que exista conexión con el servidor", "Aviso", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.Cancel) {
@@ -1021,7 +1026,7 @@ namespace EnroladorStandAloneV2 {
 
                 switch (nombrePage) {
                     case "Enrolar": {
-                            uControl = new UCEnrolar(Negocio, RUT);
+                            uControl = new UCEnrolador(Negocio, RUT);
                         };
                         break;
                     default: {
@@ -1181,6 +1186,19 @@ namespace EnroladorStandAloneV2 {
 
         #endregion
 
-        
+        #region Optimizacion de Interfaz
+        /// <summary>
+        /// Mejora el Parpadeo
+        /// https://es.stackoverflow.com/questions/127139/c%C3%B3mo-evitar-el-parpadeo-de-los-controles-windows-forms-c
+        /// </summary>
+        //protected override CreateParams CreateParams {
+        //    get {
+        //        CreateParams cp = base.CreateParams;
+        //        cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
+        //        return cp;
+        //    }
+        //}
+
+        #endregion
     }
 }

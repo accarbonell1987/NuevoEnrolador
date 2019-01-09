@@ -16,13 +16,13 @@ using DevExpress.XtraEditors;
 namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
     public partial class UCEnrolarContratos : DevExpress.XtraEditors.XtraUserControl {
         #region Atributos
-        UCEnrolar Padre;
+        UCEnrolador Padre;
         NegocioEnrolador Negocio;
         POCOEmpleado empleado;
         #endregion
 
         #region Constructor
-        public UCEnrolarContratos(UCEnrolar Padre, NegocioEnrolador Negocio, POCOEmpleado empleado) {
+        public UCEnrolarContratos(UCEnrolador Padre, NegocioEnrolador Negocio, POCOEmpleado empleado) {
             InitializeComponent();
             try {
                 this.Padre = Padre;
@@ -103,7 +103,5 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             }
         }
         #endregion
-
-        
     }
 }

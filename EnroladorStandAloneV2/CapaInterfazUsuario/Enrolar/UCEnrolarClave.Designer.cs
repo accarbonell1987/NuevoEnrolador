@@ -116,6 +116,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.DevLayoutControlComponentesAcceso);
+            this.DoubleBuffered = true;
             this.MinimumSize = new System.Drawing.Size(224, 69);
             this.Name = "UCEnrolarClave";
             this.Size = new System.Drawing.Size(224, 69);

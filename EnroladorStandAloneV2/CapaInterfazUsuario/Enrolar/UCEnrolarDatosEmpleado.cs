@@ -17,11 +17,11 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         #region Atributos
         NegocioEnrolador Negocio;
         POCOEmpleado empleado;
-        UCEnrolar Padre;
+        UCEnrolador Padre;
         #endregion
 
         #region Constructor
-        public UCEnrolarDatosEmpleado(UCEnrolar Padre, NegocioEnrolador Negocio, POCOEmpleado empleado) {
+        public UCEnrolarDatosEmpleado(UCEnrolador Padre, NegocioEnrolador Negocio, POCOEmpleado empleado) {
             InitializeComponent();
             try {
                 this.Padre = Padre;
@@ -57,8 +57,15 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         private void DevRadioGroupAcceso_EditValueChanged(object sender, EventArgs e) {
             int valor = Convert.ToInt16(DevRadioGroupAcceso.EditValue);
             DevPanelControlAcceso.Controls.Clear();
+
             if (valor == 0) {
                 UCEnrolarClave uC = new UCEnrolarClave(Padre, Negocio, empleado) {
+                    Dock = DockStyle.Fill
+                };
+
+                DevPanelControlAcceso.Controls.Add(uC);
+            } else {
+                UCEnrolarHuellas uC = new UCEnrolarHuellas(Padre, Negocio, empleado) {
                     Dock = DockStyle.Fill
                 };
 

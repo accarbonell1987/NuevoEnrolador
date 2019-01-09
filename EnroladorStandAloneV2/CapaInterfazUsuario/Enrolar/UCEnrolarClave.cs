@@ -15,7 +15,7 @@ using System.Reflection;
 namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
     public partial class UCEnrolarClave : DevExpress.XtraEditors.XtraUserControl {
         #region Atributos
-        private UCEnrolar Padre;
+        private UCEnrolador Padre;
         private NegocioEnrolador Negocio;
         private POCOEmpleado empleado;
 
@@ -23,7 +23,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         #endregion
 
         #region Constructor
-        public UCEnrolarClave(UCEnrolar Padre, NegocioEnrolador Negocio, POCOEmpleado empleado) {
+        public UCEnrolarClave(UCEnrolador Padre, NegocioEnrolador Negocio, POCOEmpleado empleado) {
             InitializeComponent();
             //temporizador para el chequeo de la revalidacion de contraseña
             temporizador = new Timer {
@@ -48,8 +48,6 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             }
             temporizador.Stop();
         }
-        #endregion
-
         private void DevTextClave_EditValueChanged(object sender, EventArgs e) {
             if (DevTextClave.Text != String.Empty)
                 DevTextEditRevalidarClave.Enabled = true;
@@ -61,5 +59,6 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             temporizador.Stop();
             temporizador.Start();
         }
+        #endregion
     }
 }

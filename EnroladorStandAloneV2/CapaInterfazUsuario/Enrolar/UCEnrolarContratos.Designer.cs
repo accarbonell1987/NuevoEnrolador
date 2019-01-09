@@ -43,8 +43,8 @@
             this.colNombreCuenta = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colNombreCargo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DevGroupControlDatosContrato = new DevExpress.XtraEditors.GroupControl();
-            this.DevLayoutControlDatosDelContacto = new DevExpress.XtraLayout.LayoutControl();
             this.DevSimpleButtonAdicionar = new DevExpress.XtraEditors.SimpleButton();
+            this.DevLayoutControlDatosDelContacto = new DevExpress.XtraLayout.LayoutControl();
             this.DevCheckEditManejaCasino = new DevExpress.XtraEditors.CheckEdit();
             this.DevCheckEditManejaAsistencia = new DevExpress.XtraEditors.CheckEdit();
             this.DevTextEditCodigo = new DevExpress.XtraEditors.TextEdit();
@@ -63,7 +63,6 @@
             this.DevLayoutControlItemCodigo = new DevExpress.XtraLayout.LayoutControlItem();
             this.DevLayoutControlItemManejaAsistencia = new DevExpress.XtraLayout.LayoutControlItem();
             this.DevLayoutControlItemManejaCasino = new DevExpress.XtraLayout.LayoutControlItem();
-            this.DevLayoutControlItemBotonAdicionar = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlContratos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsContratos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewContratos)).BeginInit();
@@ -90,7 +89,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemCodigo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemManejaAsistencia)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemManejaCasino)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemBotonAdicionar)).BeginInit();
             this.SuspendLayout();
             // 
             // DevGridControlContratos
@@ -102,7 +100,7 @@
             this.DevGridControlContratos.Location = new System.Drawing.Point(3, 3);
             this.DevGridControlContratos.MainView = this.DevGridViewContratos;
             this.DevGridControlContratos.Name = "DevGridControlContratos";
-            this.DevGridControlContratos.Size = new System.Drawing.Size(381, 365);
+            this.DevGridControlContratos.Size = new System.Drawing.Size(381, 266);
             this.DevGridControlContratos.TabIndex = 0;
             this.DevGridControlContratos.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.DevGridViewContratos});
@@ -224,19 +222,31 @@
             // 
             this.DevGroupControlDatosContrato.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DevGroupControlDatosContrato.Controls.Add(this.DevSimpleButtonAdicionar);
             this.DevGroupControlDatosContrato.Controls.Add(this.DevLayoutControlDatosDelContacto);
-            this.DevGroupControlDatosContrato.Location = new System.Drawing.Point(3, 374);
+            this.DevGroupControlDatosContrato.Location = new System.Drawing.Point(3, 275);
             this.DevGroupControlDatosContrato.Name = "DevGroupControlDatosContrato";
-            this.DevGroupControlDatosContrato.Size = new System.Drawing.Size(381, 261);
+            this.DevGroupControlDatosContrato.Size = new System.Drawing.Size(381, 236);
             this.DevGroupControlDatosContrato.TabIndex = 3;
             this.DevGroupControlDatosContrato.Text = "Datos del Contrato";
+            // 
+            // DevSimpleButtonAdicionar
+            // 
+            this.DevSimpleButtonAdicionar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.DevSimpleButtonAdicionar.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.DevSimpleButtonAdicionar.Enabled = false;
+            this.DevSimpleButtonAdicionar.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.DevSimpleButtonAdicionar.ImageUri.Uri = "Add;Size16x16;Office2013";
+            this.DevSimpleButtonAdicionar.Location = new System.Drawing.Point(320, 205);
+            this.DevSimpleButtonAdicionar.Name = "DevSimpleButtonAdicionar";
+            this.DevSimpleButtonAdicionar.Size = new System.Drawing.Size(43, 23);
+            this.DevSimpleButtonAdicionar.TabIndex = 2;
             // 
             // DevLayoutControlDatosDelContacto
             // 
             this.DevLayoutControlDatosDelContacto.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.DevLayoutControlDatosDelContacto.Controls.Add(this.DevSimpleButtonAdicionar);
             this.DevLayoutControlDatosDelContacto.Controls.Add(this.DevCheckEditManejaCasino);
             this.DevLayoutControlDatosDelContacto.Controls.Add(this.DevCheckEditManejaAsistencia);
             this.DevLayoutControlDatosDelContacto.Controls.Add(this.DevTextEditCodigo);
@@ -248,19 +258,9 @@
             this.DevLayoutControlDatosDelContacto.Name = "DevLayoutControlDatosDelContacto";
             this.DevLayoutControlDatosDelContacto.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(574, 269, 450, 400);
             this.DevLayoutControlDatosDelContacto.Root = this.DevLayoutControlGroupDatosDelContrato;
-            this.DevLayoutControlDatosDelContacto.Size = new System.Drawing.Size(370, 236);
+            this.DevLayoutControlDatosDelContacto.Size = new System.Drawing.Size(370, 187);
             this.DevLayoutControlDatosDelContacto.TabIndex = 0;
             this.DevLayoutControlDatosDelContacto.Text = "layoutControl1";
-            // 
-            // DevSimpleButtonAdicionar
-            // 
-            this.DevSimpleButtonAdicionar.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.DevSimpleButtonAdicionar.ImageUri.Uri = "AddItem";
-            this.DevSimpleButtonAdicionar.Location = new System.Drawing.Point(160, 181);
-            this.DevSimpleButtonAdicionar.Name = "DevSimpleButtonAdicionar";
-            this.DevSimpleButtonAdicionar.Size = new System.Drawing.Size(50, 38);
-            this.DevSimpleButtonAdicionar.StyleController = this.DevLayoutControlDatosDelContacto;
-            this.DevSimpleButtonAdicionar.TabIndex = 11;
             // 
             // DevCheckEditManejaCasino
             // 
@@ -383,11 +383,10 @@
             this.DevLayoutControlItemInicioVigencia,
             this.DevLayoutControlItemCodigo,
             this.DevLayoutControlItemManejaAsistencia,
-            this.DevLayoutControlItemManejaCasino,
-            this.DevLayoutControlItemBotonAdicionar});
+            this.DevLayoutControlItemManejaCasino});
             this.DevLayoutControlGroupDatosDelContrato.Location = new System.Drawing.Point(0, 0);
             this.DevLayoutControlGroupDatosDelContrato.Name = "Root";
-            this.DevLayoutControlGroupDatosDelContrato.Size = new System.Drawing.Size(370, 236);
+            this.DevLayoutControlGroupDatosDelContrato.Size = new System.Drawing.Size(370, 187);
             this.DevLayoutControlGroupDatosDelContrato.TextVisible = false;
             // 
             // DevLayoutControlItemEmpresa
@@ -449,19 +448,9 @@
             this.DevLayoutControlItemManejaCasino.Control = this.DevCheckEditManejaCasino;
             this.DevLayoutControlItemManejaCasino.Location = new System.Drawing.Point(0, 143);
             this.DevLayoutControlItemManejaCasino.Name = "DevLayoutControlItemManejaCasino";
-            this.DevLayoutControlItemManejaCasino.Size = new System.Drawing.Size(350, 23);
+            this.DevLayoutControlItemManejaCasino.Size = new System.Drawing.Size(350, 24);
             this.DevLayoutControlItemManejaCasino.TextSize = new System.Drawing.Size(0, 0);
             this.DevLayoutControlItemManejaCasino.TextVisible = false;
-            // 
-            // DevLayoutControlItemBotonAdicionar
-            // 
-            this.DevLayoutControlItemBotonAdicionar.Control = this.DevSimpleButtonAdicionar;
-            this.DevLayoutControlItemBotonAdicionar.Location = new System.Drawing.Point(0, 166);
-            this.DevLayoutControlItemBotonAdicionar.Name = "DevLayoutControlItemBotonAdicionar";
-            this.DevLayoutControlItemBotonAdicionar.Padding = new DevExpress.XtraLayout.Utils.Padding(150, 150, 5, 2);
-            this.DevLayoutControlItemBotonAdicionar.Size = new System.Drawing.Size(350, 50);
-            this.DevLayoutControlItemBotonAdicionar.TextSize = new System.Drawing.Size(0, 0);
-            this.DevLayoutControlItemBotonAdicionar.TextVisible = false;
             // 
             // UCEnrolarContratos
             // 
@@ -469,9 +458,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.DevGroupControlDatosContrato);
             this.Controls.Add(this.DevGridControlContratos);
-            this.MinimumSize = new System.Drawing.Size(388, 638);
+            this.DoubleBuffered = true;
+            this.MinimumSize = new System.Drawing.Size(388, 517);
             this.Name = "UCEnrolarContratos";
-            this.Size = new System.Drawing.Size(388, 638);
+            this.Size = new System.Drawing.Size(388, 517);
             this.Load += new System.EventHandler(this.UCEnrolarContratos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlContratos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsContratos)).EndInit();
@@ -499,7 +489,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemCodigo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemManejaAsistencia)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemManejaCasino)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemBotonAdicionar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -525,8 +514,6 @@
         private DevExpress.XtraEditors.CheckEdit DevCheckEditManejaAsistencia;
         private DevExpress.XtraLayout.LayoutControlItem DevLayoutControlItemManejaAsistencia;
         private DevExpress.XtraLayout.LayoutControlItem DevLayoutControlItemManejaCasino;
-        private DevExpress.XtraEditors.SimpleButton DevSimpleButtonAdicionar;
-        private DevExpress.XtraLayout.LayoutControlItem DevLayoutControlItemBotonAdicionar;
         private System.Windows.Forms.BindingSource bsContratos;
         private System.Windows.Forms.BindingSource bsEmpresas;
         private System.Windows.Forms.BindingSource bsCuentas;
@@ -546,5 +533,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colNombreEmpresa;
         private DevExpress.XtraGrid.Columns.GridColumn colNombreCuenta;
         private DevExpress.XtraGrid.Columns.GridColumn colNombreCargo;
+        private DevExpress.XtraEditors.SimpleButton DevSimpleButtonAdicionar;
     }
 }
