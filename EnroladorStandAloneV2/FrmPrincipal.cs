@@ -34,6 +34,10 @@ namespace EnroladorStandAloneV2 {
         #region Constructor
         public FrmPrincipal() {
             InitializeComponent();
+
+            //Si la pantalla no es full HD minimizo los botones
+            if (Height < 800) DevRibbonControl.Minimized = true;
+
             Negocio = new NegocioEnrolador();
 
             //mostar splash
@@ -1083,6 +1087,10 @@ namespace EnroladorStandAloneV2 {
         /// </summary>
         public void MostrarNotificaciones() {
             if (Negocio.lNotificaciones.Count > 0) {
+                //minimizo el control
+                if (Height < 800) DevRibbonControl.Minimized = true;
+
+                DevGroupControlNotificacionesAcciones.Height = 77;
                 DevGroupControlNotificacionesAcciones.Controls.Clear();
                 DevGroupControlNotificacionesAcciones.Controls.Add(Negocio.ObtenerUCNotificaciones(String.Empty));
             }
@@ -1187,6 +1195,30 @@ namespace EnroladorStandAloneV2 {
         {
             Negocio.Sincronizar();
         }
+
+        /// <summary>
+        /// Controla el evento de la paleta de iconos cuando la resolucion es baja
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DevRibbonControl_MinimizedChanged(object sender, EventArgs e)
+        {
+            var notificacionSize = DevGroupControlNotificacionesAcciones.Size;
+
+            if (DevRibbonControl.Minimized) notificacionSize.Height = 77;
+            else notificacionSize.Height = 20;
+
+            DevGroupControlNotificacionesAcciones.Size = notificacionSize;
+        }
+        private void DevGroupControlNotificacionesAcciones_DoubleClick(object sender, EventArgs e)
+        {
+            var notificacionSize = DevGroupControlNotificacionesAcciones.Size;
+
+            if (notificacionSize.Height == 77) notificacionSize.Height = 20;
+            else notificacionSize.Height = 77;
+
+            DevGroupControlNotificacionesAcciones.Size = notificacionSize;
+        }
         #endregion
 
         #endregion
@@ -1205,5 +1237,7 @@ namespace EnroladorStandAloneV2 {
         //}
 
         #endregion
+
+
     }
 }

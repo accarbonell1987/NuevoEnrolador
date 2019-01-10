@@ -63,6 +63,7 @@
             this.DevTextEditRevalidarClave.Size = new System.Drawing.Size(118, 20);
             this.DevTextEditRevalidarClave.StyleController = this.DevLayoutControlComponentesAcceso;
             this.DevTextEditRevalidarClave.TabIndex = 4;
+            this.DevTextEditRevalidarClave.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DevTextEditRevalidarClave_KeyPress);
             this.DevTextEditRevalidarClave.Validated += new System.EventHandler(this.DevTextEditRevalidarClave_Validated);
             // 
             // DevTextClave

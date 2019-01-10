@@ -100,7 +100,7 @@
             this.DevGridControlContratos.Location = new System.Drawing.Point(3, 3);
             this.DevGridControlContratos.MainView = this.DevGridViewContratos;
             this.DevGridControlContratos.Name = "DevGridControlContratos";
-            this.DevGridControlContratos.Size = new System.Drawing.Size(381, 266);
+            this.DevGridControlContratos.Size = new System.Drawing.Size(381, 182);
             this.DevGridControlContratos.TabIndex = 0;
             this.DevGridControlContratos.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.DevGridViewContratos});
@@ -224,7 +224,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DevGroupControlDatosContrato.Controls.Add(this.DevSimpleButtonAdicionar);
             this.DevGroupControlDatosContrato.Controls.Add(this.DevLayoutControlDatosDelContacto);
-            this.DevGroupControlDatosContrato.Location = new System.Drawing.Point(3, 275);
+            this.DevGroupControlDatosContrato.Location = new System.Drawing.Point(4, 191);
             this.DevGroupControlDatosContrato.Name = "DevGroupControlDatosContrato";
             this.DevGroupControlDatosContrato.Size = new System.Drawing.Size(381, 236);
             this.DevGroupControlDatosContrato.TabIndex = 3;
@@ -459,9 +459,9 @@
             this.Controls.Add(this.DevGroupControlDatosContrato);
             this.Controls.Add(this.DevGridControlContratos);
             this.DoubleBuffered = true;
-            this.MinimumSize = new System.Drawing.Size(388, 517);
+            this.MinimumSize = new System.Drawing.Size(388, 430);
             this.Name = "UCEnrolarContratos";
-            this.Size = new System.Drawing.Size(388, 517);
+            this.Size = new System.Drawing.Size(388, 430);
             this.Load += new System.EventHandler(this.UCEnrolarContratos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlContratos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsContratos)).EndInit();

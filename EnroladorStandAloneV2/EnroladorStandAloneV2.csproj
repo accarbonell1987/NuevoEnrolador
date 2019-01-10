@@ -372,6 +372,9 @@
   <ItemGroup>
     <Content Include="CapaInterfazUsuario\Recursos\EnroladorStandAloneV2.ico" />
     <Content Include="CapaInterfazUsuario\Recursos\Fondo_Terminales_CENCOSUD.png" />
+    <Content Include="CapaInterfazUsuario\Recursos\Huella_NoSeteada.png" />
+    <Content Include="CapaInterfazUsuario\Recursos\Huella_Seleccionada.png" />
+    <Content Include="CapaInterfazUsuario\Recursos\Huella_Seteada.png" />
     <Content Include="CapaInterfazUsuario\Recursos\Icono_Enrolador.ico" />
     <Content Include="CapaInterfazUsuario\Recursos\Logo_Biometria_Aplicada.png" />
     <Content Include="CapaInterfazUsuario\Recursos\Manos.png" />
