@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAutorizacion));
             this.DevButtonCancelar = new DevExpress.XtraEditors.SimpleButton();
             this.DevLabelControlIntentos = new DevExpress.XtraEditors.LabelControl();
             this.DevLabelControlMensaje = new DevExpress.XtraEditors.LabelControl();
@@ -70,6 +71,7 @@
             this.Controls.Add(this.DevLabelControlIntentos);
             this.Controls.Add(this.DevButtonCancelar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmAutorizacion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Autorizar Acción";

@@ -88,11 +88,9 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
-
-        #endregion
-
         private async void UCGridDatos_Load(object sender, EventArgs e) {
             bsEmpleados.DataSource = await GetDataSourceEmpleados();
         }
+        #endregion
     }
 }

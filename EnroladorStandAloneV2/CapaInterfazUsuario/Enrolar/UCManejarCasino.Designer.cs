@@ -282,6 +282,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.DevGroupControlAsistencia);
             this.Controls.Add(this.DevGridControlAsistencias);
+            this.DoubleBuffered = true;
             this.Name = "UCManejarCasino";
             this.Size = new System.Drawing.Size(447, 395);
             this.Load += new System.EventHandler(this.UCManejarCasino_Load);

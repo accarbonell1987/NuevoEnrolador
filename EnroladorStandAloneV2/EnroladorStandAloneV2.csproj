@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EnroladorStandAloneV2</RootNamespace>
-    <AssemblyName>EnroladorStandAloneV2</AssemblyName>
+    <AssemblyName>EnroladorStandAlone</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -53,7 +53,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>CapaInterfazUsuario\Recursos\Icono_Enrolador.ico</ApplicationIcon>
+    <ApplicationIcon>CapaInterfazUsuario\Recursos\EnroladorStandAloneV2.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -125,6 +125,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CapaInterfazUsuario\Enrolar\UCEnrolador.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CapaInterfazUsuario\Enrolar\UCEnrolador.Designer.cs">
+      <DependentUpon>UCEnrolador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CapaInterfazUsuario\Enrolar\UCEnrolarHuellas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CapaInterfazUsuario\Enrolar\UCEnrolarHuellas.Designer.cs">
+      <DependentUpon>UCEnrolarHuellas.cs</DependentUpon>
+    </Compile>
     <Compile Include="CapaInterfazUsuario\Enrolar\UCManejarCasino.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -174,12 +186,6 @@
     <Compile Include="CapaInterfazUsuario\Enrolar\UCEnrolarDatosEmpleado.Designer.cs">
       <DependentUpon>UCEnrolarDatosEmpleado.cs</DependentUpon>
     </Compile>
-    <Compile Include="CapaInterfazUsuario\Enrolar\UCEnrolar.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CapaInterfazUsuario\Enrolar\UCEnrolar.Designer.cs">
-      <DependentUpon>UCEnrolar.cs</DependentUpon>
-    </Compile>
     <Compile Include="CapaInterfazUsuario\UCGridDatos.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -198,12 +204,24 @@
     <Compile Include="CapaInterfazUsuario\FrmNotificaciones.Designer.cs">
       <DependentUpon>FrmNotificaciones.cs</DependentUpon>
     </Compile>
+    <Compile Include="CapaInterfazUsuario\UCSpashScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CapaInterfazUsuario\UCSpashScreen.Designer.cs">
+      <DependentUpon>UCSpashScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="CapaLogicaNegocio\NegocioEnrolador.cs" />
     <Compile Include="CapaLogicaNegocio\QueryableExtensions.cs" />
     <Compile Include="Connected Services\EnroladorServicioWeb\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSplashScreen.Designer.cs">
+      <DependentUpon>FrmSplashScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmPrincipal.cs">
       <SubType>Form</SubType>
@@ -221,6 +239,12 @@
     <Compile Include="Herramientas\ValidadorRUT.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CapaInterfazUsuario\Enrolar\UCEnrolador.resx">
+      <DependentUpon>UCEnrolador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CapaInterfazUsuario\Enrolar\UCEnrolarHuellas.resx">
+      <DependentUpon>UCEnrolarHuellas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CapaInterfazUsuario\Enrolar\UCManejarCasino.resx">
       <DependentUpon>UCManejarCasino.cs</DependentUpon>
     </EmbeddedResource>
@@ -248,14 +272,17 @@
     <EmbeddedResource Include="CapaInterfazUsuario\Enrolar\UCEnrolarDatosEmpleado.resx">
       <DependentUpon>UCEnrolarDatosEmpleado.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CapaInterfazUsuario\Enrolar\UCEnrolar.resx">
-      <DependentUpon>UCEnrolar.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CapaInterfazUsuario\UCGridDatos.resx">
       <DependentUpon>UCGridDatos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CapaInterfazUsuario\UCNotificaciones.resx">
       <DependentUpon>UCNotificaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CapaInterfazUsuario\UCSpashScreen.resx">
+      <DependentUpon>UCSpashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSplashScreen.resx">
+      <DependentUpon>FrmSplashScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPrincipal.resx">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
@@ -343,9 +370,12 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CapaInterfazUsuario\Recursos\EnroladorStandAloneV2.ico" />
     <Content Include="CapaInterfazUsuario\Recursos\Fondo_Terminales_CENCOSUD.png" />
     <Content Include="CapaInterfazUsuario\Recursos\Icono_Enrolador.ico" />
     <Content Include="CapaInterfazUsuario\Recursos\Logo_Biometria_Aplicada.png" />
+    <Content Include="CapaInterfazUsuario\Recursos\Manos.png" />
+    <Content Include="CapaInterfazUsuario\Recursos\SplashScreen.png" />
     <None Include="Resources\customer_16x16.png" />
     <None Include="Resources\bouser_16x16.png" />
     <None Include="Resources\apply_16x16.png" />

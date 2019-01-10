@@ -29,22 +29,22 @@
             this.DevLayoutControl = new DevExpress.XtraLayout.LayoutControl();
             this.DevLabelControlNotificaciones = new DevExpress.XtraEditors.LabelControl();
             this.DevGridControlNotificaciones = new DevExpress.XtraGrid.GridControl();
+            this.bsNotificaciones = new System.Windows.Forms.BindingSource(this.components);
             this.DevGridViewNotificaciones = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.DevLayoutControlGroup = new DevExpress.XtraLayout.LayoutControlGroup();
             this.DevIemLabelNotificaciones = new DevExpress.XtraLayout.LayoutControlItem();
             this.DevItemGrid = new DevExpress.XtraLayout.LayoutControlItem();
             this.DevSeparatorControl = new DevExpress.XtraEditors.SeparatorControl();
             this.DevButtonCancelar = new DevExpress.XtraEditors.SimpleButton();
-            this.bsNotificaciones = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControl)).BeginInit();
             this.DevLayoutControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlNotificaciones)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsNotificaciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewNotificaciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlGroup)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevIemLabelNotificaciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevItemGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevSeparatorControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsNotificaciones)).BeginInit();
             this.SuspendLayout();
             // 
             // DevLayoutControl
@@ -168,18 +168,19 @@
             this.Controls.Add(this.DevButtonCancelar);
             this.Controls.Add(this.DevSeparatorControl);
             this.Controls.Add(this.DevLayoutControl);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(587, 364);
             this.Name = "FrmNotificaciones";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControl)).EndInit();
             this.DevLayoutControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlNotificaciones)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsNotificaciones)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewNotificaciones)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlGroup)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevIemLabelNotificaciones)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevItemGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevSeparatorControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsNotificaciones)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -260,10 +260,12 @@
             this.DevPictureEditFotoEmpleado.Cursor = System.Windows.Forms.Cursors.Default;
             this.DevPictureEditFotoEmpleado.EditValue = ((object)(resources.GetObject("DevPictureEditFotoEmpleado.EditValue")));
             this.DevPictureEditFotoEmpleado.Location = new System.Drawing.Point(12, 19);
+            this.DevPictureEditFotoEmpleado.MaximumSize = new System.Drawing.Size(78, 78);
+            this.DevPictureEditFotoEmpleado.MinimumSize = new System.Drawing.Size(78, 78);
             this.DevPictureEditFotoEmpleado.Name = "DevPictureEditFotoEmpleado";
             this.DevPictureEditFotoEmpleado.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
             this.DevPictureEditFotoEmpleado.Properties.ZoomAccelerationFactor = 1D;
-            this.DevPictureEditFotoEmpleado.Size = new System.Drawing.Size(78, 70);
+            this.DevPictureEditFotoEmpleado.Size = new System.Drawing.Size(78, 78);
             this.DevPictureEditFotoEmpleado.TabIndex = 0;
             // 
             // UCEnrolarDatosEmpleado
@@ -274,6 +276,7 @@
             this.Controls.Add(this.DevGroupControlDatosContacto);
             this.Controls.Add(this.DevLayoutControlDatos);
             this.Controls.Add(this.DevPictureEditFotoEmpleado);
+            this.DoubleBuffered = true;
             this.MinimumSize = new System.Drawing.Size(364, 467);
             this.Name = "UCEnrolarDatosEmpleado";
             this.Size = new System.Drawing.Size(364, 467);
