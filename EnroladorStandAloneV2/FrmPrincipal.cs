@@ -1177,10 +1177,16 @@ namespace EnroladorStandAloneV2 {
                 }
             }, null, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
         }
-        #endregion
 
         #endregion
 
+        #region Sincronizar
+        private void DevBarButtonSincronizar_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Negocio.Sincronizar();
+        }
+        #endregion
         
+        #endregion
     }
 }

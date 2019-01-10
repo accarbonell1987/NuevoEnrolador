@@ -79,6 +79,7 @@
             this.DevBarButtonSincronizar.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("DevBarButtonSincronizar.ImageOptions.Image")));
             this.DevBarButtonSincronizar.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("DevBarButtonSincronizar.ImageOptions.LargeImage")));
             this.DevBarButtonSincronizar.Name = "DevBarButtonSincronizar";
+            this.DevBarButtonSincronizar.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.DevBarButtonSincronizar_ItemClick);
             // 
             // DevBarButtonEnrolar
             // 

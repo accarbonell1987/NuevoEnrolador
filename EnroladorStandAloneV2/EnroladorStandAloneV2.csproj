@@ -199,6 +199,7 @@
       <DependentUpon>FrmNotificaciones.cs</DependentUpon>
     </Compile>
     <Compile Include="CapaLogicaNegocio\NegocioEnrolador.cs" />
+    <Compile Include="CapaLogicaNegocio\QueryableExtensions.cs" />
     <Compile Include="Connected Services\EnroladorServicioWeb\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

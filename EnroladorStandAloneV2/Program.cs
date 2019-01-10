@@ -19,12 +19,6 @@ namespace EnroladorStandAloneV2 {
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es");
             BonusSkins.Register();
             SkinManager.EnableFormSkins();
-
-            var x = new NegocioEnrolador();
-            var y = x.mContext.Contrato.FirstOrDefault();
-            y.Sincronizado = 1;
-            x.EjecutarAccion(y, Guid.NewGuid());
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

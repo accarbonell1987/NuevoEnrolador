@@ -15,6 +15,12 @@ using EnroladorStandAloneV2.Herramientas.Huellero;
 using EnroladorStandAloneV2.CapaInterfazUsuario.Interfaces;
 using EnroladorAccesoDatos;
 using EnroladorStandAloneV2.CapaInterfazUsuario;
+using System.Linq.Expressions;
+using System.Data.Entity.Core.Objects.DataClasses;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.Common;
+using System.Data.SQLite;
 
 namespace EnroladorStandAloneV2.CapaLogicaNegocio {
     public class NegocioEnrolador {
@@ -953,7 +959,11 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
 
         #region Acciones
 
-        public void EjecutarAccion(object elemento, Guid responsable)
+        /// <summary>
+        /// Ejecuta una acción para un solo elemento que se valla a sincronizar
+        /// </summary>
+        /// <param name="elemento">Elemento a sincronizar</param>
+        public string EjecutarAccion(object elemento)
         {
             var TipoOperacion = Convert.ToInt32((elemento as dynamic).Sincronizado);
 
@@ -974,7 +984,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                     break;
             }
 
-            if (string.IsNullOrEmpty(NombreOperacion)) return;
+            if (string.IsNullOrEmpty(NombreOperacion)) return string.Empty;
 
             var NombreMetodo = NombreOperacion + elemento.GetType().Name;
             var tipoWS = typeof(EnroladorServicioWebClient);
@@ -984,9 +994,10 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
             try
             {
                 var ElementoPOCO = TransformacionDatos.Convertir(elemento);
-                object[] arregloParametros = new object[2] { responsable, ElementoPOCO };
+                object[] arregloParametros = new object[2] { new Guid(UsuarioAutenticado.GuidUsuario), ElementoPOCO };
 
                 var res = metodo.Invoke(WS, arregloParametros);
+                return res.ToString();
             }
             catch(Exception Ex)
             {
@@ -994,6 +1005,92 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
             }
         }
 
+        public void Sincronizar()
+        {
+            try
+            {
+                //Busco la lista de todos los tipos de la aplicacion
+                var listaTipos = AppDomain.CurrentDomain.GetAssemblies().ToList().SelectMany(q => q.GetTypes());
+
+                //Busco lo pendiente por sincronizar
+                var lSincronizar = mContext.PorSincronizar.ToList();
+
+                foreach (var sincronizar in lSincronizar)
+                {
+                    //Datos necesarios para sincronizar
+                    var llave = sincronizar.IdRegistroASincronizar;
+                    var tabla = sincronizar.TablaASincronizar;
+                    var TipoModificacion = sincronizar.IdRegistroASincronizar;
+
+                    //Busco el tipo SQLite a sincronizar
+                    var tipo = listaTipos.FirstOrDefault(p => p.Name == tabla);
+
+                    //Conformo la consulta para buscarlo en la BD SQLite
+                    var sql = string.Format("SELECT * FROM {0} WHERE Id{0}={1}", tabla, sincronizar.IdRegistroASincronizar);
+
+                    //Chequeando la bd que este abierta
+                    if (mContext.Database.Connection.State != System.Data.ConnectionState.Open) mContext.Database.Connection.Open();
+                    var command = (mContext.Database.Connection as SQLiteConnection).CreateCommand();
+                    command.CommandText = sql;
+
+                    //Creo una instancia del registro a sincronizar
+                    var instancia = Activator.CreateInstance(tipo);
+
+                    //Ahora busco todas propiedades para moverme entre ellas
+                    var propertyInfos = tipo.GetProperties();
+
+                    //Recorro el datareader y vuelco en valor en la instancia
+                    using (var rdr = command.ExecuteReader())
+                    {
+                        rdr.Read();
+                        foreach (var prop in propertyInfos)
+                        {
+                            try
+                            {
+                                prop.SetValue(instancia, rdr.GetValue(rdr.GetOrdinal(prop.Name)));
+                            }
+                            catch { }
+                        }
+                    }
+
+                    //Ejecuto el sincronismo
+                    var res = EjecutarAccion(instancia);
+
+                    if (string.IsNullOrEmpty(res))
+                    {
+                        //Si no hay errores actualizo el cliente
+                        var tran = mContext.Database.BeginTransaction();
+                        try
+                        {
+                            mContext.PorSincronizar.Remove(sincronizar);
+
+                            var sql1 = string.Format("UPDATE {0} SET Sincronizado = 0 WHERE Id{0}={1}", tabla, sincronizar.IdRegistroASincronizar);
+
+                            if (mContext.Database.Connection.State != System.Data.ConnectionState.Open) mContext.Database.Connection.Open();
+                            var command1 = (mContext.Database.Connection as SQLiteConnection).CreateCommand();
+                            command1.CommandText = sql1;
+                            command1.ExecuteNonQuery();
+                            mContext.SaveChanges();
+                            tran.Commit();
+                        }
+                        catch (Exception Ex)
+                        {
+                            tran.Rollback();
+                            throw new Exception("Actualizando elementos ya sincronizados en el cliente.", Ex);
+                        }
+
+                    }
+                    else
+                    {
+                        throw new Exception("Ocurrió un error en la sincronización. " + res);
+                    }
+                }
+            }
+            catch (Exception Ex)
+            {
+                throw new Exception("Error sincronizando los datos", Ex);
+            }
+        }
         #endregion
 
         #endregion
