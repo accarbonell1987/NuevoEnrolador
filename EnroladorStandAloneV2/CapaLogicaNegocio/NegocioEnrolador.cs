@@ -1005,6 +1005,9 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
             }
         }
 
+        /// <summary>
+        /// Sincroniza todas las operaciones pendientes
+        /// </summary>
         public void Sincronizar()
         {
             try
