@@ -73,7 +73,7 @@
             this.DevGridControlAsistencias.Location = new System.Drawing.Point(3, 3);
             this.DevGridControlAsistencias.MainView = this.DevGridViewAsistencias;
             this.DevGridControlAsistencias.Name = "DevGridControlAsistencias";
-            this.DevGridControlAsistencias.Size = new System.Drawing.Size(441, 234);
+            this.DevGridControlAsistencias.Size = new System.Drawing.Size(441, 154);
             this.DevGridControlAsistencias.TabIndex = 0;
             this.DevGridControlAsistencias.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.DevGridViewAsistencias});
@@ -93,6 +93,7 @@
             this.DevGridViewAsistencias.GridControl = this.DevGridControlAsistencias;
             this.DevGridViewAsistencias.Name = "DevGridViewAsistencias";
             this.DevGridViewAsistencias.OptionsBehavior.Editable = false;
+            this.DevGridViewAsistencias.OptionsView.ShowGroupPanel = false;
             // 
             // colGuidEmpleado
             // 
@@ -131,7 +132,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DevGroupControlAsistencia.Controls.Add(this.DevSimpleButtonAdicionar);
             this.DevGroupControlAsistencia.Controls.Add(this.DevLayoutControl);
-            this.DevGroupControlAsistencia.Location = new System.Drawing.Point(3, 244);
+            this.DevGroupControlAsistencia.Location = new System.Drawing.Point(3, 163);
             this.DevGroupControlAsistencia.Name = "DevGroupControlAsistencia";
             this.DevGroupControlAsistencia.Size = new System.Drawing.Size(441, 145);
             this.DevGroupControlAsistencia.TabIndex = 1;
@@ -284,7 +285,7 @@
             this.Controls.Add(this.DevGridControlAsistencias);
             this.DoubleBuffered = true;
             this.Name = "UCManejarCasino";
-            this.Size = new System.Drawing.Size(447, 395);
+            this.Size = new System.Drawing.Size(447, 312);
             this.Load += new System.EventHandler(this.UCManejarCasino_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlAsistencias)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEmpleadoTurnoServicioCasino)).EndInit();

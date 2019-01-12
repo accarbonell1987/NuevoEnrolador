@@ -59,7 +59,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
 
         #region Metodos
 
-        #region Obtener de SQLite
+        #region SQLite
         /// <summary>
         /// Chequea la existencia del Archivo de la BD y si tiene datos
         /// </summary>
@@ -286,6 +286,31 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 if (cadena == null) return null;
 
                 return TransformacionDatos.DeCadenaAPOCOCadena(cadena);
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                return null;
+            }
+        }
+        public POCOContrato ObtenerContrato(Guid GuidEmpleado, Guid GuidContrato) {
+            try {
+                var todosContratos = mContext.Contrato.Where(p => p.GuidEmpleado == GuidEmpleado.ToString()).ToList();
+                //cargar contratos del empleado
+                var contrato = todosContratos.FirstOrDefault(p => p.GuidContrato == GuidContrato.ToString());
+
+                if (contrato == null) return null;
+
+                POCOContrato pContrato = TransformacionDatos.DeContratoAPOCOContrato(contrato);
+
+                var empresa = TransformacionDatos.DeEmpresaAPOCOEmpresa(mContext.Empresa.FirstOrDefault(p => p.GuidEmpresa == pContrato.GuidEmpresa.ToString()));
+                pContrato.NombreEmpresa = empresa == null ? "Sin Empresa" : empresa.NombreEmpresa;
+
+                var cuenta = TransformacionDatos.DeCuentaAPOCOCuenta(mContext.Cuenta.FirstOrDefault(p => p.GuidCuenta == pContrato.GuidCuenta.ToString()));
+                pContrato.NombreCuenta = cuenta == null ? "Sin Cuenta" : cuenta.NombreCuenta;
+
+                var cargo = TransformacionDatos.DeCargoAPOCOCargo(mContext.Cargo.FirstOrDefault(p => p.GuidCargo == pContrato.GuidCargo.ToString()));
+                pContrato.NombreCargo = cargo == null ? "Sin Cargo" : cargo.NombreCargo;
+
+                return pContrato;
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
                 return null;
@@ -585,6 +610,14 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 mContext.SaveChanges();
 
                 ExistenDatos = true;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+            }
+        }
+
+        public void AdicionarEmpleadoInstalacionDispostivoSinSalvar(POCOEmpleadoDispositivo pocoEmpleadoDispositivo) {
+            try {
+                mContext.EmpleadoDispositivo.Add(TransformacionDatos.DePOCOEmpleadoDispositivoAEmpleadoDispositivo(pocoEmpleadoDispositivo));
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
             }

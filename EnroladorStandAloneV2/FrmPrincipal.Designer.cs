@@ -95,8 +95,8 @@
             // 
             this.DevBarButtonItemGuardar.Caption = "Guardar";
             this.DevBarButtonItemGuardar.Id = 4;
-            this.DevBarButtonItemGuardar.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("DevBarButtonItemGuardar.ImageOptions.Image")));
-            this.DevBarButtonItemGuardar.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("DevBarButtonItemGuardar.ImageOptions.LargeImage")));
+            this.DevBarButtonItemGuardar.ImageOptions.Image = global::EnroladorStandAloneV2.Properties.Resources.save_32x32;
+            this.DevBarButtonItemGuardar.ImageOptions.LargeImage = global::EnroladorStandAloneV2.Properties.Resources.additem_32x32;
             this.DevBarButtonItemGuardar.Name = "DevBarButtonItemGuardar";
             // 
             // DevBarButtonItemDescartar

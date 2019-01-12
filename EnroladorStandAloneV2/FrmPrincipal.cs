@@ -1177,18 +1177,18 @@ namespace EnroladorStandAloneV2 {
             return ResultadoAutorizacion.Aceptado;
 
             //Estaba asi en el Enrolador, aunque nunca se ejecuta
-            return await Task<ResultadoAutorizacion>.Factory.StartNew((obj) => {
-                using (FrmAutorizacion authDialog = new FrmAutorizacion(Negocio.mHuellero, mensaje)) {
-                    DialogResult res = authDialog.ShowDialog(owner);
-                    if (res == DialogResult.Yes) {
-                        return ResultadoAutorizacion.Aceptado;
-                    } else if (res == DialogResult.No) {
-                        return ResultadoAutorizacion.Rechazado;
-                    } else {
-                        return ResultadoAutorizacion.Cancelado;
-                    }
-                }
-            }, null, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+            //return await Task<ResultadoAutorizacion>.Factory.StartNew((obj) => {
+            //    using (FrmAutorizacion authDialog = new FrmAutorizacion(Negocio.mHuellero, mensaje)) {
+            //        DialogResult res = authDialog.ShowDialog(owner);
+            //        if (res == DialogResult.Yes) {
+            //            return ResultadoAutorizacion.Aceptado;
+            //        } else if (res == DialogResult.No) {
+            //            return ResultadoAutorizacion.Rechazado;
+            //        } else {
+            //            return ResultadoAutorizacion.Cancelado;
+            //        }
+            //    }
+            //}, null, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         private void DevBarButtonSincronizar_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
