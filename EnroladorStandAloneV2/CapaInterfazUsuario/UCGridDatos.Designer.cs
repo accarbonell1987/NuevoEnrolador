@@ -27,6 +27,7 @@
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode3 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode4 = new DevExpress.XtraGrid.GridLevelNode();
             this.DevGridViewContratos = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colGuidContrato = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colGuidEmpresa = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -45,6 +46,17 @@
             this.colNombreCargo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DevGridControlEmpleados = new DevExpress.XtraGrid.GridControl();
             this.bsEmpleados = new System.Windows.Forms.BindingSource(this.components);
+            this.DevGridViewEmpleados = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colGuidEmpleado = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colRUT = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colEnrollId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCorreo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNombres = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colApellidos = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTieneContraseña = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTipoIdentificacion = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colContraseña = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNumeroTelefono = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DevGridViewHuellas = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colGuidHuella = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colGuidEmpleado2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -59,25 +71,24 @@
             this.colHost = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPuerto = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTipo1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.DevGridViewEmpleados = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colGuidEmpleado = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colRUT = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colEnrollId = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colCorreo = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colNombres = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colApellidos = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colTieneContraseña = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colTipoIdentificacion = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colContraseña = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colNumeroTelefono = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.DevGridViewTurnoServicioCasino = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.DevGroupControlFiltroContratos = new DevExpress.XtraEditors.GroupControl();
             this.DevRadioGroupFiltroContratos = new DevExpress.XtraEditors.RadioGroup();
+            this.colGuidEmpleado3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colGuidTurnoServicio = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNombreServicio = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNombreTurno = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNombreCasino = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colVigente = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colHoraInicio = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colHoraFin = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewContratos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlEmpleados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEmpleados)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevGridViewEmpleados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewHuellas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewDispositivos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DevGridViewEmpleados)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevGridViewTurnoServicioCasino)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlFiltroContratos)).BeginInit();
             this.DevGroupControlFiltroContratos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DevRadioGroupFiltroContratos.Properties)).BeginInit();
@@ -109,31 +120,37 @@
             // 
             this.colGuidContrato.FieldName = "GuidContrato";
             this.colGuidContrato.Name = "colGuidContrato";
+            this.colGuidContrato.OptionsColumn.AllowEdit = false;
             // 
             // colGuidEmpresa
             // 
             this.colGuidEmpresa.FieldName = "GuidEmpresa";
             this.colGuidEmpresa.Name = "colGuidEmpresa";
+            this.colGuidEmpresa.OptionsColumn.AllowEdit = false;
             // 
             // colGuidCuenta
             // 
             this.colGuidCuenta.FieldName = "GuidCuenta";
             this.colGuidCuenta.Name = "colGuidCuenta";
+            this.colGuidCuenta.OptionsColumn.AllowEdit = false;
             // 
             // colGuidCargo
             // 
             this.colGuidCargo.FieldName = "GuidCargo";
             this.colGuidCargo.Name = "colGuidCargo";
+            this.colGuidCargo.OptionsColumn.AllowEdit = false;
             // 
             // colGuidEmpleado1
             // 
             this.colGuidEmpleado1.FieldName = "GuidEmpleado";
             this.colGuidEmpleado1.Name = "colGuidEmpleado1";
+            this.colGuidEmpleado1.OptionsColumn.AllowEdit = false;
             // 
             // colInicioVigencia
             // 
             this.colInicioVigencia.FieldName = "InicioVigencia";
             this.colInicioVigencia.Name = "colInicioVigencia";
+            this.colInicioVigencia.OptionsColumn.AllowEdit = false;
             this.colInicioVigencia.Visible = true;
             this.colInicioVigencia.VisibleIndex = 0;
             // 
@@ -141,6 +158,7 @@
             // 
             this.colFinVigencia.FieldName = "FinVigencia";
             this.colFinVigencia.Name = "colFinVigencia";
+            this.colFinVigencia.OptionsColumn.AllowEdit = false;
             this.colFinVigencia.Visible = true;
             this.colFinVigencia.VisibleIndex = 1;
             // 
@@ -148,6 +166,7 @@
             // 
             this.colCodigoContrato.FieldName = "CodigoContrato";
             this.colCodigoContrato.Name = "colCodigoContrato";
+            this.colCodigoContrato.OptionsColumn.AllowEdit = false;
             this.colCodigoContrato.Visible = true;
             this.colCodigoContrato.VisibleIndex = 2;
             // 
@@ -155,6 +174,7 @@
             // 
             this.colConsideraAsistencia.FieldName = "ConsideraAsistencia";
             this.colConsideraAsistencia.Name = "colConsideraAsistencia";
+            this.colConsideraAsistencia.OptionsColumn.AllowEdit = false;
             this.colConsideraAsistencia.Visible = true;
             this.colConsideraAsistencia.VisibleIndex = 3;
             // 
@@ -162,6 +182,7 @@
             // 
             this.colConsideraCasino.FieldName = "ConsideraCasino";
             this.colConsideraCasino.Name = "colConsideraCasino";
+            this.colConsideraCasino.OptionsColumn.AllowEdit = false;
             this.colConsideraCasino.Visible = true;
             this.colConsideraCasino.VisibleIndex = 4;
             // 
@@ -169,6 +190,7 @@
             // 
             this.colDescripcion.FieldName = "Descripcion";
             this.colDescripcion.Name = "colDescripcion";
+            this.colDescripcion.OptionsColumn.AllowEdit = false;
             this.colDescripcion.Visible = true;
             this.colDescripcion.VisibleIndex = 5;
             // 
@@ -176,6 +198,7 @@
             // 
             this.colEstado.FieldName = "Estado";
             this.colEstado.Name = "colEstado";
+            this.colEstado.OptionsColumn.AllowEdit = false;
             this.colEstado.Visible = true;
             this.colEstado.VisibleIndex = 6;
             // 
@@ -183,6 +206,7 @@
             // 
             this.colNombreEmpresa.FieldName = "NombreEmpresa";
             this.colNombreEmpresa.Name = "colNombreEmpresa";
+            this.colNombreEmpresa.OptionsColumn.AllowEdit = false;
             this.colNombreEmpresa.Visible = true;
             this.colNombreEmpresa.VisibleIndex = 7;
             // 
@@ -190,6 +214,7 @@
             // 
             this.colNombreCuenta.FieldName = "NombreCuenta";
             this.colNombreCuenta.Name = "colNombreCuenta";
+            this.colNombreCuenta.OptionsColumn.AllowEdit = false;
             this.colNombreCuenta.Visible = true;
             this.colNombreCuenta.VisibleIndex = 8;
             // 
@@ -197,6 +222,7 @@
             // 
             this.colNombreCargo.FieldName = "NombreCargo";
             this.colNombreCargo.Name = "colNombreCargo";
+            this.colNombreCargo.OptionsColumn.AllowEdit = false;
             this.colNombreCargo.Visible = true;
             this.colNombreCargo.VisibleIndex = 9;
             // 
@@ -210,126 +236,29 @@
             gridLevelNode2.RelationName = "Huellas";
             gridLevelNode3.LevelTemplate = this.DevGridViewDispositivos;
             gridLevelNode3.RelationName = "Dispositivos";
+            gridLevelNode4.LevelTemplate = this.DevGridViewTurnoServicioCasino;
+            gridLevelNode4.RelationName = "TurnoServicioCasino";
             this.DevGridControlEmpleados.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
             gridLevelNode1,
             gridLevelNode2,
-            gridLevelNode3});
+            gridLevelNode3,
+            gridLevelNode4});
             this.DevGridControlEmpleados.Location = new System.Drawing.Point(0, 57);
             this.DevGridControlEmpleados.MainView = this.DevGridViewEmpleados;
             this.DevGridControlEmpleados.Name = "DevGridControlEmpleados";
             this.DevGridControlEmpleados.Size = new System.Drawing.Size(1043, 504);
             this.DevGridControlEmpleados.TabIndex = 1;
             this.DevGridControlEmpleados.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.DevGridViewEmpleados,
             this.DevGridViewHuellas,
             this.DevGridViewDispositivos,
-            this.DevGridViewEmpleados,
+            this.DevGridViewTurnoServicioCasino,
             this.DevGridViewContratos});
             this.DevGridControlEmpleados.DoubleClick += new System.EventHandler(this.DevGridControlEmpleados_DoubleClick);
             // 
             // bsEmpleados
             // 
             this.bsEmpleados.DataSource = typeof(EnroladorAccesoDatos.Dominio.POCOEmpleado);
-            // 
-            // DevGridViewHuellas
-            // 
-            this.DevGridViewHuellas.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colGuidHuella,
-            this.colGuidEmpleado2,
-            this.colTipo,
-            this.colData});
-            this.DevGridViewHuellas.GridControl = this.DevGridControlEmpleados;
-            this.DevGridViewHuellas.Name = "DevGridViewHuellas";
-            this.DevGridViewHuellas.OptionsBehavior.Editable = false;
-            // 
-            // colGuidHuella
-            // 
-            this.colGuidHuella.FieldName = "GuidHuella";
-            this.colGuidHuella.Name = "colGuidHuella";
-            // 
-            // colGuidEmpleado2
-            // 
-            this.colGuidEmpleado2.FieldName = "GuidEmpleado";
-            this.colGuidEmpleado2.Name = "colGuidEmpleado2";
-            // 
-            // colTipo
-            // 
-            this.colTipo.FieldName = "Tipo";
-            this.colTipo.Name = "colTipo";
-            this.colTipo.Visible = true;
-            this.colTipo.VisibleIndex = 0;
-            // 
-            // colData
-            // 
-            this.colData.FieldName = "Data";
-            this.colData.Name = "colData";
-            // 
-            // DevGridViewDispositivos
-            // 
-            this.DevGridViewDispositivos.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colGuidDispositivo,
-            this.colGuidInstalacion,
-            this.colNombreCadena,
-            this.colNombreInstalacion,
-            this.colNombreDispositivo,
-            this.colHost,
-            this.colPuerto,
-            this.colTipo1});
-            this.DevGridViewDispositivos.GridControl = this.DevGridControlEmpleados;
-            this.DevGridViewDispositivos.Name = "DevGridViewDispositivos";
-            this.DevGridViewDispositivos.OptionsBehavior.Editable = false;
-            this.DevGridViewDispositivos.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Never;
-            // 
-            // colGuidDispositivo
-            // 
-            this.colGuidDispositivo.FieldName = "GuidDispositivo";
-            this.colGuidDispositivo.Name = "colGuidDispositivo";
-            // 
-            // colGuidInstalacion
-            // 
-            this.colGuidInstalacion.FieldName = "GuidInstalacion";
-            this.colGuidInstalacion.Name = "colGuidInstalacion";
-            // 
-            // colNombreCadena
-            // 
-            this.colNombreCadena.FieldName = "NombreCadena";
-            this.colNombreCadena.Name = "colNombreCadena";
-            this.colNombreCadena.Visible = true;
-            this.colNombreCadena.VisibleIndex = 0;
-            // 
-            // colNombreInstalacion
-            // 
-            this.colNombreInstalacion.FieldName = "NombreInstalacion";
-            this.colNombreInstalacion.Name = "colNombreInstalacion";
-            this.colNombreInstalacion.Visible = true;
-            this.colNombreInstalacion.VisibleIndex = 1;
-            // 
-            // colNombreDispositivo
-            // 
-            this.colNombreDispositivo.FieldName = "NombreDispositivo";
-            this.colNombreDispositivo.Name = "colNombreDispositivo";
-            this.colNombreDispositivo.Visible = true;
-            this.colNombreDispositivo.VisibleIndex = 2;
-            // 
-            // colHost
-            // 
-            this.colHost.FieldName = "Host";
-            this.colHost.Name = "colHost";
-            this.colHost.Visible = true;
-            this.colHost.VisibleIndex = 3;
-            // 
-            // colPuerto
-            // 
-            this.colPuerto.FieldName = "Puerto";
-            this.colPuerto.Name = "colPuerto";
-            this.colPuerto.Visible = true;
-            this.colPuerto.VisibleIndex = 4;
-            // 
-            // colTipo1
-            // 
-            this.colTipo1.FieldName = "Tipo";
-            this.colTipo1.Name = "colTipo1";
-            this.colTipo1.Visible = true;
-            this.colTipo1.VisibleIndex = 5;
             // 
             // DevGridViewEmpleados
             // 
@@ -410,6 +339,133 @@
             this.colNumeroTelefono.Visible = true;
             this.colNumeroTelefono.VisibleIndex = 5;
             // 
+            // DevGridViewHuellas
+            // 
+            this.DevGridViewHuellas.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colGuidHuella,
+            this.colGuidEmpleado2,
+            this.colTipo,
+            this.colData});
+            this.DevGridViewHuellas.GridControl = this.DevGridControlEmpleados;
+            this.DevGridViewHuellas.Name = "DevGridViewHuellas";
+            this.DevGridViewHuellas.OptionsBehavior.Editable = false;
+            // 
+            // colGuidHuella
+            // 
+            this.colGuidHuella.FieldName = "GuidHuella";
+            this.colGuidHuella.Name = "colGuidHuella";
+            this.colGuidHuella.OptionsColumn.AllowEdit = false;
+            // 
+            // colGuidEmpleado2
+            // 
+            this.colGuidEmpleado2.FieldName = "GuidEmpleado";
+            this.colGuidEmpleado2.Name = "colGuidEmpleado2";
+            this.colGuidEmpleado2.OptionsColumn.AllowEdit = false;
+            // 
+            // colTipo
+            // 
+            this.colTipo.FieldName = "Tipo";
+            this.colTipo.Name = "colTipo";
+            this.colTipo.OptionsColumn.AllowEdit = false;
+            this.colTipo.Visible = true;
+            this.colTipo.VisibleIndex = 0;
+            // 
+            // colData
+            // 
+            this.colData.FieldName = "Data";
+            this.colData.Name = "colData";
+            this.colData.OptionsColumn.AllowEdit = false;
+            // 
+            // DevGridViewDispositivos
+            // 
+            this.DevGridViewDispositivos.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colGuidDispositivo,
+            this.colGuidInstalacion,
+            this.colNombreCadena,
+            this.colNombreInstalacion,
+            this.colNombreDispositivo,
+            this.colHost,
+            this.colPuerto,
+            this.colTipo1});
+            this.DevGridViewDispositivos.GridControl = this.DevGridControlEmpleados;
+            this.DevGridViewDispositivos.Name = "DevGridViewDispositivos";
+            this.DevGridViewDispositivos.OptionsBehavior.Editable = false;
+            // 
+            // colGuidDispositivo
+            // 
+            this.colGuidDispositivo.FieldName = "GuidDispositivo";
+            this.colGuidDispositivo.Name = "colGuidDispositivo";
+            this.colGuidDispositivo.OptionsColumn.AllowEdit = false;
+            // 
+            // colGuidInstalacion
+            // 
+            this.colGuidInstalacion.FieldName = "GuidInstalacion";
+            this.colGuidInstalacion.Name = "colGuidInstalacion";
+            this.colGuidInstalacion.OptionsColumn.AllowEdit = false;
+            // 
+            // colNombreCadena
+            // 
+            this.colNombreCadena.FieldName = "NombreCadena";
+            this.colNombreCadena.Name = "colNombreCadena";
+            this.colNombreCadena.OptionsColumn.AllowEdit = false;
+            this.colNombreCadena.Visible = true;
+            this.colNombreCadena.VisibleIndex = 0;
+            // 
+            // colNombreInstalacion
+            // 
+            this.colNombreInstalacion.FieldName = "NombreInstalacion";
+            this.colNombreInstalacion.Name = "colNombreInstalacion";
+            this.colNombreInstalacion.OptionsColumn.AllowEdit = false;
+            this.colNombreInstalacion.Visible = true;
+            this.colNombreInstalacion.VisibleIndex = 1;
+            // 
+            // colNombreDispositivo
+            // 
+            this.colNombreDispositivo.FieldName = "NombreDispositivo";
+            this.colNombreDispositivo.Name = "colNombreDispositivo";
+            this.colNombreDispositivo.OptionsColumn.AllowEdit = false;
+            this.colNombreDispositivo.Visible = true;
+            this.colNombreDispositivo.VisibleIndex = 2;
+            // 
+            // colHost
+            // 
+            this.colHost.FieldName = "Host";
+            this.colHost.Name = "colHost";
+            this.colHost.OptionsColumn.AllowEdit = false;
+            this.colHost.Visible = true;
+            this.colHost.VisibleIndex = 3;
+            // 
+            // colPuerto
+            // 
+            this.colPuerto.FieldName = "Puerto";
+            this.colPuerto.Name = "colPuerto";
+            this.colPuerto.OptionsColumn.AllowEdit = false;
+            this.colPuerto.Visible = true;
+            this.colPuerto.VisibleIndex = 4;
+            // 
+            // colTipo1
+            // 
+            this.colTipo1.FieldName = "Tipo";
+            this.colTipo1.Name = "colTipo1";
+            this.colTipo1.OptionsColumn.AllowEdit = false;
+            this.colTipo1.Visible = true;
+            this.colTipo1.VisibleIndex = 5;
+            // 
+            // DevGridViewTurnoServicioCasino
+            // 
+            this.DevGridViewTurnoServicioCasino.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colGuidEmpleado3,
+            this.colGuidTurnoServicio,
+            this.colNombreServicio,
+            this.colNombreTurno,
+            this.colNombreCasino,
+            this.colVigente,
+            this.colHoraInicio,
+            this.colHoraFin});
+            this.DevGridViewTurnoServicioCasino.GridControl = this.DevGridControlEmpleados;
+            this.DevGridViewTurnoServicioCasino.Name = "DevGridViewTurnoServicioCasino";
+            this.DevGridViewTurnoServicioCasino.OptionsBehavior.Editable = false;
+            // 
             // DevGroupControlFiltroContratos
             // 
             this.DevGroupControlFiltroContratos.Controls.Add(this.DevRadioGroupFiltroContratos);
@@ -437,6 +493,66 @@
             this.DevRadioGroupFiltroContratos.TabIndex = 0;
             this.DevRadioGroupFiltroContratos.EditValueChanged += new System.EventHandler(this.DevRadioGroupFiltroContratos_EditValueChanged);
             // 
+            // colGuidEmpleado3
+            // 
+            this.colGuidEmpleado3.FieldName = "GuidEmpleado";
+            this.colGuidEmpleado3.Name = "colGuidEmpleado3";
+            this.colGuidEmpleado3.OptionsColumn.AllowEdit = false;
+            // 
+            // colGuidTurnoServicio
+            // 
+            this.colGuidTurnoServicio.FieldName = "GuidTurnoServicio";
+            this.colGuidTurnoServicio.Name = "colGuidTurnoServicio";
+            this.colGuidTurnoServicio.OptionsColumn.AllowEdit = false;
+            // 
+            // colNombreServicio
+            // 
+            this.colNombreServicio.FieldName = "NombreServicio";
+            this.colNombreServicio.Name = "colNombreServicio";
+            this.colNombreServicio.OptionsColumn.AllowEdit = false;
+            this.colNombreServicio.Visible = true;
+            this.colNombreServicio.VisibleIndex = 0;
+            // 
+            // colNombreTurno
+            // 
+            this.colNombreTurno.FieldName = "NombreTurno";
+            this.colNombreTurno.Name = "colNombreTurno";
+            this.colNombreTurno.OptionsColumn.AllowEdit = false;
+            this.colNombreTurno.Visible = true;
+            this.colNombreTurno.VisibleIndex = 1;
+            // 
+            // colNombreCasino
+            // 
+            this.colNombreCasino.FieldName = "NombreCasino";
+            this.colNombreCasino.Name = "colNombreCasino";
+            this.colNombreCasino.OptionsColumn.AllowEdit = false;
+            this.colNombreCasino.Visible = true;
+            this.colNombreCasino.VisibleIndex = 2;
+            // 
+            // colVigente
+            // 
+            this.colVigente.FieldName = "Vigente";
+            this.colVigente.Name = "colVigente";
+            this.colVigente.OptionsColumn.AllowEdit = false;
+            this.colVigente.Visible = true;
+            this.colVigente.VisibleIndex = 3;
+            // 
+            // colHoraInicio
+            // 
+            this.colHoraInicio.FieldName = "HoraInicio";
+            this.colHoraInicio.Name = "colHoraInicio";
+            this.colHoraInicio.OptionsColumn.AllowEdit = false;
+            this.colHoraInicio.Visible = true;
+            this.colHoraInicio.VisibleIndex = 4;
+            // 
+            // colHoraFin
+            // 
+            this.colHoraFin.FieldName = "HoraFin";
+            this.colHoraFin.Name = "colHoraFin";
+            this.colHoraFin.OptionsColumn.AllowEdit = false;
+            this.colHoraFin.Visible = true;
+            this.colHoraFin.VisibleIndex = 5;
+            // 
             // UCGridDatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -449,9 +565,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewContratos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlEmpleados)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEmpleados)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevGridViewEmpleados)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewHuellas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewDispositivos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DevGridViewEmpleados)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevGridViewTurnoServicioCasino)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlFiltroContratos)).EndInit();
             this.DevGroupControlFiltroContratos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DevRadioGroupFiltroContratos.Properties)).EndInit();
@@ -506,5 +623,14 @@
         private DevExpress.XtraGrid.Columns.GridColumn colHost;
         private DevExpress.XtraGrid.Columns.GridColumn colPuerto;
         private DevExpress.XtraGrid.Columns.GridColumn colTipo1;
+        private DevExpress.XtraGrid.Views.Grid.GridView DevGridViewTurnoServicioCasino;
+        private DevExpress.XtraGrid.Columns.GridColumn colGuidEmpleado3;
+        private DevExpress.XtraGrid.Columns.GridColumn colGuidTurnoServicio;
+        private DevExpress.XtraGrid.Columns.GridColumn colNombreServicio;
+        private DevExpress.XtraGrid.Columns.GridColumn colNombreTurno;
+        private DevExpress.XtraGrid.Columns.GridColumn colNombreCasino;
+        private DevExpress.XtraGrid.Columns.GridColumn colVigente;
+        private DevExpress.XtraGrid.Columns.GridColumn colHoraInicio;
+        private DevExpress.XtraGrid.Columns.GridColumn colHoraFin;
     }
 }

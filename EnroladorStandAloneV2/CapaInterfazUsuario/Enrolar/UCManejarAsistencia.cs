@@ -68,34 +68,16 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             if (empleado.Dispositivos.Count > 0) {
                 DevGridControlAsistencias.Enabled = true;
                 DevLayoutControl.Enabled = false;
+                DevLookUpEditInstalacion.Enabled = true;
             } else {
                 DevGridControlAsistencias.Enabled = false;
                 DevLayoutControl.Enabled = true;
+                DevLookUpEditInstalacion.Enabled = false;
             }
             bsEmpleadoDispositivos.DataSource = empleado.Dispositivos;
             bsInstalaciones.DataSource = Negocio.ObtenerTodasInstalaciones();
 
             DevGridViewAsistencias.RefreshData();
-        }
-        private void CargarDatos(POCODispositivo dispositivo)
-        {
-            try {
-                if (dispositivo == null) return;
-
-                DevLookUpEditInstalacion.Text = dispositivo.NombreInstalacion;
-                DevLookUpEditDispositivo.Text = dispositivo.NombreDispositivo;
-
-                DevGridControlAsistencias.Enabled = false;
-                DevLayoutControl.Enabled = true;
-                DevSimpleButtonDescartar.Visible = true;
-                DevSimpleButtonModificar.Enabled = true;
-                DevSimpleButtonNuevo.Enabled = false;
-                DevLookUpEditInstalacion.Enabled = true;
-                DevLookUpEditDispositivo.Enabled = true;
-
-            } catch (Exception eX) {
-                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
-            }
         }
         private void LimpiarCampos() {
             //limpiando campos
@@ -161,54 +143,48 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
-        private void DevGridControlAsistencias_DoubleClick(object sender, EventArgs e) {
-            try {
-                Guid GuidDispositivo = (Guid)DevGridViewAsistencias.GetFocusedRowCellValue("GuidDispositivo");
-                if (!string.IsNullOrEmpty(GuidDispositivo.ToString())) {
-                    var dispositivo = empleado.Dispositivos.FirstOrDefault(p => p.GuidDispositivo == GuidDispositivo);
-                    CargarDatos(dispositivo);
-                }
-            } catch (Exception eX) {
-                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
-            }
-        }
         private void DevSimpleButtonDescartar_Click(object sender, EventArgs e)
         {
+            DevSimpleButtonNuevo.Enabled = true;
             LimpiarCampos();
             CargarDatos();
         }
         private void DevSimpleButtonNuevo_Click(object sender, EventArgs e)
         {
-            cantPresionadoNuevo++;
+            try {
+                cantPresionadoNuevo++;
 
-            if (cantPresionadoNuevo == 1) {
-                DevGridControlAsistencias.Enabled = false;
-                DevLayoutControl.Enabled = true;
-                DevSimpleButtonDescartar.Visible = true;
+                if (cantPresionadoNuevo == 1) {
+                    DevGridControlAsistencias.Enabled = false;
+                    DevLayoutControl.Enabled = true;
+                    DevSimpleButtonDescartar.Visible = true;
+                    DevSimpleButtonNuevo.Enabled = false;
+                    DevLookUpEditInstalacion.Enabled = true;
 
-                LimpiarCampos();
-                DevSimpleButtonNuevo.Image = Properties.Resources.saveas_16x16;
-            } else {
-                //Validar e insertar y cargo datos
-                if (!AdicionarNuevo()) {
-                    cantPresionadoNuevo = 1;
                     LimpiarCampos();
+                    DevSimpleButtonNuevo.Image = Properties.Resources.saveas_16x16;
                 } else {
-                    DevSimpleButtonDescartar.Visible = false;
-                    DevSimpleButtonNuevo.Image = Properties.Resources.additem_16x16;
-                    LimpiarCampos();
-                    CargarDatos();
+                    //Validar e insertar y cargo datos
+                    if (!AdicionarNuevo()) {
+                        cantPresionadoNuevo = 1;
+                        LimpiarCampos();
+                    } else {
+                        DevSimpleButtonNuevo.Enabled = true;
+                        DevSimpleButtonDescartar.Visible = false;
+                        DevSimpleButtonNuevo.Image = Properties.Resources.additem_16x16;
+                        LimpiarCampos();
+                        CargarDatos();
+                    }
                 }
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
-        private void DevSimpleButtonModificar_Click(object sender, EventArgs e)
-        {
-            //chequear cambios   
-            //MODIFICAR
-            LimpiarCampos();
-            CargarDatos();
+        private void DevLookUpEditDispositivo_EditValueChanged(object sender, EventArgs e) {
+            DevSimpleButtonNuevo.Enabled = true;
         }
         #endregion
+
 
     }
 }

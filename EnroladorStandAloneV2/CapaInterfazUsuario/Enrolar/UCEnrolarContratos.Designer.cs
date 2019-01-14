@@ -69,6 +69,7 @@
             this.DevLayoutControlItemCodigo = new DevExpress.XtraLayout.LayoutControlItem();
             this.DevLayoutControlItemManejaAsistencia = new DevExpress.XtraLayout.LayoutControlItem();
             this.DevLayoutControlItemManejaCasino = new DevExpress.XtraLayout.LayoutControlItem();
+            this.DevDxErrorProvider = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlContratos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsContratos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewContratos)).BeginInit();
@@ -97,6 +98,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemCodigo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemManejaAsistencia)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemManejaCasino)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevDxErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // DevGridControlContratos
@@ -359,7 +361,7 @@
             this.DevLayoutControlDatosDelContacto.Enabled = false;
             this.DevLayoutControlDatosDelContacto.Location = new System.Drawing.Point(5, 23);
             this.DevLayoutControlDatosDelContacto.Name = "DevLayoutControlDatosDelContacto";
-            this.DevLayoutControlDatosDelContacto.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(574, 269, 450, 400);
+            this.DevLayoutControlDatosDelContacto.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(-8, -8, 1382, 784);
             this.DevLayoutControlDatosDelContacto.Root = this.DevLayoutControlGroupDatosDelContrato;
             this.DevLayoutControlDatosDelContacto.Size = new System.Drawing.Size(370, 187);
             this.DevLayoutControlDatosDelContacto.TabIndex = 0;
@@ -373,6 +375,7 @@
             this.DevCheckEditManejaCasino.Size = new System.Drawing.Size(346, 19);
             this.DevCheckEditManejaCasino.StyleController = this.DevLayoutControlDatosDelContacto;
             this.DevCheckEditManejaCasino.TabIndex = 10;
+            this.DevCheckEditManejaCasino.CheckedChanged += new System.EventHandler(this.DevCheckEditManejaCasino_CheckedChanged);
             this.DevCheckEditManejaCasino.EditValueChanged += new System.EventHandler(this.DevCheckEditManejaCasino_EditValueChanged);
             // 
             // DevCheckEditManejaAsistencia
@@ -383,6 +386,7 @@
             this.DevCheckEditManejaAsistencia.Size = new System.Drawing.Size(346, 19);
             this.DevCheckEditManejaAsistencia.StyleController = this.DevLayoutControlDatosDelContacto;
             this.DevCheckEditManejaAsistencia.TabIndex = 9;
+            this.DevCheckEditManejaAsistencia.CheckedChanged += new System.EventHandler(this.DevCheckEditManejaAsistencia_CheckedChanged);
             this.DevCheckEditManejaAsistencia.EditValueChanged += new System.EventHandler(this.DevCheckEditManejaAsistencia_EditValueChanged);
             // 
             // DevTextEditCodigo
@@ -424,6 +428,7 @@
             this.DevLookUpEditCargo.Size = new System.Drawing.Size(272, 20);
             this.DevLookUpEditCargo.StyleController = this.DevLayoutControlDatosDelContacto;
             this.DevLookUpEditCargo.TabIndex = 6;
+            this.DevLookUpEditCargo.EditValueChanged += new System.EventHandler(this.DevLookUpEditCargo_EditValueChanged);
             // 
             // bsCargos
             // 
@@ -448,6 +453,7 @@
             this.DevLookUpEditCuenta.Size = new System.Drawing.Size(272, 20);
             this.DevLookUpEditCuenta.StyleController = this.DevLayoutControlDatosDelContacto;
             this.DevLookUpEditCuenta.TabIndex = 5;
+            this.DevLookUpEditCuenta.EditValueChanged += new System.EventHandler(this.DevLookUpEditCuenta_EditValueChanged);
             // 
             // bsCuentas
             // 
@@ -555,6 +561,10 @@
             this.DevLayoutControlItemManejaCasino.TextSize = new System.Drawing.Size(0, 0);
             this.DevLayoutControlItemManejaCasino.TextVisible = false;
             // 
+            // DevDxErrorProvider
+            // 
+            this.DevDxErrorProvider.ContainerControl = this;
+            // 
             // UCEnrolarContratos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -595,6 +605,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemCodigo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemManejaAsistencia)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemManejaCasino)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevDxErrorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -646,5 +657,6 @@
         private DevExpress.XtraEditors.SimpleButton DevSimpleButtonCaducar;
         private DevExpress.XtraEditors.DateEdit DevDateEditCaducar;
         private DevExpress.XtraEditors.LabelControl DevLabelControlFechaFinVigencia;
+        private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider DevDxErrorProvider;
     }
 }

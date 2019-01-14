@@ -79,7 +79,6 @@
             this.DevGridControlAsistencias.TabIndex = 0;
             this.DevGridControlAsistencias.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.DevGridViewAsistencias});
-            this.DevGridControlAsistencias.DoubleClick += new System.EventHandler(this.DevGridControlAsistencias_DoubleClick);
             // 
             // bsEmpleadoDispositivos
             // 
@@ -210,7 +209,7 @@
             this.DevSimpleButtonModificar.ToolTip = "Modifica el contrato actual seleccionado...";
             this.DevSimpleButtonModificar.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information;
             this.DevSimpleButtonModificar.ToolTipTitle = "Modificar Contrato";
-            this.DevSimpleButtonModificar.Click += new System.EventHandler(this.DevSimpleButtonModificar_Click);
+            this.DevSimpleButtonModificar.Visible = false;
             // 
             // DevSimpleButtonDescartar
             // 
@@ -264,6 +263,7 @@
             this.DevLookUpEditDispositivo.Size = new System.Drawing.Size(348, 20);
             this.DevLookUpEditDispositivo.StyleController = this.DevLayoutControl;
             this.DevLookUpEditDispositivo.TabIndex = 5;
+            this.DevLookUpEditDispositivo.EditValueChanged += new System.EventHandler(this.DevLookUpEditDispositivo_EditValueChanged);
             // 
             // bsDispositivos
             // 

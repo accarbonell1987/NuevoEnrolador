@@ -258,7 +258,8 @@ namespace EnroladorStandAloneV2.Herramientas {
                     NombreDispositivo = dispositivo.NombreDispositivo,
                     Host = dispositivo.Host,
                     Puerto = int.Parse(dispositivo.Puerto.ToString()),
-                    Tipo = (TipoDispositivo)dispositivo.Tipo
+                    Tipo = (TipoDispositivo)dispositivo.Tipo,
+                    EstadoObjeto = EstadoObjeto.Almacenado
                 };
 
                 return pocoDispositivo;
@@ -473,7 +474,8 @@ namespace EnroladorStandAloneV2.Herramientas {
                     Apellidos = empleado.Apellidos,
                     TieneContraseña = TieneConstraseña,
                     Contraseña = empleado.Contrasena,
-                    NumeroTelefono = empleado.NumeroTelefono
+                    NumeroTelefono = empleado.NumeroTelefono,
+                    EstadoObjeto = EstadoObjeto.Almacenado
                 };
 
                 return pocoEmpleado;
@@ -521,7 +523,8 @@ namespace EnroladorStandAloneV2.Herramientas {
 
                 var pocoEmpleadoDispositivo = new POCOEmpleadoDispositivo() {
                     GuidDispositivo = GuidDispositivo,
-                    GuidEmpleado = GuidEmpleado
+                    GuidEmpleado = GuidEmpleado,
+                    EstadoObjeto = EstadoObjeto.Almacenado
                 };
 
                 return pocoEmpleadoDispositivo;
@@ -555,7 +558,7 @@ namespace EnroladorStandAloneV2.Herramientas {
                     FinVigencia = pocoContrato.FinVigencia.ToString(),
                     CodigoContrato = pocoContrato.CodigoContrato,
                     ConsideraAsistencia = ConsideraAsistencia,
-                    ConsideraCasino = ConsideraCasino
+                    ConsideraCasino = ConsideraCasino,
                 };
 
                 return contrato;
@@ -618,7 +621,8 @@ namespace EnroladorStandAloneV2.Herramientas {
                     ConsideraAsistencia = ConsideraAsistencia,
                     ConsideraCasino = ConsideraCasino,
                     Descripcion = Descripcion,
-                    Estado = Estado
+                    Estado = Estado,
+                    EstadoObjeto = EstadoObjeto.Almacenado
                 };
 
                 return pocoContrato;
@@ -667,7 +671,8 @@ namespace EnroladorStandAloneV2.Herramientas {
 
                 var pocoEmpleadoTurnoServicioCasino = new POCOEmpleadoTurnoServicioCasino() {
                     GuidEmpleado = GuidEmpleado,
-                    GuidTurnoServicio = GuidTurnoServicio
+                    GuidTurnoServicio = GuidTurnoServicio,
+                    EstadoObjeto = EstadoObjeto.Almacenado
                 };
 
                 return pocoEmpleadoTurnoServicioCasino;

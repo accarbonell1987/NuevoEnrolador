@@ -64,6 +64,10 @@ namespace EnroladorAccesoDatos {
         Eliminar = 2,
         SinModificacion = 3
     }
+    public enum EstadoObjeto {
+        Almacenado = 0,
+        EnMemoria = 1
+    }
     #endregion
 
     #region Clases
