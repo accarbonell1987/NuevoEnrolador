@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            this.DevGridControlAsistencias = new DevExpress.XtraGrid.GridControl();
+            this.DevGridControlTurnos = new DevExpress.XtraGrid.GridControl();
             this.bsEmpleadoTurnoServicioCasino = new System.Windows.Forms.BindingSource(this.components);
             this.DevGridViewAsistencias = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colGuidEmpleado = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -32,8 +32,11 @@
             this.colNombreServicio = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colNombreTurno = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colNombreCasino = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colEliminar = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DevGroupControlAsistencia = new DevExpress.XtraEditors.GroupControl();
-            this.DevSimpleButtonAdicionar = new DevExpress.XtraEditors.SimpleButton();
+            this.DevSimpleButtonNuevo = new DevExpress.XtraEditors.SimpleButton();
+            this.DevSimpleButtonModificar = new DevExpress.XtraEditors.SimpleButton();
+            this.DevSimpleButtonDescartar = new DevExpress.XtraEditors.SimpleButton();
             this.DevLayoutControl = new DevExpress.XtraLayout.LayoutControl();
             this.DevLookUpEditTurno = new DevExpress.XtraEditors.LookUpEdit();
             this.bsTurnos = new System.Windows.Forms.BindingSource(this.components);
@@ -45,7 +48,8 @@
             this.DevLayoutControlItemCasino = new DevExpress.XtraLayout.LayoutControlItem();
             this.DevLayoutControlItemServicio = new DevExpress.XtraLayout.LayoutControlItem();
             this.DevLayoutControlItemTurno = new DevExpress.XtraLayout.LayoutControlItem();
-            ((System.ComponentModel.ISupportInitialize)(this.DevGridControlAsistencias)).BeginInit();
+            this.dxErrorProvider = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.DevGridControlTurnos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEmpleadoTurnoServicioCasino)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewAsistencias)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlAsistencia)).BeginInit();
@@ -62,20 +66,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemCasino)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemServicio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemTurno)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
-            // DevGridControlAsistencias
+            // DevGridControlTurnos
             // 
-            this.DevGridControlAsistencias.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.DevGridControlTurnos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.DevGridControlAsistencias.DataSource = this.bsEmpleadoTurnoServicioCasino;
-            this.DevGridControlAsistencias.Location = new System.Drawing.Point(3, 3);
-            this.DevGridControlAsistencias.MainView = this.DevGridViewAsistencias;
-            this.DevGridControlAsistencias.Name = "DevGridControlAsistencias";
-            this.DevGridControlAsistencias.Size = new System.Drawing.Size(441, 234);
-            this.DevGridControlAsistencias.TabIndex = 0;
-            this.DevGridControlAsistencias.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.DevGridControlTurnos.DataSource = this.bsEmpleadoTurnoServicioCasino;
+            this.DevGridControlTurnos.Location = new System.Drawing.Point(3, 3);
+            this.DevGridControlTurnos.MainView = this.DevGridViewAsistencias;
+            this.DevGridControlTurnos.Name = "DevGridControlTurnos";
+            this.DevGridControlTurnos.Size = new System.Drawing.Size(441, 154);
+            this.DevGridControlTurnos.TabIndex = 0;
+            this.DevGridControlTurnos.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.DevGridViewAsistencias});
             // 
             // bsEmpleadoTurnoServicioCasino
@@ -89,10 +94,12 @@
             this.colGuidTurnoServicio,
             this.colNombreServicio,
             this.colNombreTurno,
-            this.colNombreCasino});
-            this.DevGridViewAsistencias.GridControl = this.DevGridControlAsistencias;
+            this.colNombreCasino,
+            this.colEliminar});
+            this.DevGridViewAsistencias.GridControl = this.DevGridControlTurnos;
             this.DevGridViewAsistencias.Name = "DevGridViewAsistencias";
             this.DevGridViewAsistencias.OptionsBehavior.Editable = false;
+            this.DevGridViewAsistencias.OptionsView.ShowGroupPanel = false;
             // 
             // colGuidEmpleado
             // 
@@ -125,28 +132,74 @@
             this.colNombreCasino.Visible = true;
             this.colNombreCasino.VisibleIndex = 2;
             // 
+            // colEliminar
+            // 
+            this.colEliminar.Caption = "Eliminar";
+            this.colEliminar.Name = "colEliminar";
+            this.colEliminar.Visible = true;
+            this.colEliminar.VisibleIndex = 3;
+            // 
             // DevGroupControlAsistencia
             // 
             this.DevGroupControlAsistencia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.DevGroupControlAsistencia.Controls.Add(this.DevSimpleButtonAdicionar);
+            this.DevGroupControlAsistencia.Controls.Add(this.DevSimpleButtonNuevo);
+            this.DevGroupControlAsistencia.Controls.Add(this.DevSimpleButtonModificar);
+            this.DevGroupControlAsistencia.Controls.Add(this.DevSimpleButtonDescartar);
             this.DevGroupControlAsistencia.Controls.Add(this.DevLayoutControl);
-            this.DevGroupControlAsistencia.Location = new System.Drawing.Point(3, 244);
+            this.DevGroupControlAsistencia.Location = new System.Drawing.Point(3, 163);
             this.DevGroupControlAsistencia.Name = "DevGroupControlAsistencia";
             this.DevGroupControlAsistencia.Size = new System.Drawing.Size(441, 145);
             this.DevGroupControlAsistencia.TabIndex = 1;
             this.DevGroupControlAsistencia.Text = "Adicionar Asistencia";
             // 
-            // DevSimpleButtonAdicionar
+            // DevSimpleButtonNuevo
             // 
-            this.DevSimpleButtonAdicionar.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.DevSimpleButtonAdicionar.Enabled = false;
-            this.DevSimpleButtonAdicionar.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.DevSimpleButtonAdicionar.ImageUri.Uri = "Add;Size16x16;Office2013";
-            this.DevSimpleButtonAdicionar.Location = new System.Drawing.Point(382, 111);
-            this.DevSimpleButtonAdicionar.Name = "DevSimpleButtonAdicionar";
-            this.DevSimpleButtonAdicionar.Size = new System.Drawing.Size(43, 23);
-            this.DevSimpleButtonAdicionar.TabIndex = 1;
+            this.DevSimpleButtonNuevo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.DevSimpleButtonNuevo.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.DevSimpleButtonNuevo.Enabled = false;
+            this.DevSimpleButtonNuevo.Image = global::EnroladorStandAloneV2.Properties.Resources.additem_16x16;
+            this.DevSimpleButtonNuevo.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.DevSimpleButtonNuevo.Location = new System.Drawing.Point(15, 112);
+            this.DevSimpleButtonNuevo.Name = "DevSimpleButtonNuevo";
+            this.DevSimpleButtonNuevo.Size = new System.Drawing.Size(43, 23);
+            this.DevSimpleButtonNuevo.TabIndex = 10;
+            this.DevSimpleButtonNuevo.ToolTip = "Adiciona un nuevo contrato...";
+            this.DevSimpleButtonNuevo.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information;
+            this.DevSimpleButtonNuevo.ToolTipTitle = "Nuevo Contrato";
+            this.DevSimpleButtonNuevo.Click += new System.EventHandler(this.DevSimpleButtonNuevo_Click);
+            // 
+            // DevSimpleButtonModificar
+            // 
+            this.DevSimpleButtonModificar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.DevSimpleButtonModificar.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.DevSimpleButtonModificar.Enabled = false;
+            this.DevSimpleButtonModificar.Image = global::EnroladorStandAloneV2.Properties.Resources.edit_16x16;
+            this.DevSimpleButtonModificar.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.DevSimpleButtonModificar.Location = new System.Drawing.Point(64, 112);
+            this.DevSimpleButtonModificar.Name = "DevSimpleButtonModificar";
+            this.DevSimpleButtonModificar.Size = new System.Drawing.Size(43, 23);
+            this.DevSimpleButtonModificar.TabIndex = 9;
+            this.DevSimpleButtonModificar.ToolTip = "Modifica el contrato actual seleccionado...";
+            this.DevSimpleButtonModificar.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information;
+            this.DevSimpleButtonModificar.ToolTipTitle = "Modificar Contrato";
+            this.DevSimpleButtonModificar.Visible = false;
+            // 
+            // DevSimpleButtonDescartar
+            // 
+            this.DevSimpleButtonDescartar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.DevSimpleButtonDescartar.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.DevSimpleButtonDescartar.Image = global::EnroladorStandAloneV2.Properties.Resources.clear_16x16;
+            this.DevSimpleButtonDescartar.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.DevSimpleButtonDescartar.Location = new System.Drawing.Point(113, 112);
+            this.DevSimpleButtonDescartar.Name = "DevSimpleButtonDescartar";
+            this.DevSimpleButtonDescartar.Size = new System.Drawing.Size(43, 23);
+            this.DevSimpleButtonDescartar.TabIndex = 8;
+            this.DevSimpleButtonDescartar.ToolTip = "Descarta todo lo antes hecho...";
+            this.DevSimpleButtonDescartar.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information;
+            this.DevSimpleButtonDescartar.ToolTipTitle = "Descartar";
+            this.DevSimpleButtonDescartar.Visible = false;
+            this.DevSimpleButtonDescartar.Click += new System.EventHandler(this.DevSimpleButtonDescartar_Click);
             // 
             // DevLayoutControl
             // 
@@ -276,17 +329,21 @@
             this.DevLayoutControlItemTurno.Text = "Turnos:";
             this.DevLayoutControlItemTurno.TextSize = new System.Drawing.Size(41, 13);
             // 
+            // dxErrorProvider
+            // 
+            this.dxErrorProvider.ContainerControl = this;
+            // 
             // UCManejarCasino
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.DevGroupControlAsistencia);
-            this.Controls.Add(this.DevGridControlAsistencias);
+            this.Controls.Add(this.DevGridControlTurnos);
             this.DoubleBuffered = true;
             this.Name = "UCManejarCasino";
-            this.Size = new System.Drawing.Size(447, 395);
+            this.Size = new System.Drawing.Size(447, 312);
             this.Load += new System.EventHandler(this.UCManejarCasino_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.DevGridControlAsistencias)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevGridControlTurnos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEmpleadoTurnoServicioCasino)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewAsistencias)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlAsistencia)).EndInit();
@@ -303,13 +360,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemCasino)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemServicio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemTurno)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private DevExpress.XtraGrid.GridControl DevGridControlAsistencias;
+        private DevExpress.XtraGrid.GridControl DevGridControlTurnos;
         private DevExpress.XtraGrid.Views.Grid.GridView DevGridViewAsistencias;
         private DevExpress.XtraEditors.GroupControl DevGroupControlAsistencia;
         private DevExpress.XtraLayout.LayoutControl DevLayoutControl;
@@ -318,7 +376,6 @@
         private DevExpress.XtraLayout.LayoutControlItem DevLayoutControlItemCasino;
         private DevExpress.XtraEditors.LookUpEdit DevLookUpEditServicio;
         private DevExpress.XtraLayout.LayoutControlItem DevLayoutControlItemServicio;
-        private DevExpress.XtraEditors.SimpleButton DevSimpleButtonAdicionar;
         private System.Windows.Forms.BindingSource bsInstalaciones;
         private System.Windows.Forms.BindingSource bsEmpleadoTurnoServicioCasino;
         private DevExpress.XtraEditors.LookUpEdit DevLookUpEditTurno;
@@ -330,5 +387,10 @@
         private DevExpress.XtraGrid.Columns.GridColumn colNombreCasino;
         private System.Windows.Forms.BindingSource bsServicios;
         private System.Windows.Forms.BindingSource bsTurnos;
+        private DevExpress.XtraGrid.Columns.GridColumn colEliminar;
+        private DevExpress.XtraEditors.SimpleButton DevSimpleButtonNuevo;
+        private DevExpress.XtraEditors.SimpleButton DevSimpleButtonModificar;
+        private DevExpress.XtraEditors.SimpleButton DevSimpleButtonDescartar;
+        private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider;
     }
 }

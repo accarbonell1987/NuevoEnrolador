@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace EnroladorAccesoDatos.Dominio {
-    public class POCOEmpleado {
+    public class POCOEmpleado : POCOGlobal {
         #region Atributos
         public Guid GuidEmpleado { get; set; }
         public string RUT { get; set; }
@@ -20,6 +20,7 @@ namespace EnroladorAccesoDatos.Dominio {
         public List<POCOContrato> Contratos { get; set; }
         public List<POCOHuella> Huellas { get; set; }
         public List<POCODispositivo> Dispositivos { get; set; }
+        public List<POCOEmpleadoTurnoServicioCasino> TurnoServicioCasino { get; set; }
         #endregion
 
         #region Constructor

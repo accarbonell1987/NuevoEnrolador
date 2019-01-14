@@ -68,8 +68,6 @@
             // 
             // DevLayoutControlDatos
             // 
-            this.DevLayoutControlDatos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.DevLayoutControlDatos.Controls.Add(this.DevTextEditNombres);
             this.DevLayoutControlDatos.Controls.Add(this.DevTextEditApellidos);
             this.DevLayoutControlDatos.Location = new System.Drawing.Point(96, 10);
@@ -133,9 +131,9 @@
             this.DevGroupControlDatosContacto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DevGroupControlDatosContacto.Controls.Add(this.DevLayoutControlDatosDelContacto);
-            this.DevGroupControlDatosContacto.Location = new System.Drawing.Point(12, 101);
+            this.DevGroupControlDatosContacto.Location = new System.Drawing.Point(3, 101);
             this.DevGroupControlDatosContacto.Name = "DevGroupControlDatosContacto";
-            this.DevGroupControlDatosContacto.Size = new System.Drawing.Size(337, 125);
+            this.DevGroupControlDatosContacto.Size = new System.Drawing.Size(358, 125);
             this.DevGroupControlDatosContacto.TabIndex = 2;
             this.DevGroupControlDatosContacto.Text = "Datos del Contacto";
             // 
@@ -151,7 +149,7 @@
             this.DevLayoutControlDatosDelContacto.Name = "DevLayoutControlDatosDelContacto";
             this.DevLayoutControlDatosDelContacto.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(574, 269, 450, 400);
             this.DevLayoutControlDatosDelContacto.Root = this.DevLayoutControlGroupDatosDelContacto;
-            this.DevLayoutControlDatosDelContacto.Size = new System.Drawing.Size(324, 100);
+            this.DevLayoutControlDatosDelContacto.Size = new System.Drawing.Size(345, 100);
             this.DevLayoutControlDatosDelContacto.TabIndex = 0;
             this.DevLayoutControlDatosDelContacto.Text = "layoutControl1";
             // 
@@ -166,7 +164,7 @@
             this.DevRadioGroupAcceso.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem(((short)(0)), "Clave", true, ((short)(0))),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(((short)(1)), "Huellas", true, ((short)(1)))});
-            this.DevRadioGroupAcceso.Size = new System.Drawing.Size(240, 28);
+            this.DevRadioGroupAcceso.Size = new System.Drawing.Size(261, 28);
             this.DevRadioGroupAcceso.StyleController = this.DevLayoutControlDatosDelContacto;
             this.DevRadioGroupAcceso.TabIndex = 5;
             this.DevRadioGroupAcceso.EditValueChanged += new System.EventHandler(this.DevRadioGroupAcceso_EditValueChanged);
@@ -177,7 +175,7 @@
             this.DevTextEditCorreo.Name = "DevTextEditCorreo";
             this.DevTextEditCorreo.Properties.Mask.EditMask = "\\w+([-+.\']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
             this.DevTextEditCorreo.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-            this.DevTextEditCorreo.Size = new System.Drawing.Size(240, 20);
+            this.DevTextEditCorreo.Size = new System.Drawing.Size(261, 20);
             this.DevTextEditCorreo.StyleController = this.DevLayoutControlDatosDelContacto;
             this.DevTextEditCorreo.TabIndex = 3;
             // 
@@ -187,7 +185,7 @@
             this.DevTextEditTelefono.Name = "DevTextEditTelefono";
             this.DevTextEditTelefono.Properties.Mask.EditMask = "(\\d?\\d?\\d?) \\d\\d\\d-\\d\\d\\d\\d\\d";
             this.DevTextEditTelefono.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-            this.DevTextEditTelefono.Size = new System.Drawing.Size(240, 20);
+            this.DevTextEditTelefono.Size = new System.Drawing.Size(261, 20);
             this.DevTextEditTelefono.StyleController = this.DevLayoutControlDatosDelContacto;
             this.DevTextEditTelefono.TabIndex = 4;
             // 
@@ -201,7 +199,7 @@
             this.DevLayoutControlItemAcceso});
             this.DevLayoutControlGroupDatosDelContacto.Location = new System.Drawing.Point(0, 0);
             this.DevLayoutControlGroupDatosDelContacto.Name = "Root";
-            this.DevLayoutControlGroupDatosDelContacto.Size = new System.Drawing.Size(324, 100);
+            this.DevLayoutControlGroupDatosDelContacto.Size = new System.Drawing.Size(345, 100);
             this.DevLayoutControlGroupDatosDelContacto.TextVisible = false;
             // 
             // DevLayoutControlItemCorreo
@@ -210,7 +208,7 @@
             this.DevLayoutControlItemCorreo.CustomizationFormText = "Email";
             this.DevLayoutControlItemCorreo.Location = new System.Drawing.Point(0, 0);
             this.DevLayoutControlItemCorreo.Name = "DevLayoutControlItemCorreo";
-            this.DevLayoutControlItemCorreo.Size = new System.Drawing.Size(304, 24);
+            this.DevLayoutControlItemCorreo.Size = new System.Drawing.Size(325, 24);
             this.DevLayoutControlItemCorreo.Text = "Email:";
             this.DevLayoutControlItemCorreo.TextSize = new System.Drawing.Size(57, 13);
             // 
@@ -220,7 +218,7 @@
             this.DevLayoutControlItemTelefono.CustomizationFormText = "Telefono";
             this.DevLayoutControlItemTelefono.Location = new System.Drawing.Point(0, 24);
             this.DevLayoutControlItemTelefono.Name = "DevLayoutControlItemTelefono";
-            this.DevLayoutControlItemTelefono.Size = new System.Drawing.Size(304, 24);
+            this.DevLayoutControlItemTelefono.Size = new System.Drawing.Size(325, 24);
             this.DevLayoutControlItemTelefono.Text = "Telefono:";
             this.DevLayoutControlItemTelefono.TextSize = new System.Drawing.Size(57, 13);
             // 
@@ -229,7 +227,7 @@
             this.DevLayoutControlItemAcceso.Control = this.DevRadioGroupAcceso;
             this.DevLayoutControlItemAcceso.Location = new System.Drawing.Point(0, 48);
             this.DevLayoutControlItemAcceso.Name = "DevLayoutControlItemAcceso";
-            this.DevLayoutControlItemAcceso.Size = new System.Drawing.Size(304, 32);
+            this.DevLayoutControlItemAcceso.Size = new System.Drawing.Size(325, 32);
             this.DevLayoutControlItemAcceso.Text = "Acceso por:";
             this.DevLayoutControlItemAcceso.TextSize = new System.Drawing.Size(57, 13);
             // 
@@ -238,9 +236,9 @@
             this.DevGroupControlAcceso.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DevGroupControlAcceso.Controls.Add(this.DevPanelControlAcceso);
-            this.DevGroupControlAcceso.Location = new System.Drawing.Point(12, 232);
+            this.DevGroupControlAcceso.Location = new System.Drawing.Point(3, 232);
             this.DevGroupControlAcceso.Name = "DevGroupControlAcceso";
-            this.DevGroupControlAcceso.Size = new System.Drawing.Size(337, 222);
+            this.DevGroupControlAcceso.Size = new System.Drawing.Size(358, 232);
             this.DevGroupControlAcceso.TabIndex = 3;
             this.DevGroupControlAcceso.Text = "Autenticacion del Usuario";
             // 
@@ -249,7 +247,7 @@
             this.DevPanelControlAcceso.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DevPanelControlAcceso.Location = new System.Drawing.Point(2, 20);
             this.DevPanelControlAcceso.Name = "DevPanelControlAcceso";
-            this.DevPanelControlAcceso.Size = new System.Drawing.Size(333, 200);
+            this.DevPanelControlAcceso.Size = new System.Drawing.Size(354, 210);
             this.DevPanelControlAcceso.TabIndex = 0;
             // 
             // DevPictureEditFotoEmpleado
@@ -259,7 +257,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DevPictureEditFotoEmpleado.Cursor = System.Windows.Forms.Cursors.Default;
             this.DevPictureEditFotoEmpleado.EditValue = ((object)(resources.GetObject("DevPictureEditFotoEmpleado.EditValue")));
-            this.DevPictureEditFotoEmpleado.Location = new System.Drawing.Point(12, 19);
+            this.DevPictureEditFotoEmpleado.Location = new System.Drawing.Point(12, 11);
             this.DevPictureEditFotoEmpleado.MaximumSize = new System.Drawing.Size(78, 78);
             this.DevPictureEditFotoEmpleado.MinimumSize = new System.Drawing.Size(78, 78);
             this.DevPictureEditFotoEmpleado.Name = "DevPictureEditFotoEmpleado";

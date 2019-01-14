@@ -23,35 +23,211 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCEnrolarHuellas));
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.DevPanelControlManos = new DevExpress.XtraEditors.PanelControl();
+            this.DevPictureBoxMeñiqueDerecho = new System.Windows.Forms.PictureBox();
+            this.DevPictureBoxAnularDerecho = new System.Windows.Forms.PictureBox();
+            this.DevPictureBoxMedioDerecho = new System.Windows.Forms.PictureBox();
+            this.DevPictureBoxIndiceDerecho = new System.Windows.Forms.PictureBox();
+            this.DevPictureBoxPulgarDerecho = new System.Windows.Forms.PictureBox();
+            this.DevPictureBoxMeñiqueIzquierdo = new System.Windows.Forms.PictureBox();
+            this.DevPictureBoxAnularIzquierdo = new System.Windows.Forms.PictureBox();
+            this.DevPictureBoxMedioIzquierdo = new System.Windows.Forms.PictureBox();
+            this.DevPictureBoxIndiceIzquierdo = new System.Windows.Forms.PictureBox();
+            this.DevPictureBoxPulgarIzquierdo = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.DevPanelControlManos)).BeginInit();
+            this.DevPanelControlManos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DevPictureBoxMeñiqueDerecho)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevPictureBoxAnularDerecho)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevPictureBoxMedioDerecho)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevPictureBoxIndiceDerecho)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevPictureBoxPulgarDerecho)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevPictureBoxMeñiqueIzquierdo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevPictureBoxAnularIzquierdo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevPictureBoxMedioIzquierdo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevPictureBoxIndiceIzquierdo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevPictureBoxPulgarIzquierdo)).BeginInit();
             this.SuspendLayout();
             // 
-            // panelControl1
+            // DevPanelControlManos
             // 
-            this.panelControl1.ContentImage = ((System.Drawing.Image)(resources.GetObject("panelControl1.ContentImage")));
-            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl1.Location = new System.Drawing.Point(0, 0);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(332, 185);
-            this.panelControl1.TabIndex = 0;
+            this.DevPanelControlManos.ContentImage = global::EnroladorStandAloneV2.Properties.Resources.Manos;
+            this.DevPanelControlManos.Controls.Add(this.DevPictureBoxMeñiqueDerecho);
+            this.DevPanelControlManos.Controls.Add(this.DevPictureBoxAnularDerecho);
+            this.DevPanelControlManos.Controls.Add(this.DevPictureBoxMedioDerecho);
+            this.DevPanelControlManos.Controls.Add(this.DevPictureBoxIndiceDerecho);
+            this.DevPanelControlManos.Controls.Add(this.DevPictureBoxPulgarDerecho);
+            this.DevPanelControlManos.Controls.Add(this.DevPictureBoxMeñiqueIzquierdo);
+            this.DevPanelControlManos.Controls.Add(this.DevPictureBoxAnularIzquierdo);
+            this.DevPanelControlManos.Controls.Add(this.DevPictureBoxMedioIzquierdo);
+            this.DevPanelControlManos.Controls.Add(this.DevPictureBoxIndiceIzquierdo);
+            this.DevPanelControlManos.Controls.Add(this.DevPictureBoxPulgarIzquierdo);
+            this.DevPanelControlManos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DevPanelControlManos.Location = new System.Drawing.Point(0, 0);
+            this.DevPanelControlManos.MaximumSize = new System.Drawing.Size(332, 185);
+            this.DevPanelControlManos.MinimumSize = new System.Drawing.Size(332, 185);
+            this.DevPanelControlManos.Name = "DevPanelControlManos";
+            this.DevPanelControlManos.Size = new System.Drawing.Size(332, 185);
+            this.DevPanelControlManos.TabIndex = 0;
             // 
-            // UCHuellas
+            // DevPictureBoxMeñiqueDerecho
+            // 
+            this.DevPictureBoxMeñiqueDerecho.BackColor = System.Drawing.Color.Transparent;
+            this.DevPictureBoxMeñiqueDerecho.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DevPictureBoxMeñiqueDerecho.Image = global::EnroladorStandAloneV2.Properties.Resources.Huella_NoSeteada;
+            this.DevPictureBoxMeñiqueDerecho.Location = new System.Drawing.Point(287, 44);
+            this.DevPictureBoxMeñiqueDerecho.Name = "DevPictureBoxMeñiqueDerecho";
+            this.DevPictureBoxMeñiqueDerecho.Size = new System.Drawing.Size(32, 32);
+            this.DevPictureBoxMeñiqueDerecho.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.DevPictureBoxMeñiqueDerecho.TabIndex = 9;
+            this.DevPictureBoxMeñiqueDerecho.TabStop = false;
+            // 
+            // DevPictureBoxAnularDerecho
+            // 
+            this.DevPictureBoxAnularDerecho.BackColor = System.Drawing.Color.Transparent;
+            this.DevPictureBoxAnularDerecho.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DevPictureBoxAnularDerecho.Image = global::EnroladorStandAloneV2.Properties.Resources.Huella_NoSeteada;
+            this.DevPictureBoxAnularDerecho.Location = new System.Drawing.Point(261, 14);
+            this.DevPictureBoxAnularDerecho.Name = "DevPictureBoxAnularDerecho";
+            this.DevPictureBoxAnularDerecho.Size = new System.Drawing.Size(32, 32);
+            this.DevPictureBoxAnularDerecho.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.DevPictureBoxAnularDerecho.TabIndex = 8;
+            this.DevPictureBoxAnularDerecho.TabStop = false;
+            // 
+            // DevPictureBoxMedioDerecho
+            // 
+            this.DevPictureBoxMedioDerecho.BackColor = System.Drawing.Color.Transparent;
+            this.DevPictureBoxMedioDerecho.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DevPictureBoxMedioDerecho.Image = global::EnroladorStandAloneV2.Properties.Resources.Huella_NoSeteada;
+            this.DevPictureBoxMedioDerecho.Location = new System.Drawing.Point(224, 3);
+            this.DevPictureBoxMedioDerecho.Name = "DevPictureBoxMedioDerecho";
+            this.DevPictureBoxMedioDerecho.Size = new System.Drawing.Size(32, 32);
+            this.DevPictureBoxMedioDerecho.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.DevPictureBoxMedioDerecho.TabIndex = 7;
+            this.DevPictureBoxMedioDerecho.TabStop = false;
+            // 
+            // DevPictureBoxIndiceDerecho
+            // 
+            this.DevPictureBoxIndiceDerecho.BackColor = System.Drawing.Color.Transparent;
+            this.DevPictureBoxIndiceDerecho.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DevPictureBoxIndiceDerecho.Image = global::EnroladorStandAloneV2.Properties.Resources.Huella_NoSeteada;
+            this.DevPictureBoxIndiceDerecho.Location = new System.Drawing.Point(185, 28);
+            this.DevPictureBoxIndiceDerecho.Name = "DevPictureBoxIndiceDerecho";
+            this.DevPictureBoxIndiceDerecho.Size = new System.Drawing.Size(32, 32);
+            this.DevPictureBoxIndiceDerecho.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.DevPictureBoxIndiceDerecho.TabIndex = 6;
+            this.DevPictureBoxIndiceDerecho.TabStop = false;
+            // 
+            // DevPictureBoxPulgarDerecho
+            // 
+            this.DevPictureBoxPulgarDerecho.BackColor = System.Drawing.Color.Transparent;
+            this.DevPictureBoxPulgarDerecho.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DevPictureBoxPulgarDerecho.Image = global::EnroladorStandAloneV2.Properties.Resources.Huella_NoSeteada;
+            this.DevPictureBoxPulgarDerecho.Location = new System.Drawing.Point(170, 71);
+            this.DevPictureBoxPulgarDerecho.Name = "DevPictureBoxPulgarDerecho";
+            this.DevPictureBoxPulgarDerecho.Size = new System.Drawing.Size(32, 32);
+            this.DevPictureBoxPulgarDerecho.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.DevPictureBoxPulgarDerecho.TabIndex = 5;
+            this.DevPictureBoxPulgarDerecho.TabStop = false;
+            // 
+            // DevPictureBoxMeñiqueIzquierdo
+            // 
+            this.DevPictureBoxMeñiqueIzquierdo.BackColor = System.Drawing.Color.Transparent;
+            this.DevPictureBoxMeñiqueIzquierdo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DevPictureBoxMeñiqueIzquierdo.Image = global::EnroladorStandAloneV2.Properties.Resources.Huella_NoSeteada;
+            this.DevPictureBoxMeñiqueIzquierdo.Location = new System.Drawing.Point(4, 43);
+            this.DevPictureBoxMeñiqueIzquierdo.Name = "DevPictureBoxMeñiqueIzquierdo";
+            this.DevPictureBoxMeñiqueIzquierdo.Size = new System.Drawing.Size(32, 32);
+            this.DevPictureBoxMeñiqueIzquierdo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.DevPictureBoxMeñiqueIzquierdo.TabIndex = 4;
+            this.DevPictureBoxMeñiqueIzquierdo.TabStop = false;
+            // 
+            // DevPictureBoxAnularIzquierdo
+            // 
+            this.DevPictureBoxAnularIzquierdo.BackColor = System.Drawing.Color.Transparent;
+            this.DevPictureBoxAnularIzquierdo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DevPictureBoxAnularIzquierdo.Image = global::EnroladorStandAloneV2.Properties.Resources.Huella_NoSeteada;
+            this.DevPictureBoxAnularIzquierdo.Location = new System.Drawing.Point(31, 14);
+            this.DevPictureBoxAnularIzquierdo.Name = "DevPictureBoxAnularIzquierdo";
+            this.DevPictureBoxAnularIzquierdo.Size = new System.Drawing.Size(32, 32);
+            this.DevPictureBoxAnularIzquierdo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.DevPictureBoxAnularIzquierdo.TabIndex = 3;
+            this.DevPictureBoxAnularIzquierdo.TabStop = false;
+            // 
+            // DevPictureBoxMedioIzquierdo
+            // 
+            this.DevPictureBoxMedioIzquierdo.BackColor = System.Drawing.Color.Transparent;
+            this.DevPictureBoxMedioIzquierdo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DevPictureBoxMedioIzquierdo.Image = global::EnroladorStandAloneV2.Properties.Resources.Huella_NoSeteada;
+            this.DevPictureBoxMedioIzquierdo.Location = new System.Drawing.Point(70, 1);
+            this.DevPictureBoxMedioIzquierdo.Name = "DevPictureBoxMedioIzquierdo";
+            this.DevPictureBoxMedioIzquierdo.Size = new System.Drawing.Size(32, 32);
+            this.DevPictureBoxMedioIzquierdo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.DevPictureBoxMedioIzquierdo.TabIndex = 2;
+            this.DevPictureBoxMedioIzquierdo.TabStop = false;
+            // 
+            // DevPictureBoxIndiceIzquierdo
+            // 
+            this.DevPictureBoxIndiceIzquierdo.BackColor = System.Drawing.Color.Transparent;
+            this.DevPictureBoxIndiceIzquierdo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DevPictureBoxIndiceIzquierdo.Image = global::EnroladorStandAloneV2.Properties.Resources.Huella_NoSeteada;
+            this.DevPictureBoxIndiceIzquierdo.Location = new System.Drawing.Point(110, 28);
+            this.DevPictureBoxIndiceIzquierdo.Name = "DevPictureBoxIndiceIzquierdo";
+            this.DevPictureBoxIndiceIzquierdo.Size = new System.Drawing.Size(32, 32);
+            this.DevPictureBoxIndiceIzquierdo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.DevPictureBoxIndiceIzquierdo.TabIndex = 1;
+            this.DevPictureBoxIndiceIzquierdo.TabStop = false;
+            // 
+            // DevPictureBoxPulgarIzquierdo
+            // 
+            this.DevPictureBoxPulgarIzquierdo.BackColor = System.Drawing.Color.Transparent;
+            this.DevPictureBoxPulgarIzquierdo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DevPictureBoxPulgarIzquierdo.Image = global::EnroladorStandAloneV2.Properties.Resources.Huella_NoSeteada;
+            this.DevPictureBoxPulgarIzquierdo.Location = new System.Drawing.Point(123, 71);
+            this.DevPictureBoxPulgarIzquierdo.Name = "DevPictureBoxPulgarIzquierdo";
+            this.DevPictureBoxPulgarIzquierdo.Size = new System.Drawing.Size(32, 32);
+            this.DevPictureBoxPulgarIzquierdo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.DevPictureBoxPulgarIzquierdo.TabIndex = 0;
+            this.DevPictureBoxPulgarIzquierdo.TabStop = false;
+            // 
+            // UCEnrolarHuellas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.panelControl1);
+            this.Controls.Add(this.DevPanelControlManos);
+            this.MaximumSize = new System.Drawing.Size(332, 185);
             this.MinimumSize = new System.Drawing.Size(332, 185);
-            this.Name = "UCHuellas";
+            this.Name = "UCEnrolarHuellas";
             this.Size = new System.Drawing.Size(332, 185);
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.Load += new System.EventHandler(this.UCEnrolarHuellas_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.DevPanelControlManos)).EndInit();
+            this.DevPanelControlManos.ResumeLayout(false);
+            this.DevPanelControlManos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DevPictureBoxMeñiqueDerecho)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevPictureBoxAnularDerecho)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevPictureBoxMedioDerecho)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevPictureBoxIndiceDerecho)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevPictureBoxPulgarDerecho)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevPictureBoxMeñiqueIzquierdo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevPictureBoxAnularIzquierdo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevPictureBoxMedioIzquierdo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevPictureBoxIndiceIzquierdo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevPictureBoxPulgarIzquierdo)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private DevExpress.XtraEditors.PanelControl panelControl1;
+        private DevExpress.XtraEditors.PanelControl DevPanelControlManos;
+        private System.Windows.Forms.PictureBox DevPictureBoxMeñiqueIzquierdo;
+        private System.Windows.Forms.PictureBox DevPictureBoxAnularIzquierdo;
+        private System.Windows.Forms.PictureBox DevPictureBoxMedioIzquierdo;
+        private System.Windows.Forms.PictureBox DevPictureBoxIndiceIzquierdo;
+        private System.Windows.Forms.PictureBox DevPictureBoxPulgarIzquierdo;
+        private System.Windows.Forms.PictureBox DevPictureBoxMeñiqueDerecho;
+        private System.Windows.Forms.PictureBox DevPictureBoxAnularDerecho;
+        private System.Windows.Forms.PictureBox DevPictureBoxMedioDerecho;
+        private System.Windows.Forms.PictureBox DevPictureBoxIndiceDerecho;
+        private System.Windows.Forms.PictureBox DevPictureBoxPulgarDerecho;
     }
 }

@@ -12,6 +12,7 @@ using System.Reflection;
 using EnroladorAccesoDatos.Ayudantes;
 using EnroladorStandAloneV2.Herramientas;
 using EnroladorAccesoDatos.Dominio;
+using DevExpress.XtraEditors;
 
 namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
     public partial class UCEnrolador : DevExpress.XtraEditors.XtraUserControl {
@@ -48,16 +49,25 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             }
         }
 
-        public void AdicionarUCAsistencia(UCManejarAsistencia uCAsistencia) {
-            DevPanelControlAsistencia.Controls.Add(uCAsistencia);
+        public void AdicionarUCAsistenciaOCasino(XtraUserControl uC) {
+            int hSize = DevSplitContainerControlAccesos.Size.Height;
+            hSize = hSize / 2 - 10;
+            Size s = new Size(uC.Size.Width, hSize);
+            DevSplitContainerControlAccesos.SplitterPosition = hSize;
+
+            uC.Size = s;
+
+            var tipo = uC.GetType();
+            if (uC is UCManejarAsistencia) {
+                DevPanelControlAsistencia.Controls.Add(uC);
+            } else {
+                DevPanelControlCasinos.Controls.Add(uC);
+            }
         }
         public void EliminarUCAsistencia() {
             DevPanelControlAsistencia.Controls.Clear();
         }
 
-        public void AdicionarUCCasino(UCManejarCasino uCAsistencia) {
-            DevPanelControlCasinos.Controls.Add(uCAsistencia);
-        }
         public void EliminarUCCasino() {
             DevPanelControlCasinos.Controls.Clear();
         }

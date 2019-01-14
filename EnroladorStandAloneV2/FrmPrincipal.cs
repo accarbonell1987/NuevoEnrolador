@@ -34,6 +34,10 @@ namespace EnroladorStandAloneV2 {
         #region Constructor
         public FrmPrincipal() {
             InitializeComponent();
+
+            //Si la pantalla no es full HD minimizo los botones
+            if (Height < 800) DevRibbonControl.Minimized = true;
+
             Negocio = new NegocioEnrolador();
 
             //mostar splash
@@ -270,7 +274,6 @@ namespace EnroladorStandAloneV2 {
                 return false;
             }
         }
-
         /// <summary>
         /// Carga todos los datos Online a la BD Local
         /// </summary>
@@ -278,98 +281,7 @@ namespace EnroladorStandAloneV2 {
         private async Task<bool> DatosOnline() {
             try {
                 if (!Negocio.ExistenDatos) {
-
-                    UCCargarDatos uCargarDatos = null;
-
-                    try {
-                        //inicializar user control
-                        uCargarDatos = new UCCargarDatos {
-                            Dock = DockStyle.Fill
-                        };
-                        //limpiar controles en el area de notificaciones
-                        DevGroupControlNotificacionesAcciones.Controls.Clear();
-                        DevGroupControlNotificacionesAcciones.Controls.Add(uCargarDatos);
-
-                        //cargar Cadenas
-                        List<POCOCadena> cadenas = await CargarCadenas(uCargarDatos);
-                        //adicionar una notificacion en caso de que este la lista vacia
-                        if (cadenas == null) 
-                            Negocio.AdicionarNotificacionListadoVacio("cadenas");
-
-                        //cargar Instalaciones
-                        List<POCOInstalacion> instalaciones = await CargarInstalaciones(uCargarDatos, cadenas);
-                        if (instalaciones == null)
-                            Negocio.AdicionarNotificacionListadoVacio("instalaciones");
-
-                        //cargar Dispositivos
-                        List<POCODispositivo> dispositivos = await CargarDispositivos(uCargarDatos, instalaciones);
-                        if (dispositivos == null)
-                            Negocio.AdicionarNotificacionListadoVacio("dispositivos");
-
-                        //cargar Empresas
-                        List<POCOEmpresa> empresas = await CargarEmpresas(uCargarDatos);
-                        if (empresas == null)
-                            Negocio.AdicionarNotificacionListadoVacio("empresas");
-
-                        //cargar Cargos
-                        List<POCOCargo> cargos = await CargarCargos(uCargarDatos, empresas);
-                        if (cargos == null)
-                            Negocio.AdicionarNotificacionListadoVacio("cargos");
-
-                        //cargar Cuentas
-                        List<POCOCuenta> cuentas = await CargarCuentas(uCargarDatos, empresas);
-                        if (cuentas == null)
-                            Negocio.AdicionarNotificacionListadoVacio("cuentas");
-
-                        //cargar Empleados
-                        List<POCOEmpleado> empleados = await CargarEmpleados(uCargarDatos);
-                        if (empleados == null)
-                            Negocio.AdicionarNotificacionListadoVacio("empleados");
-
-                        //cargar Huellas
-                        List<POCOHuella> huellas = await CargarHuellas(uCargarDatos, empleados);
-                        if (huellas == null)
-                            Negocio.AdicionarNotificacionListadoVacio("huellas");
-
-                        //cargar EmpleadoDispositivo
-                        List<POCOEmpleadoDispositivo> empleadoDispositivos = await CargarEmpleadoDispositivos(uCargarDatos, empleados, dispositivos);
-                        if (empleadoDispositivos == null)
-                            Negocio.AdicionarNotificacionListadoVacio("empleadoDispositivos");
-
-                        //cargar Contrato
-                        List<POCOContrato> contratos = await CargarContratos(uCargarDatos, empleados, empresas, cuentas, cargos);
-                        if (contratos == null)
-                            Negocio.AdicionarNotificacionListadoVacio("contratos");
-
-                        //cargar EmpleadoTurnoServicioCasinos
-                        List<POCOEmpleadoTurnoServicioCasino> empleadoTurnoServicioCasinos = await CargarEmpleadoTurnoServicioCasinos(uCargarDatos);
-                        if (empleadoTurnoServicioCasinos == null)
-                            Negocio.AdicionarNotificacionListadoVacio("empleadoTurnoServicioCasinos");
-
-                        //cargar ServicioCasinos
-                        List<POCOServicioCasino> servicioCasinoss = await CargarServicioCasinos(uCargarDatos);
-                        if (servicioCasinoss == null)
-                            Negocio.AdicionarNotificacionListadoVacio("servicioCasinoss");
-
-                        //cargar TurnoServicioss
-                        List<POCOTurnoServicio> turnoServicioss = await CargarTurnoServicios(uCargarDatos);
-                        if (turnoServicioss == null)
-                            Negocio.AdicionarNotificacionListadoVacio("turnoServicioss");
-
-                        //ACCM
-                        //ReaplicarAcciones();
-
-                        Negocio.AdicionarSincronizacion();
-
-                        return true;
-                    } catch (Exception eX) {
-                        AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
-                        return false;
-                    } finally {
-                        if (uCargarDatos != null) {
-                            DevGroupControlNotificacionesAcciones.Controls.Clear();
-                        }
-                    }
+                    return await SincronizarDatos();
                 }
                 return true;
             } catch (Exception eX) {
@@ -415,7 +327,6 @@ namespace EnroladorStandAloneV2 {
                 return null;
             }
         }
-
         private async Task<List<POCOInstalacion>> CargarInstalaciones(ICargaDatos iCargaDatos, List<POCOCadena> cadenas) {
             try {
                 List<POCOInstalacion> sList = await Negocio.CargarInstalaciones();
@@ -461,7 +372,6 @@ namespace EnroladorStandAloneV2 {
                 return null;
             }
         }
-
         private async Task<List<POCODispositivo>> CargarDispositivos(ICargaDatos iCargaDatos, List<POCOInstalacion> instalaciones) {
 
             List<POCODispositivo> sList = await Negocio.CargarDispositivos();
@@ -509,7 +419,6 @@ namespace EnroladorStandAloneV2 {
                 return null;
             }
         }
-
         private async Task<List<POCOEmpresa>> CargarEmpresas(ICargaDatos iCargaDatos) {
 
             List<POCOEmpresa> sList = await Negocio.CargarEmpresas();
@@ -549,7 +458,6 @@ namespace EnroladorStandAloneV2 {
                 return null;
             }
         }
-
         private async Task<List<POCOCargo>> CargarCargos(ICargaDatos iCargaDatos, List<POCOEmpresa> empresas) {
 
             List<POCOCargo> sList = await Negocio.CargarCargos();
@@ -597,7 +505,6 @@ namespace EnroladorStandAloneV2 {
                 return null;
             }
         }
-
         private async Task<List<POCOCuenta>> CargarCuentas(ICargaDatos iCargaDatos, List<POCOEmpresa> empresas) {
 
             List<POCOCuenta> sList = await Negocio.CargarCuentas();
@@ -635,7 +542,6 @@ namespace EnroladorStandAloneV2 {
                 return null;
             }
         }
-
         private async Task<List<POCOEmpleado>> CargarEmpleados(ICargaDatos iCargaDatos) {
 
             List<POCOEmpleado> sList = await Negocio.CargarEmpleados();
@@ -685,7 +591,6 @@ namespace EnroladorStandAloneV2 {
                 return null;
             }
         }
-
         private async Task<List<POCOHuella>> CargarHuellas(ICargaDatos iCargaDatos, List<POCOEmpleado> empleados) {
 
             List<POCOHuella> sList = await Negocio.CargarHuellas();
@@ -732,7 +637,6 @@ namespace EnroladorStandAloneV2 {
                 return null;
             }
         }
-
         private async Task<List<POCOEmpleadoDispositivo>> CargarEmpleadoDispositivos(ICargaDatos iCargaDatos, List<POCOEmpleado> empleados, List<POCODispositivo> dispositivos) {
 
             List<POCOEmpleadoDispositivo> sList = await Negocio.CargarEmpleadoDispositivos();
@@ -780,7 +684,6 @@ namespace EnroladorStandAloneV2 {
                 return null;
             }
         }
-
         private async Task<List<POCOContrato>> CargarContratos(ICargaDatos iCargaDatos, List<POCOEmpleado> empleados, List<POCOEmpresa> empresas, List<POCOCuenta> cuentas, List<POCOCargo> cargos) {
 
             List<POCOContrato> sList = await Negocio.CargarContratos();
@@ -839,7 +742,6 @@ namespace EnroladorStandAloneV2 {
                 return null;
             }
         }
-
         private async Task<List<POCOEmpleadoTurnoServicioCasino>> CargarEmpleadoTurnoServicioCasinos(ICargaDatos iCargaDatos) {
 
             List<POCOEmpleadoTurnoServicioCasino> sList = await Negocio.CargarEmpleadoTurnoServicioCasinos();
@@ -881,7 +783,6 @@ namespace EnroladorStandAloneV2 {
                 return null;
             }
         }
-
         private async Task<List<POCOServicioCasino>> CargarServicioCasinos(ICargaDatos iCargaDatos) {
 
             List<POCOServicioCasino> sList = await Negocio.CargarServicioCasinos();
@@ -923,7 +824,6 @@ namespace EnroladorStandAloneV2 {
                 return null;
             }
         }
-
         private async Task<List<POCOTurnoServicio>> CargarTurnoServicios(ICargaDatos iCargaDatos) {
 
             List<POCOTurnoServicio> sList = await Negocio.CargarTurnoServicios();
@@ -965,7 +865,102 @@ namespace EnroladorStandAloneV2 {
                 return null;
             }
         }
+        private async Task<bool> SincronizarDatos() {
+            UCCargarDatos uCargarDatos = null;
 
+            try {
+                //inicializar user control
+                uCargarDatos = new UCCargarDatos {
+                    Dock = DockStyle.Fill
+                };
+                //limpiar controles en el area de notificaciones
+                DevGroupControlNotificacionesAcciones.Controls.Clear();
+                DevGroupControlNotificacionesAcciones.Controls.Add(uCargarDatos);
+
+                //ACCM
+                //se deben de realizar los cambios en los progress bar
+                Negocio.EnviarAcciones();
+
+                //cargar Cadenas
+                List<POCOCadena> cadenas = await CargarCadenas(uCargarDatos);
+                //adicionar una notificacion en caso de que este la lista vacia
+                if (cadenas == null)
+                    Negocio.AdicionarNotificacionListadoVacio("cadenas");
+
+                //cargar Instalaciones
+                List<POCOInstalacion> instalaciones = await CargarInstalaciones(uCargarDatos, cadenas);
+                if (instalaciones == null)
+                    Negocio.AdicionarNotificacionListadoVacio("instalaciones");
+
+                //cargar Dispositivos
+                List<POCODispositivo> dispositivos = await CargarDispositivos(uCargarDatos, instalaciones);
+                if (dispositivos == null)
+                    Negocio.AdicionarNotificacionListadoVacio("dispositivos");
+
+                //cargar Empresas
+                List<POCOEmpresa> empresas = await CargarEmpresas(uCargarDatos);
+                if (empresas == null)
+                    Negocio.AdicionarNotificacionListadoVacio("empresas");
+
+                //cargar Cargos
+                List<POCOCargo> cargos = await CargarCargos(uCargarDatos, empresas);
+                if (cargos == null)
+                    Negocio.AdicionarNotificacionListadoVacio("cargos");
+
+                //cargar Cuentas
+                List<POCOCuenta> cuentas = await CargarCuentas(uCargarDatos, empresas);
+                if (cuentas == null)
+                    Negocio.AdicionarNotificacionListadoVacio("cuentas");
+
+                //cargar Empleados
+                List<POCOEmpleado> empleados = await CargarEmpleados(uCargarDatos);
+                if (empleados == null)
+                    Negocio.AdicionarNotificacionListadoVacio("empleados");
+
+                //cargar Huellas
+                List<POCOHuella> huellas = await CargarHuellas(uCargarDatos, empleados);
+                if (huellas == null)
+                    Negocio.AdicionarNotificacionListadoVacio("huellas");
+
+                //cargar EmpleadoDispositivo
+                List<POCOEmpleadoDispositivo> empleadoDispositivos = await CargarEmpleadoDispositivos(uCargarDatos, empleados, dispositivos);
+                if (empleadoDispositivos == null)
+                    Negocio.AdicionarNotificacionListadoVacio("empleadoDispositivos");
+
+                //cargar Contrato
+                List<POCOContrato> contratos = await CargarContratos(uCargarDatos, empleados, empresas, cuentas, cargos);
+                if (contratos == null)
+                    Negocio.AdicionarNotificacionListadoVacio("contratos");
+
+                //cargar EmpleadoTurnoServicioCasinos
+                List<POCOEmpleadoTurnoServicioCasino> empleadoTurnoServicioCasinos = await CargarEmpleadoTurnoServicioCasinos(uCargarDatos);
+                if (empleadoTurnoServicioCasinos == null)
+                    Negocio.AdicionarNotificacionListadoVacio("empleadoTurnoServicioCasinos");
+
+                //cargar ServicioCasinos
+                List<POCOServicioCasino> servicioCasinoss = await CargarServicioCasinos(uCargarDatos);
+                if (servicioCasinoss == null)
+                    Negocio.AdicionarNotificacionListadoVacio("servicioCasinoss");
+
+                //cargar TurnoServicioss
+                List<POCOTurnoServicio> turnoServicioss = await CargarTurnoServicios(uCargarDatos);
+                if (turnoServicioss == null)
+                    Negocio.AdicionarNotificacionListadoVacio("turnoServicioss");
+
+                //ACCM
+                //ReaplicarAcciones();
+
+                Negocio.AdicionarSincronizacion();
+                return true;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+                return false;
+            } finally {
+                if (uCargarDatos != null) {
+                    DevGroupControlNotificacionesAcciones.Controls.Clear();
+                }
+            }
+        }
         #endregion
 
         #region Metodos Y Eventos
@@ -1083,6 +1078,10 @@ namespace EnroladorStandAloneV2 {
         /// </summary>
         public void MostrarNotificaciones() {
             if (Negocio.lNotificaciones.Count > 0) {
+                //minimizo el control
+                if (Height < 800) DevRibbonControl.Minimized = true;
+
+                DevGroupControlNotificacionesAcciones.Height = 77;
                 DevGroupControlNotificacionesAcciones.Controls.Clear();
                 DevGroupControlNotificacionesAcciones.Controls.Add(Negocio.ObtenerUCNotificaciones(String.Empty));
             }
@@ -1169,23 +1168,53 @@ namespace EnroladorStandAloneV2 {
             return ResultadoAutorizacion.Aceptado;
 
             //Estaba asi en el Enrolador, aunque nunca se ejecuta
-            return await Task<ResultadoAutorizacion>.Factory.StartNew((obj) => {
-                using (FrmAutorizacion authDialog = new FrmAutorizacion(Negocio.mHuellero, mensaje)) {
-                    DialogResult res = authDialog.ShowDialog(owner);
-                    if (res == DialogResult.Yes) {
-                        return ResultadoAutorizacion.Aceptado;
-                    } else if (res == DialogResult.No) {
-                        return ResultadoAutorizacion.Rechazado;
-                    } else {
-                        return ResultadoAutorizacion.Cancelado;
-                    }
-                }
-            }, null, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+            //return await Task<ResultadoAutorizacion>.Factory.StartNew((obj) => {
+            //    using (FrmAutorizacion authDialog = new FrmAutorizacion(Negocio.mHuellero, mensaje)) {
+            //        DialogResult res = authDialog.ShowDialog(owner);
+            //        if (res == DialogResult.Yes) {
+            //            return ResultadoAutorizacion.Aceptado;
+            //        } else if (res == DialogResult.No) {
+            //            return ResultadoAutorizacion.Rechazado;
+            //        } else {
+            //            return ResultadoAutorizacion.Cancelado;
+            //        }
+            //    }
+            //}, null, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
-        private void DevBarButtonSincronizar_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private async void DevBarButtonSincronizar_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            Negocio.Sincronizar();
+            try {
+                var sincronizo = await SincronizarDatos();
+                if (sincronizo) Negocio.AdicionarNotificacionProcesoRealizadoCorrectamente("Sincronizacion Correcta");
+                else Negocio.AdicionarNotificacion("No se pudo sincronizar", TipoNotificacion.Critica);
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+            }
+        }
+
+        /// <summary>
+        /// Controla el evento de la paleta de iconos cuando la resolucion es baja
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DevRibbonControl_MinimizedChanged(object sender, EventArgs e)
+        {
+            var notificacionSize = DevGroupControlNotificacionesAcciones.Size;
+
+            if (DevRibbonControl.Minimized) notificacionSize.Height = 77;
+            else notificacionSize.Height = 20;
+
+            DevGroupControlNotificacionesAcciones.Size = notificacionSize;
+        }
+        private void DevGroupControlNotificacionesAcciones_DoubleClick(object sender, EventArgs e)
+        {
+            var notificacionSize = DevGroupControlNotificacionesAcciones.Size;
+
+            if (notificacionSize.Height == 77) notificacionSize.Height = 20;
+            else notificacionSize.Height = 77;
+
+            DevGroupControlNotificacionesAcciones.Size = notificacionSize;
         }
         #endregion
 
@@ -1196,14 +1225,15 @@ namespace EnroladorStandAloneV2 {
         /// Mejora el Parpadeo
         /// https://es.stackoverflow.com/questions/127139/c%C3%B3mo-evitar-el-parpadeo-de-los-controles-windows-forms-c
         /// </summary>
-        //protected override CreateParams CreateParams {
-        //    get {
-        //        CreateParams cp = base.CreateParams;
-        //        cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
-        //        return cp;
-        //    }
-        //}
-
+        protected override CreateParams CreateParams {
+            get {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
+                return cp;
+            }
+        }
         #endregion
+
+
     }
 }

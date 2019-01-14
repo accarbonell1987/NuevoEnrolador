@@ -21,6 +21,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Common;
 using System.Data.SQLite;
+using System.Drawing;
 
 namespace EnroladorStandAloneV2.CapaLogicaNegocio {
     public class NegocioEnrolador {
@@ -59,7 +60,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
 
         #region Metodos
 
-        #region Obtener de SQLite
+        #region SQLite
         /// <summary>
         /// Chequea la existencia del Archivo de la BD y si tiene datos
         /// </summary>
@@ -116,6 +117,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 var todasHuellas = mContext.Huella.ToList();
                 var todosEmpleadosDispositivos = mContext.EmpleadoDispositivo.ToList();
                 var todosDispositivos = mContext.Dispositivo.ToList();
+                var todosTurnoServicioCasino = mContext.EmpleadoTurnoServicioCasino.ToList();
 
                 foreach (var empleado in todosEmpleados) {
                     //transformar el empleado a poco
@@ -155,10 +157,10 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
 
                         //cargar dispositivos del empleado
                         var dispEmpleado = todosEmpleadosDispositivos.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
-
+                        //obtener todos los dispositivos del empleado
                         var dispositivos = todosDispositivos.Where(p => dispEmpleado.Any(a => a.GuidDispositivo == p.GuidDispositivo)).Select(p => p).ToList();
-                        //var dispositivos = ObtenerTodosDispositivos().Where(p => dispEmpleado.Any(a => a.GuidDispositivo == p.GuidDispositivo.ToString())).Select(p => p).ToList();
 
+                        pocoEmpleado.Dispositivos = new List<POCODispositivo>();
                         //adicionar dispositivos al empleado
                         foreach (var dispositivo in dispositivos) {
                             var pocoDispositivo = TransformacionDatos.DeDispositivoAPOCODispositivo(dispositivo);
@@ -170,6 +172,31 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                             pocoDispositivo.NombreInstalacion = instalacion.NombreInstalacion;
 
                             pocoEmpleado.Dispositivos.Add(pocoDispositivo);
+                        }
+
+                        //cargar Turnos Servicio Casino
+                        var turnoServicioCasinoEmpleado = todosTurnoServicioCasino.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
+                        //obtener todos los turnos del empleado
+                        var turnoServicios = mContext.TurnoServicio.Where(p => turnoServicioCasinoEmpleado.Any(a => a.GuidTurnoServicio == p.GuidTurnoServicio)).Select(p => p).ToList();
+
+                        pocoEmpleado.TurnoServicioCasino = new List<POCOEmpleadoTurnoServicioCasino>();
+                        //adicionar la relacion de turno servicio casino al empleado
+                        foreach (var turno in turnoServicios) {
+                            var pocoTurnoServicio = TransformacionDatos.DeTurnoServicioAPOCOTurnoServicio(turno);
+
+                            var servicio = ObtenerServicio(pocoTurnoServicio.GuidServicio);
+                            var instalacion = ObtenerInstalacion(servicio.GuidCasino);
+
+                            pocoEmpleado.TurnoServicioCasino.Add(new POCOEmpleadoTurnoServicioCasino() {
+                                GuidEmpleado = Guid.Parse(empleado.GuidEmpleado),
+                                GuidTurnoServicio = pocoTurnoServicio.GuidTurnoServicio,
+                                HoraInicio = pocoTurnoServicio.HoraInicio,
+                                HoraFin = pocoTurnoServicio.HoraFin,
+                                Vigente = pocoTurnoServicio.Vigente,
+                                NombreCasino = instalacion.NombreInstalacion,
+                                NombreServicio = servicio.NombreServicioCasino,
+                                NombreTurno = pocoTurnoServicio.NombreTurnoServicio
+                            });
                         }
 
                         lPOCOEmpleados.Add(pocoEmpleado);
@@ -286,6 +313,31 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 if (cadena == null) return null;
 
                 return TransformacionDatos.DeCadenaAPOCOCadena(cadena);
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                return null;
+            }
+        }
+        public POCOContrato ObtenerContrato(Guid GuidEmpleado, Guid GuidContrato) {
+            try {
+                var todosContratos = mContext.Contrato.Where(p => p.GuidEmpleado == GuidEmpleado.ToString()).ToList();
+                //cargar contratos del empleado
+                var contrato = todosContratos.FirstOrDefault(p => p.GuidContrato == GuidContrato.ToString());
+
+                if (contrato == null) return null;
+
+                POCOContrato pContrato = TransformacionDatos.DeContratoAPOCOContrato(contrato);
+
+                var empresa = TransformacionDatos.DeEmpresaAPOCOEmpresa(mContext.Empresa.FirstOrDefault(p => p.GuidEmpresa == pContrato.GuidEmpresa.ToString()));
+                pContrato.NombreEmpresa = empresa == null ? "Sin Empresa" : empresa.NombreEmpresa;
+
+                var cuenta = TransformacionDatos.DeCuentaAPOCOCuenta(mContext.Cuenta.FirstOrDefault(p => p.GuidCuenta == pContrato.GuidCuenta.ToString()));
+                pContrato.NombreCuenta = cuenta == null ? "Sin Cuenta" : cuenta.NombreCuenta;
+
+                var cargo = TransformacionDatos.DeCargoAPOCOCargo(mContext.Cargo.FirstOrDefault(p => p.GuidCargo == pContrato.GuidCargo.ToString()));
+                pContrato.NombreCargo = cargo == null ? "Sin Cargo" : cargo.NombreCargo;
+
+                return pContrato;
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
                 return null;
@@ -589,6 +641,22 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
             }
         }
+
+        public void AdicionarEmpleadoInstalacionDispostivoSinSalvar(POCOEmpleadoDispositivo pocoEmpleadoDispositivo) {
+            try {
+                mContext.EmpleadoDispositivo.Add(TransformacionDatos.DePOCOEmpleadoDispositivoAEmpleadoDispositivo(pocoEmpleadoDispositivo));
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+            }
+        }
+        public void AdicionarEmpleadoTurnoServicioSinSalvar(POCOEmpleadoTurnoServicioCasino pocoEmpleadoTurnoServicioCasino) {
+            try {
+                mContext.EmpleadoTurnoServicioCasino.Add(TransformacionDatos.DePOCOEmpleadoTurnoServicioCasinoAEmpleadoTurnoServicioCasino(pocoEmpleadoTurnoServicioCasino));
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+            }
+        }
+
         #endregion
 
         #region Leer Datos de WebServices
@@ -932,6 +1000,37 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
         }
 
         /// <summary>
+        /// Adicionar una notificacion
+        /// </summary>
+        /// <param name="mensajeAdicional">string mensajeAdicional</param>
+        public void AdicionarNotificacion(string mensaje, TipoNotificacion tipo) {
+            DateTime ahora = DateTime.Now;
+
+            Image icono = Properties.Resources.info_32x32;
+
+            switch (tipo) {
+                case TipoNotificacion.Exito: icono = Properties.Resources.apply_32x32;
+                    break;
+                case TipoNotificacion.Cuidado: icono = Properties.Resources.warning_32x32;
+                    break;
+                case TipoNotificacion.Critica: icono = Properties.Resources.error_32x32;
+                    break;
+                case TipoNotificacion.Informativa: icono = Properties.Resources.info_32x32;
+                    break;
+            }
+
+            POCONotificacion notificacion = new POCONotificacion() {
+                IdNotificacion = ahora.ToBinary().ToString(),
+                FechaNotificacion = ahora,
+                MensajeNotificacion = mensaje,
+                Tipo = tipo,
+                ImagenDeNotificacion = icono
+            };
+
+            lNotificaciones.Add(notificacion);
+        }
+
+        /// <summary>
         /// Adicionar notificacion de proceso terminado con exito
         /// </summary>
         /// <param name="mensajeAdicional">string mensajeAdicional</param>
@@ -1008,7 +1107,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
         /// <summary>
         /// Sincroniza todas las operaciones pendientes
         /// </summary>
-        public void Sincronizar()
+        public void EnviarAcciones()
         {
             try
             {

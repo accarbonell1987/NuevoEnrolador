@@ -35,9 +35,9 @@
             this.DevPanelControlWarning.ContentImageAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.DevPanelControlWarning.Controls.Add(this.DevLabelControlNotificacion);
             this.DevPanelControlWarning.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DevPanelControlWarning.Location = new System.Drawing.Point(10, 10);
+            this.DevPanelControlWarning.Location = new System.Drawing.Point(3, 3);
             this.DevPanelControlWarning.Name = "DevPanelControlWarning";
-            this.DevPanelControlWarning.Size = new System.Drawing.Size(801, 40);
+            this.DevPanelControlWarning.Size = new System.Drawing.Size(815, 36);
             this.DevPanelControlWarning.TabIndex = 4;
             this.DevPanelControlWarning.Click += new System.EventHandler(this.DevPanelControlNotificaciones_Click);
             this.DevPanelControlWarning.MouseEnter += new System.EventHandler(this.DevPanelControlWarning_MouseEnter);
@@ -59,8 +59,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.DevPanelControlWarning);
             this.Name = "UCNotificaciones";
-            this.Padding = new System.Windows.Forms.Padding(10);
-            this.Size = new System.Drawing.Size(821, 60);
+            this.Padding = new System.Windows.Forms.Padding(3);
+            this.Size = new System.Drawing.Size(821, 42);
             ((System.ComponentModel.ISupportInitialize)(this.DevPanelControlWarning)).EndInit();
             this.DevPanelControlWarning.ResumeLayout(false);
             this.DevPanelControlWarning.PerformLayout();

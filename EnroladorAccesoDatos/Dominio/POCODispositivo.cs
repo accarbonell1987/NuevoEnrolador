@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace EnroladorAccesoDatos.Dominio {
-    public class POCODispositivo {
+    public class POCODispositivo : POCOGlobal {
         public Guid GuidDispositivo { get; set; }
         public Guid GuidInstalacion { get; set; }
         public string NombreDispositivo { get; set; }

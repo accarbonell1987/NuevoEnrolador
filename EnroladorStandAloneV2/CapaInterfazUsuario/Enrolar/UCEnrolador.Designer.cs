@@ -59,13 +59,14 @@
             this.DevGroupControlRUT.Dock = System.Windows.Forms.DockStyle.Top;
             this.DevGroupControlRUT.Location = new System.Drawing.Point(0, 0);
             this.DevGroupControlRUT.Name = "DevGroupControlRUT";
-            this.DevGroupControlRUT.Size = new System.Drawing.Size(1306, 51);
+            this.DevGroupControlRUT.ShowCaption = false;
+            this.DevGroupControlRUT.Size = new System.Drawing.Size(1306, 30);
             this.DevGroupControlRUT.TabIndex = 0;
             this.DevGroupControlRUT.Text = "RUT";
             // 
             // DevLookUpEditRUTEmpleado
             // 
-            this.DevLookUpEditRUTEmpleado.Location = new System.Drawing.Point(9, 23);
+            this.DevLookUpEditRUTEmpleado.Location = new System.Drawing.Point(7, 4);
             this.DevLookUpEditRUTEmpleado.Name = "DevLookUpEditRUTEmpleado";
             this.DevLookUpEditRUTEmpleado.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -96,10 +97,10 @@
             // 
             this.DevGroupControlDatosEmpleado.Controls.Add(this.DevPanelControlDatosEmpleado);
             this.DevGroupControlDatosEmpleado.Dock = System.Windows.Forms.DockStyle.Left;
-            this.DevGroupControlDatosEmpleado.Location = new System.Drawing.Point(0, 51);
+            this.DevGroupControlDatosEmpleado.Location = new System.Drawing.Point(0, 30);
             this.DevGroupControlDatosEmpleado.MinimumSize = new System.Drawing.Size(368, 0);
             this.DevGroupControlDatosEmpleado.Name = "DevGroupControlDatosEmpleado";
-            this.DevGroupControlDatosEmpleado.Size = new System.Drawing.Size(368, 648);
+            this.DevGroupControlDatosEmpleado.Size = new System.Drawing.Size(368, 669);
             this.DevGroupControlDatosEmpleado.TabIndex = 1;
             this.DevGroupControlDatosEmpleado.Text = "Datos del Empleado";
             // 
@@ -108,17 +109,17 @@
             this.DevPanelControlDatosEmpleado.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DevPanelControlDatosEmpleado.Location = new System.Drawing.Point(2, 20);
             this.DevPanelControlDatosEmpleado.Name = "DevPanelControlDatosEmpleado";
-            this.DevPanelControlDatosEmpleado.Size = new System.Drawing.Size(364, 626);
+            this.DevPanelControlDatosEmpleado.Size = new System.Drawing.Size(364, 647);
             this.DevPanelControlDatosEmpleado.TabIndex = 1;
             // 
             // DevGroupControlAccesos
             // 
             this.DevGroupControlAccesos.Controls.Add(this.DevSplitContainerControlAccesos);
             this.DevGroupControlAccesos.Dock = System.Windows.Forms.DockStyle.Right;
-            this.DevGroupControlAccesos.Location = new System.Drawing.Point(859, 51);
+            this.DevGroupControlAccesos.Location = new System.Drawing.Point(859, 30);
             this.DevGroupControlAccesos.MinimumSize = new System.Drawing.Size(447, 0);
             this.DevGroupControlAccesos.Name = "DevGroupControlAccesos";
-            this.DevGroupControlAccesos.Size = new System.Drawing.Size(447, 648);
+            this.DevGroupControlAccesos.Size = new System.Drawing.Size(447, 669);
             this.DevGroupControlAccesos.TabIndex = 2;
             // 
             // DevSplitContainerControlAccesos
@@ -131,7 +132,7 @@
             this.DevSplitContainerControlAccesos.Panel1.Text = "Panel1";
             this.DevSplitContainerControlAccesos.Panel2.Controls.Add(this.DevPanelControlCasinos);
             this.DevSplitContainerControlAccesos.Panel2.Text = "Panel2";
-            this.DevSplitContainerControlAccesos.Size = new System.Drawing.Size(443, 626);
+            this.DevSplitContainerControlAccesos.Size = new System.Drawing.Size(443, 647);
             this.DevSplitContainerControlAccesos.SplitterPosition = 299;
             this.DevSplitContainerControlAccesos.TabIndex = 1;
             this.DevSplitContainerControlAccesos.Text = "splitContainerControl1";
@@ -149,16 +150,16 @@
             this.DevPanelControlCasinos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DevPanelControlCasinos.Location = new System.Drawing.Point(0, 0);
             this.DevPanelControlCasinos.Name = "DevPanelControlCasinos";
-            this.DevPanelControlCasinos.Size = new System.Drawing.Size(443, 322);
+            this.DevPanelControlCasinos.Size = new System.Drawing.Size(443, 343);
             this.DevPanelControlCasinos.TabIndex = 0;
             // 
             // DevGroupControlContratos
             // 
             this.DevGroupControlContratos.Controls.Add(this.DevPanelControlContratos);
             this.DevGroupControlContratos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DevGroupControlContratos.Location = new System.Drawing.Point(368, 51);
+            this.DevGroupControlContratos.Location = new System.Drawing.Point(368, 30);
             this.DevGroupControlContratos.Name = "DevGroupControlContratos";
-            this.DevGroupControlContratos.Size = new System.Drawing.Size(491, 648);
+            this.DevGroupControlContratos.Size = new System.Drawing.Size(491, 669);
             this.DevGroupControlContratos.TabIndex = 3;
             this.DevGroupControlContratos.Text = "Contratos";
             // 
@@ -167,7 +168,7 @@
             this.DevPanelControlContratos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DevPanelControlContratos.Location = new System.Drawing.Point(2, 20);
             this.DevPanelControlContratos.Name = "DevPanelControlContratos";
-            this.DevPanelControlContratos.Size = new System.Drawing.Size(487, 626);
+            this.DevPanelControlContratos.Size = new System.Drawing.Size(487, 647);
             this.DevPanelControlContratos.TabIndex = 1;
             // 
             // UCEnrolador

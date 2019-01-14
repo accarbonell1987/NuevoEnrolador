@@ -43,19 +43,34 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
 
         #region Metodos y Eventos
         private void Temporizador_Tick(object sender, EventArgs e) {
-            if (!DevTextClave.Text.Equals(DevTextEditRevalidarClave.Text)) {
+            if (!DevTextClave.Text.Equals(DevTextEditRevalidarClave.Text))
+            {
                 dxErrorProvider.SetError(DevTextEditRevalidarClave, "Contraseñas diferentes");
+            }
+            else {
+                dxErrorProvider.ClearErrors();
             }
             temporizador.Stop();
         }
         private void DevTextClave_EditValueChanged(object sender, EventArgs e) {
             if (DevTextClave.Text != String.Empty)
+            {
+                DevTextEditRevalidarClave.Text = String.Empty;
                 DevTextEditRevalidarClave.Enabled = true;
-            else
+            }
+            else {
+                DevTextEditRevalidarClave.Text = String.Empty;
                 DevTextEditRevalidarClave.Enabled = false;
+            }
         }
 
         private void DevTextEditRevalidarClave_Validated(object sender, EventArgs e) {
+            temporizador.Stop();
+            temporizador.Start();
+        }
+
+        private void DevTextEditRevalidarClave_KeyPress(object sender, KeyPressEventArgs e)
+        {
             temporizador.Stop();
             temporizador.Start();
         }
