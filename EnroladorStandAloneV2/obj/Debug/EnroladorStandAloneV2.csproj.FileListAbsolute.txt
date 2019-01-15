@@ -94,3 +94,32 @@ E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\En
 E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csproj.CoreCompileInputs.cache
 E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.exe
 E:\Trabajo\Chile\Trabajo 2\GitHub\EnroladorV2\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.pdb
+d:\Usuarios\Leandro\_NewEnroller\REPO\OUTPUT\EnroladorStandAlone.exe.config
+d:\Usuarios\Leandro\_NewEnroller\REPO\OUTPUT\EnroladorStandAlone.exe
+d:\Usuarios\Leandro\_NewEnroller\REPO\OUTPUT\EnroladorStandAlone.pdb
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csprojResolveAssemblyReference.cache
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\Interop.ZKFPEngXControl.dll
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\AxInterop.ZKFPEngXControl.dll
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csproj.ResolveComReference.cache
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar.UCEnrolador.resources
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar.UCEnrolarHuellas.resources
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar.UCManejarCasino.resources
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar.UCManejarAsistencia.resources
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar.UCEnrolarClave.resources
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar.UCEnrolarContratos.resources
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.FrmAutenticacionUsuario.resources
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.FrmAutorizacion.resources
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.FrmNotificaciones.resources
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.UCCargarDatos.resources
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar.UCEnrolarDatosEmpleado.resources
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.UCGridDatos.resources
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.UCNotificaciones.resources
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.CapaInterfazUsuario.UCSpashScreen.resources
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.FrmSplashScreen.resources
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.FrmPrincipal.resources
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.Properties.Resources.resources
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csproj.GenerateResource.Cache
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAlone.exe.licenses
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAloneV2.csproj.CoreCompileInputs.cache
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAlone.exe
+d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorStandAloneV2\obj\Debug\EnroladorStandAlone.pdb
