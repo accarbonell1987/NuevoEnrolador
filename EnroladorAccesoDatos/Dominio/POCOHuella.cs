@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace EnroladorAccesoDatos.Dominio {
-    public class POCOHuella {
+    public class POCOHuella :  POCOGlobal {
         public Guid GuidHuella { get; set; }
         public Guid GuidEmpleado { get; set; }
         public TipoHuella Tipo { get; set; }

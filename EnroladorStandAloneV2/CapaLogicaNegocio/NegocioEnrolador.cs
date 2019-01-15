@@ -30,6 +30,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
         public bool ExistenDatos { get; set; }
         public bool Actualizando { get; set; }
         public bool Online { get; set; }
+        public EstadoUsoSistema EstadoUsoSistema { get; set; }
         public Guid MyHardwareId { get; set; }
 
         private const int diasRecomendandosParaConectar = 15;
@@ -587,7 +588,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
 
             if (Activos)
                 return lEmpleados.Where(p => p.Contratos.Where(a => a.Estado == EstadoContrato.Activo).ToList().Count > 0).ToList();
-            
+
             return lEmpleados.Where(p => p.Contratos.Where(a => a.Estado == EstadoContrato.Vencido).ToList().Count > 0).ToList();
         }
 
@@ -606,7 +607,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
         }
 
         public List<Huella> ObtenerHuellaUsuarioLocal(string GuidUsuario) => mContext.Huella.Where(p => p.GuidEmpleado == GuidUsuario).ToList();
-        
+
         /// <summary>
         /// Saber si existe alguna sincronizacion en el sistema
         /// </summary>
@@ -641,7 +642,18 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
             }
         }
-
+        /// <summary>
+        /// Salver en la BD el Lote
+        /// </summary>
+        /// <param name="listadoEntidades">IEnumerable<Object> listadoEntidades</param>
+        public void SalvarLote(IEnumerable<Object> listadoEntidades) {
+            try {
+                mContext.BulkInsert(listadoEntidades);
+                mContext.BulkSaveChanges();
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+            }
+        }
         public void AdicionarEmpleadoInstalacionDispostivoSinSalvar(POCOEmpleadoDispositivo pocoEmpleadoDispositivo) {
             try {
                 mContext.EmpleadoDispositivo.Add(TransformacionDatos.DePOCOEmpleadoDispositivoAEmpleadoDispositivo(pocoEmpleadoDispositivo));

@@ -12,6 +12,7 @@ using EnroladorAccesoDatos.Dominio;
 using EnroladorAccesoDatos.Ayudantes;
 using System.Reflection;
 using DevExpress.XtraEditors;
+using EnroladorAccesoDatos;
 
 namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
     #region Atributos
@@ -102,11 +103,12 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 var dispositivo = instalacionSeleccionada.Dispositivos.FirstOrDefault(p => p.GuidDispositivo == GuidDispositivo);
                 dispositivo.NombreCadena = instalacionSeleccionada.NombreCadena;
                 dispositivo.NombreInstalacion = instalacionSeleccionada.NombreInstalacion;
+                dispositivo.EstadoObjeto = EstadoObjeto.EnMemoria;
 
                 if (!empleado.Dispositivos.Any(p => p.GuidDispositivo == dispositivo.GuidDispositivo)) {
                     Negocio.AdicionarEmpleadoInstalacionDispostivoSinSalvar(new POCOEmpleadoDispositivo() {
                         GuidDispositivo = dispositivo.GuidDispositivo,
-                        GuidEmpleado = empleado.GuidEmpleado
+                        GuidEmpleado = empleado.GuidEmpleado,
                     });
                     empleado.Dispositivos.Add(dispositivo);
                     return true;
@@ -160,7 +162,6 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                     DevSimpleButtonDescartar.Visible = true;
                     DevSimpleButtonNuevo.Enabled = false;
                     DevLookUpEditInstalacion.Enabled = true;
-
                     LimpiarCampos();
                     DevSimpleButtonNuevo.Image = Properties.Resources.saveas_16x16;
                 } else {

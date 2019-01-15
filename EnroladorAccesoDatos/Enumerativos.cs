@@ -24,19 +24,16 @@ namespace EnroladorAccesoDatos {
         [EnumDisplayName("Meñique Derecho")]
         MENDER
     }
-
     public enum HuelleroSonidos {
         Correcto,
         Incorrecto,
         Solicitud
     }
-
     public enum ResultadoAutorizacion {
         Aceptado,
         Rechazado,
         Cancelado
     }
-
     public enum TipoDispositivo {
         Invalido,
         [EnumDisplayName("SCCS.Module.BusinessObjects.Dispositivos.Reloj.Reloj")]
@@ -67,6 +64,14 @@ namespace EnroladorAccesoDatos {
     public enum EstadoObjeto {
         Almacenado = 0,
         EnMemoria = 1
+    }
+    public enum EstadoUsoSistema {
+        Habilitado = 0,
+        Inhabilitado = 1
+    }
+    public enum EstadoHuellero {
+        Habilitado = 0,
+        Inhabilitado = 1
     }
     #endregion
 
