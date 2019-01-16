@@ -49,11 +49,12 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         #region Metodos y Eventos
         private void UCEnrolarHuellas_Load(object sender, EventArgs e)
         {
+            if (empleado == null) return;
+
             var huellasDelUsuario = empleado.Huellas;
             foreach (var huella in huellasDelUsuario)
                 MostarImagenSegunHuellaYTipo(huella.Tipo);
         }
-
         private void MostarImagenSegunHuellaYTipo(TipoHuella tipo) {
             try
             {
@@ -97,7 +98,6 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
-
         private async void Huellero_FingerFeature(object sender, FingerFeatureEventArgs e) {
             try {
                 if (Enrolando) {
@@ -136,7 +136,6 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         private void ActualizaStatusHuellas() {
             DevLabelControlCantHuellasSelecionada.Text = string.Format("Se han leido {0} huellas", Dedos);
         }
-
         private void AlmacenarHuella(string data, TipoHuella tipo) {
             try {
 
@@ -238,7 +237,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         }
         #endregion
 
-        #region Flyout
+        #region Flyout Control
         void EnsureShowBeakForm(TipoHuella tipo, object sender) {
             try {
                 if (flyoutPanel.FlyoutPanelState.IsActive) return;
@@ -282,7 +281,5 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             }
         }
         #endregion
-
-        
     }
 }

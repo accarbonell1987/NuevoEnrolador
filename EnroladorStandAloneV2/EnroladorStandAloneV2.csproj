@@ -382,6 +382,9 @@
     <Content Include="CapaInterfazUsuario\Recursos\Logo_Biometria_Aplicada.png" />
     <Content Include="CapaInterfazUsuario\Recursos\Manos.png" />
     <Content Include="CapaInterfazUsuario\Recursos\SplashScreen.png" />
+    <None Include="Resources\employee_16x16.png" />
+    <None Include="Resources\usergroup_16x16.png" />
+    <None Include="Resources\cancel_16x162.png" />
     <None Include="Resources\apply_16x161.png" />
     <None Include="Resources\monthview_16x16.png" />
     <None Include="Resources\today_32x32.png" />

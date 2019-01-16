@@ -12,6 +12,7 @@ using EnroladorAccesoDatos.Dominio;
 using EnroladorAccesoDatos.Ayudantes;
 using System.Reflection;
 using DevExpress.XtraEditors;
+using EnroladorAccesoDatos;
 
 namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
     public partial class UCManejarCasino : DevExpress.XtraEditors.XtraUserControl {
@@ -43,14 +44,12 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         #region Metodos y Eventos
         private void UCManejarCasino_Load(object sender, EventArgs e) {
             try {
-                if (empleado != null) {
-                    CargarDatos();
-                }
+                if (empleado == null) return;
+                CargarDatos();
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
-
         public void CargarDatos() {
             dxErrorProvider.ClearErrors();
             //setea las veces presionadas
@@ -109,6 +108,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 var turno = servicioSeleccionado.TurnosDelServicio.FirstOrDefault(p => p.GuidTurnoServicio == GuidTurnoServicio);
 
                 if (!empleado.TurnoServicioCasino.Any(p => p.GuidTurnoServicio == turno.GuidTurnoServicio)) {
+
                     var pocoEmpleadoTurnoServicioCasino = new POCOEmpleadoTurnoServicioCasino() {
                         GuidTurnoServicio = GuidTurnoServicio,
                         GuidEmpleado = empleado.GuidEmpleado,
@@ -117,10 +117,10 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                         Vigente = turno.Vigente,
                         NombreCasino = instalacionSeleccionada.NombreInstalacion,
                         NombreServicio = servicioSeleccionado.NombreServicioCasino,
-                        NombreTurno = turno.NombreTurnoServicio
+                        NombreTurno = turno.NombreTurnoServicio,
+                        EstadoObjeto = EstadoObjeto.EnMemoria
                     };
 
-                    Negocio.AdicionarEmpleadoTurnoServicioSinSalvar(pocoEmpleadoTurnoServicioCasino);
                     empleado.TurnoServicioCasino.Add(pocoEmpleadoTurnoServicioCasino);
                     return true;
                 } else {
@@ -132,7 +132,6 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 return false;
             }
         }
-
         private void DevLookUpEditInstalacion_EditValueChanged(object sender, EventArgs e) {
             try {
                 var GuidInstalacion = DevLookUpEditCasino.GetColumnValue("GuidInstalacion");
@@ -214,7 +213,5 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             CargarDatos();
         }
         #endregion
-
-        
     }
 }

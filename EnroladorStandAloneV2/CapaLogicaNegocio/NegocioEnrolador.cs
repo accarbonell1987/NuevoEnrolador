@@ -146,62 +146,62 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
 
                             pocoEmpleado.Contratos.Add(pContrato);
                         }
-
-                        //cargar huellas del empleado
-                        var huellas = todasHuellas.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
-
-                        //adicionar huellas al empleado
-                        List<POCOHuella> lPOCOHuellas = new List<POCOHuella>();
-                        foreach (var huella in huellas) {
-                            pocoEmpleado.Huellas.Add(TransformacionDatos.DeHuellaAPOCOHuella(huella));
-                        }
-
-                        //cargar dispositivos del empleado
-                        var dispEmpleado = todosEmpleadosDispositivos.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
-                        //obtener todos los dispositivos del empleado
-                        var dispositivos = todosDispositivos.Where(p => dispEmpleado.Any(a => a.GuidDispositivo == p.GuidDispositivo)).Select(p => p).ToList();
-
-                        pocoEmpleado.Dispositivos = new List<POCODispositivo>();
-                        //adicionar dispositivos al empleado
-                        foreach (var dispositivo in dispositivos) {
-                            var pocoDispositivo = TransformacionDatos.DeDispositivoAPOCODispositivo(dispositivo);
-
-                            var instalacion = ObtenerInstalacionDelDispositivo(pocoDispositivo.GuidInstalacion);
-                            var cadena = ObtenerCadenaDeInstalacion(instalacion.GuidCadena);
-
-                            pocoDispositivo.NombreCadena = cadena.NombreCadena;
-                            pocoDispositivo.NombreInstalacion = instalacion.NombreInstalacion;
-
-                            pocoEmpleado.Dispositivos.Add(pocoDispositivo);
-                        }
-
-                        //cargar Turnos Servicio Casino
-                        var turnoServicioCasinoEmpleado = todosTurnoServicioCasino.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
-                        //obtener todos los turnos del empleado
-                        var turnoServicios = mContext.TurnoServicio.Where(p => turnoServicioCasinoEmpleado.Any(a => a.GuidTurnoServicio == p.GuidTurnoServicio)).Select(p => p).ToList();
-
-                        pocoEmpleado.TurnoServicioCasino = new List<POCOEmpleadoTurnoServicioCasino>();
-                        //adicionar la relacion de turno servicio casino al empleado
-                        foreach (var turno in turnoServicios) {
-                            var pocoTurnoServicio = TransformacionDatos.DeTurnoServicioAPOCOTurnoServicio(turno);
-
-                            var servicio = ObtenerServicio(pocoTurnoServicio.GuidServicio);
-                            var instalacion = ObtenerInstalacion(servicio.GuidCasino);
-
-                            pocoEmpleado.TurnoServicioCasino.Add(new POCOEmpleadoTurnoServicioCasino() {
-                                GuidEmpleado = Guid.Parse(empleado.GuidEmpleado),
-                                GuidTurnoServicio = pocoTurnoServicio.GuidTurnoServicio,
-                                HoraInicio = pocoTurnoServicio.HoraInicio,
-                                HoraFin = pocoTurnoServicio.HoraFin,
-                                Vigente = pocoTurnoServicio.Vigente,
-                                NombreCasino = instalacion.NombreInstalacion,
-                                NombreServicio = servicio.NombreServicioCasino,
-                                NombreTurno = pocoTurnoServicio.NombreTurnoServicio
-                            });
-                        }
-
-                        lPOCOEmpleados.Add(pocoEmpleado);
                     }
+
+                    //cargar huellas del empleado
+                    var huellas = todasHuellas.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
+
+                    //adicionar huellas al empleado
+                    List<POCOHuella> lPOCOHuellas = new List<POCOHuella>();
+                    foreach (var huella in huellas) {
+                        pocoEmpleado.Huellas.Add(TransformacionDatos.DeHuellaAPOCOHuella(huella));
+                    }
+
+                    //cargar dispositivos del empleado
+                    var dispEmpleado = todosEmpleadosDispositivos.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
+                    //obtener todos los dispositivos del empleado
+                    var dispositivos = todosDispositivos.Where(p => dispEmpleado.Any(a => a.GuidDispositivo == p.GuidDispositivo)).Select(p => p).ToList();
+
+                    pocoEmpleado.Dispositivos = new List<POCODispositivo>();
+                    //adicionar dispositivos al empleado
+                    foreach (var dispositivo in dispositivos) {
+                        var pocoDispositivo = TransformacionDatos.DeDispositivoAPOCODispositivo(dispositivo);
+
+                        var instalacion = ObtenerInstalacionDelDispositivo(pocoDispositivo.GuidInstalacion);
+                        var cadena = ObtenerCadenaDeInstalacion(instalacion.GuidCadena);
+
+                        pocoDispositivo.NombreCadena = cadena.NombreCadena;
+                        pocoDispositivo.NombreInstalacion = instalacion.NombreInstalacion;
+
+                        pocoEmpleado.Dispositivos.Add(pocoDispositivo);
+                    }
+
+                    //cargar Turnos Servicio Casino
+                    var turnoServicioCasinoEmpleado = todosTurnoServicioCasino.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
+                    //obtener todos los turnos del empleado
+                    var turnoServicios = mContext.TurnoServicio.Where(p => turnoServicioCasinoEmpleado.Any(a => a.GuidTurnoServicio == p.GuidTurnoServicio)).Select(p => p).ToList();
+
+                    pocoEmpleado.TurnoServicioCasino = new List<POCOEmpleadoTurnoServicioCasino>();
+                    //adicionar la relacion de turno servicio casino al empleado
+                    foreach (var turno in turnoServicios) {
+                        var pocoTurnoServicio = TransformacionDatos.DeTurnoServicioAPOCOTurnoServicio(turno);
+
+                        var servicio = ObtenerServicio(pocoTurnoServicio.GuidServicio);
+                        var instalacion = ObtenerInstalacion(servicio.GuidCasino);
+
+                        pocoEmpleado.TurnoServicioCasino.Add(new POCOEmpleadoTurnoServicioCasino() {
+                            GuidEmpleado = Guid.Parse(empleado.GuidEmpleado),
+                            GuidTurnoServicio = pocoTurnoServicio.GuidTurnoServicio,
+                            HoraInicio = pocoTurnoServicio.HoraInicio,
+                            HoraFin = pocoTurnoServicio.HoraFin,
+                            Vigente = pocoTurnoServicio.Vigente,
+                            NombreCasino = instalacion.NombreInstalacion,
+                            NombreServicio = servicio.NombreServicioCasino,
+                            NombreTurno = pocoTurnoServicio.NombreTurnoServicio
+                        });
+                    }
+
+                    lPOCOEmpleados.Add(pocoEmpleado);
                 }
 
                 lEmpleados = lPOCOEmpleados;
@@ -576,7 +576,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
         /// </summary>
         /// <param name="pRut">string pRut</param>
         /// <returns>string</returns>
-        public List<POCOEmpleado> ObtenerListaContratosEmpleado(bool Activos) {
+        public async Task<List<POCOEmpleado>> ObtenerListaContratosEmpleado(bool Activos) {
             //saber si la lista esta en blanco si lo esta intento llenarla nuevamente
             if ((lEmpleados == null) || (lEmpleados.Count == 0)) {
                 lEmpleados = ObtenerTodosEmpleados();
@@ -625,7 +625,6 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 return false;
             }
         }
-
         /// <summary>
         /// Adiciona un nuevo registro de sincronizacion
         /// </summary>
@@ -654,6 +653,18 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
             }
         }
+        public void SalvarEmpleado(POCOEmpleado empleado) {
+            try {
+                var turnoServiciosCasinosParaAdicionar = empleado.TurnoServicioCasino.Where(p => p.EstadoObjeto == EstadoObjeto.EnMemoria).ToList();
+                var empleadoDispositivosParaAdicionar = empleado.Dispositivos.Where(p => p.EstadoObjeto == EstadoObjeto.EnMemoria).ToList();
+                var huellasParaAdicionar = empleado.Huellas.Where(p => p.EstadoObjeto == EstadoObjeto.EnMemoria).ToList();
+                var contratosParaAdicionar = empleado.Contratos.Where(p => p.EstadoObjeto == EstadoObjeto.EnMemoria).ToList();
+
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+            }
+        }
+
         public void AdicionarEmpleadoInstalacionDispostivoSinSalvar(POCOEmpleadoDispositivo pocoEmpleadoDispositivo) {
             try {
                 mContext.EmpleadoDispositivo.Add(TransformacionDatos.DePOCOEmpleadoDispositivoAEmpleadoDispositivo(pocoEmpleadoDispositivo));
@@ -668,7 +679,6 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
             }
         }
-
         #endregion
 
         #region Leer Datos de WebServices

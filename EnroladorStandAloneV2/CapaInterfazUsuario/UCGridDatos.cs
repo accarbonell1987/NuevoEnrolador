@@ -51,22 +51,18 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
         /// <param name="tipoLlenado">int tipoLlenado Contratos Activos o Vencidos</param>
         private async Task ProcesarGrid(int tipoLlenado) {
             try {
-                var lEmpleados = await GetDataSourceEmpleados();
-
                 switch (tipoLlenado) {
                     case 0:
-                        DevGridControlEmpleados.DataSource = lEmpleados;
+                        bsEmpleados.DataSource = await GetDataSourceEmpleados();
                         break;
                     case 1: {
-                            var lEmpleadosContratosActivos = Negocio.ObtenerListaContratosEmpleado(true);
-                            bsEmpleados.DataSource = new BindingList<POCOEmpleado>(lEmpleadosContratosActivos);
-                            DevGridControlEmpleados.DataSource = bsEmpleados;
+                            var lEmpleadosContratosActivos = await Negocio.ObtenerListaContratosEmpleado(true);
+                            bsEmpleados.DataSource = lEmpleadosContratosActivos;
                         }; break;
 
                     default: {
-                            var lEmpleadosContratosVencidos = Negocio.ObtenerListaContratosEmpleado(false);
-                            bsEmpleados.DataSource = new BindingList<POCOEmpleado>(lEmpleadosContratosVencidos);
-                            DevGridControlEmpleados.DataSource = bsEmpleados;
+                            var lEmpleadosContratosVencidos = await Negocio.ObtenerListaContratosEmpleado(false);
+                            bsEmpleados.DataSource = lEmpleadosContratosVencidos;
                         }; break;
                 }
             } catch (Exception eX) {

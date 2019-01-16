@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace EnroladorAccesoDatos.Dominio {
-    public class POCOEmpleado : POCOGlobal {
+    public class POCOEmpleado : POCOGlobal, ICloneable {
         #region Atributos
         public Guid GuidEmpleado { get; set; }
         public string RUT { get; set; }
@@ -28,6 +28,10 @@ namespace EnroladorAccesoDatos.Dominio {
             Contratos = new List<POCOContrato>();
             Huellas = new List<POCOHuella>();
             Dispositivos = new List<POCODispositivo>();
+        }
+
+        public object Clone() {
+            return MemberwiseClone();
         }
         #endregion
     }

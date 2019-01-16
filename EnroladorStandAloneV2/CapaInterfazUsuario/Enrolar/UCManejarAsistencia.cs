@@ -46,14 +46,12 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         #region Metodos y Eventos
         private void UCEnrolarAsistencia_Load(object sender, EventArgs e) {
             try {
-                if (empleado != null) {
-                    CargarDatos();
-                }
+                if (empleado == null) return;
+                CargarDatos();
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
-
         public void CargarDatos() {
             dxErrorProvider.ClearErrors();
             //setea las veces presionadas
@@ -106,10 +104,6 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 dispositivo.EstadoObjeto = EstadoObjeto.EnMemoria;
 
                 if (!empleado.Dispositivos.Any(p => p.GuidDispositivo == dispositivo.GuidDispositivo)) {
-                    Negocio.AdicionarEmpleadoInstalacionDispostivoSinSalvar(new POCOEmpleadoDispositivo() {
-                        GuidDispositivo = dispositivo.GuidDispositivo,
-                        GuidEmpleado = empleado.GuidEmpleado,
-                    });
                     empleado.Dispositivos.Add(dispositivo);
                     return true;
                 } else {
@@ -121,7 +115,6 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 return false;
             }
         }
-
         private void DevLookUpEditInstalacion_EditValueChanged(object sender, EventArgs e) {
             try {
                 var GuidInstalacion = DevLookUpEditInstalacion.GetColumnValue("GuidInstalacion");
@@ -185,7 +178,5 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             DevSimpleButtonNuevo.Enabled = true;
         }
         #endregion
-
-
     }
 }

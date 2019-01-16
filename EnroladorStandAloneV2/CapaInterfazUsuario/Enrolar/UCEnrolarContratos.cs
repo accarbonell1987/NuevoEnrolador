@@ -13,6 +13,7 @@ using EnroladorAccesoDatos.Ayudantes;
 using System.Reflection;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
+using EnroladorAccesoDatos;
 
 namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
     public partial class UCEnrolarContratos : DevExpress.XtraEditors.XtraUserControl {
@@ -46,14 +47,12 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         #region Metodos y Eventos
         private void UCEnrolarContratos_Load(object sender, EventArgs e) {
             try {
-                if (empleado != null) {
-                    CargarDatos();
-                }
+                if (empleado == null) return;
+                CargarDatos();
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
-
         private void LimpiarCampos() {
             DevLabelControlFechaFinVigencia.Visible = false;
             DevDateEditCaducar.Visible = false;
@@ -162,24 +161,58 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                     return false;
                 }
 
-                var fechaInicio = DevDateEditInicioVigencia.Text;
-                if (fechaInicio == null || fechaInicio == String.Empty) {
+                var fechaInicio = DevDateEditInicioVigencia.DateTime.Date;
+                if (fechaInicio == null) {
                     DevDxErrorProvider.SetError(DevDateEditInicioVigencia, "Fecha no valida o nula...");
                     return false;
                 }
-                return true;
-                ////chequeo que no exista en la relacion ya
-                //if (!empleado.Dispositivos.Any(p => p.GuidDispositivo == dispositivo.GuidDispositivo)) {
-                //    Negocio.AdicionarEmpleadoInstalacionDispostivoSinSalvar(new POCOEmpleadoDispositivo() {
-                //        GuidDispositivo = dispositivo.GuidDispositivo,
-                //        GuidEmpleado = empleado.GuidEmpleado
-                //    });
-                //    empleado.Dispositivos.Add(dispositivo);
-                //    return true;
-                //} else {
-                //    DevDxErrorProvider.SetError(DevLookUpEditInstalacion, "Relacion ya existente...");
-                //    return false;
-                //}
+
+                var codigo = DevTextEditCodigo.Text;
+                if (codigo == null || codigo == String.Empty) {
+                    DevDxErrorProvider.SetError(DevTextEditCodigo, "Codigo no valido o nulo...");
+                    return false;
+                }
+
+                var cantidadDispositivosAsignados = empleado.Dispositivos.Count;
+                var consideraAsistencia = DevCheckEditManejaAsistencia.Checked;
+                if ((consideraAsistencia) && (cantidadDispositivosAsignados == 0)) {
+                    DevDxErrorProvider.SetError(DevCheckEditManejaAsistencia, "Debe de asignar al menos un dispositivo para asistencia...");
+                    return false;
+                }
+
+                var cantidadTurnosAsignados = empleado.TurnoServicioCasino.Count;
+                var consideraCasino = DevCheckEditManejaCasino.Checked;
+                if ((consideraCasino) && (cantidadTurnosAsignados == 0)) {
+                    DevDxErrorProvider.SetError(DevCheckEditManejaCasino, "Debe de asignar al menos un turno del casino...");
+                    return false;
+                }
+
+                //el unico valor representativo del contrato es el codigo
+                //chequeo que no exista en la relacion ya
+                if (!empleado.Contratos.Any(p => p.CodigoContrato == codigo)) {
+
+                    var pocoContrato = new POCOContrato() {
+                        CodigoContrato = codigo,
+                        ConsideraAsistencia = consideraAsistencia,
+                        ConsideraCasino = consideraCasino,
+                        Estado = EstadoContrato.Activo,
+                        EstadoObjeto = EstadoObjeto.EnMemoria,
+                        GuidCargo = cargoSeleccionado.GuidCargo,
+                        NombreCargo = cargoSeleccionado.NombreCargo,
+                        GuidCuenta = cuentaSeleccionada.GuidCuenta,
+                        NombreCuenta = cuentaSeleccionada.NombreCuenta,
+                        GuidEmpleado = empleado.GuidEmpleado,
+                        GuidEmpresa = empresaSeleccionada.GuidEmpresa,
+                        NombreEmpresa = empresaSeleccionada.NombreEmpresa,
+                        InicioVigencia = fechaInicio
+                    };
+
+                    empleado.Contratos.Add(pocoContrato);
+                    return true;
+                } else {
+                    DevDxErrorProvider.SetError(DevTextEditCodigo, "Código de contrato ya existente...");
+                    return false;
+                }
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
                 return false;

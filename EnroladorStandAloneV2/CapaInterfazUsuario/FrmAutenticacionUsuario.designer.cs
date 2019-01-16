@@ -37,6 +37,7 @@
             this.lblUser = new DevExpress.XtraEditors.LabelControl();
             this.lblPass = new DevExpress.XtraEditors.LabelControl();
             this.ribbonPage3 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.DevTextUsuario.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevTextClave.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.separatorControl1)).BeginInit();
@@ -47,8 +48,9 @@
             // 
             // DevButtonAceptar
             // 
-            this.DevButtonAceptar.Image = ((System.Drawing.Image)(resources.GetObject("DevButtonAceptar.Image")));
-            this.DevButtonAceptar.Location = new System.Drawing.Point(208, 116);
+            this.DevButtonAceptar.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.DevButtonAceptar.Image = global::EnroladorStandAloneV2.Properties.Resources.apply_16x161;
+            this.DevButtonAceptar.Location = new System.Drawing.Point(215, 114);
             this.DevButtonAceptar.Name = "DevButtonAceptar";
             this.DevButtonAceptar.Size = new System.Drawing.Size(75, 23);
             this.DevButtonAceptar.TabIndex = 2;
@@ -57,9 +59,10 @@
             // 
             // DevButtonCancelar
             // 
+            this.DevButtonCancelar.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             this.DevButtonCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.DevButtonCancelar.Image = ((System.Drawing.Image)(resources.GetObject("DevButtonCancelar.Image")));
-            this.DevButtonCancelar.Location = new System.Drawing.Point(289, 116);
+            this.DevButtonCancelar.Image = global::EnroladorStandAloneV2.Properties.Resources.cancel_16x161;
+            this.DevButtonCancelar.Location = new System.Drawing.Point(296, 114);
             this.DevButtonCancelar.Name = "DevButtonCancelar";
             this.DevButtonCancelar.Size = new System.Drawing.Size(75, 23);
             this.DevButtonCancelar.TabIndex = 3;
@@ -84,8 +87,9 @@
             // 
             // DevButtonCambiarUsuario
             // 
-            this.DevButtonCambiarUsuario.Image = ((System.Drawing.Image)(resources.GetObject("DevButtonCambiarUsuario.Image")));
-            this.DevButtonCambiarUsuario.Location = new System.Drawing.Point(5, 116);
+            this.DevButtonCambiarUsuario.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.DevButtonCambiarUsuario.Image = global::EnroladorStandAloneV2.Properties.Resources.usergroup_16x16;
+            this.DevButtonCambiarUsuario.Location = new System.Drawing.Point(4, 114);
             this.DevButtonCambiarUsuario.Name = "DevButtonCambiarUsuario";
             this.DevButtonCambiarUsuario.Size = new System.Drawing.Size(108, 23);
             this.DevButtonCambiarUsuario.TabIndex = 7;
@@ -94,7 +98,7 @@
             // 
             // separatorControl1
             // 
-            this.separatorControl1.Location = new System.Drawing.Point(5, 87);
+            this.separatorControl1.Location = new System.Drawing.Point(4, 85);
             this.separatorControl1.Name = "separatorControl1";
             this.separatorControl1.Size = new System.Drawing.Size(352, 23);
             this.separatorControl1.TabIndex = 8;
@@ -110,7 +114,7 @@
             // 
             // groupControl1
             // 
-            this.groupControl1.CaptionImage = ((System.Drawing.Image)(resources.GetObject("groupControl1.CaptionImage")));
+            this.groupControl1.CaptionImage = global::EnroladorStandAloneV2.Properties.Resources.employee_16x16;
             this.groupControl1.Controls.Add(this.separatorControl1);
             this.groupControl1.Controls.Add(this.DevTextUsuario);
             this.groupControl1.Controls.Add(this.DevButtonCambiarUsuario);
@@ -122,7 +126,7 @@
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(377, 149);
+            this.groupControl1.Size = new System.Drawing.Size(377, 142);
             this.groupControl1.TabIndex = 8;
             this.groupControl1.Text = "Autenticación de Usuario";
             // 
@@ -147,14 +151,19 @@
             this.ribbonPage3.Name = "ribbonPage3";
             this.ribbonPage3.Text = "ribbonPage3";
             // 
+            // defaultLookAndFeel1
+            // 
+            this.defaultLookAndFeel1.LookAndFeel.SkinName = "DevExpress Dark Style";
+            // 
             // FrmAutenticacionUsuario
             // 
             this.AcceptButton = this.DevButtonAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.DevButtonCancelar;
-            this.ClientSize = new System.Drawing.Size(377, 149);
+            this.ClientSize = new System.Drawing.Size(377, 142);
             this.Controls.Add(this.groupControl1);
+            this.FormBorderEffect = DevExpress.XtraEditors.FormBorderEffect.None;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -188,5 +197,6 @@
         private DevExpress.XtraEditors.LabelControl lblUser;
         private DevExpress.XtraEditors.LabelControl lblPass;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage3;
+        private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;
     }
 }

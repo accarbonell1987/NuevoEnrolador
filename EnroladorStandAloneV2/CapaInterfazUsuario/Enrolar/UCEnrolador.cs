@@ -38,12 +38,16 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         private void UCEnrolador_Load(object sender, EventArgs e) {
             try {
                 bsEmpleados.DataSource = Negocio.lEmpleados;
+
+                POCOEmpleado empleado = null;
+
                 //seleccionar el RUT en el textbox
-                if (RUT != String.Empty) {
+                if ((RUT != String.Empty)&&(!RUT.Equals("Nuevo"))) {
                     DevLookUpEditRUTEmpleado.Text = RUT;
-                    var empleado = Negocio.ObtenerEmpleadoDeLista(RUT);
-                    CargarEmpleado(empleado);
+                    empleado = Negocio.ObtenerEmpleadoDeLista(RUT);
                 }
+
+                CargarEmpleado(empleado);
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
@@ -67,11 +71,9 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         public void EliminarUCAsistencia() {
             DevPanelControlAsistencia.Controls.Clear();
         }
-
         public void EliminarUCCasino() {
             DevPanelControlCasinos.Controls.Clear();
         }
-
         private void DevLookUpEditRUTEmpleado_EditValueChanged(object sender, EventArgs e) {
             try {
                 string RUT = DevLookUpEditRUTEmpleado.Text;
@@ -87,7 +89,6 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
-
         private void CargarEmpleado(POCOEmpleado empleado) {
             try {
                 UCEnrolarDatosEmpleado uCEmpleados = new UCEnrolarDatosEmpleado(this, Negocio, empleado) {
