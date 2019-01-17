@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
             this.DevRibbonControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.DevBarButtonSalir = new DevExpress.XtraBars.BarButtonItem();
@@ -38,6 +39,7 @@
             this.DevPanelControlPrincipal = new DevExpress.XtraEditors.PanelControl();
             this.DevNavigationPanePrincipal = new DevExpress.XtraBars.Navigation.NavigationPane();
             this.backgroundWorkerChequeoNotificaciones = new System.ComponentModel.BackgroundWorker();
+            this.DevDefaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.DevRibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlNotificacionesAcciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevPanelControlPrincipal)).BeginInit();
@@ -96,8 +98,9 @@
             this.DevBarButtonItemGuardar.Caption = "Guardar";
             this.DevBarButtonItemGuardar.Id = 4;
             this.DevBarButtonItemGuardar.ImageOptions.Image = global::EnroladorStandAloneV2.Properties.Resources.save_32x32;
-            this.DevBarButtonItemGuardar.ImageOptions.LargeImage = global::EnroladorStandAloneV2.Properties.Resources.additem_32x32;
+            this.DevBarButtonItemGuardar.ImageOptions.LargeImage = global::EnroladorStandAloneV2.Properties.Resources.save_32x32;
             this.DevBarButtonItemGuardar.Name = "DevBarButtonItemGuardar";
+            this.DevBarButtonItemGuardar.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.DevBarButtonItemGuardar_ItemClick);
             // 
             // DevBarButtonItemDescartar
             // 
@@ -219,6 +222,7 @@
         private DevExpress.XtraBars.BarButtonItem DevBarButtonItemGuardar;
         private DevExpress.XtraBars.BarButtonItem DevBarButtonItemDescartar;
         private System.ComponentModel.BackgroundWorker backgroundWorkerChequeoNotificaciones;
+        private DevExpress.LookAndFeel.DefaultLookAndFeel DevDefaultLookAndFeel;
     }
 }
 

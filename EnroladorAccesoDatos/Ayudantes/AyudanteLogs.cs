@@ -32,7 +32,12 @@ namespace EnroladorAccesoDatos.Ayudantes {
         /// <param name="nombreArchivo">string nombreArchivo</param>
         /// <returns>Exception</returns>
         public static Exception Log(this Exception ex, string nombreArchivo, string nombreProcedimiento, List<POCONotificacion> lNotificaciones) {
-            string mensaje = string.Concat(ex.InnerExceptions().Select(e => e.Message + "\n"));
+
+            List<string> mensaje = new List<string>();
+            foreach (Exception error in ex.InnerExceptions()) {
+                mensaje.Add(error.GetType() + ": " + error.Message + " - " + error.InnerException);
+            }
+            //string mensaje = string.Concat(ex.InnerExceptions().Select(e => e.Message + "\n"));
 
             DateTime ahora = DateTime.Now;
 

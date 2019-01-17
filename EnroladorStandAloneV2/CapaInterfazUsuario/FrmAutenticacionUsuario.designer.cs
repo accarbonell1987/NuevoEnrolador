@@ -37,7 +37,8 @@
             this.lblUser = new DevExpress.XtraEditors.LabelControl();
             this.lblPass = new DevExpress.XtraEditors.LabelControl();
             this.ribbonPage3 = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+            this.ribbonPage4 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.DevDefaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.DevTextUsuario.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevTextClave.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.separatorControl1)).BeginInit();
@@ -126,7 +127,7 @@
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(377, 142);
+            this.groupControl1.Size = new System.Drawing.Size(385, 142);
             this.groupControl1.TabIndex = 8;
             this.groupControl1.Text = "Autenticación de Usuario";
             // 
@@ -151,9 +152,10 @@
             this.ribbonPage3.Name = "ribbonPage3";
             this.ribbonPage3.Text = "ribbonPage3";
             // 
-            // defaultLookAndFeel1
+            // ribbonPage4
             // 
-            this.defaultLookAndFeel1.LookAndFeel.SkinName = "DevExpress Dark Style";
+            this.ribbonPage4.Name = "ribbonPage4";
+            this.ribbonPage4.Text = "ribbonPage4";
             // 
             // FrmAutenticacionUsuario
             // 
@@ -161,7 +163,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.DevButtonCancelar;
-            this.ClientSize = new System.Drawing.Size(377, 142);
+            this.ClientSize = new System.Drawing.Size(385, 142);
             this.Controls.Add(this.groupControl1);
             this.FormBorderEffect = DevExpress.XtraEditors.FormBorderEffect.None;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -197,6 +199,7 @@
         private DevExpress.XtraEditors.LabelControl lblUser;
         private DevExpress.XtraEditors.LabelControl lblPass;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage3;
-        private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage4;
+        private DevExpress.LookAndFeel.DefaultLookAndFeel DevDefaultLookAndFeel;
     }
 }

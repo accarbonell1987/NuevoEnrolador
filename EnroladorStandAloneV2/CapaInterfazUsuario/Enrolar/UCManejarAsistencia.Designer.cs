@@ -24,6 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCManejarAsistencia));
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             this.DevGridControlAsistencias = new DevExpress.XtraGrid.GridControl();
             this.bsEmpleadoDispositivos = new System.Windows.Forms.BindingSource(this.components);
             this.DevGridViewAsistencias = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -49,6 +51,7 @@
             this.DevLayoutControlItemInstalacion = new DevExpress.XtraLayout.LayoutControlItem();
             this.DevLayoutControlItemDispositivo = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxErrorProvider = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+            this.DevRepositoryItemButtonEditEliminar = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlAsistencias)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEmpleadoDispositivos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewAsistencias)).BeginInit();
@@ -64,6 +67,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemInstalacion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemDispositivo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevRepositoryItemButtonEditEliminar)).BeginInit();
             this.SuspendLayout();
             // 
             // DevGridControlAsistencias
@@ -75,6 +79,8 @@
             this.DevGridControlAsistencias.Location = new System.Drawing.Point(3, 3);
             this.DevGridControlAsistencias.MainView = this.DevGridViewAsistencias;
             this.DevGridControlAsistencias.Name = "DevGridControlAsistencias";
+            this.DevGridControlAsistencias.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.DevRepositoryItemButtonEditEliminar});
             this.DevGridControlAsistencias.Size = new System.Drawing.Size(441, 150);
             this.DevGridControlAsistencias.TabIndex = 0;
             this.DevGridControlAsistencias.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -159,7 +165,8 @@
             // colEliminar
             // 
             this.colEliminar.Caption = "Eliminar";
-            this.colEliminar.FieldName = "Eliminar";
+            this.colEliminar.ColumnEdit = this.DevRepositoryItemButtonEditEliminar;
+            this.colEliminar.FieldName = "NombreDispositivo";
             this.colEliminar.Name = "colEliminar";
             this.colEliminar.ToolTip = "Eliminar Dispositivo";
             this.colEliminar.Visible = true;
@@ -184,7 +191,7 @@
             this.DevSimpleButtonNuevo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.DevSimpleButtonNuevo.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             this.DevSimpleButtonNuevo.Enabled = false;
-            this.DevSimpleButtonNuevo.Image = global::EnroladorStandAloneV2.Properties.Resources.additem_16x16;
+            this.DevSimpleButtonNuevo.Image = ((System.Drawing.Image)(resources.GetObject("DevSimpleButtonNuevo.Image")));
             this.DevSimpleButtonNuevo.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.DevSimpleButtonNuevo.Location = new System.Drawing.Point(15, 86);
             this.DevSimpleButtonNuevo.Name = "DevSimpleButtonNuevo";
@@ -200,7 +207,7 @@
             this.DevSimpleButtonModificar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.DevSimpleButtonModificar.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             this.DevSimpleButtonModificar.Enabled = false;
-            this.DevSimpleButtonModificar.Image = global::EnroladorStandAloneV2.Properties.Resources.edit_16x16;
+            this.DevSimpleButtonModificar.Image = ((System.Drawing.Image)(resources.GetObject("DevSimpleButtonModificar.Image")));
             this.DevSimpleButtonModificar.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.DevSimpleButtonModificar.Location = new System.Drawing.Point(64, 86);
             this.DevSimpleButtonModificar.Name = "DevSimpleButtonModificar";
@@ -215,7 +222,7 @@
             // 
             this.DevSimpleButtonDescartar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.DevSimpleButtonDescartar.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.DevSimpleButtonDescartar.Image = global::EnroladorStandAloneV2.Properties.Resources.clear_16x16;
+            this.DevSimpleButtonDescartar.Image = ((System.Drawing.Image)(resources.GetObject("DevSimpleButtonDescartar.Image")));
             this.DevSimpleButtonDescartar.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.DevSimpleButtonDescartar.Location = new System.Drawing.Point(113, 86);
             this.DevSimpleButtonDescartar.Name = "DevSimpleButtonDescartar";
@@ -326,6 +333,17 @@
             // 
             this.dxErrorProvider.ContainerControl = this;
             // 
+            // DevRepositoryItemButtonEditEliminar
+            // 
+            this.DevRepositoryItemButtonEditEliminar.AutoHeight = false;
+            this.DevRepositoryItemButtonEditEliminar.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.DevRepositoryItemButtonEditEliminar.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("DevRepositoryItemButtonEditEliminar.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            this.DevRepositoryItemButtonEditEliminar.ButtonsStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.DevRepositoryItemButtonEditEliminar.Name = "DevRepositoryItemButtonEditEliminar";
+            this.DevRepositoryItemButtonEditEliminar.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.DevRepositoryItemButtonEditEliminar.Click += new System.EventHandler(this.DevRepositoryItemButtonEditEliminar_Click);
+            // 
             // UCManejarAsistencia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -351,6 +369,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemInstalacion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlItemDispositivo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevRepositoryItemButtonEditEliminar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -382,5 +401,6 @@
         private DevExpress.XtraEditors.SimpleButton DevSimpleButtonNuevo;
         private DevExpress.XtraEditors.SimpleButton DevSimpleButtonModificar;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit DevRepositoryItemButtonEditEliminar;
     }
 }

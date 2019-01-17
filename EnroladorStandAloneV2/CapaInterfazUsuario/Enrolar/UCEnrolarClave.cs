@@ -77,6 +77,9 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             try {
                 empleado.Contraseña = DevTextClave.Text;
                 empleado.TieneContraseña = true;
+
+                DevSimpleButtonAplicar.Enabled = false;
+                DevTextEditRevalidarClave.Enabled = false;
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }

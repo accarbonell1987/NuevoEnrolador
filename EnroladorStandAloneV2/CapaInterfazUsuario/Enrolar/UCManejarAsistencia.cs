@@ -178,5 +178,9 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             DevSimpleButtonNuevo.Enabled = true;
         }
         #endregion
+
+        private void DevRepositoryItemButtonEditEliminar_Click(object sender, EventArgs e) {
+            //
+        }
     }
 }

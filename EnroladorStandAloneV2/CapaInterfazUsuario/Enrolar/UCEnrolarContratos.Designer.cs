@@ -24,6 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCEnrolarContratos));
             this.DevGridControlContratos = new DevExpress.XtraGrid.GridControl();
             this.bsContratos = new System.Windows.Forms.BindingSource(this.components);
             this.DevGridViewContratos = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -32,17 +34,18 @@
             this.colGuidCuenta = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colGuidCargo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colGuidEmpleado = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colCodigoContrato = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colInicioVigencia = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colFinVigencia = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colConsideraAsistencia = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colConsideraCasino = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDescripcion = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colEstado = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colNombreEmpresa = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colNombreCuenta = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colNombreCargo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCodigoContrato = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colInicioVigencia = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFinVigencia = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colEstado = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colEliminar = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.DevRepositoryItemButtonEditEliminar = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.DevGroupControlDatosContrato = new DevExpress.XtraEditors.GroupControl();
             this.DevDateEditCaducar = new DevExpress.XtraEditors.DateEdit();
             this.DevLabelControlFechaFinVigencia = new DevExpress.XtraEditors.LabelControl();
@@ -73,6 +76,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlContratos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsContratos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewContratos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevRepositoryItemButtonEditEliminar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlDatosContrato)).BeginInit();
             this.DevGroupControlDatosContrato.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DevDateEditCaducar.Properties.CalendarTimeProperties)).BeginInit();
@@ -111,6 +115,8 @@
             this.DevGridControlContratos.Location = new System.Drawing.Point(3, 3);
             this.DevGridControlContratos.MainView = this.DevGridViewContratos;
             this.DevGridControlContratos.Name = "DevGridControlContratos";
+            this.DevGridControlContratos.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.DevRepositoryItemButtonEditEliminar});
             this.DevGridControlContratos.Size = new System.Drawing.Size(381, 182);
             this.DevGridControlContratos.TabIndex = 0;
             this.DevGridControlContratos.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -129,16 +135,16 @@
             this.colGuidCuenta,
             this.colGuidCargo,
             this.colGuidEmpleado,
-            this.colCodigoContrato,
-            this.colInicioVigencia,
-            this.colFinVigencia,
             this.colConsideraAsistencia,
             this.colConsideraCasino,
             this.colDescripcion,
-            this.colEstado,
             this.colNombreEmpresa,
             this.colNombreCuenta,
             this.colNombreCargo,
+            this.colCodigoContrato,
+            this.colInicioVigencia,
+            this.colFinVigencia,
+            this.colEstado,
             this.colEliminar});
             this.DevGridViewContratos.GridControl = this.DevGridControlContratos;
             this.DevGridViewContratos.Name = "DevGridViewContratos";
@@ -170,28 +176,6 @@
             this.colGuidEmpleado.FieldName = "GuidEmpleado";
             this.colGuidEmpleado.Name = "colGuidEmpleado";
             // 
-            // colCodigoContrato
-            // 
-            this.colCodigoContrato.Caption = "Codigo";
-            this.colCodigoContrato.FieldName = "CodigoContrato";
-            this.colCodigoContrato.Name = "colCodigoContrato";
-            this.colCodigoContrato.Visible = true;
-            this.colCodigoContrato.VisibleIndex = 2;
-            // 
-            // colInicioVigencia
-            // 
-            this.colInicioVigencia.FieldName = "InicioVigencia";
-            this.colInicioVigencia.Name = "colInicioVigencia";
-            this.colInicioVigencia.Visible = true;
-            this.colInicioVigencia.VisibleIndex = 0;
-            // 
-            // colFinVigencia
-            // 
-            this.colFinVigencia.FieldName = "FinVigencia";
-            this.colFinVigencia.Name = "colFinVigencia";
-            this.colFinVigencia.Visible = true;
-            this.colFinVigencia.VisibleIndex = 1;
-            // 
             // colConsideraAsistencia
             // 
             this.colConsideraAsistencia.FieldName = "ConsideraAsistencia";
@@ -206,15 +190,6 @@
             // 
             this.colDescripcion.FieldName = "Descripcion";
             this.colDescripcion.Name = "colDescripcion";
-            this.colDescripcion.Visible = true;
-            this.colDescripcion.VisibleIndex = 3;
-            // 
-            // colEstado
-            // 
-            this.colEstado.FieldName = "Estado";
-            this.colEstado.Name = "colEstado";
-            this.colEstado.Visible = true;
-            this.colEstado.VisibleIndex = 4;
             // 
             // colNombreEmpresa
             // 
@@ -231,15 +206,54 @@
             this.colNombreCargo.FieldName = "NombreCargo";
             this.colNombreCargo.Name = "colNombreCargo";
             // 
+            // colCodigoContrato
+            // 
+            this.colCodigoContrato.Caption = "Codigo";
+            this.colCodigoContrato.FieldName = "CodigoContrato";
+            this.colCodigoContrato.Name = "colCodigoContrato";
+            this.colCodigoContrato.Visible = true;
+            this.colCodigoContrato.VisibleIndex = 0;
+            // 
+            // colInicioVigencia
+            // 
+            this.colInicioVigencia.FieldName = "InicioVigencia";
+            this.colInicioVigencia.Name = "colInicioVigencia";
+            this.colInicioVigencia.Visible = true;
+            this.colInicioVigencia.VisibleIndex = 1;
+            // 
+            // colFinVigencia
+            // 
+            this.colFinVigencia.FieldName = "FinVigencia";
+            this.colFinVigencia.Name = "colFinVigencia";
+            this.colFinVigencia.Visible = true;
+            this.colFinVigencia.VisibleIndex = 2;
+            // 
+            // colEstado
+            // 
+            this.colEstado.FieldName = "Estado";
+            this.colEstado.Name = "colEstado";
+            this.colEstado.Visible = true;
+            this.colEstado.VisibleIndex = 3;
+            // 
             // colEliminar
             // 
             this.colEliminar.Caption = "Eliminar";
-            this.colEliminar.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            this.colEliminar.ColumnEdit = this.DevRepositoryItemButtonEditEliminar;
+            this.colEliminar.FieldName = "Eliminar";
             this.colEliminar.Name = "colEliminar";
-            this.colEliminar.OptionsColumn.AllowEdit = false;
-            this.colEliminar.ToolTip = "Eliminar Contrato";
             this.colEliminar.Visible = true;
-            this.colEliminar.VisibleIndex = 5;
+            this.colEliminar.VisibleIndex = 4;
+            // 
+            // DevRepositoryItemButtonEditEliminar
+            // 
+            this.DevRepositoryItemButtonEditEliminar.AutoHeight = false;
+            this.DevRepositoryItemButtonEditEliminar.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.DevRepositoryItemButtonEditEliminar.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::EnroladorStandAloneV2.Properties.Resources.cancel_16x161, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            this.DevRepositoryItemButtonEditEliminar.ButtonsStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.DevRepositoryItemButtonEditEliminar.Name = "DevRepositoryItemButtonEditEliminar";
+            this.DevRepositoryItemButtonEditEliminar.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.DevRepositoryItemButtonEditEliminar.Click += new System.EventHandler(this.DevRepositoryItemButtonEditEliminar_Click);
             // 
             // DevGroupControlDatosContrato
             // 
@@ -287,7 +301,7 @@
             // 
             this.DevSimpleButtonCaducar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.DevSimpleButtonCaducar.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.DevSimpleButtonCaducar.Image = global::EnroladorStandAloneV2.Properties.Resources.monthview_16x16;
+            this.DevSimpleButtonCaducar.Image = ((System.Drawing.Image)(resources.GetObject("DevSimpleButtonCaducar.Image")));
             this.DevSimpleButtonCaducar.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.DevSimpleButtonCaducar.Location = new System.Drawing.Point(320, 206);
             this.DevSimpleButtonCaducar.Name = "DevSimpleButtonCaducar";
@@ -302,7 +316,7 @@
             // 
             this.DevSimpleButtonDescartar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.DevSimpleButtonDescartar.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.DevSimpleButtonDescartar.Image = global::EnroladorStandAloneV2.Properties.Resources.clear_16x16;
+            this.DevSimpleButtonDescartar.Image = ((System.Drawing.Image)(resources.GetObject("DevSimpleButtonDescartar.Image")));
             this.DevSimpleButtonDescartar.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.DevSimpleButtonDescartar.Location = new System.Drawing.Point(105, 205);
             this.DevSimpleButtonDescartar.Name = "DevSimpleButtonDescartar";
@@ -319,7 +333,7 @@
             this.DevSimpleButtonNuevo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.DevSimpleButtonNuevo.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             this.DevSimpleButtonNuevo.Enabled = false;
-            this.DevSimpleButtonNuevo.Image = global::EnroladorStandAloneV2.Properties.Resources.additem_16x16;
+            this.DevSimpleButtonNuevo.Image = ((System.Drawing.Image)(resources.GetObject("DevSimpleButtonNuevo.Image")));
             this.DevSimpleButtonNuevo.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.DevSimpleButtonNuevo.Location = new System.Drawing.Point(7, 205);
             this.DevSimpleButtonNuevo.Name = "DevSimpleButtonNuevo";
@@ -335,7 +349,7 @@
             this.DevSimpleButtonModificar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.DevSimpleButtonModificar.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             this.DevSimpleButtonModificar.Enabled = false;
-            this.DevSimpleButtonModificar.Image = global::EnroladorStandAloneV2.Properties.Resources.edit_16x16;
+            this.DevSimpleButtonModificar.Image = ((System.Drawing.Image)(resources.GetObject("DevSimpleButtonModificar.Image")));
             this.DevSimpleButtonModificar.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.DevSimpleButtonModificar.Location = new System.Drawing.Point(56, 205);
             this.DevSimpleButtonModificar.Name = "DevSimpleButtonModificar";
@@ -375,7 +389,6 @@
             this.DevCheckEditManejaCasino.Size = new System.Drawing.Size(346, 19);
             this.DevCheckEditManejaCasino.StyleController = this.DevLayoutControlDatosDelContacto;
             this.DevCheckEditManejaCasino.TabIndex = 10;
-            this.DevCheckEditManejaCasino.CheckedChanged += new System.EventHandler(this.DevCheckEditManejaCasino_CheckedChanged);
             this.DevCheckEditManejaCasino.EditValueChanged += new System.EventHandler(this.DevCheckEditManejaCasino_EditValueChanged);
             // 
             // DevCheckEditManejaAsistencia
@@ -386,7 +399,6 @@
             this.DevCheckEditManejaAsistencia.Size = new System.Drawing.Size(346, 19);
             this.DevCheckEditManejaAsistencia.StyleController = this.DevLayoutControlDatosDelContacto;
             this.DevCheckEditManejaAsistencia.TabIndex = 9;
-            this.DevCheckEditManejaAsistencia.CheckedChanged += new System.EventHandler(this.DevCheckEditManejaAsistencia_CheckedChanged);
             this.DevCheckEditManejaAsistencia.EditValueChanged += new System.EventHandler(this.DevCheckEditManejaAsistencia_EditValueChanged);
             // 
             // DevTextEditCodigo
@@ -579,6 +591,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlContratos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsContratos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewContratos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevRepositoryItemButtonEditEliminar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlDatosContrato)).EndInit();
             this.DevGroupControlDatosContrato.ResumeLayout(false);
             this.DevGroupControlDatosContrato.PerformLayout();
@@ -651,12 +664,13 @@
         private DevExpress.XtraGrid.Columns.GridColumn colNombreCuenta;
         private DevExpress.XtraGrid.Columns.GridColumn colNombreCargo;
         private DevExpress.XtraEditors.SimpleButton DevSimpleButtonModificar;
-        private DevExpress.XtraGrid.Columns.GridColumn colEliminar;
         private DevExpress.XtraEditors.SimpleButton DevSimpleButtonNuevo;
         private DevExpress.XtraEditors.SimpleButton DevSimpleButtonDescartar;
         private DevExpress.XtraEditors.SimpleButton DevSimpleButtonCaducar;
         private DevExpress.XtraEditors.DateEdit DevDateEditCaducar;
         private DevExpress.XtraEditors.LabelControl DevLabelControlFechaFinVigencia;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider DevDxErrorProvider;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit DevRepositoryItemButtonEditEliminar;
+        private DevExpress.XtraGrid.Columns.GridColumn colEliminar;
     }
 }

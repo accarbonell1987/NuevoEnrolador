@@ -389,7 +389,7 @@ namespace EnroladorStandAloneV2 {
                     if ((pDispositivo.Tipo != TipoDispositivo.Invalido) && (instalacionContieneDispositivo)) {
                         //transformar datos
                         var tDispositivo = TransformacionDatos.DePOCODispositivoADispositivo(pDispositivo);
-                        Negocio.SalvarLote(dbList);
+                        dbList.Add(tDispositivo);
                         lDispositivos.Add(pDispositivo);
                     }
 
@@ -988,6 +988,9 @@ namespace EnroladorStandAloneV2 {
             }
         }
 
+        private void DevBarButtonItemGuardar_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
+            //
+        }
         private void DevBarButtonItemDescartar_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
             try {
                 var framePage = DevNavigationPanePrincipal.SelectedPage;
@@ -1182,8 +1185,9 @@ namespace EnroladorStandAloneV2 {
                 return cp;
             }
         }
+
         #endregion
 
-
+        
     }
 }

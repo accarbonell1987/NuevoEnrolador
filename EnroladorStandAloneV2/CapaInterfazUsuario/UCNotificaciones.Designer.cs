@@ -31,23 +31,21 @@
             // 
             // DevPanelControlWarning
             // 
-            this.DevPanelControlWarning.ContentImage = global::EnroladorStandAloneV2.Properties.Resources.apply_32x32;
+            this.DevPanelControlWarning.ContentImage = global::EnroladorStandAloneV2.Properties.Resources.checkbox_32x32;
             this.DevPanelControlWarning.ContentImageAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.DevPanelControlWarning.Controls.Add(this.DevLabelControlNotificacion);
             this.DevPanelControlWarning.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DevPanelControlWarning.Location = new System.Drawing.Point(3, 3);
+            this.DevPanelControlWarning.Location = new System.Drawing.Point(5, 5);
             this.DevPanelControlWarning.Name = "DevPanelControlWarning";
-            this.DevPanelControlWarning.Size = new System.Drawing.Size(815, 36);
+            this.DevPanelControlWarning.Size = new System.Drawing.Size(811, 32);
             this.DevPanelControlWarning.TabIndex = 4;
             this.DevPanelControlWarning.Click += new System.EventHandler(this.DevPanelControlNotificaciones_Click);
             this.DevPanelControlWarning.MouseEnter += new System.EventHandler(this.DevPanelControlWarning_MouseEnter);
             // 
             // DevLabelControlNotificacion
             // 
-            this.DevLabelControlNotificacion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.DevLabelControlNotificacion.ImageAlignToText = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.DevLabelControlNotificacion.Location = new System.Drawing.Point(47, 13);
+            this.DevLabelControlNotificacion.Location = new System.Drawing.Point(47, 9);
             this.DevLabelControlNotificacion.Name = "DevLabelControlNotificacion";
             this.DevLabelControlNotificacion.Size = new System.Drawing.Size(113, 13);
             this.DevLabelControlNotificacion.TabIndex = 3;
@@ -59,7 +57,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.DevPanelControlWarning);
             this.Name = "UCNotificaciones";
-            this.Padding = new System.Windows.Forms.Padding(3);
+            this.Padding = new System.Windows.Forms.Padding(5);
             this.Size = new System.Drawing.Size(821, 42);
             ((System.ComponentModel.ISupportInitialize)(this.DevPanelControlWarning)).EndInit();
             this.DevPanelControlWarning.ResumeLayout(false);

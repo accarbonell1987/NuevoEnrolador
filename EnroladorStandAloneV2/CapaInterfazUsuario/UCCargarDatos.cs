@@ -20,6 +20,15 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
         #region Constructor
         public UCCargarDatos() {
             InitializeComponent();
+
+            DevProgressBarControlTotal.LookAndFeel.SetUltraFlatStyle();
+            DevProgressBarControlTotal.Properties.StartColor = Color.BlueViolet;
+            DevProgressBarControlTotal.Properties.EndColor = Color.GreenYellow;
+
+            DevProgressBarControlActual.LookAndFeel.SetUltraFlatStyle();
+            DevProgressBarControlActual.Properties.StartColor = Color.BlueViolet;
+            DevProgressBarControlActual.Properties.EndColor = Color.GreenYellow;
+
             DevLabelControlTotal.Text = "";
             DevLabelControlActual.Text = "";
         }
@@ -42,7 +51,6 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
             numeroPaso = 1;
             ActualizaLabels();
         }
-
         public void SiguientePaso(int totalActual, string nombrePaso) {
             numeroPaso++;
 
@@ -53,7 +61,6 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
 
             ActualizaLabels();
         }
-
         public void AvanzarActual() {
             //Hay que revisar que está dando problemas y no muestra lo que es
             DevProgressBarControlActual.PerformStep();
@@ -63,7 +70,6 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
 
             ActualizaLabels();
         }
-
         private void ActualizaLabels() {
             //DevLabelControlTotal.Text = string.Format("Paso {0} de {1}: {2}", numeroPaso, DevProgressBarControlTotal.Properties.Maximum / 10, nombrePaso);
             DevLabelControlTotal.Text = string.Format("Paso {0} de {1}: {2}", numeroPaso, totalPasos, nombrePaso);

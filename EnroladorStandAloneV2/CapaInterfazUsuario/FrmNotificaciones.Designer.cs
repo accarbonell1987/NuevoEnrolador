@@ -35,7 +35,7 @@
             this.DevIemLabelNotificaciones = new DevExpress.XtraLayout.LayoutControlItem();
             this.DevItemGrid = new DevExpress.XtraLayout.LayoutControlItem();
             this.DevSeparatorControl = new DevExpress.XtraEditors.SeparatorControl();
-            this.DevButtonCancelar = new DevExpress.XtraEditors.SimpleButton();
+            this.DevButtonCerrar = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControl)).BeginInit();
             this.DevLayoutControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlNotificaciones)).BeginInit();
@@ -147,16 +147,17 @@
             this.DevSeparatorControl.Size = new System.Drawing.Size(547, 23);
             this.DevSeparatorControl.TabIndex = 10;
             // 
-            // DevButtonCancelar
+            // DevButtonCerrar
             // 
-            this.DevButtonCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.DevButtonCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.DevButtonCancelar.Image = ((System.Drawing.Image)(resources.GetObject("DevButtonCancelar.Image")));
-            this.DevButtonCancelar.Location = new System.Drawing.Point(484, 290);
-            this.DevButtonCancelar.Name = "DevButtonCancelar";
-            this.DevButtonCancelar.Size = new System.Drawing.Size(75, 23);
-            this.DevButtonCancelar.TabIndex = 9;
-            this.DevButtonCancelar.Text = "Cancelar";
+            this.DevButtonCerrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.DevButtonCerrar.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.DevButtonCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.DevButtonCerrar.Image = global::EnroladorStandAloneV2.Properties.Resources.cancel_16x161;
+            this.DevButtonCerrar.Location = new System.Drawing.Point(484, 290);
+            this.DevButtonCerrar.Name = "DevButtonCerrar";
+            this.DevButtonCerrar.Size = new System.Drawing.Size(75, 23);
+            this.DevButtonCerrar.TabIndex = 9;
+            this.DevButtonCerrar.Text = "Cerrar";
             // 
             // FrmNotificaciones
             // 
@@ -165,7 +166,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(571, 325);
-            this.Controls.Add(this.DevButtonCancelar);
+            this.Controls.Add(this.DevButtonCerrar);
             this.Controls.Add(this.DevSeparatorControl);
             this.Controls.Add(this.DevLayoutControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -195,7 +196,7 @@
         private DevExpress.XtraLayout.LayoutControlItem DevIemLabelNotificaciones;
         private DevExpress.XtraLayout.LayoutControlItem DevItemGrid;
         private DevExpress.XtraEditors.SeparatorControl DevSeparatorControl;
-        private DevExpress.XtraEditors.SimpleButton DevButtonCancelar;
+        private DevExpress.XtraEditors.SimpleButton DevButtonCerrar;
         private System.Windows.Forms.BindingSource bsNotificaciones;
     }
 }

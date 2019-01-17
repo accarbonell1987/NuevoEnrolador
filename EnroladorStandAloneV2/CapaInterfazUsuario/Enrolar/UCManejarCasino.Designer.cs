@@ -24,6 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCManejarCasino));
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             this.DevGridControlTurnos = new DevExpress.XtraGrid.GridControl();
             this.bsEmpleadoTurnoServicioCasino = new System.Windows.Forms.BindingSource(this.components);
             this.DevGridViewAsistencias = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -33,6 +35,7 @@
             this.colNombreTurno = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colNombreCasino = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colEliminar = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.DevRepositoryItemButtonEditEliminar = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.DevGroupControlAsistencia = new DevExpress.XtraEditors.GroupControl();
             this.DevSimpleButtonNuevo = new DevExpress.XtraEditors.SimpleButton();
             this.DevSimpleButtonModificar = new DevExpress.XtraEditors.SimpleButton();
@@ -52,6 +55,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlTurnos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEmpleadoTurnoServicioCasino)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewAsistencias)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevRepositoryItemButtonEditEliminar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlAsistencia)).BeginInit();
             this.DevGroupControlAsistencia.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControl)).BeginInit();
@@ -78,6 +82,8 @@
             this.DevGridControlTurnos.Location = new System.Drawing.Point(3, 3);
             this.DevGridControlTurnos.MainView = this.DevGridViewAsistencias;
             this.DevGridControlTurnos.Name = "DevGridControlTurnos";
+            this.DevGridControlTurnos.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.DevRepositoryItemButtonEditEliminar});
             this.DevGridControlTurnos.Size = new System.Drawing.Size(441, 154);
             this.DevGridControlTurnos.TabIndex = 0;
             this.DevGridControlTurnos.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -135,9 +141,22 @@
             // colEliminar
             // 
             this.colEliminar.Caption = "Eliminar";
+            this.colEliminar.ColumnEdit = this.DevRepositoryItemButtonEditEliminar;
+            this.colEliminar.FieldName = "NombreCasino";
             this.colEliminar.Name = "colEliminar";
             this.colEliminar.Visible = true;
             this.colEliminar.VisibleIndex = 3;
+            // 
+            // DevRepositoryItemButtonEditEliminar
+            // 
+            this.DevRepositoryItemButtonEditEliminar.AutoHeight = false;
+            this.DevRepositoryItemButtonEditEliminar.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.DevRepositoryItemButtonEditEliminar.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("DevRepositoryItemButtonEditEliminar.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            this.DevRepositoryItemButtonEditEliminar.ButtonsStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.DevRepositoryItemButtonEditEliminar.Name = "DevRepositoryItemButtonEditEliminar";
+            this.DevRepositoryItemButtonEditEliminar.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.DevRepositoryItemButtonEditEliminar.Click += new System.EventHandler(this.DevRepositoryItemButtonEditEliminar_Click);
             // 
             // DevGroupControlAsistencia
             // 
@@ -158,7 +177,7 @@
             this.DevSimpleButtonNuevo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.DevSimpleButtonNuevo.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             this.DevSimpleButtonNuevo.Enabled = false;
-            this.DevSimpleButtonNuevo.Image = global::EnroladorStandAloneV2.Properties.Resources.additem_16x16;
+            this.DevSimpleButtonNuevo.Image = ((System.Drawing.Image)(resources.GetObject("DevSimpleButtonNuevo.Image")));
             this.DevSimpleButtonNuevo.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.DevSimpleButtonNuevo.Location = new System.Drawing.Point(15, 112);
             this.DevSimpleButtonNuevo.Name = "DevSimpleButtonNuevo";
@@ -174,7 +193,7 @@
             this.DevSimpleButtonModificar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.DevSimpleButtonModificar.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             this.DevSimpleButtonModificar.Enabled = false;
-            this.DevSimpleButtonModificar.Image = global::EnroladorStandAloneV2.Properties.Resources.edit_16x16;
+            this.DevSimpleButtonModificar.Image = ((System.Drawing.Image)(resources.GetObject("DevSimpleButtonModificar.Image")));
             this.DevSimpleButtonModificar.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.DevSimpleButtonModificar.Location = new System.Drawing.Point(64, 112);
             this.DevSimpleButtonModificar.Name = "DevSimpleButtonModificar";
@@ -189,7 +208,7 @@
             // 
             this.DevSimpleButtonDescartar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.DevSimpleButtonDescartar.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.DevSimpleButtonDescartar.Image = global::EnroladorStandAloneV2.Properties.Resources.clear_16x16;
+            this.DevSimpleButtonDescartar.Image = ((System.Drawing.Image)(resources.GetObject("DevSimpleButtonDescartar.Image")));
             this.DevSimpleButtonDescartar.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.DevSimpleButtonDescartar.Location = new System.Drawing.Point(113, 112);
             this.DevSimpleButtonDescartar.Name = "DevSimpleButtonDescartar";
@@ -346,6 +365,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlTurnos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEmpleadoTurnoServicioCasino)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewAsistencias)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevRepositoryItemButtonEditEliminar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlAsistencia)).EndInit();
             this.DevGroupControlAsistencia.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControl)).EndInit();
@@ -392,5 +412,6 @@
         private DevExpress.XtraEditors.SimpleButton DevSimpleButtonModificar;
         private DevExpress.XtraEditors.SimpleButton DevSimpleButtonDescartar;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit DevRepositoryItemButtonEditEliminar;
     }
 }

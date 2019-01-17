@@ -71,12 +71,10 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 DevLayoutControl.Enabled = true;
                 DevLookUpEditCasino.Enabled = false;
             }
-
-            DevGridViewAsistencias.RefreshData();
-
-            //bsEmpleadoTurnoServicioCasino.DataSource = Negocio.ObtenerTodosEmpleadoTurnoServicioCasinoDelEmpleado(empleado.GuidEmpleado);
             bsEmpleadoTurnoServicioCasino.DataSource = empleado.TurnoServicioCasino;
             bsInstalaciones.DataSource = Negocio.ObtenerTodasInstalaciones();
+
+            DevGridViewAsistencias.RefreshData();
         }
         private void LimpiarCampos() {
             //limpiando campos
@@ -213,5 +211,9 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             CargarDatos();
         }
         #endregion
+
+        private void DevRepositoryItemButtonEditEliminar_Click(object sender, EventArgs e) {
+            //Eliminar
+        }
     }
 }

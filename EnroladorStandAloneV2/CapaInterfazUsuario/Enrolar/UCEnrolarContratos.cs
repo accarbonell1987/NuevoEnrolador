@@ -89,11 +89,13 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 DevLayoutControlDatosDelContacto.Enabled = false;
             } else {
                 DevGridControlContratos.Enabled = false;
-                DevLayoutControlDatosDelContacto.Enabled = true;
+                DevLayoutControlDatosDelContacto.Enabled = false;
             }
             //carga los binding
             bsContratos.DataSource = empleado.Contratos;
             bsEmpresas.DataSource = Negocio.ObtenerTodasEmpresas();
+
+            DevGridViewContratos.RefreshData();
         }
         private void CargarDatos(POCOContrato contrato) {
             try {
@@ -259,7 +261,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         }
         private void DevLookUpEditCuenta_EditValueChanged(object sender, EventArgs e) {
             try {
-                Guid GuidCuenta = (Guid)DevLookUpEditCargo.GetColumnValue("GuidCuenta");
+                Guid GuidCuenta = (Guid)DevLookUpEditCuenta.GetColumnValue("GuidCuenta");
                 if (string.IsNullOrEmpty(GuidCuenta.ToString())) {
                     DevDxErrorProvider.SetError(DevLookUpEditCuenta, "Cuenta no disponible...");
                     return;
@@ -379,18 +381,10 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
-        private void DevCheckEditManejaCasino_CheckedChanged(object sender, EventArgs e) {
-            if (DevCheckEditManejaCasino.Checked) {
-                XtraMessageBox.Show(this, "Debe de asignarles turnos...", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-        private void DevCheckEditManejaAsistencia_CheckedChanged(object sender, EventArgs e) {
-            if (DevCheckEditManejaAsistencia.Checked) {
-                XtraMessageBox.Show(this, "Debe de asignarles dispositivos...", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
         #endregion
 
-
+        private void DevRepositoryItemButtonEditEliminar_Click(object sender, EventArgs e) {
+            //Eliminar
+        }
     }
 }

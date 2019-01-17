@@ -16,9 +16,11 @@ using DevExpress.XtraEditors;
 
 namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
     public partial class UCEnrolador : DevExpress.XtraEditors.XtraUserControl {
-        #region MyRegion
+        #region Atributos
         NegocioEnrolador Negocio;
         private string RUT;
+
+        public UCEnrolarDatosEmpleado uCEmpleados { get; set; }
         #endregion
 
         #region Constructor
@@ -91,7 +93,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         }
         private void CargarEmpleado(POCOEmpleado empleado) {
             try {
-                UCEnrolarDatosEmpleado uCEmpleados = new UCEnrolarDatosEmpleado(this, Negocio, empleado) {
+                uCEmpleados = new UCEnrolarDatosEmpleado(this, Negocio, empleado) {
                     Dock = DockStyle.Fill
                 };
                 UCEnrolarContratos uCContratos = new UCEnrolarContratos(this, Negocio, empleado) {
