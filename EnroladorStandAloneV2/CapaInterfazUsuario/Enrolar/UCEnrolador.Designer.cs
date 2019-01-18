@@ -25,7 +25,9 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.DevGroupControlRUT = new DevExpress.XtraEditors.GroupControl();
+            this.DevLookUpEditRUTEmpleado = new DevExpress.XtraEditors.LookUpEdit();
             this.bsEmpleados = new System.Windows.Forms.BindingSource(this.components);
+            this.DevTextEditRUT = new DevExpress.XtraEditors.TextEdit();
             this.DevGroupControlDatosEmpleado = new DevExpress.XtraEditors.GroupControl();
             this.DevPanelControlDatosEmpleado = new DevExpress.XtraEditors.PanelControl();
             this.DevGroupControlAccesos = new DevExpress.XtraEditors.GroupControl();
@@ -34,11 +36,11 @@
             this.DevPanelControlCasinos = new DevExpress.XtraEditors.PanelControl();
             this.DevGroupControlContratos = new DevExpress.XtraEditors.GroupControl();
             this.DevPanelControlContratos = new DevExpress.XtraEditors.PanelControl();
-            this.DevLookUpEditRUTEmpleado = new DevExpress.XtraEditors.LookUpEdit();
-            this.DevTextEditRUT = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlRUT)).BeginInit();
             this.DevGroupControlRUT.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DevLookUpEditRUTEmpleado.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEmpleados)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevTextEditRUT.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlDatosEmpleado)).BeginInit();
             this.DevGroupControlDatosEmpleado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DevPanelControlDatosEmpleado)).BeginInit();
@@ -51,8 +53,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlContratos)).BeginInit();
             this.DevGroupControlContratos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DevPanelControlContratos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DevLookUpEditRUTEmpleado.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DevTextEditRUT.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // DevGroupControlRUT
@@ -67,9 +67,43 @@
             this.DevGroupControlRUT.TabIndex = 0;
             this.DevGroupControlRUT.Text = "RUT";
             // 
+            // DevLookUpEditRUTEmpleado
+            // 
+            this.DevLookUpEditRUTEmpleado.Location = new System.Drawing.Point(5, 5);
+            this.DevLookUpEditRUTEmpleado.Name = "DevLookUpEditRUTEmpleado";
+            this.DevLookUpEditRUTEmpleado.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.DevLookUpEditRUTEmpleado.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("GuidEmpleado", "Guid Empleado", 93, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("RUT", "RUT", 30, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EnrollId", "Enroll Id", 49, DevExpress.Utils.FormatType.Numeric, "", false, DevExpress.Utils.HorzAlignment.Far),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Correo", "Correo", 43, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Nombres", "Nombres", 52, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Apellidos", "Apellidos", 52, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TieneContraseña", "Tiene Contraseña", 95, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TipoIdentificacion", "Tipo Identificacion", 97, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Contraseña", "Contraseña", 66, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NumeroTelefono", "Numero Telefono", 92, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near)});
+            this.DevLookUpEditRUTEmpleado.Properties.DataSource = this.bsEmpleados;
+            this.DevLookUpEditRUTEmpleado.Properties.DisplayMember = "RUT";
+            this.DevLookUpEditRUTEmpleado.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            this.DevLookUpEditRUTEmpleado.Properties.ValueMember = "EnrollId";
+            this.DevLookUpEditRUTEmpleado.Size = new System.Drawing.Size(359, 20);
+            this.DevLookUpEditRUTEmpleado.TabIndex = 1;
+            this.DevLookUpEditRUTEmpleado.EditValueChanged += new System.EventHandler(this.DevLookUpEditRUTEmpleado_EditValueChanged);
+            // 
             // bsEmpleados
             // 
             this.bsEmpleados.DataSource = typeof(EnroladorAccesoDatos.Dominio.POCOEmpleado);
+            // 
+            // DevTextEditRUT
+            // 
+            this.DevTextEditRUT.Location = new System.Drawing.Point(370, 5);
+            this.DevTextEditRUT.Name = "DevTextEditRUT";
+            this.DevTextEditRUT.Size = new System.Drawing.Size(214, 20);
+            this.DevTextEditRUT.TabIndex = 2;
+            this.DevTextEditRUT.Visible = false;
+            this.DevTextEditRUT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DevTextEditRUT_KeyPress);
             // 
             // DevGroupControlDatosEmpleado
             // 
@@ -149,40 +183,6 @@
             this.DevPanelControlContratos.Size = new System.Drawing.Size(487, 647);
             this.DevPanelControlContratos.TabIndex = 1;
             // 
-            // DevLookUpEditRUTEmpleado
-            // 
-            this.DevLookUpEditRUTEmpleado.Location = new System.Drawing.Point(5, 5);
-            this.DevLookUpEditRUTEmpleado.Name = "DevLookUpEditRUTEmpleado";
-            this.DevLookUpEditRUTEmpleado.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.DevLookUpEditRUTEmpleado.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("GuidEmpleado", "Guid Empleado", 93, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("RUT", "RUT", 30, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EnrollId", "Enroll Id", 49, DevExpress.Utils.FormatType.Numeric, "", false, DevExpress.Utils.HorzAlignment.Far),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Correo", "Correo", 43, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Nombres", "Nombres", 52, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Apellidos", "Apellidos", 52, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TieneContraseña", "Tiene Contraseña", 95, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TipoIdentificacion", "Tipo Identificacion", 97, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Contraseña", "Contraseña", 66, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NumeroTelefono", "Numero Telefono", 92, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near)});
-            this.DevLookUpEditRUTEmpleado.Properties.DataSource = this.bsEmpleados;
-            this.DevLookUpEditRUTEmpleado.Properties.DisplayMember = "RUT";
-            this.DevLookUpEditRUTEmpleado.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
-            this.DevLookUpEditRUTEmpleado.Properties.ValueMember = "EnrollId";
-            this.DevLookUpEditRUTEmpleado.Size = new System.Drawing.Size(359, 20);
-            this.DevLookUpEditRUTEmpleado.TabIndex = 1;
-            this.DevLookUpEditRUTEmpleado.EditValueChanged += new System.EventHandler(this.DevLookUpEditRUTEmpleado_EditValueChanged);
-            // 
-            // DevTextEditRUT
-            // 
-            this.DevTextEditRUT.Location = new System.Drawing.Point(370, 5);
-            this.DevTextEditRUT.Name = "DevTextEditRUT";
-            this.DevTextEditRUT.Size = new System.Drawing.Size(214, 20);
-            this.DevTextEditRUT.TabIndex = 2;
-            this.DevTextEditRUT.Visible = false;
-            this.DevTextEditRUT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DevTextEditRUT_KeyPress);
-            // 
             // UCEnrolador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -197,7 +197,9 @@
             this.Load += new System.EventHandler(this.UCEnrolador_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlRUT)).EndInit();
             this.DevGroupControlRUT.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DevLookUpEditRUTEmpleado.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEmpleados)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevTextEditRUT.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlDatosEmpleado)).EndInit();
             this.DevGroupControlDatosEmpleado.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DevPanelControlDatosEmpleado)).EndInit();
@@ -210,8 +212,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlContratos)).EndInit();
             this.DevGroupControlContratos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DevPanelControlContratos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DevLookUpEditRUTEmpleado.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DevTextEditRUT.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -1,4 +1,10 @@
-﻿Hay que activar el Distributed Transaction Coordinator (MSDTC)
-Ejecutar con privilegios elevados
-1. Abrir la Consola CMD
-2. Net Start msdtc
+﻿1.)
+Para Limitar el uso de los empleados se modificó la consulta del procedimiento 
+public IList<POCOEmpleado> LeeTodosEmpleados() de la clase EnroladorServicioWeb
+en el Servicio WEB, se debe de moficiar la consulta poniendo esto para quitar el limite de 5000 empleados:
+
+string sql = string.Format(@"SELECT E.Oid, E.EnrollID, E.RUT, P.FirstName, P.LastName, P.Email, PN.Number, E.Contraseña 
+FROM ESA_Empleado E
+INNER JOIN Person P ON E.Oid = P.Oid
+INNER JOIN Party PT ON PT.Oid = P.Oid
+LEFT OUTER JOIN PhoneNumber PN ON PN.Party = PT.Oid");

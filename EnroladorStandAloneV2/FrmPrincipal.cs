@@ -308,8 +308,6 @@ namespace EnroladorStandAloneV2 {
             Negocio.mContext.Configuration.ValidateOnSaveEnabled = false;
 
             MostrarNotificaciones();
-            //desactivar sistema
-            EstablecerEstadoSistema(EstadoUsoSistema.Inhabilitado);
 
             UCCargarDatos uCargarDatos = null;
 
@@ -322,7 +320,6 @@ namespace EnroladorStandAloneV2 {
                 DevGroupControlNotificacionesAcciones.Controls.Clear();
                 DevGroupControlNotificacionesAcciones.Controls.Add(uCargarDatos);
 
-                //ACCM
                 //se deben de realizar los cambios en los progress bar
                 Negocio.EnviarAcciones();
 
@@ -373,12 +370,10 @@ namespace EnroladorStandAloneV2 {
                     Negocio.AdicionarNotificacionListadoVacio("huellas");
 
 
-
                 //cargar EmpleadoDispositivo
                 List<POCOEmpleadoDispositivo> empleadoDispositivos = await CargarEmpleadoDispositivos(uCargarDatos, empleados, dispositivos);
                 if (empleadoDispositivos == null)
                     Negocio.AdicionarNotificacionListadoVacio("empleadoDispositivos");
-
                 
 
                 //cargar EmpleadoTurnoServicioCasinos
@@ -400,8 +395,6 @@ namespace EnroladorStandAloneV2 {
 
                 //cargar grid
                 CargarGridEmpleados();
-                //activar sistema
-                EstablecerEstadoSistema(EstadoUsoSistema.Habilitado);
 
                 return true;
             } catch (Exception eX) {
@@ -1149,9 +1142,15 @@ namespace EnroladorStandAloneV2 {
         private async void DevBarButtonSincronizar_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             try {
+                //desactivar sistema
+                EstablecerEstadoSistema(EstadoUsoSistema.Inhabilitado);
+
                 var sincronizo = await SincronizarDatos();
                 if (sincronizo) Negocio.AdicionarNotificacionProcesoRealizadoCorrectamente("Sincronizacion Correcta");
                 else Negocio.AdicionarNotificacion("No se pudo sincronizar", TipoNotificacion.Cuidado);
+
+                //activar sistema
+                EstablecerEstadoSistema(EstadoUsoSistema.Habilitado);
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
@@ -1197,7 +1196,5 @@ namespace EnroladorStandAloneV2 {
             }
         }
         #endregion
-
-        
     }
 }

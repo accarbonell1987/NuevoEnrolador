@@ -62,13 +62,11 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             DevSimpleButtonDescartar.Visible = false;
             DevSimpleButtonNuevo.Enabled = true;
             //si la cantidad de dispositivos es menor que cero solo se activa el nuevo
-            if (empleado.TurnoServicioCasino != null) {
-                if (empleado.TurnoServicioCasino.Count > 0) {
-                    DevGridControlTurnos.Enabled = true;
-                    DevLayoutControl.Enabled = false;
-                    DevLookUpEditCasino.Enabled = true;
-                    bsEmpleadoTurnoServicioCasino.DataSource = empleado.TurnoServicioCasino.Where(p => p.EstadoObjeto != EstadoObjeto.Eliminar).ToList();
-                }
+            if (empleado.TurnoServicioCasino.Count > 0) {
+                DevGridControlTurnos.Enabled = true;
+                DevLayoutControl.Enabled = false;
+                DevLookUpEditCasino.Enabled = true;
+                bsEmpleadoTurnoServicioCasino.DataSource = empleado.TurnoServicioCasino.Where(p => p.EstadoObjeto != EstadoObjeto.Eliminar).ToList();
             } else {
                 DevGridControlTurnos.Enabled = false;
                 DevLayoutControl.Enabled = true;

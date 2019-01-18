@@ -174,7 +174,7 @@
             this.DevGroupControlTurnos.Name = "DevGroupControlTurnos";
             this.DevGroupControlTurnos.Size = new System.Drawing.Size(441, 145);
             this.DevGroupControlTurnos.TabIndex = 1;
-            this.DevGroupControlTurnos.Text = "Adicionar Asistencia";
+            this.DevGroupControlTurnos.Text = "Adicionar Casino";
             // 
             // DevSimpleButtonNuevo
             // 

@@ -89,6 +89,11 @@
     <Compile Include="Dominio\POCOTurnoServicio.cs" />
     <Compile Include="Dominio\POCOUsuario.cs" />
     <Compile Include="Enumerativos.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -195,9 +200,9 @@
       <DependentUpon>SQLiteEnrollModel.edmx</DependentUpon>
     </None>
     <None Include="Recursos\Vsix\SqlCeVsToolbox.4.7.534.vsix" />
-    <Resource Include="Recursos\Ficheros\Roll.sqlite3">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <Content Include="Recursos\Ficheros\Roll.sqlite3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Recursos\Nugets\entityframework.6.2.0.nupkg" />
     <None Include="Recursos\Nugets\system.data.sqlite.1.0.109.2.nupkg" />
     <None Include="Recursos\Nugets\system.data.sqlite.core.1.0.109.2.nupkg" />
@@ -206,6 +211,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.98.1\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.98.1\build\net45\System.Data.SQLite.Core.targets')" />

@@ -53,7 +53,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 //seleccionar el RUT en el textbox
                 if ((RUT != String.Empty) && (!RUT.Equals("Nuevo"))) {
                     DevLookUpEditRUTEmpleado.Text = RUT;
-                    empleado = Negocio.ObtenerEmpleadoDeLista(RUT);
+                    empleado = Negocio.ObtenerEmpleadoDeBD(RUT);
                 } else {
                     DevLookUpEditRUTEmpleado.Visible = false;
                     DevTextEditRUT.Location = DevLookUpEditRUTEmpleado.Location;
@@ -70,7 +70,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 if (e.KeyChar == (char)Keys.Enter) {
                     string rut = DevTextEditRUT.Text;
                     if (rut != String.Empty) {
-                        var empleado = Negocio.ObtenerEmpleadoDeLista(rut);
+                        var empleado = Negocio.ObtenerEmpleadoDeBD(rut);
                         if (empleado == null) {
                             empleado = new POCOEmpleado();
                             RUT = rut;
@@ -87,7 +87,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             try {
                 string rut = DevLookUpEditRUTEmpleado.Text;
                 if (rut != String.Empty) {
-                    var empleado = Negocio.ObtenerEmpleadoDeLista(rut);
+                    var empleado = Negocio.ObtenerEmpleadoDeBD(rut);
                     if (empleado != null) {
                         RUT = rut;
                         CargarEmpleado(empleado);

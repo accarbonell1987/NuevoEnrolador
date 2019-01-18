@@ -64,13 +64,11 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             DevSimpleButtonDescartar.Visible = false;
             DevSimpleButtonNuevo.Enabled = true;
             //si la cantidad de dispositivos es menor que cero solo se activa el nuevo
-            if (empleado.Dispositivos != null) {
-                if (empleado.Dispositivos.Count > 0) {
-                    DevGridControlAsistencias.Enabled = true;
-                    DevLayoutControl.Enabled = false;
-                    DevLookUpEditInstalacion.Enabled = true;
-                    bsEmpleadoDispositivos.DataSource = empleado.Dispositivos.Where(p => p.EstadoObjeto != EstadoObjeto.Eliminar).ToList();
-                }
+            if (empleado.Dispositivos.Count > 0) {
+                DevGridControlAsistencias.Enabled = true;
+                DevLayoutControl.Enabled = false;
+                DevLookUpEditInstalacion.Enabled = true;
+                bsEmpleadoDispositivos.DataSource = empleado.Dispositivos.Where(p => p.EstadoObjeto != EstadoObjeto.Eliminar).ToList();
             } else {
                 DevGridControlAsistencias.Enabled = false;
                 DevLayoutControl.Enabled = true;
