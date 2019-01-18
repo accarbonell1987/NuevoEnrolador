@@ -1,0 +1,4 @@
+﻿Hay que activar el Distributed Transaction Coordinator (MSDTC)
+Ejecutar con privilegios elevados
+1. Abrir la Consola CMD
+2. Net Start msdtc

@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Ayudantes\AyudanteDirectorioDatos.cs" />
     <Compile Include="Ayudantes\AyudanteLogs.cs" />
+    <Compile Include="Ayudantes\AyudanteSerializacion.cs" />
     <Compile Include="Ayudantes\AyudanteSQL.cs" />
     <Compile Include="Dominio\POCOGlobal.cs" />
     <Compile Include="Dominio\POCONotificacion.cs" />

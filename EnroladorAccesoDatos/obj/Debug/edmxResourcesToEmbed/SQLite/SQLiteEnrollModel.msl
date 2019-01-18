@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SQLiteEnrollModelStoreContainer" CdmEntityContainer="SQLiteEnrollEntities">
+    <EntitySetMapping Name="Cadena">
+      <EntityTypeMapping TypeName="SQLiteEnrollModel.Cadena">
+        <MappingFragment StoreEntitySet="Cadena">
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="NombreCadena" ColumnName="NombreCadena" />
+          <ScalarProperty Name="GuidCadena" ColumnName="GuidCadena" />
+          <ScalarProperty Name="IdCadena" ColumnName="IdCadena" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cargo">
+      <EntityTypeMapping TypeName="SQLiteEnrollModel.Cargo">
+        <MappingFragment StoreEntitySet="Cargo">
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="NombreCargo" ColumnName="NombreCargo" />
+          <ScalarProperty Name="GuidEmpresa" ColumnName="GuidEmpresa" />
+          <ScalarProperty Name="GuidCargo" ColumnName="GuidCargo" />
+          <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contrato">
+      <EntityTypeMapping TypeName="SQLiteEnrollModel.Contrato">
+        <MappingFragment StoreEntitySet="Contrato">
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="ConsideraCasino" ColumnName="ConsideraCasino" />
+          <ScalarProperty Name="ConsideraAsistencia" ColumnName="ConsideraAsistencia" />
+          <ScalarProperty Name="CodigoContrato" ColumnName="CodigoContrato" />
+          <ScalarProperty Name="FinVigencia" ColumnName="FinVigencia" />
+          <ScalarProperty Name="InicioVigencia" ColumnName="InicioVigencia" />
+          <ScalarProperty Name="GuidEmpleado" ColumnName="GuidEmpleado" />
+          <ScalarProperty Name="GuidCargo" ColumnName="GuidCargo" />
+          <ScalarProperty Name="GuidCuenta" ColumnName="GuidCuenta" />
+          <ScalarProperty Name="GuidEmpresa" ColumnName="GuidEmpresa" />
+          <ScalarProperty Name="GuidContrato" ColumnName="GuidContrato" />
+          <ScalarProperty Name="IdContrato" ColumnName="IdContrato" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cuenta">
+      <EntityTypeMapping TypeName="SQLiteEnrollModel.Cuenta">
+        <MappingFragment StoreEntitySet="Cuenta">
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="FechaUltimoCierre" ColumnName="FechaUltimoCierre" />
+          <ScalarProperty Name="NombreCuenta" ColumnName="NombreCuenta" />
+          <ScalarProperty Name="GuidEmpresa" ColumnName="GuidEmpresa" />
+          <ScalarProperty Name="GuidCuenta" ColumnName="GuidCuenta" />
+          <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empleado">
+      <EntityTypeMapping TypeName="SQLiteEnrollModel.Empleado">
+        <MappingFragment StoreEntitySet="Empleado">
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="NumeroTelefono" ColumnName="NumeroTelefono" />
+          <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+          <ScalarProperty Name="TieneContrasena" ColumnName="TieneContrasena" />
+          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="EnrollId" ColumnName="EnrollId" />
+          <ScalarProperty Name="RUT" ColumnName="RUT" />
+          <ScalarProperty Name="GuidEmpleado" ColumnName="GuidEmpleado" />
+          <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmpleadoTurnoServicioCasino">
+      <EntityTypeMapping TypeName="SQLiteEnrollModel.EmpleadoTurnoServicioCasino">
+        <MappingFragment StoreEntitySet="EmpleadoTurnoServicioCasino">
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="GuidTurnoServicio" ColumnName="GuidTurnoServicio" />
+          <ScalarProperty Name="GuidEmpleado" ColumnName="GuidEmpleado" />
+          <ScalarProperty Name="IdEmpleadoTurnoServicioCasino" ColumnName="IdEmpleadoTurnoServicioCasino" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empresa">
+      <EntityTypeMapping TypeName="SQLiteEnrollModel.Empresa">
+        <MappingFragment StoreEntitySet="Empresa">
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="NombreEmpresa" ColumnName="NombreEmpresa" />
+          <ScalarProperty Name="GuidEmpresa" ColumnName="GuidEmpresa" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hardware">
+      <EntityTypeMapping TypeName="SQLiteEnrollModel.Hardware">
+        <MappingFragment StoreEntitySet="Hardware">
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="GuidHardware" ColumnName="GuidHardware" />
+          <ScalarProperty Name="IdHardware" ColumnName="IdHardware" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Instalacion">
+      <EntityTypeMapping TypeName="SQLiteEnrollModel.Instalacion">
+        <MappingFragment StoreEntitySet="Instalacion">
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="NombreInstalacion" ColumnName="NombreInstalacion" />
+          <ScalarProperty Name="GuidCadena" ColumnName="GuidCadena" />
+          <ScalarProperty Name="GuidInstalacion" ColumnName="GuidInstalacion" />
+          <ScalarProperty Name="IdInstalacion" ColumnName="IdInstalacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PorSincronizar">
+      <EntityTypeMapping TypeName="SQLiteEnrollModel.PorSincronizar">
+        <MappingFragment StoreEntitySet="PorSincronizar">
+          <ScalarProperty Name="TipoModificacion" ColumnName="TipoModificacion" />
+          <ScalarProperty Name="FechaCambio" ColumnName="FechaCambio" />
+          <ScalarProperty Name="TablaASincronizar" ColumnName="TablaASincronizar" />
+          <ScalarProperty Name="IdRegistroASincronizar" ColumnName="IdRegistroASincronizar" />
+          <ScalarProperty Name="IdPorSincronizar" ColumnName="IdPorSincronizar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sincronizacion">
+      <EntityTypeMapping TypeName="SQLiteEnrollModel.Sincronizacion">
+        <MappingFragment StoreEntitySet="Sincronizacion">
+          <ScalarProperty Name="FechaSincronizacion" ColumnName="FechaSincronizacion" />
+          <ScalarProperty Name="IdSincronizacion" ColumnName="IdSincronizacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="SQLiteEnrollModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="SHAClave" ColumnName="SHAClave" />
+          <ScalarProperty Name="ClaveUsuario" ColumnName="ClaveUsuario" />
+          <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+          <ScalarProperty Name="GuidUsuario" ColumnName="GuidUsuario" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmpleadoDispositivo">
+      <EntityTypeMapping TypeName="SQLiteEnrollModel.EmpleadoDispositivo">
+        <MappingFragment StoreEntitySet="EmpleadoDispositivo">
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="GuidEmpleado" ColumnName="GuidEmpleado" />
+          <ScalarProperty Name="GuidDispositivo" ColumnName="GuidDispositivo" />
+          <ScalarProperty Name="IdEmpleadoDispositivo" ColumnName="IdEmpleadoDispositivo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dispositivo">
+      <EntityTypeMapping TypeName="SQLiteEnrollModel.Dispositivo">
+        <MappingFragment StoreEntitySet="Dispositivo">
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Puerto" ColumnName="Puerto" />
+          <ScalarProperty Name="Host" ColumnName="Host" />
+          <ScalarProperty Name="NombreDispositivo" ColumnName="NombreDispositivo" />
+          <ScalarProperty Name="GuidInstalacion" ColumnName="GuidInstalacion" />
+          <ScalarProperty Name="GuidDispositivo" ColumnName="GuidDispositivo" />
+          <ScalarProperty Name="IdDispositivo" ColumnName="IdDispositivo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Huella">
+      <EntityTypeMapping TypeName="SQLiteEnrollModel.Huella">
+        <MappingFragment StoreEntitySet="Huella">
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="GuidEmpleado" ColumnName="GuidEmpleado" />
+          <ScalarProperty Name="GuidHuella" ColumnName="GuidHuella" />
+          <ScalarProperty Name="IdHuella" ColumnName="IdHuella" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServicioCasino">
+      <EntityTypeMapping TypeName="SQLiteEnrollModel.ServicioCasino">
+        <MappingFragment StoreEntitySet="ServicioCasino">
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="Vigente" ColumnName="Vigente" />
+          <ScalarProperty Name="NombreServicioCasino" ColumnName="NombreServicioCasino" />
+          <ScalarProperty Name="GuidCasino" ColumnName="GuidCasino" />
+          <ScalarProperty Name="GuidServicioCasino" ColumnName="GuidServicioCasino" />
+          <ScalarProperty Name="IdServicioCasino" ColumnName="IdServicioCasino" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TurnoServicio">
+      <EntityTypeMapping TypeName="SQLiteEnrollModel.TurnoServicio">
+        <MappingFragment StoreEntitySet="TurnoServicio">
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="HoraFin" ColumnName="HoraFin" />
+          <ScalarProperty Name="HoraInicio" ColumnName="HoraInicio" />
+          <ScalarProperty Name="Vigente" ColumnName="Vigente" />
+          <ScalarProperty Name="NombreTurnoServicio" ColumnName="NombreTurnoServicio" />
+          <ScalarProperty Name="GuidServicio" ColumnName="GuidServicio" />
+          <ScalarProperty Name="GuidTurnoServicio" ColumnName="GuidTurnoServicio" />
+          <ScalarProperty Name="IdTurnoServicio" ColumnName="IdTurnoServicio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

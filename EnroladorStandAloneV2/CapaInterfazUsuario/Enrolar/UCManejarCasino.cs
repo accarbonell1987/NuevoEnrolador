@@ -62,19 +62,21 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             DevSimpleButtonDescartar.Visible = false;
             DevSimpleButtonNuevo.Enabled = true;
             //si la cantidad de dispositivos es menor que cero solo se activa el nuevo
-            if (empleado.TurnoServicioCasino.Count > 0) {
-                DevGridControlTurnos.Enabled = true;
-                DevLayoutControl.Enabled = false;
-                DevLookUpEditCasino.Enabled = true;
+            if (empleado.TurnoServicioCasino != null) {
+                if (empleado.TurnoServicioCasino.Count > 0) {
+                    DevGridControlTurnos.Enabled = true;
+                    DevLayoutControl.Enabled = false;
+                    DevLookUpEditCasino.Enabled = true;
+                    bsEmpleadoTurnoServicioCasino.DataSource = empleado.TurnoServicioCasino.Where(p => p.EstadoObjeto != EstadoObjeto.Eliminar).ToList();
+                }
             } else {
                 DevGridControlTurnos.Enabled = false;
                 DevLayoutControl.Enabled = true;
                 DevLookUpEditCasino.Enabled = false;
             }
-            bsEmpleadoTurnoServicioCasino.DataSource = empleado.TurnoServicioCasino;
+            
             bsInstalaciones.DataSource = Negocio.ObtenerTodasInstalaciones();
-
-            DevGridViewAsistencias.RefreshData();
+            DevGridViewTurnos.RefreshData();
         }
         private void LimpiarCampos() {
             //limpiando campos
@@ -105,31 +107,36 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 //chequeo que no exista en la relacion ya
                 var turno = servicioSeleccionado.TurnosDelServicio.FirstOrDefault(p => p.GuidTurnoServicio == GuidTurnoServicio);
 
-                if (!empleado.TurnoServicioCasino.Any(p => p.GuidTurnoServicio == turno.GuidTurnoServicio)) {
+                var pocoEmpleadoTurnoServicioCasino = new POCOEmpleadoTurnoServicioCasino() {
+                    GuidTurnoServicio = GuidTurnoServicio,
+                    GuidEmpleado = empleado.GuidEmpleado,
+                    HoraInicio = turno.HoraInicio,
+                    HoraFin = turno.HoraFin,
+                    Vigente = turno.Vigente,
+                    NombreCasino = instalacionSeleccionada.NombreInstalacion,
+                    NombreServicio = servicioSeleccionado.NombreServicioCasino,
+                    NombreTurno = turno.NombreTurnoServicio,
+                    EstadoObjeto = EstadoObjeto.Almacenar
+                };
 
-                    var pocoEmpleadoTurnoServicioCasino = new POCOEmpleadoTurnoServicioCasino() {
-                        GuidTurnoServicio = GuidTurnoServicio,
-                        GuidEmpleado = empleado.GuidEmpleado,
-                        HoraInicio = turno.HoraInicio,
-                        HoraFin = turno.HoraFin,
-                        Vigente = turno.Vigente,
-                        NombreCasino = instalacionSeleccionada.NombreInstalacion,
-                        NombreServicio = servicioSeleccionado.NombreServicioCasino,
-                        NombreTurno = turno.NombreTurnoServicio,
-                        EstadoObjeto = EstadoObjeto.EnMemoria
-                    };
-
+                if (empleado.TurnoServicioCasino != null) {
+                    if (!empleado.TurnoServicioCasino.Any(p => p.GuidTurnoServicio == turno.GuidTurnoServicio)) {
+                        empleado.TurnoServicioCasino.Add(pocoEmpleadoTurnoServicioCasino);
+                        return true;
+                    } else {
+                        dxErrorProvider.SetError(DevLookUpEditCasino, "Relacion ya existente...");
+                    }
+                } else {
                     empleado.TurnoServicioCasino.Add(pocoEmpleadoTurnoServicioCasino);
                     return true;
-                } else {
-                    dxErrorProvider.SetError(DevLookUpEditCasino, "Relacion ya existente...");
-                    return false;
                 }
+                return false;
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
                 return false;
             }
         }
+
         private void DevLookUpEditInstalacion_EditValueChanged(object sender, EventArgs e) {
             try {
                 var GuidInstalacion = DevLookUpEditCasino.GetColumnValue("GuidInstalacion");
@@ -210,10 +217,20 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             LimpiarCampos();
             CargarDatos();
         }
-        #endregion
-
         private void DevRepositoryItemButtonEditEliminar_Click(object sender, EventArgs e) {
-            //Eliminar
+            try {
+                Guid GuidTurnoServicio = (Guid)DevGridViewTurnos.GetFocusedRowCellValue("GuidTurnoServicio");
+                if (!string.IsNullOrEmpty(GuidTurnoServicio.ToString())) {
+                    var turnoServicio = empleado.TurnoServicioCasino.First(p => p.GuidTurnoServicio == GuidTurnoServicio);
+                    if (turnoServicio.EstadoObjeto == EstadoObjeto.Almacenar) {
+                        turnoServicio.EstadoObjeto = EstadoObjeto.Eliminar;
+                        CargarDatos();
+                    }
+                }
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+            }
         }
+        #endregion
     }
 }

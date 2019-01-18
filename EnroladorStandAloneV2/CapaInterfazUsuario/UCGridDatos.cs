@@ -40,14 +40,14 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
         /// Para el filtrado de la grid
         /// </summary>
         /// <param name="tipoLlenado">int tipoLlenado Contratos Activos o Vencidos</param>
-        private async Task ProcesarGrid(int tipoLlenado) {
+        private void ProcesarGrid(int tipoLlenado) {
             try {
                 switch (tipoLlenado) {
                     case 0: {
-                            if (Negocio.lEmpleados == null) Negocio.ObtenerTodosEmpleados();
+                            if (Negocio.lEmpleados == null) Negocio.ObtenerTodosEmpleadosParaGrid();
                             else {
                                 if (Negocio.CantidadDeEmpleados() != Negocio.lEmpleados.Count) {
-                                    Negocio.ObtenerTodosEmpleados();
+                                    Negocio.ObtenerTodosEmpleadosParaGrid();
                                 }
                             }
                             
@@ -55,11 +55,11 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
                         };
                         break;
                     case 1: {
-                            var lEmpleadosContratosActivos = await Negocio.ObtenerListaContratosEmpleado(true);
+                            var lEmpleadosContratosActivos = Negocio.ObtenerListaContratosEmpleado(true);
                             bsEmpleados.DataSource = lEmpleadosContratosActivos;
                         }; break;
                     default: {
-                            var lEmpleadosContratosVencidos = await Negocio.ObtenerListaContratosEmpleado(false);
+                            var lEmpleadosContratosVencidos = Negocio.ObtenerListaContratosEmpleado(false);
                             bsEmpleados.DataSource = lEmpleadosContratosVencidos;
                         }; break;
                 }
@@ -82,9 +82,8 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
-        private async void UCGridDatos_Load(object sender, EventArgs e) {
-            await ProcesarGrid(0);
-            //bsEmpleados.DataSource = await GetDataSourceEmpleados();
+        private void UCGridDatos_Load(object sender, EventArgs e) {
+            ProcesarGrid(0);
         }
         #endregion
     }

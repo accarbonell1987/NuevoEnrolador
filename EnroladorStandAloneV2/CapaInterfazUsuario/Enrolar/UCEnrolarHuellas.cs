@@ -143,7 +143,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                     GuidEmpleado = empleado.GuidEmpleado,
                     Tipo = tipo,
                     Data = data,
-                    EstadoObjeto = EstadoObjeto.EnMemoria
+                    EstadoObjeto = EstadoObjeto.Almacenar
                 };
 
                 var huellasDelUsuario = empleado.Huellas;

@@ -25,9 +25,6 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode3 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode4 = new DevExpress.XtraGrid.GridLevelNode();
             this.DevGridViewContratos = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colGuidContrato = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colGuidEmpresa = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -232,17 +229,8 @@
             this.DevGridControlEmpleados.Dock = System.Windows.Forms.DockStyle.Fill;
             gridLevelNode1.LevelTemplate = this.DevGridViewContratos;
             gridLevelNode1.RelationName = "Contratos";
-            gridLevelNode2.LevelTemplate = this.DevGridViewHuellas;
-            gridLevelNode2.RelationName = "Huellas";
-            gridLevelNode3.LevelTemplate = this.DevGridViewDispositivos;
-            gridLevelNode3.RelationName = "Dispositivos";
-            gridLevelNode4.LevelTemplate = this.DevGridViewTurnoServicioCasino;
-            gridLevelNode4.RelationName = "TurnoServicioCasino";
             this.DevGridControlEmpleados.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1,
-            gridLevelNode2,
-            gridLevelNode3,
-            gridLevelNode4});
+            gridLevelNode1});
             this.DevGridControlEmpleados.Location = new System.Drawing.Point(0, 57);
             this.DevGridControlEmpleados.MainView = this.DevGridViewEmpleados;
             this.DevGridControlEmpleados.Name = "DevGridControlEmpleados";

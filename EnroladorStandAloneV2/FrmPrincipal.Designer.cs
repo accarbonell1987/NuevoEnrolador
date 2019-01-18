@@ -104,10 +104,10 @@
             // 
             // DevBarButtonItemDescartar
             // 
-            this.DevBarButtonItemDescartar.Caption = "Descartar";
+            this.DevBarButtonItemDescartar.Caption = "Cerrar Página";
             this.DevBarButtonItemDescartar.Id = 5;
-            this.DevBarButtonItemDescartar.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("DevBarButtonItemDescartar.ImageOptions.Image")));
-            this.DevBarButtonItemDescartar.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("DevBarButtonItemDescartar.ImageOptions.LargeImage")));
+            this.DevBarButtonItemDescartar.ImageOptions.Image = global::EnroladorStandAloneV2.Properties.Resources.cancel_16x162;
+            this.DevBarButtonItemDescartar.ImageOptions.LargeImage = global::EnroladorStandAloneV2.Properties.Resources.cancel_32x32;
             this.DevBarButtonItemDescartar.Name = "DevBarButtonItemDescartar";
             this.DevBarButtonItemDescartar.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.DevBarButtonItemDescartar_ItemClick);
             // 
@@ -193,7 +193,7 @@
             this.Name = "FrmPrincipal";
             this.Ribbon = this.DevRibbonControl;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Enrolador";
+            this.Text = "Enrolador StandAlone";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DevRibbonControl)).EndInit();

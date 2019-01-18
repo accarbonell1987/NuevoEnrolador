@@ -178,6 +178,7 @@
             this.DevTextEditCorreo.Size = new System.Drawing.Size(261, 20);
             this.DevTextEditCorreo.StyleController = this.DevLayoutControlDatosDelContacto;
             this.DevTextEditCorreo.TabIndex = 3;
+            this.DevTextEditCorreo.EditValueChanged += new System.EventHandler(this.DevTextEditCorreo_EditValueChanged);
             // 
             // DevTextEditTelefono
             // 
@@ -188,6 +189,7 @@
             this.DevTextEditTelefono.Size = new System.Drawing.Size(261, 20);
             this.DevTextEditTelefono.StyleController = this.DevLayoutControlDatosDelContacto;
             this.DevTextEditTelefono.TabIndex = 4;
+            this.DevTextEditTelefono.EditValueChanged += new System.EventHandler(this.DevTextEditTelefono_EditValueChanged);
             // 
             // DevLayoutControlGroupDatosDelContacto
             // 

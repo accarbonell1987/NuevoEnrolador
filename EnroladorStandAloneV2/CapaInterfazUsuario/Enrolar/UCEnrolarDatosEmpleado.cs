@@ -18,8 +18,6 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         NegocioEnrolador Negocio;
         POCOEmpleado empleado;
         UCEnrolador Padre;
-
-        POCOEmpleado copiaEmpleado;
         #endregion
 
         #region Constructor
@@ -29,9 +27,6 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 this.Padre = Padre;
                 this.Negocio = Negocio;
                 this.empleado = empleado;
-
-                if (empleado != null)
-                    copiaEmpleado = (empleado.Clone() as POCOEmpleado);
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
@@ -41,26 +36,27 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         #region Metodos y Eventos
         private void UCDatosEmpleado_Load(object sender, EventArgs e) {
             try {
-                if (empleado == null) return;
                 CargarDatos();
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
         private void CargarDatos() {
-            if (empleado == null) return;
+            if (empleado != null) {
+                if (empleado.Nombres != null) {
+                    DevTextEditNombres.Text = empleado.Nombres;
+                    DevTextEditNombres.Enabled = false;
 
-            DevTextEditNombres.Text = empleado.Nombres;
-            DevTextEditNombres.Enabled = false;
+                    DevTextEditApellidos.Text = empleado.Apellidos;
+                    DevTextEditApellidos.Enabled = false;
 
-            DevTextEditApellidos.Text = empleado.Apellidos;
-            DevTextEditApellidos.Enabled = false;
+                    DevTextEditCorreo.Text = empleado.Correo;
+                    DevTextEditTelefono.Text = empleado.NumeroTelefono;
 
-            DevTextEditCorreo.Text = empleado.Correo;
-            DevTextEditTelefono.Text = empleado.NumeroTelefono;
-
-            if (empleado.TieneContraseña) DevRadioGroupAcceso.SelectedIndex = 0;
-            else DevRadioGroupAcceso.SelectedIndex = 1;
+                    if (empleado.TieneContraseña) DevRadioGroupAcceso.SelectedIndex = 0;
+                    else DevRadioGroupAcceso.SelectedIndex = 1;
+                }
+            }
         }
         private void DevRadioGroupAcceso_EditValueChanged(object sender, EventArgs e) {
             int valor = Convert.ToInt16(DevRadioGroupAcceso.EditValue);
@@ -80,9 +76,18 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 DevPanelControlAcceso.Controls.Add(uC);
             }
         }
-        public void DescartarCambios() {
-            empleado = copiaEmpleado;
+        private void DevTextEditCorreo_EditValueChanged(object sender, EventArgs e) {
+            if (DevTextEditCorreo.OldEditValue != DevTextEditCorreo.EditValue) {
+                empleado.Correo = DevTextEditCorreo.EditValue.ToString();
+            }
+        }
+        private void DevTextEditTelefono_EditValueChanged(object sender, EventArgs e) {
+            if (DevTextEditTelefono.OldEditValue != DevTextEditTelefono.EditValue) {
+                empleado.NumeroTelefono = DevTextEditTelefono.EditValue.ToString();
+            }
         }
         #endregion
+
+
     }
 }

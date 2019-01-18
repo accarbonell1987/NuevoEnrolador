@@ -242,6 +242,7 @@
     <Compile Include="Herramientas\ValidadorRUT.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="TODO\Recomendable.txt" />
     <EmbeddedResource Include="CapaInterfazUsuario\Enrolar\UCEnrolador.resx">
       <DependentUpon>UCEnrolador.cs</DependentUpon>
     </EmbeddedResource>
@@ -382,6 +383,8 @@
     <Content Include="CapaInterfazUsuario\Recursos\Logo_Biometria_Aplicada.png" />
     <Content Include="CapaInterfazUsuario\Recursos\Manos.png" />
     <Content Include="CapaInterfazUsuario\Recursos\SplashScreen.png" />
+    <None Include="Resources\cancel_16x163.png" />
+    <None Include="Resources\cancel_32x32.png" />
     <None Include="Resources\checkbox_32x32.png" />
     <None Include="Resources\close_32x32.png" />
     <None Include="Resources\about_32x32.png" />

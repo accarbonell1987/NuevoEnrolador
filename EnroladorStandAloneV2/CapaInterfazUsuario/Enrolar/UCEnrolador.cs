@@ -13,12 +13,21 @@ using EnroladorAccesoDatos.Ayudantes;
 using EnroladorStandAloneV2.Herramientas;
 using EnroladorAccesoDatos.Dominio;
 using DevExpress.XtraEditors;
+using System.Runtime.Serialization;
+using System.Xml;
 
 namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
     public partial class UCEnrolador : DevExpress.XtraEditors.XtraUserControl {
         #region Atributos
         NegocioEnrolador Negocio;
         private string RUT;
+        public POCOEmpleado empleado { get; set; }
+
+        //POCOEmpleado copiaEmpleado;
+        //List<POCODispositivo> copiaDispositivos;
+        //List<POCOEmpleadoTurnoServicioCasino> copiaTurnoServicios;
+        //List<POCOContrato> copiaContratos;
+        //List<POCOHuella> copiaHuellas;
 
         public UCEnrolarDatosEmpleado uCEmpleados { get; set; }
         #endregion
@@ -41,12 +50,14 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             try {
                 bsEmpleados.DataSource = Negocio.lEmpleados;
 
-                POCOEmpleado empleado = null;
-
                 //seleccionar el RUT en el textbox
-                if ((RUT != String.Empty)&&(!RUT.Equals("Nuevo"))) {
+                if ((RUT != String.Empty) && (!RUT.Equals("Nuevo"))) {
                     DevLookUpEditRUTEmpleado.Text = RUT;
                     empleado = Negocio.ObtenerEmpleadoDeLista(RUT);
+                } else {
+                    DevLookUpEditRUTEmpleado.Visible = false;
+                    DevTextEditRUT.Location = DevLookUpEditRUTEmpleado.Location;
+                    DevTextEditRUT.Visible = true;
                 }
 
                 CargarEmpleado(empleado);
@@ -54,7 +65,38 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
-
+        private void DevTextEditRUT_KeyPress(object sender, KeyPressEventArgs e) {
+            try {
+                if (e.KeyChar == (char)Keys.Enter) {
+                    string rut = DevTextEditRUT.Text;
+                    if (rut != String.Empty) {
+                        var empleado = Negocio.ObtenerEmpleadoDeLista(rut);
+                        if (empleado == null) {
+                            empleado = new POCOEmpleado();
+                            RUT = rut;
+                            CargarEmpleado(empleado);
+                            DevTextEditRUT.Enabled = false;
+                        }
+                    }
+                }
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+            }
+        }
+        private void DevLookUpEditRUTEmpleado_EditValueChanged(object sender, EventArgs e) {
+            try {
+                string rut = DevLookUpEditRUTEmpleado.Text;
+                if (rut != String.Empty) {
+                    var empleado = Negocio.ObtenerEmpleadoDeLista(rut);
+                    if (empleado != null) {
+                        RUT = rut;
+                        CargarEmpleado(empleado);
+                    }
+                }
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+            }
+        }
         public void AdicionarUCAsistenciaOCasino(XtraUserControl uC) {
             int hSize = DevSplitContainerControlAccesos.Size.Height;
             hSize = hSize / 2 - 10;
@@ -76,21 +118,6 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         public void EliminarUCCasino() {
             DevPanelControlCasinos.Controls.Clear();
         }
-        private void DevLookUpEditRUTEmpleado_EditValueChanged(object sender, EventArgs e) {
-            try {
-                string RUT = DevLookUpEditRUTEmpleado.Text;
-                if (RUT != String.Empty) {
-
-                    var empleado = Negocio.ObtenerEmpleadoDeLista(RUT);
-                    if (empleado == null) return;
-
-                    this.RUT = RUT;
-                    CargarEmpleado(empleado);
-                }
-            } catch (Exception eX) {
-                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
-            }
-        }
         private void CargarEmpleado(POCOEmpleado empleado) {
             try {
                 uCEmpleados = new UCEnrolarDatosEmpleado(this, Negocio, empleado) {
@@ -108,6 +135,12 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
+        }
+        public void DescartarCambios() {
+            //copiaEmpleado.Dispositivos = copiaDispositivos;
+            //copiaEmpleado.Huellas = copiaHuellas;
+            //copiaEmpleado.Contratos = copiaContratos;
+            //copiaEmpleado.TurnoServicioCasino = copiaTurnoServicios;
         }
         #endregion
     }

@@ -28,6 +28,7 @@ namespace EnroladorAccesoDatos.Dominio {
             Contratos = new List<POCOContrato>();
             Huellas = new List<POCOHuella>();
             Dispositivos = new List<POCODispositivo>();
+            TurnoServicioCasino = new List<POCOEmpleadoTurnoServicioCasino>();
         }
 
         public object Clone() {

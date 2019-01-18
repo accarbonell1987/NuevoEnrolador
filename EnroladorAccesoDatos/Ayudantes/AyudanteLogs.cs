@@ -33,15 +33,16 @@ namespace EnroladorAccesoDatos.Ayudantes {
         /// <returns>Exception</returns>
         public static Exception Log(this Exception ex, string nombreArchivo, string nombreProcedimiento, List<POCONotificacion> lNotificaciones) {
 
-            List<string> mensaje = new List<string>();
+            string mensaje = "";
             foreach (Exception error in ex.InnerExceptions()) {
-                mensaje.Add(error.GetType() + ": " + error.Message + " - " + error.InnerException);
+                mensaje += (error.GetType() + ": " + error.Message + " - " + error.InnerException + Environment.NewLine);
             }
             //string mensaje = string.Concat(ex.InnerExceptions().Select(e => e.Message + "\n"));
 
             DateTime ahora = DateTime.Now;
 
             var nombreFichero = AyudanteDirectorioDatos.ObtenerDirectorioDelEnsamblado() + @"\" + String.Format(nombreArchivo + "-Log {0:yyyy-MM-dd}.log", ahora);
+
             var textoError = String.Format("{0:HH:mm:ss}: {1}-{2}\n {3}\n", ahora, "Programador", nombreProcedimiento, mensaje);
 
             string idNotificacion = ahora.ToBinary().ToString();

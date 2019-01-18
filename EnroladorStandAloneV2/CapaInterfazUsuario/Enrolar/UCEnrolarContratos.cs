@@ -92,7 +92,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 DevLayoutControlDatosDelContacto.Enabled = false;
             }
             //carga los binding
-            bsContratos.DataSource = empleado.Contratos;
+            bsContratos.DataSource = empleado.Contratos.Where(p => p.EstadoObjeto != EstadoObjeto.Eliminar).ToList();
             bsEmpresas.DataSource = Negocio.ObtenerTodasEmpresas();
 
             DevGridViewContratos.RefreshData();
@@ -198,7 +198,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                         ConsideraAsistencia = consideraAsistencia,
                         ConsideraCasino = consideraCasino,
                         Estado = EstadoContrato.Activo,
-                        EstadoObjeto = EstadoObjeto.EnMemoria,
+                        EstadoObjeto = EstadoObjeto.Almacenar,
                         GuidCargo = cargoSeleccionado.GuidCargo,
                         NombreCargo = cargoSeleccionado.NombreCargo,
                         GuidCuenta = cuentaSeleccionada.GuidCuenta,
@@ -381,10 +381,22 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
+        private void DevRepositoryItemButtonEditEliminar_Click(object sender, EventArgs e) {
+            try {
+                Guid GuidContrato = (Guid)DevGridViewContratos.GetFocusedRowCellValue("GuidContrato");
+                if (!string.IsNullOrEmpty(GuidContrato.ToString())) {
+                    var contrato = empleado.Contratos.First(p => p.GuidContrato == GuidContrato);
+                    if (contrato.EstadoObjeto != EstadoObjeto.Almacenado) {
+                        contrato.EstadoObjeto = EstadoObjeto.Eliminar;
+                        CargarDatos();
+                    }
+                }
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+            }
+        }
         #endregion
 
-        private void DevRepositoryItemButtonEditEliminar_Click(object sender, EventArgs e) {
-            //Eliminar
-        }
+
     }
 }

@@ -64,18 +64,19 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             DevSimpleButtonDescartar.Visible = false;
             DevSimpleButtonNuevo.Enabled = true;
             //si la cantidad de dispositivos es menor que cero solo se activa el nuevo
-            if (empleado.Dispositivos.Count > 0) {
-                DevGridControlAsistencias.Enabled = true;
-                DevLayoutControl.Enabled = false;
-                DevLookUpEditInstalacion.Enabled = true;
+            if (empleado.Dispositivos != null) {
+                if (empleado.Dispositivos.Count > 0) {
+                    DevGridControlAsistencias.Enabled = true;
+                    DevLayoutControl.Enabled = false;
+                    DevLookUpEditInstalacion.Enabled = true;
+                    bsEmpleadoDispositivos.DataSource = empleado.Dispositivos.Where(p => p.EstadoObjeto != EstadoObjeto.Eliminar).ToList();
+                }
             } else {
                 DevGridControlAsistencias.Enabled = false;
                 DevLayoutControl.Enabled = true;
                 DevLookUpEditInstalacion.Enabled = false;
             }
-            bsEmpleadoDispositivos.DataSource = empleado.Dispositivos;
             bsInstalaciones.DataSource = Negocio.ObtenerTodasInstalaciones();
-
             DevGridViewAsistencias.RefreshData();
         }
         private void LimpiarCampos() {
@@ -101,14 +102,19 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 var dispositivo = instalacionSeleccionada.Dispositivos.FirstOrDefault(p => p.GuidDispositivo == GuidDispositivo);
                 dispositivo.NombreCadena = instalacionSeleccionada.NombreCadena;
                 dispositivo.NombreInstalacion = instalacionSeleccionada.NombreInstalacion;
-                dispositivo.EstadoObjeto = EstadoObjeto.EnMemoria;
+                dispositivo.EstadoObjeto = EstadoObjeto.Almacenar;
 
-                if (!empleado.Dispositivos.Any(p => p.GuidDispositivo == dispositivo.GuidDispositivo)) {
+                if (empleado.Dispositivos != null) {
+                    if (!empleado.Dispositivos.Any(p => p.GuidDispositivo == dispositivo.GuidDispositivo)) {
+                        empleado.Dispositivos.Add(dispositivo);
+                        return true;
+                    } else {
+                        dxErrorProvider.SetError(DevLookUpEditInstalacion, "Relacion ya existente...");
+                        return false;
+                    }
+                } else {
                     empleado.Dispositivos.Add(dispositivo);
                     return true;
-                } else {
-                    dxErrorProvider.SetError(DevLookUpEditInstalacion, "Relacion ya existente...");
-                    return false;
                 }
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
@@ -177,10 +183,18 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         private void DevLookUpEditDispositivo_EditValueChanged(object sender, EventArgs e) {
             DevSimpleButtonNuevo.Enabled = true;
         }
-        #endregion
-
         private void DevRepositoryItemButtonEditEliminar_Click(object sender, EventArgs e) {
-            //
+            try {
+                Guid GuidDispositivo = (Guid)DevGridViewAsistencias.GetFocusedRowCellValue("GuidDispositivo");
+                if (!string.IsNullOrEmpty(GuidDispositivo.ToString())) {
+                    var dispositivo = empleado.Dispositivos.First(p => p.GuidDispositivo == GuidDispositivo);
+                    dispositivo.EstadoObjeto = EstadoObjeto.Eliminar;
+                    CargarDatos();
+                }
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+            }
         }
+        #endregion
     }
 }

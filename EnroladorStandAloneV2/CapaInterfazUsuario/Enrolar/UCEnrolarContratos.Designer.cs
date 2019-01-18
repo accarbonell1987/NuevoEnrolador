@@ -148,69 +148,80 @@
             this.colEliminar});
             this.DevGridViewContratos.GridControl = this.DevGridControlContratos;
             this.DevGridViewContratos.Name = "DevGridViewContratos";
-            this.DevGridViewContratos.OptionsBehavior.Editable = false;
             this.DevGridViewContratos.OptionsView.ShowGroupPanel = false;
             // 
             // colGuidContrato
             // 
             this.colGuidContrato.FieldName = "GuidContrato";
             this.colGuidContrato.Name = "colGuidContrato";
+            this.colGuidContrato.OptionsColumn.AllowEdit = false;
             // 
             // colGuidEmpresa
             // 
             this.colGuidEmpresa.FieldName = "GuidEmpresa";
             this.colGuidEmpresa.Name = "colGuidEmpresa";
+            this.colGuidEmpresa.OptionsColumn.AllowEdit = false;
             // 
             // colGuidCuenta
             // 
             this.colGuidCuenta.FieldName = "GuidCuenta";
             this.colGuidCuenta.Name = "colGuidCuenta";
+            this.colGuidCuenta.OptionsColumn.AllowEdit = false;
             // 
             // colGuidCargo
             // 
             this.colGuidCargo.FieldName = "GuidCargo";
             this.colGuidCargo.Name = "colGuidCargo";
+            this.colGuidCargo.OptionsColumn.AllowEdit = false;
             // 
             // colGuidEmpleado
             // 
             this.colGuidEmpleado.FieldName = "GuidEmpleado";
             this.colGuidEmpleado.Name = "colGuidEmpleado";
+            this.colGuidEmpleado.OptionsColumn.AllowEdit = false;
             // 
             // colConsideraAsistencia
             // 
             this.colConsideraAsistencia.FieldName = "ConsideraAsistencia";
             this.colConsideraAsistencia.Name = "colConsideraAsistencia";
+            this.colConsideraAsistencia.OptionsColumn.AllowEdit = false;
             // 
             // colConsideraCasino
             // 
             this.colConsideraCasino.FieldName = "ConsideraCasino";
             this.colConsideraCasino.Name = "colConsideraCasino";
+            this.colConsideraCasino.OptionsColumn.AllowEdit = false;
             // 
             // colDescripcion
             // 
             this.colDescripcion.FieldName = "Descripcion";
             this.colDescripcion.Name = "colDescripcion";
+            this.colDescripcion.OptionsColumn.AllowEdit = false;
             // 
             // colNombreEmpresa
             // 
             this.colNombreEmpresa.FieldName = "NombreEmpresa";
             this.colNombreEmpresa.Name = "colNombreEmpresa";
+            this.colNombreEmpresa.OptionsColumn.AllowEdit = false;
             // 
             // colNombreCuenta
             // 
             this.colNombreCuenta.FieldName = "NombreCuenta";
             this.colNombreCuenta.Name = "colNombreCuenta";
+            this.colNombreCuenta.OptionsColumn.AllowEdit = false;
             // 
             // colNombreCargo
             // 
             this.colNombreCargo.FieldName = "NombreCargo";
             this.colNombreCargo.Name = "colNombreCargo";
+            this.colNombreCargo.OptionsColumn.AllowEdit = false;
             // 
             // colCodigoContrato
             // 
             this.colCodigoContrato.Caption = "Codigo";
             this.colCodigoContrato.FieldName = "CodigoContrato";
             this.colCodigoContrato.Name = "colCodigoContrato";
+            this.colCodigoContrato.OptionsColumn.AllowEdit = false;
             this.colCodigoContrato.Visible = true;
             this.colCodigoContrato.VisibleIndex = 0;
             // 
@@ -218,6 +229,7 @@
             // 
             this.colInicioVigencia.FieldName = "InicioVigencia";
             this.colInicioVigencia.Name = "colInicioVigencia";
+            this.colInicioVigencia.OptionsColumn.AllowEdit = false;
             this.colInicioVigencia.Visible = true;
             this.colInicioVigencia.VisibleIndex = 1;
             // 
@@ -225,6 +237,7 @@
             // 
             this.colFinVigencia.FieldName = "FinVigencia";
             this.colFinVigencia.Name = "colFinVigencia";
+            this.colFinVigencia.OptionsColumn.AllowEdit = false;
             this.colFinVigencia.Visible = true;
             this.colFinVigencia.VisibleIndex = 2;
             // 
@@ -232,6 +245,7 @@
             // 
             this.colEstado.FieldName = "Estado";
             this.colEstado.Name = "colEstado";
+            this.colEstado.OptionsColumn.AllowEdit = false;
             this.colEstado.Visible = true;
             this.colEstado.VisibleIndex = 3;
             // 

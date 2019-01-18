@@ -895,7 +895,7 @@ namespace EnroladorServicioWeb {
                     comm.Parameters.Add("@Correo", SqlDbType.VarChar).Value = pocoEmpleado.Correo;
                     comm.Parameters.Add("@Telefono", SqlDbType.VarChar).Value = pocoEmpleado.NumeroTelefono;
                     comm.Parameters.Add("@EnrollID", SqlDbType.Int).Value = pocoEmpleado.EnrollId;
-                    comm.Parameters.Add("@Contraseña", SqlDbType.NVarChar).Value = pocoEmpleado.Contraseña;
+                    comm.Parameters.Add("@Contraseña", SqlDbType.NVarChar).Value = pocoEmpleado.Contraseña == null ? "" : pocoEmpleado.Contraseña;
                     SqlParameter outParam = new SqlParameter("@Error", SqlDbType.NVarChar, -1);
                     outParam.Direction = ParameterDirection.Output;
                     comm.Parameters.Add(outParam);
@@ -925,51 +925,52 @@ namespace EnroladorServicioWeb {
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(ConnectionString()))
-                using (SqlCommand comm = new SqlCommand("", conn) { CommandType = CommandType.StoredProcedure })
-                {
-                    conn.Open();
+                return InsertarEmpleado(responsable, pocoEmpleado);
+                //using (SqlConnection conn = new SqlConnection(ConnectionString()))
+                //using (SqlCommand comm = new SqlCommand("", conn) { CommandType = CommandType.StoredProcedure })
+                //{
+                //    conn.Open();
 
-                    if (string.IsNullOrEmpty(pocoEmpleado.Contraseña))
-                    {
-                        comm.CommandText = "ESA_Eliminar_Contraseña";
-                        comm.Parameters.Add("@LoggedUserOid", SqlDbType.UniqueIdentifier).Value = responsable;
-                        comm.Parameters.Add("@EmpleadoOid", SqlDbType.UniqueIdentifier).Value = pocoEmpleado.GuidEmpleado;
-                        SqlParameter outParam = new SqlParameter("@Error", SqlDbType.NVarChar);
-                        outParam.Direction = ParameterDirection.Output;
-                        outParam.Size = -1; // nvarchar(max)
-                        comm.Parameters.Add(outParam);
+                //    if (string.IsNullOrEmpty(pocoEmpleado.Contraseña))
+                //    {
+                //        comm.CommandText = "ESA_Eliminar_Contraseña";
+                //        comm.Parameters.Add("@LoggedUserOid", SqlDbType.UniqueIdentifier).Value = responsable;
+                //        comm.Parameters.Add("@EmpleadoOid", SqlDbType.UniqueIdentifier).Value = pocoEmpleado.GuidEmpleado;
+                //        SqlParameter outParam = new SqlParameter("@Error", SqlDbType.NVarChar);
+                //        outParam.Direction = ParameterDirection.Output;
+                //        outParam.Size = -1; // nvarchar(max)
+                //        comm.Parameters.Add(outParam);
 
-                        comm.ExecuteNonQuery();
+                //        comm.ExecuteNonQuery();
 
-                        if (!(outParam.Value is DBNull) && !string.IsNullOrEmpty((string)outParam.Value))
-                        {
-                            return (string)outParam.Value;
-                        }
-                        return null;
-                    }
-                    else
-                    {
-                        comm.CommandText = "ESA_Crear_Contraseña";
-                        comm.CommandType = CommandType.StoredProcedure;
-                        comm.Parameters.Clear();
-                        comm.Parameters.Add("@LoggedUserOid", SqlDbType.UniqueIdentifier).Value = responsable;
-                        comm.Parameters.Add("@EmpleadoOid", SqlDbType.UniqueIdentifier).Value = pocoEmpleado.GuidEmpleado;
-                        comm.Parameters.Add("@Contraseña", SqlDbType.VarChar).Value = pocoEmpleado.Contraseña;
-                        SqlParameter outParam = new SqlParameter("@Error", SqlDbType.NVarChar);
-                        outParam.Direction = ParameterDirection.Output;
-                        outParam.Size = -1; // nvarchar(max)
-                        comm.Parameters.Add(outParam);
+                //        if (!(outParam.Value is DBNull) && !string.IsNullOrEmpty((string)outParam.Value))
+                //        {
+                //            return (string)outParam.Value;
+                //        }
+                //        return null;
+                //    }
+                //    else
+                //    {
+                //        comm.CommandText = "ESA_Crear_Contraseña";
+                //        comm.CommandType = CommandType.StoredProcedure;
+                //        comm.Parameters.Clear();
+                //        comm.Parameters.Add("@LoggedUserOid", SqlDbType.UniqueIdentifier).Value = responsable;
+                //        comm.Parameters.Add("@EmpleadoOid", SqlDbType.UniqueIdentifier).Value = pocoEmpleado.GuidEmpleado;
+                //        comm.Parameters.Add("@Contraseña", SqlDbType.VarChar).Value = pocoEmpleado.Contraseña;
+                //        SqlParameter outParam = new SqlParameter("@Error", SqlDbType.NVarChar);
+                //        outParam.Direction = ParameterDirection.Output;
+                //        outParam.Size = -1; // nvarchar(max)
+                //        comm.Parameters.Add(outParam);
 
-                        comm.ExecuteNonQuery();
+                //        comm.ExecuteNonQuery();
 
-                        if (!(outParam.Value is DBNull) && !string.IsNullOrEmpty((string)outParam.Value))
-                        {
-                            return (string)outParam.Value;
-                        }
-                        return null;
-                    }
-                }
+                //        if (!(outParam.Value is DBNull) && !string.IsNullOrEmpty((string)outParam.Value))
+                //        {
+                //            return (string)outParam.Value;
+                //        }
+                //        return null;
+                //    }
+                //}
             }
             catch (Exception ex)
             {

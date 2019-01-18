@@ -29,3 +29,10 @@ d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorAccesoDatos\obj\Debug\EnroladorAc
 d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.csproj.CoreCompileInputs.cache
 d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.dll
 d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.pdb
+D:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\OUTPUT\EnroladorAccesoDatos.dll.config
+D:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\OUTPUT\EnroladorAccesoDatos.dll
+D:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\OUTPUT\EnroladorAccesoDatos.pdb
+D:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.g.resources
+D:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.csproj.CoreCompileInputs.cache
+D:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.dll
+D:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.pdb
