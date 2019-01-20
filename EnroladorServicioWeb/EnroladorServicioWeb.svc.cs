@@ -1134,7 +1134,7 @@ namespace EnroladorServicioWeb {
                     comm.Parameters.Add("@Cargo", SqlDbType.UniqueIdentifier).Value = pocoContrato.GuidCargo;
                     comm.Parameters.Add("@InicioVigencia", SqlDbType.DateTime).Value = pocoContrato.InicioVigencia;
                     comm.Parameters.Add("@CodigoContrato", SqlDbType.VarChar).Value = pocoContrato.CodigoContrato.Length > 100 ? pocoContrato.CodigoContrato.Substring(0, 100) : pocoContrato.CodigoContrato;
-                    comm.Parameters.Add("@ConsideraColacion", SqlDbType.Bit).Value = pocoContrato.ConsideraAsistencia;
+                    comm.Parameters.Add("@ConsideraAsistencia", SqlDbType.Bit).Value = pocoContrato.ConsideraAsistencia;
                     comm.Parameters.Add("@ConsideraCasino", SqlDbType.Bit).Value = pocoContrato.ConsideraCasino;
 
                     if (pocoContrato.FinVigencia.HasValue)

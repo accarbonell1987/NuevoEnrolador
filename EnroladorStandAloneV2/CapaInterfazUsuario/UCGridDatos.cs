@@ -55,11 +55,11 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
                         };
                         break;
                     case 1: {
-                            var lEmpleadosContratosActivos = Negocio.ObtenerListaContratosEmpleado(true);
+                            var lEmpleadosContratosActivos = Negocio.FiltrarEmpleadosPorContratos(true);
                             bsEmpleados.DataSource = lEmpleadosContratosActivos;
                         }; break;
                     default: {
-                            var lEmpleadosContratosVencidos = Negocio.ObtenerListaContratosEmpleado(false);
+                            var lEmpleadosContratosVencidos = Negocio.FiltrarEmpleadosPorContratos(false);
                             bsEmpleados.DataSource = lEmpleadosContratosVencidos;
                         }; break;
                 }
@@ -84,6 +84,26 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
         }
         private void UCGridDatos_Load(object sender, EventArgs e) {
             ProcesarGrid(0);
+        }
+        /// <summary>
+        /// Actualizar la Row del empleado
+        /// </summary>
+        /// <param name="empleado">POCOEmpleado empleado</param>
+        public void ActualizarRowDelEmpleado(POCOEmpleado empleado) {
+            try {
+                var lempleado = Negocio.lEmpleados.First(p => p.RUT == empleado.RUT);
+                lempleado = empleado;
+
+                for (int i = 0; i < DevGridViewEmpleados.DataRowCount; i++) {
+                    object b = DevGridViewEmpleados.GetRowCellValue(i, "RUT");
+                    if (b != null && b.Equals(empleado.RUT)) {
+                        DevGridViewEmpleados.RefreshRow(i);
+                        return;
+                    }
+                }
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+            }
         }
         #endregion
     }

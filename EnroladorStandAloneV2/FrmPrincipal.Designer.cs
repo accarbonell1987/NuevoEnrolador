@@ -40,6 +40,7 @@
             this.DevNavigationPanePrincipal = new DevExpress.XtraBars.Navigation.NavigationPane();
             this.backgroundWorkerChequeoNotificaciones = new System.ComponentModel.BackgroundWorker();
             this.DevDefaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+            this.ucBarraInformacion1 = new EnroladorStandAloneV2.CapaInterfazUsuario.UCBarraInformacion();
             ((System.ComponentModel.ISupportInitialize)(this.DevRibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlNotificacionesAcciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevPanelControlPrincipal)).BeginInit();
@@ -179,12 +180,25 @@
             this.backgroundWorkerChequeoNotificaciones.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorkerChequeoNotificaciones_DoWork);
             this.backgroundWorkerChequeoNotificaciones.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BackgroundWorkerChequeoNotificaciones_ProgressChanged);
             // 
+            // DevDefaultLookAndFeel
+            // 
+            this.DevDefaultLookAndFeel.LookAndFeel.SkinName = "DevExpress Dark Style";
+            // 
+            // ucBarraInformacion1
+            // 
+            this.ucBarraInformacion1.Location = new System.Drawing.Point(110, 28);
+            this.ucBarraInformacion1.Name = "ucBarraInformacion1";
+            this.ucBarraInformacion1.Size = new System.Drawing.Size(123, 20);
+            this.ucBarraInformacion1.TabIndex = 7;
+            this.ucBarraInformacion1.Visible = false;
+            // 
             // FrmPrincipal
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1333, 783);
+            this.Controls.Add(this.ucBarraInformacion1);
             this.Controls.Add(this.DevPanelControlPrincipal);
             this.Controls.Add(this.DevGroupControlNotificacionesAcciones);
             this.Controls.Add(this.DevRibbonControl);
@@ -195,7 +209,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Enrolador StandAlone";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmPrincipal_FormClosing);
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
+            this.Resize += new System.EventHandler(this.FrmPrincipal_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.DevRibbonControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlNotificacionesAcciones)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevPanelControlPrincipal)).EndInit();
@@ -223,6 +239,7 @@
         private DevExpress.XtraBars.BarButtonItem DevBarButtonItemDescartar;
         private System.ComponentModel.BackgroundWorker backgroundWorkerChequeoNotificaciones;
         private DevExpress.LookAndFeel.DefaultLookAndFeel DevDefaultLookAndFeel;
+        private CapaInterfazUsuario.UCBarraInformacion ucBarraInformacion1;
     }
 }
 

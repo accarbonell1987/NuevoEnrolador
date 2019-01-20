@@ -44,6 +44,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
         public SQLiteEnrollEntities mContext { get; set; }
         public List<POCONotificacion> lNotificaciones { get; set; }
         public int CantidadElementosNotificaciones { get; set; }
+        public int CantidadAccionesPorEnviar { get; set; }
 
         public List<POCOEmpleado> lEmpleados { get; set; }
         #endregion
@@ -100,12 +101,21 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
             return false;
         }
 
+        public void CargarCantidadDeAccionesPendientes() {
+            try {
+                CantidadAccionesPorEnviar = mContext.PorSincronizar.Count();
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+            }
+        }
+
         public Usuario ObtenerUsuarioLocal() {
             try {
                 var usuario = mContext.Usuario.FirstOrDefault();
                 if (usuario == null) return null;
 
                 HuellasUsuario = ObtenerHuellaUsuarioLocal(usuario.GuidUsuario);
+                CargarCantidadDeAccionesPendientes();
 
                 return usuario;
             } catch (Exception eX) {
@@ -113,6 +123,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 return null;
             }
         }
+
         public List<POCOEmpleado> ObtenerTodosEmpleados() {
             try {
                 List<POCOEmpleado> lPOCOEmpleados = new List<POCOEmpleado>();
@@ -276,12 +287,121 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 return null;
             }
         }
+        public POCOEmpleado ObtenerEmpleadoDeBD(string RUT) {
+            try {
+                //cargar empleados locales
+                var empleado = mContext.Empleado.FirstOrDefault(p => p.RUT == RUT);
+                if (empleado == null) return null;
+
+                //transformar el empleado a poco
+                var pocoEmpleado = TransformacionDatos.DeEmpleadoAPOCOEmpleado(empleado);
+
+                pocoEmpleado.TipoIdentificacion = pocoEmpleado.TieneContraseña ? TipoIdentificacion.Clave.ToString() : TipoIdentificacion.Huella.ToString();
+
+                //cargar contratos del empleado
+                var contratos = mContext.Contrato.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
+
+                if (contratos.Count > 0) {
+                    //adicionar contratos al empleado
+                    List<POCOContrato> lPOCOContratos = new List<POCOContrato>();
+                    foreach (var contrato in contratos) {
+                        POCOContrato pContrato = TransformacionDatos.DeContratoAPOCOContrato(contrato);
+
+                        var empresa = TransformacionDatos.DeEmpresaAPOCOEmpresa(mContext.Empresa.FirstOrDefault(p => p.GuidEmpresa == pContrato.GuidEmpresa.ToString()));
+                        pContrato.NombreEmpresa = empresa == null ? "Sin Empresa" : empresa.NombreEmpresa;
+
+                        var cuenta = TransformacionDatos.DeCuentaAPOCOCuenta(mContext.Cuenta.FirstOrDefault(p => p.GuidCuenta == pContrato.GuidCuenta.ToString()));
+                        pContrato.NombreCuenta = cuenta == null ? "Sin Cuenta" : cuenta.NombreCuenta;
+
+                        var cargo = TransformacionDatos.DeCargoAPOCOCargo(mContext.Cargo.FirstOrDefault(p => p.GuidCargo == pContrato.GuidCargo.ToString()));
+                        pContrato.NombreCargo = cargo == null ? "Sin Cargo" : cargo.NombreCargo;
+
+                        pocoEmpleado.Contratos.Add(pContrato);
+                    }
+                }
+
+                //cargar huellas del empleado
+                var huellas = mContext.Huella.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
+                //adicionar huellas al empleado
+                List<POCOHuella> lPOCOHuellas = new List<POCOHuella>();
+                foreach (var huella in huellas)
+                    pocoEmpleado.Huellas.Add(TransformacionDatos.DeHuellaAPOCOHuella(huella));
+                //cargar dispositivos del empleado
+                var dispEmpleado = mContext.EmpleadoDispositivo.Where(p => p.GuidEmpleado == empleado.GuidEmpleado);
+                var dispositivos = mContext.Dispositivo.Where(p => dispEmpleado.Any(a => a.GuidDispositivo == p.GuidDispositivo)).Select(p => p).ToList();
+
+                pocoEmpleado.Dispositivos = new List<POCODispositivo>();
+                //adicionar dispositivos al empleado
+                foreach (var dispositivo in dispositivos) {
+                    var pocoDispositivo = TransformacionDatos.DeDispositivoAPOCODispositivo(dispositivo);
+
+                    var instalacion = ObtenerInstalacionDelDispositivo(pocoDispositivo.GuidInstalacion);
+                    var cadena = ObtenerCadenaDeInstalacion(instalacion.GuidCadena);
+
+                    pocoDispositivo.NombreCadena = cadena.NombreCadena;
+                    pocoDispositivo.NombreInstalacion = instalacion.NombreInstalacion;
+
+                    pocoEmpleado.Dispositivos.Add(pocoDispositivo);
+                }
+
+                //cargar Turnos Servicio Casino
+                var turnoServicioCasinoEmpleado = mContext.EmpleadoTurnoServicioCasino.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
+                //obtener todos los turnos del empleado
+                List<TurnoServicio> turnoServicios = new List<TurnoServicio>();
+                foreach (var turnoEmpleado in turnoServicioCasinoEmpleado) {
+                    var turno = mContext.TurnoServicio.First(p => p.GuidTurnoServicio == turnoEmpleado.GuidTurnoServicio);
+                    turnoServicios.Add(turno);
+                }
+
+                pocoEmpleado.TurnoServicioCasino = new List<POCOEmpleadoTurnoServicioCasino>();
+                //adicionar la relacion de turno servicio casino al empleado
+                foreach (var turno in turnoServicios) {
+                    var pocoTurnoServicio = TransformacionDatos.DeTurnoServicioAPOCOTurnoServicio(turno);
+
+                    var servicio = ObtenerServicio(pocoTurnoServicio.GuidServicio);
+                    var instalacion = ObtenerInstalacion(servicio.GuidCasino);
+
+                    pocoEmpleado.TurnoServicioCasino.Add(new POCOEmpleadoTurnoServicioCasino() {
+                        GuidEmpleado = Guid.Parse(empleado.GuidEmpleado),
+                        GuidTurnoServicio = pocoTurnoServicio.GuidTurnoServicio,
+                        HoraInicio = pocoTurnoServicio.HoraInicio,
+                        HoraFin = pocoTurnoServicio.HoraFin,
+                        Vigente = pocoTurnoServicio.Vigente,
+                        NombreCasino = instalacion.NombreInstalacion,
+                        NombreServicio = servicio.NombreServicioCasino,
+                        NombreTurno = pocoTurnoServicio.NombreTurnoServicio
+                    });
+                }
+
+                return pocoEmpleado;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Obtener un string de NombreEmpresa - NombreCuenta - NombreCargo de cada contrato del empleado
+        /// </summary>
+        /// <param name="pRut">string pRut</param>
+        /// <returns>string</returns>
+        public List<POCOEmpleado> FiltrarEmpleadosPorContratos(bool Activos) {
+            if (Activos)
+                //foreach (var empleado in lEmpleados.Where(p => p.Contratos.Where(a => a.Estado == EstadoContrato.Activo).ToList().Count > 0))
+                //    yield return empleado;
+                return lEmpleados.Where(p => p.Contratos.Where(a => a.Estado == EstadoContrato.Activo).ToList().Count > 0).ToList();
+            else
+                //foreach (var empleado in lEmpleados.Where(p => p.Contratos.Where(a => a.Estado == EstadoContrato.Vencido).ToList().Count > 0))
+                //    yield return empleado;
+                return lEmpleados.Where(p => p.Contratos.Where(a => a.Estado == EstadoContrato.Vencido).ToList().Count > 0).ToList();
+        }
         public int CantidadDeEmpleados() {
             var empleado = mContext.Empleado.FirstOrDefault();
             if (empleado == null) return 0;
 
             return mContext.Empleado.Count();
         }
+
         public List<POCOEmpresa> ObtenerTodasEmpresas() {
             try {
                 List<POCOEmpresa> lPOCOEmpresas = new List<POCOEmpresa>();
@@ -376,7 +496,6 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 return null;
             }
         }
-
         public POCOCadena ObtenerCadenaDeInstalacion(Guid GuidCadena) {
             try {
                 var cadena = mContext.Cadena.FirstOrDefault(p => p.GuidCadena == GuidCadena.ToString());
@@ -388,6 +507,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 return null;
             }
         }
+
         public POCOContrato ObtenerContrato(Guid GuidEmpleado, Guid GuidContrato) {
             try {
                 var todosContratos = mContext.Contrato.Where(p => p.GuidEmpleado == GuidEmpleado.ToString()).ToList();
@@ -625,115 +745,6 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
                 return null;
             }
-        }
-
-        public POCOEmpleado ObtenerEmpleadoDeBD(string RUT) {
-            try {
-                //cargar empleados locales
-                var empleado = mContext.Empleado.FirstOrDefault(p => p.RUT == RUT);
-                if (empleado == null) return null;
-
-                //transformar el empleado a poco
-                var pocoEmpleado = TransformacionDatos.DeEmpleadoAPOCOEmpleado(empleado);
-
-                pocoEmpleado.TipoIdentificacion = pocoEmpleado.TieneContraseña ? TipoIdentificacion.Clave.ToString() : TipoIdentificacion.Huella.ToString();
-                    
-                //cargar contratos del empleado
-                var contratos = mContext.Contrato.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
-
-                if (contratos.Count > 0) {
-                    //adicionar contratos al empleado
-                    List<POCOContrato> lPOCOContratos = new List<POCOContrato>();
-                    foreach (var contrato in contratos) {
-                        POCOContrato pContrato = TransformacionDatos.DeContratoAPOCOContrato(contrato);
-
-                        var empresa = TransformacionDatos.DeEmpresaAPOCOEmpresa(mContext.Empresa.FirstOrDefault(p => p.GuidEmpresa == pContrato.GuidEmpresa.ToString()));
-                        pContrato.NombreEmpresa = empresa == null ? "Sin Empresa" : empresa.NombreEmpresa;
-
-                        var cuenta = TransformacionDatos.DeCuentaAPOCOCuenta(mContext.Cuenta.FirstOrDefault(p => p.GuidCuenta == pContrato.GuidCuenta.ToString()));
-                        pContrato.NombreCuenta = cuenta == null ? "Sin Cuenta" : cuenta.NombreCuenta;
-
-                        var cargo = TransformacionDatos.DeCargoAPOCOCargo(mContext.Cargo.FirstOrDefault(p => p.GuidCargo == pContrato.GuidCargo.ToString()));
-                        pContrato.NombreCargo = cargo == null ? "Sin Cargo" : cargo.NombreCargo;
-
-                        pocoEmpleado.Contratos.Add(pContrato);
-                    }
-                }
-
-                //cargar huellas del empleado
-                var huellas = mContext.Huella.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
-                //adicionar huellas al empleado
-                List<POCOHuella> lPOCOHuellas = new List<POCOHuella>();
-                foreach (var huella in huellas)
-                    pocoEmpleado.Huellas.Add(TransformacionDatos.DeHuellaAPOCOHuella(huella));
-                //cargar dispositivos del empleado
-                var dispEmpleado = mContext.EmpleadoDispositivo.Where(p => p.GuidEmpleado == empleado.GuidEmpleado);
-                var dispositivos = mContext.Dispositivo.Where(p => dispEmpleado.Any(a => a.GuidDispositivo == p.GuidDispositivo)).Select(p => p).ToList();
-
-                pocoEmpleado.Dispositivos = new List<POCODispositivo>();
-                //adicionar dispositivos al empleado
-                foreach (var dispositivo in dispositivos) {
-                    var pocoDispositivo = TransformacionDatos.DeDispositivoAPOCODispositivo(dispositivo);
-
-                    var instalacion = ObtenerInstalacionDelDispositivo(pocoDispositivo.GuidInstalacion);
-                    var cadena = ObtenerCadenaDeInstalacion(instalacion.GuidCadena);
-
-                    pocoDispositivo.NombreCadena = cadena.NombreCadena;
-                    pocoDispositivo.NombreInstalacion = instalacion.NombreInstalacion;
-
-                    pocoEmpleado.Dispositivos.Add(pocoDispositivo);
-                }
-
-                //cargar Turnos Servicio Casino
-                var turnoServicioCasinoEmpleado = mContext.EmpleadoTurnoServicioCasino.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
-                //obtener todos los turnos del empleado
-                List<TurnoServicio> turnoServicios = new List<TurnoServicio>();
-                foreach (var turnoEmpleado in turnoServicioCasinoEmpleado) {
-                    var turno = mContext.TurnoServicio.First(p => p.GuidTurnoServicio == turnoEmpleado.GuidTurnoServicio);
-                    turnoServicios.Add(turno);
-                }
-                    
-                pocoEmpleado.TurnoServicioCasino = new List<POCOEmpleadoTurnoServicioCasino>();
-                //adicionar la relacion de turno servicio casino al empleado
-                foreach (var turno in turnoServicios) {
-                    var pocoTurnoServicio = TransformacionDatos.DeTurnoServicioAPOCOTurnoServicio(turno);
-
-                    var servicio = ObtenerServicio(pocoTurnoServicio.GuidServicio);
-                    var instalacion = ObtenerInstalacion(servicio.GuidCasino);
-
-                    pocoEmpleado.TurnoServicioCasino.Add(new POCOEmpleadoTurnoServicioCasino() {
-                        GuidEmpleado = Guid.Parse(empleado.GuidEmpleado),
-                        GuidTurnoServicio = pocoTurnoServicio.GuidTurnoServicio,
-                        HoraInicio = pocoTurnoServicio.HoraInicio,
-                        HoraFin = pocoTurnoServicio.HoraFin,
-                        Vigente = pocoTurnoServicio.Vigente,
-                        NombreCasino = instalacion.NombreInstalacion,
-                        NombreServicio = servicio.NombreServicioCasino,
-                        NombreTurno = pocoTurnoServicio.NombreTurnoServicio
-                    });
-                }
-
-                return pocoEmpleado;
-            } catch (Exception eX) {
-                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Obtener un string de NombreEmpresa - NombreCuenta - NombreCargo de cada contrato del empleado
-        /// </summary>
-        /// <param name="pRut">string pRut</param>
-        /// <returns>string</returns>
-        public List<POCOEmpleado> ObtenerListaContratosEmpleado(bool Activos) {
-            if (Activos)
-                //foreach (var empleado in lEmpleados.Where(p => p.Contratos.Where(a => a.Estado == EstadoContrato.Activo).ToList().Count > 0))
-                //    yield return empleado;
-                return lEmpleados.Where(p => p.Contratos.Where(a => a.Estado == EstadoContrato.Activo).ToList().Count > 0).ToList();
-            else
-                //foreach (var empleado in lEmpleados.Where(p => p.Contratos.Where(a => a.Estado == EstadoContrato.Vencido).ToList().Count > 0))
-                //    yield return empleado;
-                return lEmpleados.Where(p => p.Contratos.Where(a => a.Estado == EstadoContrato.Vencido).ToList().Count > 0).ToList();
         }
 
         /// <summary>

@@ -24,6 +24,7 @@ using System.Transactions;
 using DevExpress.XtraBars.Navigation;
 using EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar;
 using System.Data.SQLite;
+using System.Diagnostics;
 
 namespace EnroladorStandAloneV2 {
     public partial class FrmPrincipal : DevExpress.XtraBars.Ribbon.RibbonForm {
@@ -39,6 +40,8 @@ namespace EnroladorStandAloneV2 {
             //Si la pantalla no es full HD minimizo los botones
             if (Height < 800) DevRibbonControl.Minimized = true;
 
+            
+            
             Negocio = new NegocioEnrolador();
 
             //mostar splash
@@ -51,6 +54,26 @@ namespace EnroladorStandAloneV2 {
         #endregion
 
         #region Eventos Form
+        private void FrmPrincipal_FormClosing(object sender, FormClosingEventArgs e) {
+            try {
+                if (!Negocio.Actualizando && Negocio.ExistenDatos && Negocio.CantidadAccionesPorEnviar > 0) {
+                    DialogResult dRes = XtraMessageBox.Show("Hay acciones que no han sido enviadas. Enviar ahora?", "Acciones no enviadas", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
+                    if (dRes != DialogResult.No) {
+                        e.Cancel = true;
+                        if (dRes == DialogResult.Yes) {
+                            DevBarButtonSincronizar_ItemClick(sender, null);
+                        }
+                        return;
+                    }
+                }
+                if (Negocio.mHuellero != null) {
+                    Negocio.mHuellero.Dispose();
+                    Negocio.mHuellero = null;
+                }
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+            }
+        }
         private void BarButtonItemSalir_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
             //Chequear:
             //1. Actualizando?
@@ -59,21 +82,7 @@ namespace EnroladorStandAloneV2 {
             // Mostrar Mensaje "¿Hay acciones que no han sido enviadas. Enviar ahora?"
 
             //Destruir Huellero
-
-            //if (!actualizando && dataLoaded && accionesPorEnviar.Count() > 0) {
-            //    DialogResult res = MessageBox.Show("Hay acciones que no han sido enviadas. Enviar ahora?", "Acciones no enviadas", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
-            //    if (res != DialogResult.No) {
-            //        e.Cancel = true;
-            //        if (res == DialogResult.Yes) {
-            //            recargar_ItemClick(this, null);
-            //        }
-            //        return;
-            //    }
-            //}
-            //if (huellero != null) {
-            //    huellero.Dispose();
-            //    huellero = null;
-            //}
+            FrmPrincipal_FormClosing(sender, new FormClosingEventArgs(CloseReason.UserClosing, false));
         }
 
         private async void FrmPrincipal_Load(object sender, EventArgs e) {
@@ -698,9 +707,10 @@ namespace EnroladorStandAloneV2 {
                 foreach (var pHuella in sList) {
 
                     //saber si existe la huella en empleados
-                    bool empleadoContieneHuella = empleados.Any(p => p.GuidEmpleado == pHuella.GuidEmpleado);
+                    //bool empleadoContieneHuella = empleados.Any(p => p.GuidEmpleado == pHuella.GuidEmpleado);
 
-                    if ((empleadoContieneHuella) && (Enum.IsDefined(typeof(TipoHuella), pHuella.Tipo))) {
+                    //if ((empleadoContieneHuella) && (Enum.IsDefined(typeof(TipoHuella), pHuella.Tipo)))
+                    if (Enum.IsDefined(typeof(TipoHuella), pHuella.Tipo)) {
                         //transformar datos
                         var tHuella = TransformacionDatos.DePOCOHuellaAHuella(pHuella);
                         dbList.Add(tHuella);
@@ -917,11 +927,22 @@ namespace EnroladorStandAloneV2 {
         private void DevBarButtonItemGuardar_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
             try {
                 if (DevNavigationPanePrincipal.SelectedPage.Caption.Split('-')[0] == "Enrolar") {
+                    //buscar la pagina del tab que se mando a guardar
                     var framePage = DevNavigationPanePrincipal.SelectedPage;
                     NavigationPageBase page = DevNavigationPanePrincipal.Pages.Where(p => p.Caption == framePage.Caption).FirstOrDefault();
-                    UCEnrolador uC = (UCEnrolador)page.Controls[0];
+                    UCEnrolador uCEnrolador = (UCEnrolador)page.Controls[0];
+                    
+                    //capturar el empleado
+                    var empleado = uCEnrolador.empleado;
 
-                    Negocio.SalvarCambios(uC.empleado);
+                    //buscar la pagina de la grid
+                    NavigationPageBase gridPage = DevNavigationPanePrincipal.Pages.FirstOrDefault(p => p.Caption.Split('-')[0] != "Enrolar");
+                    UCGridDatos uCGrid = (UCGridDatos)gridPage.Controls[0];
+                    //actualizar la row del empleado
+                    uCGrid.ActualizarRowDelEmpleado(empleado);
+
+                    //salvar los cambios
+                    Negocio.SalvarCambios(uCEnrolador.empleado);
                     DevNavigationPanePrincipal.Pages.Remove(page);
 
                 }
@@ -1195,6 +1216,12 @@ namespace EnroladorStandAloneV2 {
                 return cp;
             }
         }
+
         #endregion
+
+        private void FrmPrincipal_Resize(object sender, EventArgs e) {
+            if (MaximizeBox)
+                ucBarraInformacion1.Location = new Point(ucBarraInformacion1.Location.X, 30);
+        }
     }
 }

@@ -177,6 +177,12 @@
       <DependentUpon>FrmAutorizacion.cs</DependentUpon>
     </Compile>
     <Compile Include="CapaInterfazUsuario\Interfaces\ICargaDatos.cs" />
+    <Compile Include="CapaInterfazUsuario\UCBarraInformacion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CapaInterfazUsuario\UCBarraInformacion.Designer.cs">
+      <DependentUpon>UCBarraInformacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="CapaInterfazUsuario\UCCargarDatos.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -242,6 +248,8 @@
     <Compile Include="Herramientas\ValidadorRUT.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Resources\notes_16x16.png" />
+    <None Include="Resources\pielabelstooltips_16x16.png" />
     <Content Include="TODO\Recomendable.txt" />
     <EmbeddedResource Include="CapaInterfazUsuario\Enrolar\UCEnrolador.resx">
       <DependentUpon>UCEnrolador.cs</DependentUpon>
@@ -269,6 +277,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CapaInterfazUsuario\FrmNotificaciones.resx">
       <DependentUpon>FrmNotificaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CapaInterfazUsuario\UCBarraInformacion.resx">
+      <DependentUpon>UCBarraInformacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CapaInterfazUsuario\UCCargarDatos.resx">
       <DependentUpon>UCCargarDatos.cs</DependentUpon>

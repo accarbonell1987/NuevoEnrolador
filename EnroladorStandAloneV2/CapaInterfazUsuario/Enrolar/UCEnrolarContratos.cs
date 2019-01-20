@@ -115,6 +115,8 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 DevLookUpEditCuenta.Text = contrato.NombreCuenta;
                 DevLookUpEditCargo.Text = contrato.NombreCargo;
                 DevDateEditInicioVigencia.Text = contrato.InicioVigencia.ToShortDateString();
+
+                DevDateEditFinVigencia.Text = contrato.FinVigencia != null ? contrato.FinVigencia.Value.ToString("dd-MM-yyyy") : "";
                 DevTextEditCodigo.Text = contrato.CodigoContrato;
 
                 if ((contrato.ConsideraAsistencia)||(empleado.Dispositivos.Count > 0)) DevCheckEditManejaAsistencia.Checked = true;
@@ -140,7 +142,8 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                     return false;
                 } else {
                     contratoSeleccionado.FinVigencia = finVigencia;
-                    contratoSeleccionado.Estado = EnroladorAccesoDatos.EstadoContrato.Vencido;
+                    contratoSeleccionado.Estado = EstadoContrato.Vencido;
+                    contratoSeleccionado.EstadoObjeto = EstadoObjeto.Almacenar;
                     return true;
                 }
             } catch (Exception eX) {
@@ -148,7 +151,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 return false;
             }
         }
-        private bool AdicionarNuevo() {
+        private bool CrearModificarContrato(TipoSincronizacion tipo) {
             try {
                 if (empresaSeleccionada == null) {
                     DevDxErrorProvider.SetError(DevLookUpEditEmpresa, "Instalacion no disponible...");
@@ -166,6 +169,12 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 var fechaInicio = DevDateEditInicioVigencia.DateTime.Date;
                 if (fechaInicio == null) {
                     DevDxErrorProvider.SetError(DevDateEditInicioVigencia, "Fecha no valida o nula...");
+                    return false;
+                }
+
+                var fechaFin = DevDateEditFinVigencia.DateTime.Date;
+                if (fechaFin < fechaInicio) {
+                    DevDxErrorProvider.SetError(DevDateEditInicioVigencia, "Fecha fin menor que fecha inicio...");
                     return false;
                 }
 
@@ -189,32 +198,93 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                     return false;
                 }
 
-                //el unico valor representativo del contrato es el codigo
-                //chequeo que no exista en la relacion ya
-                if (!empleado.Contratos.Any(p => p.CodigoContrato == codigo)) {
+                if (tipo == TipoSincronizacion.Insertar) {
+                    //el unico valor representativo del contrato es el codigo
+                    //chequeo que no exista en la relacion ya
+                    if (!empleado.Contratos.Any(p => p.CodigoContrato == codigo)) {
+                        var pocoContrato = new POCOContrato() {
+                            CodigoContrato = codigo,
+                            ConsideraAsistencia = consideraAsistencia,
+                            ConsideraCasino = consideraCasino,
+                            Estado = EstadoContrato.Activo,
+                            EstadoObjeto = EstadoObjeto.Almacenar,
+                            GuidCargo = cargoSeleccionado.GuidCargo,
+                            NombreCargo = cargoSeleccionado.NombreCargo,
+                            GuidCuenta = cuentaSeleccionada.GuidCuenta,
+                            NombreCuenta = cuentaSeleccionada.NombreCuenta,
+                            GuidEmpleado = empleado.GuidEmpleado,
+                            GuidEmpresa = empresaSeleccionada.GuidEmpresa,
+                            NombreEmpresa = empresaSeleccionada.NombreEmpresa,
+                            InicioVigencia = fechaInicio,
+                            FinVigencia = fechaFin
+                        };
 
-                    var pocoContrato = new POCOContrato() {
-                        CodigoContrato = codigo,
-                        ConsideraAsistencia = consideraAsistencia,
-                        ConsideraCasino = consideraCasino,
-                        Estado = EstadoContrato.Activo,
-                        EstadoObjeto = EstadoObjeto.Almacenar,
-                        GuidCargo = cargoSeleccionado.GuidCargo,
-                        NombreCargo = cargoSeleccionado.NombreCargo,
-                        GuidCuenta = cuentaSeleccionada.GuidCuenta,
-                        NombreCuenta = cuentaSeleccionada.NombreCuenta,
-                        GuidEmpleado = empleado.GuidEmpleado,
-                        GuidEmpresa = empresaSeleccionada.GuidEmpresa,
-                        NombreEmpresa = empresaSeleccionada.NombreEmpresa,
-                        InicioVigencia = fechaInicio
-                    };
+                        pocoContrato.Descripcion = "Sin descripcion";
 
-                    empleado.Contratos.Add(pocoContrato);
-                    return true;
-                } else {
-                    DevDxErrorProvider.SetError(DevTextEditCodigo, "Código de contrato ya existente...");
-                    return false;
+                        if ((pocoContrato.FinVigencia == null) || (pocoContrato.FinVigencia == Convert.ToDateTime(null))) {
+
+                            var inicioContrato = ((pocoContrato.InicioVigencia == null) || (pocoContrato.InicioVigencia == DateTime.MinValue) || (pocoContrato.InicioVigencia == new DateTime(1900, 1, 1))) ? "Contrato Permanente" : Convert.ToDateTime(pocoContrato.InicioVigencia).Date.ToShortDateString();
+
+                            var finContrato = ((pocoContrato.FinVigencia == null) || (pocoContrato.FinVigencia == DateTime.MinValue)) ? "Contrato Permanente" : Convert.ToDateTime(pocoContrato.FinVigencia).Date.ToShortDateString();
+
+                            var rangoContrato = (inicioContrato == finContrato) ? "Contrato Permanente" :
+                                                    "(" +
+                                                        pocoContrato.InicioVigencia.Date.ToShortDateString() + "-" +
+                                                        finContrato +
+                                                    ")";
+                            pocoContrato.Descripcion = rangoContrato;
+                        } else if ((pocoContrato.FinVigencia != null) && (Convert.ToDateTime(pocoContrato.FinVigencia).Date <= DateTime.Now)) {
+                            pocoContrato.Estado = EstadoContrato.Vencido;
+                        }
+
+                        empleado.Contratos.Add(pocoContrato);
+                        return true;
+                    } else {
+                        DevDxErrorProvider.SetError(DevTextEditCodigo, "Código de contrato ya existente...");
+                        return false;
+                    }
+                } else if (tipo == TipoSincronizacion.Modificar) {
+                    if (!empleado.Contratos.Any(p => (p.CodigoContrato == codigo) && (p.GuidContrato != contratoSeleccionado.GuidContrato) )) {
+
+                        contratoSeleccionado.CodigoContrato = codigo;
+                        contratoSeleccionado.ConsideraAsistencia = consideraAsistencia;
+                        contratoSeleccionado.ConsideraCasino = consideraCasino;
+                        contratoSeleccionado.Estado = EstadoContrato.Activo;
+                        contratoSeleccionado.EstadoObjeto = EstadoObjeto.Almacenar;
+                        contratoSeleccionado.GuidCargo = cargoSeleccionado.GuidCargo;
+                        contratoSeleccionado.NombreCargo = cargoSeleccionado.NombreCargo;
+                        contratoSeleccionado.GuidCuenta = cuentaSeleccionada.GuidCuenta;
+                        contratoSeleccionado.NombreCuenta = cuentaSeleccionada.NombreCuenta;
+                        contratoSeleccionado.GuidEmpleado = empleado.GuidEmpleado;
+                        contratoSeleccionado.GuidEmpresa = empresaSeleccionada.GuidEmpresa;
+                        contratoSeleccionado.NombreEmpresa = empresaSeleccionada.NombreEmpresa;
+                        contratoSeleccionado.InicioVigencia = fechaInicio;
+                        contratoSeleccionado.FinVigencia = fechaFin;
+
+                        contratoSeleccionado.Descripcion = "Sin descripcion";
+
+                        if ((contratoSeleccionado.FinVigencia == null) || (contratoSeleccionado.FinVigencia == Convert.ToDateTime(null))) {
+
+                            var inicioContrato = ((contratoSeleccionado.InicioVigencia == null) || (contratoSeleccionado.InicioVigencia == DateTime.MinValue) || (contratoSeleccionado.InicioVigencia == new DateTime(1900, 1, 1))) ? "Contrato Permanente" : Convert.ToDateTime(contratoSeleccionado.InicioVigencia).Date.ToShortDateString();
+
+                            var finContrato = ((contratoSeleccionado.FinVigencia == null) || (contratoSeleccionado.FinVigencia == DateTime.MinValue)) ? "Contrato Permanente" : Convert.ToDateTime(contratoSeleccionado.FinVigencia).Date.ToShortDateString();
+
+                            var rangoContrato = (inicioContrato == finContrato) ? "Contrato Permanente" :
+                                                    "(" +
+                                                        contratoSeleccionado.InicioVigencia.Date.ToShortDateString() + "-" +
+                                                        finContrato +
+                                                    ")";
+                            contratoSeleccionado.Descripcion = rangoContrato;
+                        } else if ((contratoSeleccionado.FinVigencia != null) && (Convert.ToDateTime(contratoSeleccionado.FinVigencia).Date <= DateTime.Now)) {
+                            contratoSeleccionado.Estado = EstadoContrato.Vencido;
+                        }
+                        return true;
+                    } else {
+                        DevDxErrorProvider.SetError(DevTextEditCodigo, "Código de contrato ya existente...");
+                        return false;
+                    }
                 }
+                return false;
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
                 return false;
@@ -309,7 +379,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             } else {
 
                 //Validar e insertar y cargo datos
-                if (!AdicionarNuevo()) {
+                if (!CrearModificarContrato(TipoSincronizacion.Insertar)) {
                     cantPresionadoNuevo = 1;
                     LimpiarCampos();
                 } else {
@@ -333,7 +403,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 if (!string.IsNullOrEmpty(GuidContrato.ToString())) {
                     var contrato = empleado.Contratos.FirstOrDefault(p => p.GuidContrato == GuidContrato);
                     CargarDatos(contrato);
-                    //Modificar
+                    CrearModificarContrato(TipoSincronizacion.Modificar);
                     LimpiarCampos();
                     CargarDatos();
                 }
