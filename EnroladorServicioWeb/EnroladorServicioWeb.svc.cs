@@ -896,8 +896,9 @@ namespace EnroladorServicioWeb {
                     comm.Parameters.Add("@Telefono", SqlDbType.VarChar).Value = pocoEmpleado.NumeroTelefono;
                     comm.Parameters.Add("@EnrollID", SqlDbType.Int).Value = pocoEmpleado.EnrollId;
                     comm.Parameters.Add("@Contraseña", SqlDbType.NVarChar).Value = pocoEmpleado.Contraseña == null ? "" : pocoEmpleado.Contraseña;
-                    SqlParameter outParam = new SqlParameter("@Error", SqlDbType.NVarChar, -1);
-                    outParam.Direction = ParameterDirection.Output;
+                    SqlParameter outParam = new SqlParameter("@Error", SqlDbType.NVarChar, -1) {
+                        Direction = ParameterDirection.Output
+                    };
                     comm.Parameters.Add(outParam);
 
                     comm.ExecuteNonQuery();

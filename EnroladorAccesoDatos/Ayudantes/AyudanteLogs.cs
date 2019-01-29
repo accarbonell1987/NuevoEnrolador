@@ -32,18 +32,23 @@ namespace EnroladorAccesoDatos.Ayudantes {
         /// <param name="nombreArchivo">string nombreArchivo</param>
         /// <returns>Exception</returns>
         public static Exception Log(this Exception ex, string nombreArchivo, string nombreProcedimiento, List<POCONotificacion> lNotificaciones) {
-
             string mensaje = "";
+
             foreach (Exception error in ex.InnerExceptions()) {
                 mensaje += (error.GetType() + ": " + error.Message + " - " + error.InnerException + Environment.NewLine);
             }
-            //string mensaje = string.Concat(ex.InnerExceptions().Select(e => e.Message + "\n"));
-
             DateTime ahora = DateTime.Now;
 
-            var nombreFichero = AyudanteDirectorioDatos.ObtenerDirectorioDelEnsamblado() + @"\" + String.Format(nombreArchivo + "-Log {0:yyyy-MM-dd}.log", ahora);
+            var nombreFichero = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), String.Format(@"EnroladorV2\" + nombreArchivo + "-Log {0:yyyy-MM-dd}.log", ahora));
 
             var textoError = String.Format("{0:HH:mm:ss}: {1}-{2}\n {3}\n", ahora, "Programador", nombreProcedimiento, mensaje);
+            if (File.Exists(nombreFichero))
+                File.AppendAllText(nombreFichero, textoError);
+            else {
+                var fileDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), String.Format(@"EnroladorV2"));
+                Directory.CreateDirectory(fileDir);
+                File.AppendAllText(nombreFichero, textoError);
+            }
 
             string idNotificacion = ahora.ToBinary().ToString();
 
@@ -54,20 +59,27 @@ namespace EnroladorAccesoDatos.Ayudantes {
                 Tipo = TipoNotificacion.Critica,
             });
 
-            File.AppendAllText(nombreFichero, textoError);
-
             return ex;
         }
 
         public static Exception Log(this Exception ex, string nombreArchivo, string nombreProcedimiento) {
-            string mensaje = string.Concat(ex.InnerExceptions().Select(e => e.Message + "\n"));
+            string mensaje = "";
 
+            foreach (Exception error in ex.InnerExceptions()) {
+                mensaje += (error.GetType() + ": " + error.Message + " - " + error.InnerException + Environment.NewLine);
+            }
             DateTime ahora = DateTime.Now;
 
-            var nombreFichero = AyudanteDirectorioDatos.ObtenerDirectorioDelEnsamblado() + @"\" + String.Format(nombreArchivo + "-Log {0:yyyy-MM-dd}.log", ahora);
-            var textoError = String.Format("{0:HH:mm:ss}: {1}-{2}\n {3}\n", ahora, "Programador", nombreProcedimiento, mensaje);
+            var nombreFichero = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), String.Format(@"EnroladorV2\"+nombreArchivo + "-Log {0:yyyy-MM-dd}.log", ahora));
 
-            File.AppendAllText(nombreFichero, textoError);
+            var textoError = String.Format("{0:HH:mm:ss}: {1}-{2}\n {3}\n", ahora, "Programador", nombreProcedimiento, mensaje);
+            if (File.Exists(nombreFichero))
+                File.AppendAllText(nombreFichero, textoError);
+            else {
+                var fileDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), String.Format(@"EnroladorV2"));
+                Directory.CreateDirectory(fileDir);
+                File.AppendAllText(nombreFichero, textoError);
+            }
 
             return ex;
         }

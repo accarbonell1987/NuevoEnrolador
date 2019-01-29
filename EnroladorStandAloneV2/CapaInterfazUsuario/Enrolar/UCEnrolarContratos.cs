@@ -14,6 +14,7 @@ using System.Reflection;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
 using EnroladorAccesoDatos;
+using System.Data.SqlTypes;
 
 namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
     public partial class UCEnrolarContratos : DevExpress.XtraEditors.XtraUserControl {
@@ -177,6 +178,8 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                     DevDxErrorProvider.SetError(DevDateEditInicioVigencia, "Fecha fin menor que fecha inicio...");
                     return false;
                 }
+
+                if ((fechaFin == null) || (fechaFin == DateTime.MinValue)) fechaFin = SqlDateTime.MinValue.Value;
 
                 var codigo = DevTextEditCodigo.Text;
                 if (codigo == null || codigo == String.Empty) {
@@ -466,7 +469,5 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             }
         }
         #endregion
-
-
     }
 }

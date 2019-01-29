@@ -121,7 +121,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
                     dxErrorProvider.SetError(DevTextClave, "Usuario o contraseña incorrectos...");
                 }
             } catch (Exception eX) {
-                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name);
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
 
             try {
