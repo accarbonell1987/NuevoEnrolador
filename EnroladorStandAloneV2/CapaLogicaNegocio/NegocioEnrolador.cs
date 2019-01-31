@@ -872,7 +872,6 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
 
                 if (mContext.Empleado.FirstOrDefault(p => p.GuidEmpleado == pocoEmpleado.GuidEmpleado.ToString()) == null) {
                     //Insertar empleado
-                    empleado.GuidEmpleado = Guid.NewGuid().ToString();
                     empleado.Sincronizado = (int)TipoSincronizacion.Insertar;
                     mContext.Empleado.Add(empleado);
                     mContext.SaveChanges();

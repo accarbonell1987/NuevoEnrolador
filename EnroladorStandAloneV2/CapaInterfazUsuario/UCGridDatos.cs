@@ -105,6 +105,16 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
+        public void AdicionarRowDelEmpleado(POCOEmpleado empleado) {
+            try {
+                Negocio.lEmpleados.Add(empleado);
+
+                bsEmpleados.Add(empleado);
+                DevGridViewEmpleados.RefreshData();
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+            }
+        }
         #endregion
     }
 }

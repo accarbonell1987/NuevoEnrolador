@@ -71,7 +71,7 @@
             // 
             // DevTextUsuario
             // 
-            this.DevTextUsuario.EditValue = "Fmolina";
+            this.DevTextUsuario.EditValue = "";
             this.DevTextUsuario.Location = new System.Drawing.Point(80, 35);
             this.DevTextUsuario.Name = "DevTextUsuario";
             this.DevTextUsuario.Size = new System.Drawing.Size(256, 20);
@@ -79,7 +79,7 @@
             // 
             // DevTextClave
             // 
-            this.DevTextClave.EditValue = "asd123";
+            this.DevTextClave.EditValue = "";
             this.DevTextClave.Location = new System.Drawing.Point(80, 61);
             this.DevTextClave.Name = "DevTextClave";
             this.DevTextClave.Properties.PasswordChar = '*';

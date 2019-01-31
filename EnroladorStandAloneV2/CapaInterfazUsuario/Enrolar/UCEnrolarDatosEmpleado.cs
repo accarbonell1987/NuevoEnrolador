@@ -42,7 +42,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             }
         }
         private void CargarDatos() {
-            if (empleado != null) {
+            //if (empleado != null) {
                 if (empleado.Nombres != null) {
                     DevTextEditNombres.Text = empleado.Nombres;
                     DevTextEditNombres.Enabled = false;
@@ -56,7 +56,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                     if (empleado.TieneContraseña) DevRadioGroupAcceso.SelectedIndex = 0;
                     else DevRadioGroupAcceso.SelectedIndex = 1;
                 }
-            }
+            //}
         }
         private void DevRadioGroupAcceso_EditValueChanged(object sender, EventArgs e) {
             int valor = Convert.ToInt16(DevRadioGroupAcceso.EditValue);
@@ -86,8 +86,16 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 empleado.NumeroTelefono = DevTextEditTelefono.EditValue.ToString();
             }
         }
+        private void DevTextEditNombres_EditValueChanged(object sender, EventArgs e) {
+            if (DevTextEditNombres.OldEditValue != DevTextEditNombres.EditValue) {
+                empleado.Nombres = DevTextEditNombres.EditValue.ToString();
+            }
+        }
+        private void DevTextEditApellidos_EditValueChanged(object sender, EventArgs e) {
+            if (DevTextEditApellidos.OldEditValue != DevTextEditApellidos.EditValue) {
+                empleado.Apellidos = DevTextEditApellidos.EditValue.ToString();
+            }
+        }
         #endregion
-
-
     }
 }

@@ -85,6 +85,7 @@
             this.DevTextEditNombres.Size = new System.Drawing.Size(192, 20);
             this.DevTextEditNombres.StyleController = this.DevLayoutControlDatos;
             this.DevTextEditNombres.TabIndex = 1;
+            this.DevTextEditNombres.EditValueChanged += new System.EventHandler(this.DevTextEditNombres_EditValueChanged);
             // 
             // DevTextEditApellidos
             // 
@@ -93,6 +94,7 @@
             this.DevTextEditApellidos.Size = new System.Drawing.Size(192, 20);
             this.DevTextEditApellidos.StyleController = this.DevLayoutControlDatos;
             this.DevTextEditApellidos.TabIndex = 2;
+            this.DevTextEditApellidos.EditValueChanged += new System.EventHandler(this.DevTextEditApellidos_EditValueChanged);
             // 
             // DevLayoutControlGroupDatosEmpleado
             // 

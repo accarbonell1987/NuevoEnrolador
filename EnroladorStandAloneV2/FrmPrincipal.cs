@@ -939,12 +939,14 @@ namespace EnroladorStandAloneV2 {
                     NavigationPageBase gridPage = DevNavigationPanePrincipal.Pages.FirstOrDefault(p => p.Caption.Split('-')[0] != "Enrolar");
                     UCGridDatos uCGrid = (UCGridDatos)gridPage.Controls[0];
                     //actualizar la row del empleado
-                    uCGrid.ActualizarRowDelEmpleado(empleado);
+                    if (Negocio.lEmpleados.Exists(p => p == empleado))
+                        uCGrid.ActualizarRowDelEmpleado(empleado);
+                    //else
+                    //    uCGrid.AdicionarRowDelEmpleado(empleado);
 
                     //salvar los cambios
                     Negocio.SalvarCambios(uCEnrolador.empleado);
                     DevNavigationPanePrincipal.Pages.Remove(page);
-
                 }
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);

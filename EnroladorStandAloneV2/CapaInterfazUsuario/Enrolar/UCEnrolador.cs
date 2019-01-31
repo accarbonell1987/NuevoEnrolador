@@ -54,13 +54,12 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 if ((RUT != String.Empty) && (!RUT.Equals("Nuevo"))) {
                     DevLookUpEditRUTEmpleado.Text = RUT;
                     empleado = Negocio.ObtenerEmpleadoDeBD(RUT);
+                    CargarEmpleado(empleado);
                 } else {
                     DevLookUpEditRUTEmpleado.Visible = false;
                     DevTextEditRUT.Location = DevLookUpEditRUTEmpleado.Location;
                     DevTextEditRUT.Visible = true;
                 }
-
-                CargarEmpleado(empleado);
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
@@ -69,13 +68,24 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             try {
                 if (e.KeyChar == (char)Keys.Enter) {
                     string rut = DevTextEditRUT.Text;
-                    if (rut != String.Empty) {
-                        var empleado = Negocio.ObtenerEmpleadoDeBD(rut);
-                        if (empleado == null) {
-                            empleado = new POCOEmpleado();
-                            RUT = rut;
-                            CargarEmpleado(empleado);
-                            DevTextEditRUT.Enabled = false;
+                    RUT = rut;
+
+                    if (RUT != String.Empty) {
+                        if (ValidadorRUT.Validar(RUT, out RUT)) {
+                            empleado = Negocio.ObtenerEmpleadoDeBD(rut);
+                            if (empleado == null) {
+                                //crear nuevo empleado con el Guid y el rut
+                                empleado = new POCOEmpleado {
+                                    GuidEmpleado = Guid.NewGuid(),
+                                    RUT = RUT
+                                };
+                                CargarEmpleado(empleado);
+                                DevTextEditRUT.Enabled = false;
+                            } else {
+                                XtraMessageBox.Show(this, "Rut ya existente, intente con otro...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        } else {
+                            XtraMessageBox.Show(this, "Rut incorrecto, intente con otro...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
@@ -120,6 +130,11 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         }
         private void CargarEmpleado(POCOEmpleado empleado) {
             try {
+                DevPanelControlDatosEmpleado.Enabled = true;
+                DevPanelControlContratos.Enabled = true;
+                DevPanelControlCasinos.Enabled = true;
+                DevPanelControlAsistencia.Enabled = true;
+
                 uCEmpleados = new UCEnrolarDatosEmpleado(this, Negocio, empleado) {
                     Dock = DockStyle.Fill
                 };
