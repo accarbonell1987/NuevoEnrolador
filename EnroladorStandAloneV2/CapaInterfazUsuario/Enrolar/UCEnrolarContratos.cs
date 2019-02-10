@@ -60,12 +60,14 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             DevLookUpEditCargo.Enabled = false;
             DevLookUpEditCuenta.Enabled = false;
             //limpiando campos
-            DevLookUpEditEmpresa.Text = String.Empty;
-            DevLookUpEditCargo.Text = String.Empty;
-            DevLookUpEditCuenta.Text = String.Empty;
-            DevTextEditCodigo.Text = String.Empty;
-            DevDateEditInicioVigencia.Text = String.Empty;
-            DevDateEditCaducar.Text = String.Empty;
+            DevLookUpEditEmpresa.Text = "";
+            DevLookUpEditCargo.Text = "";
+            DevLookUpEditCuenta.Text = "";
+
+            DevTextEditCodigo.EditValue = String.Empty;
+            DevDateEditInicioVigencia.EditValue = String.Empty;
+            DevDateEditFinVigencia.EditValue = String.Empty;
+            DevDateEditCaducar.EditValue = String.Empty;
 
             DevCheckEditManejaAsistencia.Checked = false;
             DevCheckEditManejaCasino.Checked = false;
@@ -169,19 +171,19 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
 
                 var fechaInicio = DevDateEditInicioVigencia.DateTime.Date;
                 if (fechaInicio == null) {
-                    DevDxErrorProvider.SetError(DevDateEditInicioVigencia, "Fecha no valida o nula...");
+                    DevDxErrorProvider.SetError(DevDateEditInicioVigencia, "Fecha inicio vigencia no valida o nula...");
                     return false;
                 }
 
-                var fechaFin = DevDateEditFinVigencia.DateTime.Date;
+                var fechaFin = DateTime.Parse(DevDateEditFinVigencia.OldEditValue.ToString());
                 if (fechaFin < fechaInicio) {
-                    DevDxErrorProvider.SetError(DevDateEditInicioVigencia, "Fecha fin menor que fecha inicio...");
+                    DevDxErrorProvider.SetError(DevDateEditFinVigencia, "Fecha fin menor que fecha inicio...");
                     return false;
                 }
 
                 if ((fechaFin == null) || (fechaFin == DateTime.MinValue)) fechaFin = SqlDateTime.MinValue.Value;
 
-                var codigo = DevTextEditCodigo.Text;
+                var codigo = DevTextEditCodigo.OldEditValue.ToString();
                 if (codigo == null || codigo == String.Empty) {
                     DevDxErrorProvider.SetError(DevTextEditCodigo, "Codigo no valido o nulo...");
                     return false;
@@ -247,7 +249,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                         return false;
                     }
                 } else if (tipo == TipoSincronizacion.Modificar) {
-                    if (!empleado.Contratos.Any(p => (p.CodigoContrato == codigo) && (p.GuidContrato != contratoSeleccionado.GuidContrato) )) {
+                    if (!empleado.Contratos.Where(p => (p.GuidContrato != contratoSeleccionado.GuidContrato)).Any(q => q.CodigoContrato == codigo)) {
 
                         contratoSeleccionado.CodigoContrato = codigo;
                         contratoSeleccionado.ConsideraAsistencia = consideraAsistencia;
@@ -384,7 +386,6 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 //Validar e insertar y cargo datos
                 if (!CrearModificarContrato(TipoSincronizacion.Insertar)) {
                     cantPresionadoNuevo = 1;
-                    LimpiarCampos();
                 } else {
                     DevSimpleButtonNuevo.Enabled = true;
                     DevSimpleButtonDescartar.Visible = false;
@@ -406,9 +407,8 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 if (!string.IsNullOrEmpty(GuidContrato.ToString())) {
                     var contrato = empleado.Contratos.FirstOrDefault(p => p.GuidContrato == GuidContrato);
                     CargarDatos(contrato);
-                    CrearModificarContrato(TipoSincronizacion.Modificar);
-                    LimpiarCampos();
-                    CargarDatos();
+                    if (CrearModificarContrato(TipoSincronizacion.Modificar))
+                        CargarDatos();
                 }
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);

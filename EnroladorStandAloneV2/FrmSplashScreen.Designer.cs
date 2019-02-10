@@ -35,7 +35,7 @@
             this.ucSpashScreen1.TabIndex = 0;
             this.ucSpashScreen1.UseWaitCursor = true;
             // 
-            // FrmBase
+            // FrmSplashScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -45,11 +45,10 @@
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FrmBase";
+            this.Name = "FrmSplashScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cargando Enrolador...";
             this.UseWaitCursor = true;
-            //this.Load += new System.EventHandler(this.FrmBase_Load);
             this.ResumeLayout(false);
 
         }

@@ -34,7 +34,7 @@
             this.DevPanelControlSplashScreen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DevPanelControlSplashScreen.Location = new System.Drawing.Point(0, 0);
             this.DevPanelControlSplashScreen.Name = "DevPanelControlSplashScreen";
-            this.DevPanelControlSplashScreen.Size = new System.Drawing.Size(597, 330);
+            this.DevPanelControlSplashScreen.Size = new System.Drawing.Size(604, 344);
             this.DevPanelControlSplashScreen.TabIndex = 0;
             // 
             // UCSpashScreen
@@ -43,7 +43,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.DevPanelControlSplashScreen);
             this.Name = "UCSpashScreen";
-            this.Size = new System.Drawing.Size(597, 330);
+            this.Size = new System.Drawing.Size(604, 344);
             ((System.ComponentModel.ISupportInitialize)(this.DevPanelControlSplashScreen)).EndInit();
             this.ResumeLayout(false);
 

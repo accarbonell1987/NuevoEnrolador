@@ -23,6 +23,7 @@ using System.Data.Common;
 using System.Data.SQLite;
 using System.Drawing;
 using System.Transactions;
+using System.Collections;
 
 namespace EnroladorStandAloneV2.CapaLogicaNegocio {
     public class NegocioEnrolador {
@@ -800,14 +801,31 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
         /// Salver en la BD el Lote
         /// </summary>
         /// <param name="listadoEntidades">IEnumerable<Object> listadoEntidades</param>
-        public void SalvarLote(IEnumerable<Object> listadoEntidades) {
+        public void SalvarLote<T>(IList<T> listadoEntidades) {
             try {
-                mContext.BulkInsert(listadoEntidades);
-                mContext.BulkSaveChanges();
+                //var listaTipos = AppDomain.CurrentDomain.GetAssemblies().ToList().SelectMany(q => q.GetTypes());
+                //Type cTipo = listaTipos.FirstOrDefault(p => p.Name == nombreClase);
+
+                //if (cTipo == null) return;
+
+                //var lType = typeof(List<>);
+                //var cListType = lType.MakeGenericType(cTipo);
+
+                //IList lInstaciada = (IList)Activator.CreateInstance(cListType);
+
+                //foreach (var entidad in listadoEntidades) {
+                //    lInstaciada.Add(entidad);
+                //}
+
+                mContext.BulkInsertAll(listadoEntidades);
+
+                //mContext.BulkInsert(listadoEntidades);
+                //mContext.BulkSaveChanges();
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
             }
         }
+
         public void SalvarCambios(POCOEmpleado pocoEmpleado) {
             try {
                 var pocoTurnoServiciosCasinosParaAdicionar = pocoEmpleado.TurnoServicioCasino.Where(p => p.EstadoObjeto != EstadoObjeto.Almacenado).ToList();
@@ -872,7 +890,6 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
 
                 if (mContext.Empleado.FirstOrDefault(p => p.GuidEmpleado == pocoEmpleado.GuidEmpleado.ToString()) == null) {
                     //Insertar empleado
-                    empleado.GuidEmpleado = Guid.NewGuid().ToString();
                     empleado.Sincronizado = (int)TipoSincronizacion.Insertar;
                     mContext.Empleado.Add(empleado);
                     mContext.SaveChanges();
@@ -1051,7 +1068,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
 
                 if (pocoContrato.EstadoObjeto == EstadoObjeto.Almacenar) {
                     //Almacenar Contrato
-                    if (mContext.Contrato.FirstOrDefault(p => (p.GuidEmpleado == pocoContrato.GuidEmpleado.ToString()) && (p.CodigoContrato == pocoContrato.CodigoContrato)) == null) {
+                    if (mContext.Contrato.FirstOrDefault(p => (p.GuidEmpleado == pocoContrato.GuidEmpleado.ToString()) && (p.GuidContrato == pocoContrato.GuidContrato.ToString())) == null) {
 
                         contrato.GuidContrato = Guid.NewGuid().ToString();
                         contrato.Sincronizado = (int)TipoSincronizacion.Insertar;
@@ -1061,7 +1078,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                         //crear registro para sincronizar y la accion
                         CrearPorSincronizarYAccion(contrato);
                     } else {
-                        var bdContrato = mContext.Contrato.FirstOrDefault(p => (p.GuidEmpleado == pocoContrato.GuidEmpleado.ToString()) && (p.CodigoContrato == pocoContrato.CodigoContrato));
+                        var bdContrato = mContext.Contrato.FirstOrDefault(p => (p.GuidEmpleado == pocoContrato.GuidEmpleado.ToString()) && (p.GuidContrato == pocoContrato.GuidContrato.ToString()));
 
                         bdContrato.GuidContrato = contrato.GuidContrato;
                         bdContrato.GuidCargo = contrato.GuidCargo;

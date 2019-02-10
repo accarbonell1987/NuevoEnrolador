@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="EstadoObjeto">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Almacenado" />
+      <xs:enumeration value="Almacenar" />
+      <xs:enumeration value="Eliminar" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EstadoObjeto" nillable="true" type="tns:EstadoObjeto" />
   <xs:simpleType name="TipoHuella">
     <xs:restriction base="xs:string">
       <xs:enumeration value="MENIZQ" />

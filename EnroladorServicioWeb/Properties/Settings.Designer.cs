@@ -26,8 +26,8 @@ namespace EnroladorServicioWeb.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Pooling=false;Data Source=.;Initial Catalog=SCCSPArauco;User Id=sa;Password=drjld" +
-            "igi;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Pooling=false;Data Source=.;Initial Catalog=SCCSPArauco;User Id=sa;Password=$ql-2" +
+            "008-SCU/*-;")]
         public string ConnectionString {
             get {
                 return ((string)(this["ConnectionString"]));

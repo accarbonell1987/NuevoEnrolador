@@ -24,12 +24,11 @@
         /// </summary>
         ///
         private void InitializeComponent() {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmNotificaciones));
             this.DevLayoutControl = new DevExpress.XtraLayout.LayoutControl();
             this.DevLabelControlNotificaciones = new DevExpress.XtraEditors.LabelControl();
             this.DevGridControlNotificaciones = new DevExpress.XtraGrid.GridControl();
-            this.bsNotificaciones = new System.Windows.Forms.BindingSource(this.components);
+            this.bsNotificaciones = new System.Windows.Forms.BindingSource();
             this.DevGridViewNotificaciones = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.DevLayoutControlGroup = new DevExpress.XtraLayout.LayoutControlGroup();
             this.DevIemLabelNotificaciones = new DevExpress.XtraLayout.LayoutControlItem();

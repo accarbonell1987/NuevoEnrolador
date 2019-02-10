@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EnroladorStandAloneV2</RootNamespace>
     <AssemblyName>EnroladorStandAlone</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
@@ -53,7 +53,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>CapaInterfazUsuario\Recursos\EnroladorStandAloneV2.ico</ApplicationIcon>
+    <ApplicationIcon>CapaInterfazUsuario\Recursos\EnroladorV2.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -123,9 +123,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Z.EntityFramework.Extensions, Version=3.16.20.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
-      <HintPath>..\packages\Z.EntityFramework.Extensions.3.16.20\lib\net45\Z.EntityFramework.Extensions.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CapaInterfazUsuario\Enrolar\UCEnrolador.cs">
@@ -219,6 +216,12 @@
     <Compile Include="CapaInterfazUsuario\UCSpashScreen.Designer.cs">
       <DependentUpon>UCSpashScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="CapaInterfazUsuario\FrmWait.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CapaInterfazUsuario\FrmWait.Designer.cs">
+      <DependentUpon>FrmWait.cs</DependentUpon>
+    </Compile>
     <Compile Include="CapaLogicaNegocio\NegocioEnrolador.cs" />
     <Compile Include="CapaLogicaNegocio\QueryableExtensions.cs" />
     <Compile Include="Connected Services\EnroladorServicioWeb\Reference.cs">
@@ -250,6 +253,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Resources\notes_16x16.png" />
     <None Include="Resources\pielabelstooltips_16x16.png" />
+    <Content Include="CapaInterfazUsuario\Recursos\EnroladorV2.ico" />
+    <None Include="Resources\contentarrangeinrows_16x16.png" />
     <Content Include="TODO\Recomendable.txt" />
     <EmbeddedResource Include="CapaInterfazUsuario\Enrolar\UCEnrolador.resx">
       <DependentUpon>UCEnrolador.cs</DependentUpon>
@@ -295,6 +300,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CapaInterfazUsuario\UCSpashScreen.resx">
       <DependentUpon>UCSpashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CapaInterfazUsuario\FrmWait.resx">
+      <DependentUpon>FrmWait.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSplashScreen.resx">
       <DependentUpon>FrmSplashScreen.cs</DependentUpon>

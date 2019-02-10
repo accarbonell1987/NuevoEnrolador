@@ -23,7 +23,6 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAutenticacionUsuario));
             this.DevButtonAceptar = new DevExpress.XtraEditors.SimpleButton();
             this.DevButtonCancelar = new DevExpress.XtraEditors.SimpleButton();
@@ -31,14 +30,14 @@
             this.DevTextClave = new DevExpress.XtraEditors.TextEdit();
             this.DevButtonCambiarUsuario = new DevExpress.XtraEditors.SimpleButton();
             this.separatorControl1 = new DevExpress.XtraEditors.SeparatorControl();
-            this.dxErrorProvider = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+            this.dxErrorProvider = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider();
             this.ribbonPage2 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.lblUser = new DevExpress.XtraEditors.LabelControl();
             this.lblPass = new DevExpress.XtraEditors.LabelControl();
             this.ribbonPage3 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPage4 = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.DevDefaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+            this.DevDefaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel();
             ((System.ComponentModel.ISupportInitialize)(this.DevTextUsuario.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevTextClave.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.separatorControl1)).BeginInit();
@@ -71,7 +70,7 @@
             // 
             // DevTextUsuario
             // 
-            this.DevTextUsuario.EditValue = "Fmolina";
+            this.DevTextUsuario.EditValue = "";
             this.DevTextUsuario.Location = new System.Drawing.Point(80, 35);
             this.DevTextUsuario.Name = "DevTextUsuario";
             this.DevTextUsuario.Size = new System.Drawing.Size(256, 20);
@@ -79,7 +78,7 @@
             // 
             // DevTextClave
             // 
-            this.DevTextClave.EditValue = "asd123";
+            this.DevTextClave.EditValue = "";
             this.DevTextClave.Location = new System.Drawing.Point(80, 61);
             this.DevTextClave.Name = "DevTextClave";
             this.DevTextClave.Properties.PasswordChar = '*';
@@ -156,6 +155,10 @@
             // 
             this.ribbonPage4.Name = "ribbonPage4";
             this.ribbonPage4.Text = "ribbonPage4";
+            // 
+            // DevDefaultLookAndFeel
+            // 
+            this.DevDefaultLookAndFeel.LookAndFeel.SkinName = "DevExpress Dark Style";
             // 
             // FrmAutenticacionUsuario
             // 

@@ -119,6 +119,7 @@
             // DevPanelControlDatosEmpleado
             // 
             this.DevPanelControlDatosEmpleado.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DevPanelControlDatosEmpleado.Enabled = false;
             this.DevPanelControlDatosEmpleado.Location = new System.Drawing.Point(2, 20);
             this.DevPanelControlDatosEmpleado.Name = "DevPanelControlDatosEmpleado";
             this.DevPanelControlDatosEmpleado.Size = new System.Drawing.Size(364, 647);
@@ -152,6 +153,7 @@
             // DevPanelControlAsistencia
             // 
             this.DevPanelControlAsistencia.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DevPanelControlAsistencia.Enabled = false;
             this.DevPanelControlAsistencia.Location = new System.Drawing.Point(0, 0);
             this.DevPanelControlAsistencia.Name = "DevPanelControlAsistencia";
             this.DevPanelControlAsistencia.Size = new System.Drawing.Size(443, 299);
@@ -160,6 +162,7 @@
             // DevPanelControlCasinos
             // 
             this.DevPanelControlCasinos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DevPanelControlCasinos.Enabled = false;
             this.DevPanelControlCasinos.Location = new System.Drawing.Point(0, 0);
             this.DevPanelControlCasinos.Name = "DevPanelControlCasinos";
             this.DevPanelControlCasinos.Size = new System.Drawing.Size(443, 343);
@@ -178,6 +181,7 @@
             // DevPanelControlContratos
             // 
             this.DevPanelControlContratos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DevPanelControlContratos.Enabled = false;
             this.DevPanelControlContratos.Location = new System.Drawing.Point(2, 20);
             this.DevPanelControlContratos.Name = "DevPanelControlContratos";
             this.DevPanelControlContratos.Size = new System.Drawing.Size(487, 647);

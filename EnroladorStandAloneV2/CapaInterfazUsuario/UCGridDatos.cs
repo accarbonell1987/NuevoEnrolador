@@ -42,6 +42,8 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
         /// <param name="tipoLlenado">int tipoLlenado Contratos Activos o Vencidos</param>
         private void ProcesarGrid(int tipoLlenado) {
             try {
+                splashScreenManager.ShowWaitForm();
+
                 switch (tipoLlenado) {
                     case 0: {
                             if (Negocio.lEmpleados == null) Negocio.ObtenerTodosEmpleadosParaGrid();
@@ -63,8 +65,11 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
                             bsEmpleados.DataSource = lEmpleadosContratosVencidos;
                         }; break;
                 }
+
+                splashScreenManager.CloseWaitForm();
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+                splashScreenManager.CloseWaitForm();
             }
         }
 
@@ -101,6 +106,16 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
                         return;
                     }
                 }
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+            }
+        }
+        public void AdicionarRowDelEmpleado(POCOEmpleado empleado) {
+            try {
+                Negocio.lEmpleados.Add(empleado);
+
+                bsEmpleados.Add(empleado);
+                DevGridViewEmpleados.RefreshData();
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }

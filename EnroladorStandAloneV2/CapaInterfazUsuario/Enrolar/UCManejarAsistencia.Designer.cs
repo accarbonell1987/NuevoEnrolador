@@ -40,6 +40,7 @@
             this.colEliminar = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DevRepositoryItemButtonEditEliminar = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.DevGroupControlAsistencia = new DevExpress.XtraEditors.GroupControl();
+            this.DevSimpleButtonAdicionarTodosDispositivo = new DevExpress.XtraEditors.SimpleButton();
             this.DevSimpleButtonNuevo = new DevExpress.XtraEditors.SimpleButton();
             this.DevSimpleButtonModificar = new DevExpress.XtraEditors.SimpleButton();
             this.DevSimpleButtonDescartar = new DevExpress.XtraEditors.SimpleButton();
@@ -194,6 +195,7 @@
             // 
             this.DevGroupControlAsistencia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DevGroupControlAsistencia.Controls.Add(this.DevSimpleButtonAdicionarTodosDispositivo);
             this.DevGroupControlAsistencia.Controls.Add(this.DevSimpleButtonNuevo);
             this.DevGroupControlAsistencia.Controls.Add(this.DevSimpleButtonModificar);
             this.DevGroupControlAsistencia.Controls.Add(this.DevSimpleButtonDescartar);
@@ -203,6 +205,23 @@
             this.DevGroupControlAsistencia.Size = new System.Drawing.Size(441, 114);
             this.DevGroupControlAsistencia.TabIndex = 1;
             this.DevGroupControlAsistencia.Text = "Adicionar Asistencia";
+            // 
+            // DevSimpleButtonAdicionarTodosDispositivo
+            // 
+            this.DevSimpleButtonAdicionarTodosDispositivo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.DevSimpleButtonAdicionarTodosDispositivo.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.DevSimpleButtonAdicionarTodosDispositivo.Enabled = false;
+            this.DevSimpleButtonAdicionarTodosDispositivo.Image = global::EnroladorStandAloneV2.Properties.Resources.contentarrangeinrows_16x16;
+            this.DevSimpleButtonAdicionarTodosDispositivo.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.DevSimpleButtonAdicionarTodosDispositivo.Location = new System.Drawing.Point(381, 86);
+            this.DevSimpleButtonAdicionarTodosDispositivo.Name = "DevSimpleButtonAdicionarTodosDispositivo";
+            this.DevSimpleButtonAdicionarTodosDispositivo.Size = new System.Drawing.Size(43, 23);
+            this.DevSimpleButtonAdicionarTodosDispositivo.TabIndex = 8;
+            this.DevSimpleButtonAdicionarTodosDispositivo.ToolTip = "Adiciona todos los dispositivos para la instalacion seleccionada";
+            this.DevSimpleButtonAdicionarTodosDispositivo.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information;
+            this.DevSimpleButtonAdicionarTodosDispositivo.ToolTipTitle = "Adicionar Todos Dispositivos";
+            this.DevSimpleButtonAdicionarTodosDispositivo.Visible = false;
+            this.DevSimpleButtonAdicionarTodosDispositivo.Click += new System.EventHandler(this.DevSimpleButtonAdicionarTodosDispositivo_Click);
             // 
             // DevSimpleButtonNuevo
             // 
@@ -409,5 +428,6 @@
         private DevExpress.XtraEditors.SimpleButton DevSimpleButtonModificar;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit DevRepositoryItemButtonEditEliminar;
+        private DevExpress.XtraEditors.SimpleButton DevSimpleButtonAdicionarTodosDispositivo;
     }
 }

@@ -62,6 +62,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
             DevSimpleButtonDescartar.Visible = false;
             DevSimpleButtonModificar.Enabled = false;
             DevSimpleButtonDescartar.Visible = false;
+            DevSimpleButtonAdicionarTodosDispositivo.Visible = false;
             DevSimpleButtonNuevo.Enabled = true;
             //si la cantidad de dispositivos es menor que cero solo se activa el nuevo
             if (empleado.Dispositivos.Count > 0) {
@@ -124,6 +125,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 var GuidInstalacion = DevLookUpEditInstalacion.GetColumnValue("GuidInstalacion");
                 if (GuidInstalacion == null) {
                     DevLookUpEditDispositivo.Enabled = false;
+                    DevSimpleButtonAdicionarTodosDispositivo.Visible = false;
                 }
 
                 instalacionSeleccionada = Negocio.ObtenerInstalacion((Guid)GuidInstalacion);
@@ -133,9 +135,12 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 if (dispositivos.Count > 0) {
                     bsDispositivos.DataSource = dispositivos;
                     DevLookUpEditDispositivo.Enabled = true;
+                    DevSimpleButtonAdicionarTodosDispositivo.Enabled = true;
+                    DevSimpleButtonAdicionarTodosDispositivo.Visible = true;
                 } else {
                     Negocio.AdicionarNotificacionListadoVacio("No existen dispositivos para la instalacion: " + instalacionSeleccionada.NombreInstalacion);
                     DevLookUpEditDispositivo.Enabled = false;
+                    DevSimpleButtonAdicionarTodosDispositivo.Visible = false;
                 }
                 DevLookUpEditDispositivo.Enabled = true;
             } catch (Exception eX) {
@@ -193,6 +198,37 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
+        private void DevSimpleButtonAdicionarTodosDispositivo_Click(object sender, EventArgs e) {
+            try {
+                //incluir todos los dispositivos de la instalacion
+                foreach (var dispositivo in instalacionSeleccionada.Dispositivos) {
+
+                    dispositivo.NombreCadena = instalacionSeleccionada.NombreCadena;
+                    dispositivo.NombreInstalacion = instalacionSeleccionada.NombreInstalacion;
+                    dispositivo.EstadoObjeto = EstadoObjeto.Almacenar;
+
+                    if (empleado.Dispositivos != null) {
+                        if (!empleado.Dispositivos.Any(p => p.GuidDispositivo == dispositivo.GuidDispositivo)) {
+                            empleado.Dispositivos.Add(dispositivo);
+                        } else {
+                            Negocio.AdicionarNotificacion("Ya existe relacion con el dispositivo: " + dispositivo.NombreDispositivo, TipoNotificacion.Cuidado);
+                        }
+                    } else {
+                        empleado.Dispositivos.Add(dispositivo);
+                    }
+                }
+
+                DevSimpleButtonNuevo.Enabled = true;
+                DevSimpleButtonDescartar.Visible = false;
+                DevSimpleButtonNuevo.Image = Properties.Resources.additem_16x16;
+                LimpiarCampos();
+                CargarDatos();
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+            }
+        }
         #endregion
+
+
     }
 }
