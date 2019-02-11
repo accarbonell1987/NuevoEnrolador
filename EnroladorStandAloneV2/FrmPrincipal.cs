@@ -1291,7 +1291,7 @@ namespace EnroladorStandAloneV2 {
 
         private void FrmPrincipal_Resize(object sender, EventArgs e) {
             if (MaximizeBox)
-                ucBarraInformacion1.Location = new Point(ucBarraInformacion1.Location.X, 30);
+                ucBarraInformacion.Location = new Point(ucBarraInformacion.Location.X, 30);
         }
     }
 }

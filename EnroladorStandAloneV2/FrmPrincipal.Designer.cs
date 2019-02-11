@@ -31,6 +31,7 @@
             this.DevBarButtonEnrolar = new DevExpress.XtraBars.BarButtonItem();
             this.DevBarButtonItemGuardar = new DevExpress.XtraBars.BarButtonItem();
             this.DevBarButtonItemDescartar = new DevExpress.XtraBars.BarButtonItem();
+            this.skinRibbonGalleryBarItem = new DevExpress.XtraBars.SkinRibbonGalleryBarItem();
             this.DevRibbonPageMenu = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.DevRibbonPageGroupArchivos = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.DevRibbonPageGroupOpciones = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -40,7 +41,7 @@
             this.DevNavigationPanePrincipal = new DevExpress.XtraBars.Navigation.NavigationPane();
             this.backgroundWorkerChequeoNotificaciones = new System.ComponentModel.BackgroundWorker();
             this.DevDefaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
-            this.ucBarraInformacion1 = new EnroladorStandAloneV2.CapaInterfazUsuario.UCBarraInformacion();
+            this.ucBarraInformacion = new EnroladorStandAloneV2.CapaInterfazUsuario.UCBarraInformacion();
             ((System.ComponentModel.ISupportInitialize)(this.DevRibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlNotificacionesAcciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevPanelControlPrincipal)).BeginInit();
@@ -57,12 +58,14 @@
             this.DevBarButtonSincronizar,
             this.DevBarButtonEnrolar,
             this.DevBarButtonItemGuardar,
-            this.DevBarButtonItemDescartar});
+            this.DevBarButtonItemDescartar,
+            this.skinRibbonGalleryBarItem});
             this.DevRibbonControl.Location = new System.Drawing.Point(0, 0);
-            this.DevRibbonControl.MaxItemId = 6;
+            this.DevRibbonControl.MaxItemId = 7;
             this.DevRibbonControl.Name = "DevRibbonControl";
             this.DevRibbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.DevRibbonPageMenu});
+            this.DevRibbonControl.QuickToolbarItemLinks.Add(this.skinRibbonGalleryBarItem);
             this.DevRibbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010;
             this.DevRibbonControl.Size = new System.Drawing.Size(1333, 143);
             this.DevRibbonControl.MinimizedChanged += new System.EventHandler(this.DevRibbonControl_MinimizedChanged);
@@ -111,6 +114,12 @@
             this.DevBarButtonItemDescartar.ImageOptions.LargeImage = global::EnroladorStandAloneV2.Properties.Resources.cancel_32x32;
             this.DevBarButtonItemDescartar.Name = "DevBarButtonItemDescartar";
             this.DevBarButtonItemDescartar.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.DevBarButtonItemDescartar_ItemClick);
+            // 
+            // skinRibbonGalleryBarItem
+            // 
+            this.skinRibbonGalleryBarItem.Caption = "Seleccionador de Temas";
+            this.skinRibbonGalleryBarItem.Id = 6;
+            this.skinRibbonGalleryBarItem.Name = "skinRibbonGalleryBarItem";
             // 
             // DevRibbonPageMenu
             // 
@@ -184,13 +193,13 @@
             // 
             this.DevDefaultLookAndFeel.LookAndFeel.SkinName = "DevExpress Dark Style";
             // 
-            // ucBarraInformacion1
+            // ucBarraInformacion
             // 
-            this.ucBarraInformacion1.Location = new System.Drawing.Point(110, 28);
-            this.ucBarraInformacion1.Name = "ucBarraInformacion1";
-            this.ucBarraInformacion1.Size = new System.Drawing.Size(123, 20);
-            this.ucBarraInformacion1.TabIndex = 7;
-            this.ucBarraInformacion1.Visible = false;
+            this.ucBarraInformacion.Location = new System.Drawing.Point(110, 28);
+            this.ucBarraInformacion.Name = "ucBarraInformacion";
+            this.ucBarraInformacion.Size = new System.Drawing.Size(123, 20);
+            this.ucBarraInformacion.TabIndex = 7;
+            this.ucBarraInformacion.Visible = false;
             // 
             // FrmPrincipal
             // 
@@ -198,7 +207,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1333, 783);
-            this.Controls.Add(this.ucBarraInformacion1);
+            this.Controls.Add(this.ucBarraInformacion);
             this.Controls.Add(this.DevPanelControlPrincipal);
             this.Controls.Add(this.DevGroupControlNotificacionesAcciones);
             this.Controls.Add(this.DevRibbonControl);
@@ -239,7 +248,8 @@
         private DevExpress.XtraBars.BarButtonItem DevBarButtonItemDescartar;
         private System.ComponentModel.BackgroundWorker backgroundWorkerChequeoNotificaciones;
         private DevExpress.LookAndFeel.DefaultLookAndFeel DevDefaultLookAndFeel;
-        private CapaInterfazUsuario.UCBarraInformacion ucBarraInformacion1;
+        private CapaInterfazUsuario.UCBarraInformacion ucBarraInformacion;
+        private DevExpress.XtraBars.SkinRibbonGalleryBarItem skinRibbonGalleryBarItem;
     }
 }
 

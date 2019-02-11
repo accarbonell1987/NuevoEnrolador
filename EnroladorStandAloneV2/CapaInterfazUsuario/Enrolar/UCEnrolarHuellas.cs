@@ -61,35 +61,35 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 switch (tipo)
                 {
                     case TipoHuella.MENIZQ: {
-                            DevPictureBoxMeñiqueIzquierdo.Image = Properties.Resources.Huella_Seteada;
+                            DevPictureBoxMeñiqueIzquierdo.Image = Properties.Resources.OK16x16;
                         }; break;
                     case TipoHuella.MENDER: {
-                            DevPictureBoxMeñiqueDerecho.Image = Properties.Resources.Huella_Seteada;
+                            DevPictureBoxMeñiqueDerecho.Image = Properties.Resources.OK16x16;
                         }; break;
                     case TipoHuella.ANUIZQ: {
-                            DevPictureBoxAnularIzquierdo.Image = Properties.Resources.Huella_Seteada;
+                            DevPictureBoxAnularIzquierdo.Image = Properties.Resources.OK16x16;
                         }; break;
                     case TipoHuella.ANUDER: {
-                            DevPictureBoxAnularDerecho.Image = Properties.Resources.Huella_Seteada;
+                            DevPictureBoxAnularDerecho.Image = Properties.Resources.OK16x16;
                         }; break;
                     case TipoHuella.MEDIZQ: {
-                            DevPictureBoxMedioIzquierdo.Image = Properties.Resources.Huella_Seteada;
+                            DevPictureBoxMedioIzquierdo.Image = Properties.Resources.OK16x16;
                         }; break;
                     case TipoHuella.MEDDER: {
-                            DevPictureBoxMedioDerecho.Image = Properties.Resources.Huella_Seteada;
+                            DevPictureBoxMedioDerecho.Image = Properties.Resources.OK16x16;
                         }; break;
                     case TipoHuella.INDIZQ: {
-                            DevPictureBoxIndiceIzquierdo.Image = Properties.Resources.Huella_Seteada;
+                            DevPictureBoxIndiceIzquierdo.Image = Properties.Resources.OK16x16;
                         }; break;
                     case TipoHuella.INDDER: {
-                            DevPictureBoxIndiceDerecho.Image = Properties.Resources.Huella_Seteada;
+                            DevPictureBoxIndiceDerecho.Image = Properties.Resources.OK16x16;
 
                         }; break;
                     case TipoHuella.PULIZQ: {
-                            DevPictureBoxPulgarIzquierdo.Image = Properties.Resources.Huella_Seteada;
+                            DevPictureBoxPulgarIzquierdo.Image = Properties.Resources.OK16x16;
                         }; break;
                     case TipoHuella.PULDER: {
-                            DevPictureBoxPulgarDerecho.Image = Properties.Resources.Huella_Seteada;
+                            DevPictureBoxPulgarDerecho.Image = Properties.Resources.OK16x16;
                         }; break;
                 }
             }
@@ -104,9 +104,9 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                     Dedos = e.Count;
 
                     switch (Dedos) {
-                        case 1: DevPictureBoxPrimera.Image = Properties.Resources.Huella_Seteada; break;
-                        case 2: DevPictureBoxSegunda.Image = Properties.Resources.Huella_Seteada; break;
-                        case 3: DevPictureBoxTercera.Image = Properties.Resources.Huella_Seteada; break;
+                        case 1: DevPictureBoxPrimera.Image = Properties.Resources.OK32x32; break;
+                        case 2: DevPictureBoxSegunda.Image = Properties.Resources.OK32x32; break;
+                        case 3: DevPictureBoxTercera.Image = Properties.Resources.OK32x32; break;
                     }
 
                     ActualizaStatusHuellas();

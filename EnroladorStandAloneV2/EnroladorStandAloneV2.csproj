@@ -255,6 +255,11 @@
     <None Include="Resources\pielabelstooltips_16x16.png" />
     <Content Include="CapaInterfazUsuario\Recursos\EnroladorV2.ico" />
     <None Include="Resources\contentarrangeinrows_16x16.png" />
+    <None Include="Resources\Cancel16x16.png" />
+    <None Include="Resources\ManosLimpias.png" />
+    <None Include="Resources\OK16x16.png" />
+    <None Include="Resources\Cancel32x32.png" />
+    <None Include="Resources\OK32x32.png" />
     <Content Include="TODO\Recomendable.txt" />
     <EmbeddedResource Include="CapaInterfazUsuario\Enrolar\UCEnrolador.resx">
       <DependentUpon>UCEnrolador.cs</DependentUpon>

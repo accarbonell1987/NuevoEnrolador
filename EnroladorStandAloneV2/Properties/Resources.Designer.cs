@@ -183,6 +183,26 @@ namespace EnroladorStandAloneV2.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Cancel16x16 {
+            get {
+                object obj = ResourceManager.GetObject("Cancel16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Cancel32x32 {
+            get {
+                object obj = ResourceManager.GetObject("Cancel32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap checkbox_32x32 {
             get {
                 object obj = ResourceManager.GetObject("checkbox_32x32", resourceCulture);
@@ -313,6 +333,16 @@ namespace EnroladorStandAloneV2.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ManosLimpias {
+            get {
+                object obj = ResourceManager.GetObject("ManosLimpias", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap monthview_16x16 {
             get {
                 object obj = ResourceManager.GetObject("monthview_16x16", resourceCulture);
@@ -326,6 +356,26 @@ namespace EnroladorStandAloneV2.Properties {
         internal static System.Drawing.Bitmap notes_16x16 {
             get {
                 object obj = ResourceManager.GetObject("notes_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OK16x16 {
+            get {
+                object obj = ResourceManager.GetObject("OK16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OK32x32 {
+            get {
+                object obj = ResourceManager.GetObject("OK32x32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
