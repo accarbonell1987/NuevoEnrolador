@@ -48,6 +48,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 dxErrorProvider.SetError(DevTextEditRevalidarClave, "Contraseñas diferentes");
             }
             else {
+                DevSimpleButtonAplicar.Enabled = true;
                 dxErrorProvider.ClearErrors();
             }
             temporizador.Stop();
@@ -63,16 +64,25 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 DevTextEditRevalidarClave.Enabled = false;
             }
         }
-
         private void DevTextEditRevalidarClave_Validated(object sender, EventArgs e) {
             temporizador.Stop();
             temporizador.Start();
         }
-
         private void DevTextEditRevalidarClave_KeyPress(object sender, KeyPressEventArgs e)
         {
             temporizador.Stop();
             temporizador.Start();
+        }
+        private void DevSimpleButtonAplicar_Click(object sender, EventArgs e) {
+            try {
+                empleado.Contraseña = DevTextClave.Text;
+                empleado.TieneContraseña = true;
+                
+                DevSimpleButtonAplicar.Enabled = false;
+                DevTextEditRevalidarClave.Enabled = false;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+            }
         }
         #endregion
     }

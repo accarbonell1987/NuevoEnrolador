@@ -23,11 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode3 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode4 = new DevExpress.XtraGrid.GridLevelNode();
             this.DevGridViewContratos = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colGuidContrato = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colGuidEmpresa = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -45,7 +41,7 @@
             this.colNombreCuenta = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colNombreCargo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DevGridControlEmpleados = new DevExpress.XtraGrid.GridControl();
-            this.bsEmpleados = new System.Windows.Forms.BindingSource(this.components);
+            this.bsEmpleados = new System.Windows.Forms.BindingSource();
             this.DevGridViewEmpleados = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colGuidEmpleado = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colRUT = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -72,8 +68,6 @@
             this.colPuerto = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTipo1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DevGridViewTurnoServicioCasino = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.DevGroupControlFiltroContratos = new DevExpress.XtraEditors.GroupControl();
-            this.DevRadioGroupFiltroContratos = new DevExpress.XtraEditors.RadioGroup();
             this.colGuidEmpleado3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colGuidTurnoServicio = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colNombreServicio = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -82,6 +76,9 @@
             this.colVigente = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colHoraInicio = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colHoraFin = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.DevGroupControlFiltroContratos = new DevExpress.XtraEditors.GroupControl();
+            this.DevRadioGroupFiltroContratos = new DevExpress.XtraEditors.RadioGroup();
+            this.splashScreenManager = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::EnroladorStandAloneV2.CapaInterfazUsuario.FrmWait), true, true, typeof(System.Windows.Forms.UserControl));
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewContratos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlEmpleados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEmpleados)).BeginInit();
@@ -230,19 +227,10 @@
             // 
             this.DevGridControlEmpleados.DataSource = this.bsEmpleados;
             this.DevGridControlEmpleados.Dock = System.Windows.Forms.DockStyle.Fill;
-            gridLevelNode1.LevelTemplate = this.DevGridViewContratos;
-            gridLevelNode1.RelationName = "Contratos";
-            gridLevelNode2.LevelTemplate = this.DevGridViewHuellas;
-            gridLevelNode2.RelationName = "Huellas";
-            gridLevelNode3.LevelTemplate = this.DevGridViewDispositivos;
-            gridLevelNode3.RelationName = "Dispositivos";
-            gridLevelNode4.LevelTemplate = this.DevGridViewTurnoServicioCasino;
-            gridLevelNode4.RelationName = "TurnoServicioCasino";
+            gridLevelNode2.LevelTemplate = this.DevGridViewContratos;
+            gridLevelNode2.RelationName = "Contratos";
             this.DevGridControlEmpleados.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1,
-            gridLevelNode2,
-            gridLevelNode3,
-            gridLevelNode4});
+            gridLevelNode2});
             this.DevGridControlEmpleados.Location = new System.Drawing.Point(0, 57);
             this.DevGridControlEmpleados.MainView = this.DevGridViewEmpleados;
             this.DevGridControlEmpleados.Name = "DevGridControlEmpleados";
@@ -466,33 +454,6 @@
             this.DevGridViewTurnoServicioCasino.Name = "DevGridViewTurnoServicioCasino";
             this.DevGridViewTurnoServicioCasino.OptionsBehavior.Editable = false;
             // 
-            // DevGroupControlFiltroContratos
-            // 
-            this.DevGroupControlFiltroContratos.Controls.Add(this.DevRadioGroupFiltroContratos);
-            this.DevGroupControlFiltroContratos.Dock = System.Windows.Forms.DockStyle.Top;
-            this.DevGroupControlFiltroContratos.Location = new System.Drawing.Point(0, 0);
-            this.DevGroupControlFiltroContratos.Name = "DevGroupControlFiltroContratos";
-            this.DevGroupControlFiltroContratos.Size = new System.Drawing.Size(1043, 57);
-            this.DevGroupControlFiltroContratos.TabIndex = 0;
-            this.DevGroupControlFiltroContratos.Text = "Filtrar Contratos:";
-            // 
-            // DevRadioGroupFiltroContratos
-            // 
-            this.DevRadioGroupFiltroContratos.EditValue = ((short)(0));
-            this.DevRadioGroupFiltroContratos.Location = new System.Drawing.Point(8, 25);
-            this.DevRadioGroupFiltroContratos.Name = "DevRadioGroupFiltroContratos";
-            this.DevRadioGroupFiltroContratos.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.DevRadioGroupFiltroContratos.Properties.Appearance.Options.UseBackColor = true;
-            this.DevRadioGroupFiltroContratos.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.DevRadioGroupFiltroContratos.Properties.Columns = 3;
-            this.DevRadioGroupFiltroContratos.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(((short)(0)), "Todos", true, ((short)(0))),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(((short)(1)), "Activos", true, ((short)(1))),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(((short)(2)), "Vencidos", true, ((short)(2)))});
-            this.DevRadioGroupFiltroContratos.Size = new System.Drawing.Size(282, 24);
-            this.DevRadioGroupFiltroContratos.TabIndex = 0;
-            this.DevRadioGroupFiltroContratos.EditValueChanged += new System.EventHandler(this.DevRadioGroupFiltroContratos_EditValueChanged);
-            // 
             // colGuidEmpleado3
             // 
             this.colGuidEmpleado3.FieldName = "GuidEmpleado";
@@ -552,6 +513,37 @@
             this.colHoraFin.OptionsColumn.AllowEdit = false;
             this.colHoraFin.Visible = true;
             this.colHoraFin.VisibleIndex = 5;
+            // 
+            // DevGroupControlFiltroContratos
+            // 
+            this.DevGroupControlFiltroContratos.Controls.Add(this.DevRadioGroupFiltroContratos);
+            this.DevGroupControlFiltroContratos.Dock = System.Windows.Forms.DockStyle.Top;
+            this.DevGroupControlFiltroContratos.Location = new System.Drawing.Point(0, 0);
+            this.DevGroupControlFiltroContratos.Name = "DevGroupControlFiltroContratos";
+            this.DevGroupControlFiltroContratos.Size = new System.Drawing.Size(1043, 57);
+            this.DevGroupControlFiltroContratos.TabIndex = 0;
+            this.DevGroupControlFiltroContratos.Text = "Filtrar Contratos:";
+            // 
+            // DevRadioGroupFiltroContratos
+            // 
+            this.DevRadioGroupFiltroContratos.EditValue = ((short)(0));
+            this.DevRadioGroupFiltroContratos.Location = new System.Drawing.Point(8, 25);
+            this.DevRadioGroupFiltroContratos.Name = "DevRadioGroupFiltroContratos";
+            this.DevRadioGroupFiltroContratos.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.DevRadioGroupFiltroContratos.Properties.Appearance.Options.UseBackColor = true;
+            this.DevRadioGroupFiltroContratos.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.DevRadioGroupFiltroContratos.Properties.Columns = 3;
+            this.DevRadioGroupFiltroContratos.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(((short)(0)), "Todos", true, ((short)(0))),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(((short)(1)), "Activos", true, ((short)(1))),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(((short)(2)), "Vencidos", true, ((short)(2)))});
+            this.DevRadioGroupFiltroContratos.Size = new System.Drawing.Size(282, 24);
+            this.DevRadioGroupFiltroContratos.TabIndex = 0;
+            this.DevRadioGroupFiltroContratos.EditValueChanged += new System.EventHandler(this.DevRadioGroupFiltroContratos_EditValueChanged);
+            // 
+            // splashScreenManager
+            // 
+            this.splashScreenManager.ClosingDelay = 500;
             // 
             // UCGridDatos
             // 
@@ -632,5 +624,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colVigente;
         private DevExpress.XtraGrid.Columns.GridColumn colHoraInicio;
         private DevExpress.XtraGrid.Columns.GridColumn colHoraFin;
+        private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager;
     }
 }

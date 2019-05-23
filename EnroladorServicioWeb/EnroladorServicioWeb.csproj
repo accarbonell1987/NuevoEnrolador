@@ -22,6 +22,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,12 +43,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.EnterpriseServices" />
@@ -62,7 +63,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="EnroladorServicioWeb.svc" />
+    <Content Include="SQL\SP\CREAR_ESA_Crear_EmpleadoTurnoServicioCasino.sql" />
+    <Content Include="SQL\SP\CREAR_ESA_Eliminar_EmpleadoTurnoServicioCasino.sql" />
+    <Content Include="SQL\SP\CREATE_EMPLEADO.sql" />
+    <Content Include="SQL\SP\ESA_Crear_Empleado.sql" />
+    <Content Include="SQL\SP\Modificar_CREATE_EMPLEADO.sql" />
     <Content Include="SQL\SP\Modificar_ESA_Crear_Contrato.sql" />
+    <Content Include="SQL\SP\Modificar_ESA_Crear_Empleado.sql" />
+    <Content Include="SQL\SP\Modificar_ESA_Login.sql" />
+    <Content Include="SQL\SP\Modificar_ESA_Revalidar.sql" />
     <Content Include="SQL\Tablas\Modificar_Contrato.sql" />
     <Content Include="SQL\Vistas\Modificar_ESA_Contrato.sql" />
     <Content Include="Web.config" />

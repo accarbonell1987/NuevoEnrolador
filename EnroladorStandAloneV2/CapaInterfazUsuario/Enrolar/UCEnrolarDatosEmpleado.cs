@@ -36,24 +36,28 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
         #region Metodos y Eventos
         private void UCDatosEmpleado_Load(object sender, EventArgs e) {
             try {
-                if (empleado != null) {
-                    CargarDatos();
-                }
+                CargarDatos();
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
-
         private void CargarDatos() {
-            DevTextEditNombres.Text = empleado.Nombres;
-            DevTextEditApellidos.Text = empleado.Apellidos;
-            DevTextEditCorreo.Text = empleado.Correo;
-            DevTextEditTelefono.Text = empleado.NumeroTelefono;
+            //if (empleado != null) {
+                if (empleado.Nombres != null) {
+                    DevTextEditNombres.Text = empleado.Nombres;
+                    DevTextEditNombres.Enabled = false;
 
-            if (empleado.TieneContraseña) DevRadioGroupAcceso.SelectedIndex = 0;
-            else DevRadioGroupAcceso.SelectedIndex = 1;
+                    DevTextEditApellidos.Text = empleado.Apellidos;
+                    DevTextEditApellidos.Enabled = false;
+
+                    DevTextEditCorreo.Text = empleado.Correo;
+                    DevTextEditTelefono.Text = empleado.NumeroTelefono;
+
+                    if (empleado.TieneContraseña) DevRadioGroupAcceso.SelectedIndex = 0;
+                    else DevRadioGroupAcceso.SelectedIndex = 1;
+                }
+            //}
         }
-
         private void DevRadioGroupAcceso_EditValueChanged(object sender, EventArgs e) {
             int valor = Convert.ToInt16(DevRadioGroupAcceso.EditValue);
             DevPanelControlAcceso.Controls.Clear();
@@ -70,6 +74,26 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar {
                 };
 
                 DevPanelControlAcceso.Controls.Add(uC);
+            }
+        }
+        private void DevTextEditCorreo_EditValueChanged(object sender, EventArgs e) {
+            if (DevTextEditCorreo.OldEditValue != DevTextEditCorreo.EditValue) {
+                empleado.Correo = DevTextEditCorreo.EditValue.ToString();
+            }
+        }
+        private void DevTextEditTelefono_EditValueChanged(object sender, EventArgs e) {
+            if (DevTextEditTelefono.OldEditValue != DevTextEditTelefono.EditValue) {
+                empleado.NumeroTelefono = DevTextEditTelefono.EditValue.ToString();
+            }
+        }
+        private void DevTextEditNombres_EditValueChanged(object sender, EventArgs e) {
+            if (DevTextEditNombres.OldEditValue != DevTextEditNombres.EditValue) {
+                empleado.Nombres = DevTextEditNombres.EditValue.ToString();
+            }
+        }
+        private void DevTextEditApellidos_EditValueChanged(object sender, EventArgs e) {
+            if (DevTextEditApellidos.OldEditValue != DevTextEditApellidos.EditValue) {
+                empleado.Apellidos = DevTextEditApellidos.EditValue.ToString();
             }
         }
         #endregion

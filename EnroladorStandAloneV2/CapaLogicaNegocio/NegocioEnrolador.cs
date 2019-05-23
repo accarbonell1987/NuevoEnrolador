@@ -22,6 +22,8 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Common;
 using System.Data.SQLite;
 using System.Drawing;
+using System.Transactions;
+using System.Collections;
 
 namespace EnroladorStandAloneV2.CapaLogicaNegocio {
     public class NegocioEnrolador {
@@ -30,6 +32,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
         public bool ExistenDatos { get; set; }
         public bool Actualizando { get; set; }
         public bool Online { get; set; }
+        public EstadoUsoSistema EstadoUsoSistema { get; set; }
         public Guid MyHardwareId { get; set; }
 
         private const int diasRecomendandosParaConectar = 15;
@@ -42,6 +45,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
         public SQLiteEnrollEntities mContext { get; set; }
         public List<POCONotificacion> lNotificaciones { get; set; }
         public int CantidadElementosNotificaciones { get; set; }
+        public int CantidadAccionesPorEnviar { get; set; }
 
         public List<POCOEmpleado> lEmpleados { get; set; }
         #endregion
@@ -49,6 +53,9 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
         #region Constructor
         public NegocioEnrolador() {
             mContext = new SQLiteEnrollEntities();
+            mContext.Configuration.AutoDetectChangesEnabled = true;
+            mContext.Configuration.ValidateOnSaveEnabled = true;
+
             lNotificaciones = new List<POCONotificacion>();
             CantidadElementosNotificaciones = 0;
 
@@ -95,12 +102,21 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
             return false;
         }
 
+        public void CargarCantidadDeAccionesPendientes() {
+            try {
+                CantidadAccionesPorEnviar = mContext.PorSincronizar.Count();
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+            }
+        }
+
         public Usuario ObtenerUsuarioLocal() {
             try {
                 var usuario = mContext.Usuario.FirstOrDefault();
                 if (usuario == null) return null;
 
                 HuellasUsuario = ObtenerHuellaUsuarioLocal(usuario.GuidUsuario);
+                CargarCantidadDeAccionesPendientes();
 
                 return usuario;
             } catch (Exception eX) {
@@ -108,6 +124,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 return null;
             }
         }
+
         public List<POCOEmpleado> ObtenerTodosEmpleados() {
             try {
                 List<POCOEmpleado> lPOCOEmpleados = new List<POCOEmpleado>();
@@ -124,7 +141,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                     var pocoEmpleado = TransformacionDatos.DeEmpleadoAPOCOEmpleado(empleado);
 
                     pocoEmpleado.TipoIdentificacion = pocoEmpleado.TieneContraseña ? TipoIdentificacion.Clave.ToString() : TipoIdentificacion.Huella.ToString();
-
+                    
                     //cargar contratos del empleado
                     var contratos = todosContratos.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
 
@@ -145,71 +162,245 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
 
                             pocoEmpleado.Contratos.Add(pContrato);
                         }
-
-                        //cargar huellas del empleado
-                        var huellas = todasHuellas.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
-
-                        //adicionar huellas al empleado
-                        List<POCOHuella> lPOCOHuellas = new List<POCOHuella>();
-                        foreach (var huella in huellas) {
-                            pocoEmpleado.Huellas.Add(TransformacionDatos.DeHuellaAPOCOHuella(huella));
-                        }
-
-                        //cargar dispositivos del empleado
-                        var dispEmpleado = todosEmpleadosDispositivos.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
-                        //obtener todos los dispositivos del empleado
-                        var dispositivos = todosDispositivos.Where(p => dispEmpleado.Any(a => a.GuidDispositivo == p.GuidDispositivo)).Select(p => p).ToList();
-
-                        pocoEmpleado.Dispositivos = new List<POCODispositivo>();
-                        //adicionar dispositivos al empleado
-                        foreach (var dispositivo in dispositivos) {
-                            var pocoDispositivo = TransformacionDatos.DeDispositivoAPOCODispositivo(dispositivo);
-
-                            var instalacion = ObtenerInstalacionDelDispositivo(pocoDispositivo.GuidInstalacion);
-                            var cadena = ObtenerCadenaDeInstalacion(instalacion.GuidCadena);
-
-                            pocoDispositivo.NombreCadena = cadena.NombreCadena;
-                            pocoDispositivo.NombreInstalacion = instalacion.NombreInstalacion;
-
-                            pocoEmpleado.Dispositivos.Add(pocoDispositivo);
-                        }
-
-                        //cargar Turnos Servicio Casino
-                        var turnoServicioCasinoEmpleado = todosTurnoServicioCasino.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
-                        //obtener todos los turnos del empleado
-                        var turnoServicios = mContext.TurnoServicio.Where(p => turnoServicioCasinoEmpleado.Any(a => a.GuidTurnoServicio == p.GuidTurnoServicio)).Select(p => p).ToList();
-
-                        pocoEmpleado.TurnoServicioCasino = new List<POCOEmpleadoTurnoServicioCasino>();
-                        //adicionar la relacion de turno servicio casino al empleado
-                        foreach (var turno in turnoServicios) {
-                            var pocoTurnoServicio = TransformacionDatos.DeTurnoServicioAPOCOTurnoServicio(turno);
-
-                            var servicio = ObtenerServicio(pocoTurnoServicio.GuidServicio);
-                            var instalacion = ObtenerInstalacion(servicio.GuidCasino);
-
-                            pocoEmpleado.TurnoServicioCasino.Add(new POCOEmpleadoTurnoServicioCasino() {
-                                GuidEmpleado = Guid.Parse(empleado.GuidEmpleado),
-                                GuidTurnoServicio = pocoTurnoServicio.GuidTurnoServicio,
-                                HoraInicio = pocoTurnoServicio.HoraInicio,
-                                HoraFin = pocoTurnoServicio.HoraFin,
-                                Vigente = pocoTurnoServicio.Vigente,
-                                NombreCasino = instalacion.NombreInstalacion,
-                                NombreServicio = servicio.NombreServicioCasino,
-                                NombreTurno = pocoTurnoServicio.NombreTurnoServicio
-                            });
-                        }
-
-                        lPOCOEmpleados.Add(pocoEmpleado);
                     }
+
+                    //cargar huellas del empleado
+                    var huellas = todasHuellas.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
+
+                    //adicionar huellas al empleado
+                    List<POCOHuella> lPOCOHuellas = new List<POCOHuella>();
+                    foreach (var huella in huellas) {
+                        pocoEmpleado.Huellas.Add(TransformacionDatos.DeHuellaAPOCOHuella(huella));
+                    }
+
+                    //cargar dispositivos del empleado
+                    var dispEmpleado = todosEmpleadosDispositivos.Where(p => p.GuidEmpleado == empleado.GuidEmpleado);
+
+                    //List<Dispositivo> dispositivos = new List<Dispositivo>();
+                    //foreach (var dEmpleado in dispEmpleado) {
+                    //    var dispositivo = todosDispositivos.First(p => p.GuidDispositivo == dEmpleado.GuidDispositivo);
+                    //    dispositivos.Add(dispositivo);
+                    //}
+
+                    var dispositivos = todosDispositivos.Where(p => dispEmpleado.Any(a => a.GuidDispositivo == p.GuidDispositivo)).Select(p => p).ToList();
+
+                    pocoEmpleado.Dispositivos = new List<POCODispositivo>();
+                    //adicionar dispositivos al empleado
+                    foreach (var dispositivo in dispositivos) {
+                        var pocoDispositivo = TransformacionDatos.DeDispositivoAPOCODispositivo(dispositivo);
+
+                        var instalacion = ObtenerInstalacionDelDispositivo(pocoDispositivo.GuidInstalacion);
+                        var cadena = ObtenerCadenaDeInstalacion(instalacion.GuidCadena);
+
+                        pocoDispositivo.NombreCadena = cadena.NombreCadena;
+                        pocoDispositivo.NombreInstalacion = instalacion.NombreInstalacion;
+
+                        pocoEmpleado.Dispositivos.Add(pocoDispositivo);
+                    }
+
+                    //cargar Turnos Servicio Casino
+                    var turnoServicioCasinoEmpleado = todosTurnoServicioCasino.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
+
+                    //obtener todos los turnos del empleado
+                    List<TurnoServicio> turnoServicios = new List<TurnoServicio>();
+                    foreach (var turnoEmpleado in turnoServicioCasinoEmpleado) {
+                        var turno = mContext.TurnoServicio.First(p => p.GuidTurnoServicio == turnoEmpleado.GuidTurnoServicio);
+                        turnoServicios.Add(turno);
+                    }
+                    
+                    pocoEmpleado.TurnoServicioCasino = new List<POCOEmpleadoTurnoServicioCasino>();
+                    //adicionar la relacion de turno servicio casino al empleado
+                    foreach (var turno in turnoServicios) {
+                        var pocoTurnoServicio = TransformacionDatos.DeTurnoServicioAPOCOTurnoServicio(turno);
+
+                        var servicio = ObtenerServicio(pocoTurnoServicio.GuidServicio);
+                        var instalacion = ObtenerInstalacion(servicio.GuidCasino);
+
+                        pocoEmpleado.TurnoServicioCasino.Add(new POCOEmpleadoTurnoServicioCasino() {
+                            GuidEmpleado = Guid.Parse(empleado.GuidEmpleado),
+                            GuidTurnoServicio = pocoTurnoServicio.GuidTurnoServicio,
+                            HoraInicio = pocoTurnoServicio.HoraInicio,
+                            HoraFin = pocoTurnoServicio.HoraFin,
+                            Vigente = pocoTurnoServicio.Vigente,
+                            NombreCasino = instalacion.NombreInstalacion,
+                            NombreServicio = servicio.NombreServicioCasino,
+                            NombreTurno = pocoTurnoServicio.NombreTurnoServicio
+                        });
+                    }
+
+                    lPOCOEmpleados.Add(pocoEmpleado);
                 }
 
-                lEmpleados = lPOCOEmpleados;
-                return lPOCOEmpleados;
+            lEmpleados = lPOCOEmpleados;
+            return lPOCOEmpleados;
 
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
                 return null;
             }
+        }
+        public List<POCOEmpleado> ObtenerTodosEmpleadosParaGrid() {
+            try {
+                List<POCOEmpleado> lPOCOEmpleados = new List<POCOEmpleado>();
+                //cargar empleados locales
+                var empleados = mContext.Empleado.ToList();
+                var contratos = mContext.Contrato.ToList();
+                var empresas = mContext.Empresa.ToList();
+                var cuentas = mContext.Cuenta.ToList();
+                var cargos = mContext.Cargo.ToList();
+
+                foreach (var empleado in empleados) {
+                    //transformar el empleado a poco
+                    var pocoEmpleado = TransformacionDatos.DeEmpleadoAPOCOEmpleado(empleado);
+
+                    pocoEmpleado.TipoIdentificacion = pocoEmpleado.TieneContraseña ? TipoIdentificacion.Clave.ToString() : TipoIdentificacion.Huella.ToString();
+
+                    //cargar contratos del empleado
+                    var contratosDelEmpleado = contratos.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
+
+                    if (contratosDelEmpleado.Count > 0) {
+                        //adicionar contratos al empleado
+                        List<POCOContrato> lPOCOContratos = new List<POCOContrato>();
+
+                        foreach (var contrato in contratosDelEmpleado) {
+                            POCOContrato pContrato = TransformacionDatos.DeContratoAPOCOContrato(contrato);
+
+                            var empresa = TransformacionDatos.DeEmpresaAPOCOEmpresa(empresas.FirstOrDefault(p => p.GuidEmpresa == pContrato.GuidEmpresa.ToString()));
+                            pContrato.NombreEmpresa = empresa == null ? "Sin Empresa" : empresa.NombreEmpresa;
+
+                            var cuenta = TransformacionDatos.DeCuentaAPOCOCuenta(cuentas.FirstOrDefault(p => p.GuidCuenta == pContrato.GuidCuenta.ToString()));
+                            pContrato.NombreCuenta = cuenta == null ? "Sin Cuenta" : cuenta.NombreCuenta;
+
+                            var cargo = TransformacionDatos.DeCargoAPOCOCargo(cargos.FirstOrDefault(p => p.GuidCargo == pContrato.GuidCargo.ToString()));
+                            pContrato.NombreCargo = cargo == null ? "Sin Cargo" : cargo.NombreCargo;
+
+                            pocoEmpleado.Contratos.Add(pContrato);
+                        }
+                    }
+                    
+                    lPOCOEmpleados.Add(pocoEmpleado);
+                }
+
+                lEmpleados = lPOCOEmpleados;
+                return lPOCOEmpleados;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                return null;
+            }
+        }
+        public POCOEmpleado ObtenerEmpleadoDeBD(string RUT) {
+            try {
+                //cargar empleados locales
+                var empleado = mContext.Empleado.FirstOrDefault(p => p.RUT == RUT);
+                if (empleado == null) return null;
+
+                //transformar el empleado a poco
+                var pocoEmpleado = TransformacionDatos.DeEmpleadoAPOCOEmpleado(empleado);
+
+                pocoEmpleado.TipoIdentificacion = pocoEmpleado.TieneContraseña ? TipoIdentificacion.Clave.ToString() : TipoIdentificacion.Huella.ToString();
+
+                //cargar contratos del empleado
+                var contratos = mContext.Contrato.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
+
+                if (contratos.Count > 0) {
+                    //adicionar contratos al empleado
+                    List<POCOContrato> lPOCOContratos = new List<POCOContrato>();
+                    foreach (var contrato in contratos) {
+                        POCOContrato pContrato = TransformacionDatos.DeContratoAPOCOContrato(contrato);
+
+                        var empresa = TransformacionDatos.DeEmpresaAPOCOEmpresa(mContext.Empresa.FirstOrDefault(p => p.GuidEmpresa == pContrato.GuidEmpresa.ToString()));
+                        pContrato.NombreEmpresa = empresa == null ? "Sin Empresa" : empresa.NombreEmpresa;
+
+                        var cuenta = TransformacionDatos.DeCuentaAPOCOCuenta(mContext.Cuenta.FirstOrDefault(p => p.GuidCuenta == pContrato.GuidCuenta.ToString()));
+                        pContrato.NombreCuenta = cuenta == null ? "Sin Cuenta" : cuenta.NombreCuenta;
+
+                        var cargo = TransformacionDatos.DeCargoAPOCOCargo(mContext.Cargo.FirstOrDefault(p => p.GuidCargo == pContrato.GuidCargo.ToString()));
+                        pContrato.NombreCargo = cargo == null ? "Sin Cargo" : cargo.NombreCargo;
+
+                        pocoEmpleado.Contratos.Add(pContrato);
+                    }
+                }
+
+                //cargar huellas del empleado
+                var huellas = mContext.Huella.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
+                //adicionar huellas al empleado
+                List<POCOHuella> lPOCOHuellas = new List<POCOHuella>();
+                foreach (var huella in huellas)
+                    pocoEmpleado.Huellas.Add(TransformacionDatos.DeHuellaAPOCOHuella(huella));
+                //cargar dispositivos del empleado
+                var dispEmpleado = mContext.EmpleadoDispositivo.Where(p => p.GuidEmpleado == empleado.GuidEmpleado);
+                var dispositivos = mContext.Dispositivo.Where(p => dispEmpleado.Any(a => a.GuidDispositivo == p.GuidDispositivo)).Select(p => p).ToList();
+
+                pocoEmpleado.Dispositivos = new List<POCODispositivo>();
+                //adicionar dispositivos al empleado
+                foreach (var dispositivo in dispositivos) {
+                    var pocoDispositivo = TransformacionDatos.DeDispositivoAPOCODispositivo(dispositivo);
+
+                    var instalacion = ObtenerInstalacionDelDispositivo(pocoDispositivo.GuidInstalacion);
+                    var cadena = ObtenerCadenaDeInstalacion(instalacion.GuidCadena);
+
+                    pocoDispositivo.NombreCadena = cadena.NombreCadena;
+                    pocoDispositivo.NombreInstalacion = instalacion.NombreInstalacion;
+
+                    pocoEmpleado.Dispositivos.Add(pocoDispositivo);
+                }
+
+                //cargar Turnos Servicio Casino
+                var turnoServicioCasinoEmpleado = mContext.EmpleadoTurnoServicioCasino.Where(p => p.GuidEmpleado == empleado.GuidEmpleado).ToList();
+                //obtener todos los turnos del empleado
+                List<TurnoServicio> turnoServicios = new List<TurnoServicio>();
+                foreach (var turnoEmpleado in turnoServicioCasinoEmpleado) {
+                    var turno = mContext.TurnoServicio.First(p => p.GuidTurnoServicio == turnoEmpleado.GuidTurnoServicio);
+                    turnoServicios.Add(turno);
+                }
+
+                pocoEmpleado.TurnoServicioCasino = new List<POCOEmpleadoTurnoServicioCasino>();
+                //adicionar la relacion de turno servicio casino al empleado
+                foreach (var turno in turnoServicios) {
+                    var pocoTurnoServicio = TransformacionDatos.DeTurnoServicioAPOCOTurnoServicio(turno);
+
+                    var servicio = ObtenerServicio(pocoTurnoServicio.GuidServicio);
+                    var instalacion = ObtenerInstalacion(servicio.GuidCasino);
+
+                    pocoEmpleado.TurnoServicioCasino.Add(new POCOEmpleadoTurnoServicioCasino() {
+                        GuidEmpleado = Guid.Parse(empleado.GuidEmpleado),
+                        GuidTurnoServicio = pocoTurnoServicio.GuidTurnoServicio,
+                        HoraInicio = pocoTurnoServicio.HoraInicio,
+                        HoraFin = pocoTurnoServicio.HoraFin,
+                        Vigente = pocoTurnoServicio.Vigente,
+                        NombreCasino = instalacion.NombreInstalacion,
+                        NombreServicio = servicio.NombreServicioCasino,
+                        NombreTurno = pocoTurnoServicio.NombreTurnoServicio
+                    });
+                }
+
+                return pocoEmpleado;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Obtener un string de NombreEmpresa - NombreCuenta - NombreCargo de cada contrato del empleado
+        /// </summary>
+        /// <param name="pRut">string pRut</param>
+        /// <returns>string</returns>
+        public List<POCOEmpleado> FiltrarEmpleadosPorContratos(bool Activos) {
+            if (Activos)
+                //foreach (var empleado in lEmpleados.Where(p => p.Contratos.Where(a => a.Estado == EstadoContrato.Activo).ToList().Count > 0))
+                //    yield return empleado;
+                return lEmpleados.Where(p => p.Contratos.Where(a => a.Estado == EstadoContrato.Activo).ToList().Count > 0).ToList();
+            else
+                //foreach (var empleado in lEmpleados.Where(p => p.Contratos.Where(a => a.Estado == EstadoContrato.Vencido).ToList().Count > 0))
+                //    yield return empleado;
+                return lEmpleados.Where(p => p.Contratos.Where(a => a.Estado == EstadoContrato.Vencido).ToList().Count > 0).ToList();
+        }
+        public int CantidadDeEmpleados() {
+            var empleado = mContext.Empleado.FirstOrDefault();
+            if (empleado == null) return 0;
+
+            return mContext.Empleado.Count();
         }
 
         public List<POCOEmpresa> ObtenerTodasEmpresas() {
@@ -306,7 +497,6 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 return null;
             }
         }
-
         public POCOCadena ObtenerCadenaDeInstalacion(Guid GuidCadena) {
             try {
                 var cadena = mContext.Cadena.FirstOrDefault(p => p.GuidCadena == GuidCadena.ToString());
@@ -318,6 +508,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 return null;
             }
         }
+
         public POCOContrato ObtenerContrato(Guid GuidEmpleado, Guid GuidContrato) {
             try {
                 var todosContratos = mContext.Contrato.Where(p => p.GuidEmpleado == GuidEmpleado.ToString()).ToList();
@@ -557,40 +748,6 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
             }
         }
 
-        public POCOEmpleado ObtenerEmpleadoDeLista(string RUT) {
-            try {
-                if (lEmpleados == null) return null;
-                return lEmpleados.FirstOrDefault(p => p.RUT == RUT);
-            } catch (Exception eX) {
-                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
-                return null;
-            }
-        }
-        public POCOEmpleado ObtenerEmpleadoDeBaseDatos(string RUT) {
-            ObtenerTodosEmpleados();
-            return ObtenerEmpleadoDeLista(RUT);
-        }
-        /// <summary>
-        /// Obtener un string de NombreEmpresa - NombreCuenta - NombreCargo de cada contrato del empleado
-        /// </summary>
-        /// <param name="pRut">string pRut</param>
-        /// <returns>string</returns>
-        public List<POCOEmpleado> ObtenerListaContratosEmpleado(bool Activos) {
-            //saber si la lista esta en blanco si lo esta intento llenarla nuevamente
-            if ((lEmpleados == null) || (lEmpleados.Count == 0)) {
-                lEmpleados = ObtenerTodosEmpleados();
-
-                if ((lEmpleados == null) || (lEmpleados.Count == 0)) {
-                    return null;
-                }
-            }
-
-            if (Activos)
-                return lEmpleados.Where(p => p.Contratos.Where(a => a.Estado == EstadoContrato.Activo).ToList().Count > 0).ToList();
-            
-            return lEmpleados.Where(p => p.Contratos.Where(a => a.Estado == EstadoContrato.Vencido).ToList().Count > 0).ToList();
-        }
-
         /// <summary>
         /// Eliminar todos los registros de una tabla
         /// </summary>
@@ -606,7 +763,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
         }
 
         public List<Huella> ObtenerHuellaUsuarioLocal(string GuidUsuario) => mContext.Huella.Where(p => p.GuidEmpleado == GuidUsuario).ToList();
-        
+
         /// <summary>
         /// Saber si existe alguna sincronizacion en el sistema
         /// </summary>
@@ -624,7 +781,6 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 return false;
             }
         }
-
         /// <summary>
         /// Adiciona un nuevo registro de sincronizacion
         /// </summary>
@@ -641,22 +797,330 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
             }
         }
-
-        public void AdicionarEmpleadoInstalacionDispostivoSinSalvar(POCOEmpleadoDispositivo pocoEmpleadoDispositivo) {
+        /// <summary>
+        /// Salver en la BD el Lote
+        /// </summary>
+        /// <param name="listadoEntidades">IEnumerable<Object> listadoEntidades</param>
+        public void SalvarLote<T>(IList<T> listadoEntidades) {
             try {
-                mContext.EmpleadoDispositivo.Add(TransformacionDatos.DePOCOEmpleadoDispositivoAEmpleadoDispositivo(pocoEmpleadoDispositivo));
+                //var listaTipos = AppDomain.CurrentDomain.GetAssemblies().ToList().SelectMany(q => q.GetTypes());
+                //Type cTipo = listaTipos.FirstOrDefault(p => p.Name == nombreClase);
+
+                //if (cTipo == null) return;
+
+                //var lType = typeof(List<>);
+                //var cListType = lType.MakeGenericType(cTipo);
+
+                //IList lInstaciada = (IList)Activator.CreateInstance(cListType);
+
+                //foreach (var entidad in listadoEntidades) {
+                //    lInstaciada.Add(entidad);
+                //}
+
+                mContext.BulkInsertAll(listadoEntidades);
+
+                //mContext.BulkInsert(listadoEntidades);
+                //mContext.BulkSaveChanges();
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
             }
         }
-        public void AdicionarEmpleadoTurnoServicioSinSalvar(POCOEmpleadoTurnoServicioCasino pocoEmpleadoTurnoServicioCasino) {
+
+        public void SalvarCambios(POCOEmpleado pocoEmpleado) {
             try {
-                mContext.EmpleadoTurnoServicioCasino.Add(TransformacionDatos.DePOCOEmpleadoTurnoServicioCasinoAEmpleadoTurnoServicioCasino(pocoEmpleadoTurnoServicioCasino));
+                var pocoTurnoServiciosCasinosParaAdicionar = pocoEmpleado.TurnoServicioCasino.Where(p => p.EstadoObjeto != EstadoObjeto.Almacenado).ToList();
+                var pocoEmpleadoDispositivosParaAdicionar = pocoEmpleado.Dispositivos.Where(p => p.EstadoObjeto != EstadoObjeto.Almacenado).ToList();
+                var pocoHuellasParaAdicionar = pocoEmpleado.Huellas.Where(p => p.EstadoObjeto != EstadoObjeto.Almacenado).ToList();
+                var pocoContratosParaAdicionar = pocoEmpleado.Contratos.Where(p => p.EstadoObjeto == EstadoObjeto.Almacenar).ToList();
+
+                var trans = mContext.Database.BeginTransaction();
+                try {
+                    //convertir empleado
+                    var empleado = SQLiteModificarEmpleado(pocoEmpleado);
+
+                    //recorro todos los turnos a insertar y los inserto pue...
+                    foreach (var turno in pocoTurnoServiciosCasinosParaAdicionar) {
+                        turno.GuidEmpleado = Guid.Parse(empleado.GuidEmpleado);
+                        SQLiteModificarEmpleadoTurnoServicio(turno);
+                    }
+
+                    //recorro todos los dispositivos a insertar y los inserto pue...
+                    foreach (var dispositivo in pocoEmpleadoDispositivosParaAdicionar) {
+                        var empleadoDispositivo = new POCOEmpleadoDispositivo() {
+                            GuidEmpleado = Guid.Parse(empleado.GuidEmpleado),
+                            GuidDispositivo = dispositivo.GuidDispositivo,
+                            EstadoObjeto = dispositivo.EstadoObjeto
+                        };
+                        SQLiteModificarEmpleadoDispostivo(empleadoDispositivo);
+                    }
+
+                    //recorro todas las huellas a insertar y las inserto...then...
+                    foreach (var huella in pocoHuellasParaAdicionar) {
+                        huella.GuidEmpleado = Guid.Parse(empleado.GuidEmpleado);
+                        SQLiteModificarHuella(huella);
+                    }
+
+                    //...
+                    foreach (var contratos in pocoContratosParaAdicionar) {
+                        contratos.GuidEmpleado = Guid.Parse(empleado.GuidEmpleado);
+                        SQLiteModificarContrato(contratos);
+                    }
+
+
+                    trans.Commit();
+
+                    AdicionarNotificacion("Empleado: " + empleado.Nombres + " " + empleado.Apellidos + " RUT: " + empleado.RUT + " Salvado Correctamente", TipoNotificacion.Exito);
+                } catch (Exception eX) {
+                    trans.Rollback();
+                    AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                }
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
             }
         }
 
+        /// <summary>
+        /// Adiciona un empleado chequeando si existe o no en la BD si existe lo actualiza
+        /// </summary>
+        /// <param name="pocoEmpleado">POCOEmpleado pocoEmpleado</param>
+        /// <returns>Empleado</returns>
+        public Empleado SQLiteModificarEmpleado(POCOEmpleado pocoEmpleado) {
+            try {
+                var empleado = TransformacionDatos.DePOCOEmpleadoAEmpleado(pocoEmpleado);
+
+                if (mContext.Empleado.FirstOrDefault(p => p.GuidEmpleado == pocoEmpleado.GuidEmpleado.ToString()) == null) {
+                    //Insertar empleado
+                    empleado.Sincronizado = (int)TipoSincronizacion.Insertar;
+                    mContext.Empleado.Add(empleado);
+                    mContext.SaveChanges();
+                    //crear registro para sincronizar y la accion
+                    CrearPorSincronizarYAccion(empleado);
+                    return empleado;
+                } else {
+                    //Modificar empleado
+                    var bdEmpleado = mContext.Empleado.FirstOrDefault(p => p.GuidEmpleado == pocoEmpleado.GuidEmpleado.ToString());
+
+                    bdEmpleado.NumeroTelefono = empleado.NumeroTelefono;
+                    bdEmpleado.Correo = empleado.Correo;
+                    bdEmpleado.TieneContrasena = empleado.TieneContrasena;
+                    bdEmpleado.Contrasena = empleado.Contrasena;
+                    bdEmpleado.Sincronizado = (int)TipoSincronizacion.Modificar;
+                    mContext.SaveChanges();
+                    //crear registro para sincronizar y la accion
+                    CrearPorSincronizarYAccion(bdEmpleado);
+                    return bdEmpleado;
+                }
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                throw eX;
+            }
+        }
+        /// <summary>
+        /// Adiciona un EmpleadoDispositivo chequeando si existe o no en la BD si existe lo actualiza
+        /// </summary>
+        /// <param name="pocoEmpleado">POCOEmpleadoDispositivo pocoEmpleadoDispositivo</param>
+        /// <returns>EmpleadoDispositivo</returns>
+        public void SQLiteModificarEmpleadoDispostivo(POCOEmpleadoDispositivo pocoEmpleadoDispositivo) {
+            try {
+                var empleadoDispositivo = TransformacionDatos.DePOCOEmpleadoDispositivoAEmpleadoDispositivo(pocoEmpleadoDispositivo);
+                
+                if (pocoEmpleadoDispositivo.EstadoObjeto == EstadoObjeto.Almacenar) {
+                    //Adicionar empleadoDispositivo
+                    if (mContext.EmpleadoDispositivo.FirstOrDefault(p => (p.GuidEmpleado == pocoEmpleadoDispositivo.GuidEmpleado.ToString()) && (p.GuidDispositivo == pocoEmpleadoDispositivo.GuidDispositivo.ToString())) == null) {
+
+                        empleadoDispositivo.Sincronizado = (int)TipoSincronizacion.Insertar;
+                        mContext.EmpleadoDispositivo.Add(empleadoDispositivo);
+                        mContext.SaveChanges();
+                        //crear registro para sincronizar y la accion
+                        CrearPorSincronizarYAccion(empleadoDispositivo);
+                    } else {
+                        //Modificar empleadoDispositivo
+                        var bdEmpleadoDispositivo = mContext.EmpleadoDispositivo.FirstOrDefault(p => (p.GuidEmpleado == pocoEmpleadoDispositivo.GuidEmpleado.ToString()) && (p.GuidDispositivo == pocoEmpleadoDispositivo.GuidDispositivo.ToString()));
+
+                        bdEmpleadoDispositivo.GuidDispositivo = empleadoDispositivo.GuidDispositivo;
+                        bdEmpleadoDispositivo.GuidEmpleado = empleadoDispositivo.GuidEmpleado;
+                        bdEmpleadoDispositivo.Sincronizado = (int)TipoSincronizacion.Modificar;
+                        mContext.SaveChanges();
+                        //crear registro para sincronizar y la accion
+                        CrearPorSincronizarYAccion(empleadoDispositivo);
+                    }
+                } else if (pocoEmpleadoDispositivo.EstadoObjeto == EstadoObjeto.Eliminar) {
+                    //Eliminar empleadoDispositivo
+                    var bdEmpleadoDispositivo = mContext.EmpleadoDispositivo.FirstOrDefault(p => (p.GuidEmpleado == pocoEmpleadoDispositivo.GuidEmpleado.ToString()) && (p.GuidDispositivo == pocoEmpleadoDispositivo.GuidDispositivo.ToString()));
+                    
+                    bdEmpleadoDispositivo.Sincronizado = (int)TipoSincronizacion.Eliminar;
+
+                    mContext.EmpleadoDispositivo.Remove(bdEmpleadoDispositivo);
+                    mContext.SaveChanges();
+                    //crear registro para sincronizar y la accion
+                    CrearPorSincronizarYAccion(empleadoDispositivo);
+                }
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                throw eX;
+            }
+        }
+        /// <summary>
+        /// Adiciona un EmpleadoTurnoServicioCasino chequeando si existe o no en la BD si existe lo actualiza
+        /// </summary>
+        /// <param name="pocoEmpleadoTurnoServicioCasino">POCOEmpleadoTurnoServicioCasino pocoEmpleadoTurnoServicioCasino</param>
+        /// <returns>EmpleadoTurnoServicioCasino</returns>
+        public void SQLiteModificarEmpleadoTurnoServicio(POCOEmpleadoTurnoServicioCasino pocoEmpleadoTurnoServicioCasino) {
+            try {
+                var empleadoTurnoServicioCasino = TransformacionDatos.DePOCOEmpleadoTurnoServicioCasinoAEmpleadoTurnoServicioCasino(pocoEmpleadoTurnoServicioCasino);
+
+                if (pocoEmpleadoTurnoServicioCasino.EstadoObjeto == EstadoObjeto.Almacenar) {
+                    //Adicionar empleadoTurnoServicioCasino
+                    if (mContext.EmpleadoTurnoServicioCasino.FirstOrDefault(p => (p.GuidEmpleado == pocoEmpleadoTurnoServicioCasino.GuidEmpleado.ToString()) && (p.GuidTurnoServicio == pocoEmpleadoTurnoServicioCasino.GuidTurnoServicio.ToString())) == null) {
+
+                        empleadoTurnoServicioCasino.Sincronizado = (int)TipoSincronizacion.Insertar;
+
+                        mContext.EmpleadoTurnoServicioCasino.Add(empleadoTurnoServicioCasino);
+                        mContext.SaveChanges();
+                        //crear registro para sincronizar y la accion
+                        CrearPorSincronizarYAccion(empleadoTurnoServicioCasino);
+
+                    } else {
+                        //Modificar empleadoTurnoServicioCasino
+                        var bdEmpleadoTurnoServicioCasino = mContext.EmpleadoTurnoServicioCasino.FirstOrDefault(p => (p.GuidEmpleado == pocoEmpleadoTurnoServicioCasino.GuidEmpleado.ToString()) && (p.GuidTurnoServicio == pocoEmpleadoTurnoServicioCasino.GuidTurnoServicio.ToString()));
+
+                        bdEmpleadoTurnoServicioCasino.GuidTurnoServicio = empleadoTurnoServicioCasino.GuidTurnoServicio;
+                        bdEmpleadoTurnoServicioCasino.GuidEmpleado = empleadoTurnoServicioCasino.GuidEmpleado;
+                        bdEmpleadoTurnoServicioCasino.Sincronizado = (int)TipoSincronizacion.Modificar;
+
+                        mContext.SaveChanges();
+                        //crear registro para sincronizar y la accion
+                        CrearPorSincronizarYAccion(bdEmpleadoTurnoServicioCasino);
+                    }
+                } else if (pocoEmpleadoTurnoServicioCasino.EstadoObjeto == EstadoObjeto.Eliminar) {
+                    //Eliminar empleadoTurnoServicioCasino
+                    var bdEmpleadoTurnoServicioCasino = mContext.EmpleadoTurnoServicioCasino.FirstOrDefault(p => (p.GuidEmpleado == pocoEmpleadoTurnoServicioCasino.GuidEmpleado.ToString()) && (p.GuidTurnoServicio == pocoEmpleadoTurnoServicioCasino.GuidTurnoServicio.ToString()));
+
+                    bdEmpleadoTurnoServicioCasino.Sincronizado = (int)TipoSincronizacion.Eliminar;
+
+                    mContext.EmpleadoTurnoServicioCasino.Remove(bdEmpleadoTurnoServicioCasino);
+                    mContext.SaveChanges();
+                    //crear registro para sincronizar y la accion
+                    CrearPorSincronizarYAccion(bdEmpleadoTurnoServicioCasino);
+                }
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                throw eX;
+            }
+        }
+        /// <summary>
+        /// Adiciona una huella chequeando si existe o no en la BD si existe lo actualiza
+        /// </summary>
+        /// <param name="pocoHuella">POCOHuella pocoHuella</param>
+        /// <returns>Huella</returns>
+        public void SQLiteModificarHuella(POCOHuella pocoHuella) {
+            try {
+                var huella = TransformacionDatos.DePOCOHuellaAHuella(pocoHuella);
+
+                if (pocoHuella.EstadoObjeto == EstadoObjeto.Almacenar) {
+                    //Adicionar Huella
+                    if (mContext.Huella.FirstOrDefault(p => (p.GuidEmpleado == pocoHuella.GuidEmpleado.ToString()) && (p.GuidHuella == pocoHuella.GuidHuella.ToString())) == null) {
+
+                        huella.GuidHuella = Guid.NewGuid().ToString();
+                        huella.Sincronizado = (int)TipoSincronizacion.Insertar;
+
+                        mContext.Huella.Add(huella);
+                        mContext.SaveChanges();
+                        //crear registro para sincronizar y la accion
+                        CrearPorSincronizarYAccion(huella);
+                    } else {
+                        var bdHuella = mContext.Huella.FirstOrDefault(p => (p.GuidEmpleado == pocoHuella.GuidEmpleado.ToString()) && (p.GuidHuella == pocoHuella.GuidHuella.ToString()));
+
+                        bdHuella.GuidHuella = huella.GuidHuella;
+                        bdHuella.GuidEmpleado = huella.GuidEmpleado;
+                        bdHuella.Tipo = huella.Tipo;
+                        bdHuella.Data = huella.Data;
+                        bdHuella.Sincronizado = (int)TipoSincronizacion.Modificar;
+
+                        mContext.SaveChanges();
+                        //crear registro para sincronizar y la accion
+                        CrearPorSincronizarYAccion(bdHuella);
+                    }
+                } else if (pocoHuella.EstadoObjeto == EstadoObjeto.Eliminar){
+                    //Eliminar Huella
+                    var bdHuella = mContext.Huella.FirstOrDefault(p => (p.GuidEmpleado == pocoHuella.GuidEmpleado.ToString()) && (p.GuidHuella == pocoHuella.GuidHuella.ToString()));
+
+                    bdHuella.Sincronizado = (int)TipoSincronizacion.Eliminar;
+
+                    mContext.Huella.Remove(bdHuella);
+                    mContext.SaveChanges();
+                    //crear registro para sincronizar y la accion
+                    CrearPorSincronizarYAccion(bdHuella);
+                }
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                throw eX;
+            }
+        }
+        /// <summary>
+        /// Adiciona un Contrato chequeando si existe o no en la BD si existe lo actualiza
+        /// </summary>
+        /// <param name="pocoContrato">POCOContrato pocoContrato</param>
+        /// <returns>Contrato</returns>
+        public void SQLiteModificarContrato(POCOContrato pocoContrato) {
+            try {
+                var contrato = TransformacionDatos.DePOCOContratoAContrato(pocoContrato);
+
+                if (pocoContrato.EstadoObjeto == EstadoObjeto.Almacenar) {
+                    //Almacenar Contrato
+                    if (mContext.Contrato.FirstOrDefault(p => (p.GuidEmpleado == pocoContrato.GuidEmpleado.ToString()) && (p.GuidContrato == pocoContrato.GuidContrato.ToString())) == null) {
+
+                        contrato.GuidContrato = Guid.NewGuid().ToString();
+                        contrato.Sincronizado = (int)TipoSincronizacion.Insertar;
+
+                        mContext.Contrato.Add(contrato);
+                        mContext.SaveChanges();
+                        //crear registro para sincronizar y la accion
+                        CrearPorSincronizarYAccion(contrato);
+                    } else {
+                        var bdContrato = mContext.Contrato.FirstOrDefault(p => (p.GuidEmpleado == pocoContrato.GuidEmpleado.ToString()) && (p.GuidContrato == pocoContrato.GuidContrato.ToString()));
+
+                        bdContrato.GuidContrato = contrato.GuidContrato;
+                        bdContrato.GuidCargo = contrato.GuidCargo;
+                        bdContrato.GuidCuenta = contrato.GuidCuenta;
+                        bdContrato.GuidEmpleado = contrato.GuidEmpleado;
+                        bdContrato.GuidEmpresa = contrato.GuidEmpresa;
+                        bdContrato.InicioVigencia = contrato.InicioVigencia;
+                        bdContrato.FinVigencia = contrato.FinVigencia;
+                        bdContrato.CodigoContrato = contrato.CodigoContrato;
+                        bdContrato.ConsideraAsistencia = contrato.ConsideraAsistencia;
+                        bdContrato.ConsideraCasino = contrato.ConsideraCasino;
+                        bdContrato.Sincronizado = (int)TipoSincronizacion.Modificar;
+
+                        mContext.SaveChanges();
+                        //crear registro para sincronizar y la accion
+                        CrearPorSincronizarYAccion(bdContrato);
+                    }
+                } else {
+                    //Eliminar Contrato
+                    var bdContrato = mContext.Contrato.FirstOrDefault(p => (p.GuidEmpleado == pocoContrato.GuidEmpleado.ToString()) && (p.CodigoContrato == pocoContrato.CodigoContrato));
+
+                    bdContrato.Sincronizado = (int)TipoSincronizacion.Eliminar;
+
+                    mContext.Contrato.Remove(bdContrato);
+                    mContext.SaveChanges();
+                    //crear registro para sincronizar y la accion
+                    CrearPorSincronizarYAccion(bdContrato);
+                }
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+            }
+        }
+        public void CrearPorSincronizarYAccion(object mObjeto) {
+            try {
+                var registro = CrearRegistroParaSincronizar(mObjeto);
+                mContext.PorSincronizar.Add(registro);
+                mContext.SaveChanges();
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                throw eX;
+            }
+        }
         #endregion
 
         #region Leer Datos de WebServices
@@ -957,8 +1421,6 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 return null;
             }
         }
-
-
         #endregion
 
         #region Notificacion
@@ -1057,7 +1519,6 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
         #endregion
 
         #region Acciones
-
         /// <summary>
         /// Ejecuta una acción para un solo elemento que se valla a sincronizar
         /// </summary>
@@ -1096,7 +1557,7 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
                 object[] arregloParametros = new object[2] { new Guid(UsuarioAutenticado.GuidUsuario), ElementoPOCO };
 
                 var res = metodo.Invoke(WS, arregloParametros);
-                return res.ToString();
+                return res == null ? "" : res.ToString();
             }
             catch(Exception Ex)
             {
@@ -1191,6 +1652,30 @@ namespace EnroladorStandAloneV2.CapaLogicaNegocio {
             catch (Exception Ex)
             {
                 throw new Exception("Error sincronizando los datos", Ex);
+            }
+        }
+
+        public PorSincronizar CrearRegistroParaSincronizar(object mObjeto) {
+            try {
+                string nombreObjeto = mObjeto.GetType().Name;
+                string nombrePropiedad = string.Format("Id{0}", nombreObjeto);
+
+                var propiedad = mObjeto.GetType().GetProperties().FirstOrDefault(p => p.Name == nombrePropiedad);
+                var valorPropiedad = Convert.ToInt32(propiedad.GetValue(mObjeto));
+
+                var tipoSincronizacion = Convert.ToInt32((mObjeto as dynamic).Sincronizado);
+
+                var nRegistro = new PorSincronizar() {
+                    FechaCambio = DateTime.Now.ToString(),
+                    TablaASincronizar = nombreObjeto,
+                    IdRegistroASincronizar = valorPropiedad.ToString(),
+                    TipoModificacion = tipoSincronizacion
+                };
+
+                return nRegistro;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, lNotificaciones);
+                throw eX;
             }
         }
         #endregion

@@ -24,6 +24,7 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
         public UCNotificaciones(NegocioEnrolador negocio, string enunciadoNotificaciones) {
             InitializeComponent();
             Negocio = negocio;
+
             DevLabelControlNotificacion.Text = enunciadoNotificaciones;
 
             bool critica = negocio.lNotificaciones.Any(p => p.Tipo == TipoNotificacion.Critica);
@@ -33,13 +34,13 @@ namespace EnroladorStandAloneV2.CapaInterfazUsuario {
             Bitmap imagen = null;
 
             if (critica)
-                imagen = Properties.Resources.error_32x32;
+                imagen = Properties.Resources.close_32x32;
             else if (cuidado) {
                 imagen = Properties.Resources.warning_32x32;
             } else if (informativa) {
-                imagen = Properties.Resources.info_32x32;
+                imagen = Properties.Resources.about_32x32;
             } else {
-                imagen = Properties.Resources.apply_32x32;
+                imagen = Properties.Resources.checkbox_32x32;
             }
 
             DevPanelControlWarning.ContentImage = imagen;

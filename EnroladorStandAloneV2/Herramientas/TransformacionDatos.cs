@@ -105,7 +105,8 @@ namespace EnroladorStandAloneV2.Herramientas {
                     GuidEmpleado = GuidUsuario,
                     GuidHuella = GuidHuella,
                     Data = huella.Data,
-                    Tipo = (TipoHuella)huella.Tipo
+                    Tipo = (TipoHuella)huella.Tipo,
+                    EstadoObjeto = EstadoObjeto.Almacenado
                 };
 
                 return pocoHuella;

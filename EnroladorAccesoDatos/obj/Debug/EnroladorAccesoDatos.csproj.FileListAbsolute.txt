@@ -29,3 +29,23 @@ d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorAccesoDatos\obj\Debug\EnroladorAc
 d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.csproj.CoreCompileInputs.cache
 d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.dll
 d:\Usuarios\Leandro\_NewEnroller\REPO\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.pdb
+D:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\OUTPUT\Recursos\Ficheros\Roll.sqlite3
+D:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\OUTPUT\EnroladorAccesoDatos.dll.config
+D:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\OUTPUT\EnroladorAccesoDatos.dll
+D:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\OUTPUT\EnroladorAccesoDatos.pdb
+D:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.csprojResolveAssemblyReference.cache
+D:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.Properties.Resources.resources
+D:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.csproj.GenerateResource.Cache
+D:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.csproj.CoreCompileInputs.cache
+D:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.dll
+D:\Trabajo\Chile\Trabajo 2\GitHub\NuevoEnrolador\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.pdb
+D:\Trabajo\Chile\Trabajo 2 - Enrolador\GitHub\NuevoEnrolador\OUTPUT\Recursos\Ficheros\Roll.sqlite3
+D:\Trabajo\Chile\Trabajo 2 - Enrolador\GitHub\NuevoEnrolador\OUTPUT\EnroladorAccesoDatos.dll.config
+D:\Trabajo\Chile\Trabajo 2 - Enrolador\GitHub\NuevoEnrolador\OUTPUT\EnroladorAccesoDatos.dll
+D:\Trabajo\Chile\Trabajo 2 - Enrolador\GitHub\NuevoEnrolador\OUTPUT\EnroladorAccesoDatos.pdb
+D:\Trabajo\Chile\Trabajo 2 - Enrolador\GitHub\NuevoEnrolador\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.csprojResolveAssemblyReference.cache
+D:\Trabajo\Chile\Trabajo 2 - Enrolador\GitHub\NuevoEnrolador\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.Properties.Resources.resources
+D:\Trabajo\Chile\Trabajo 2 - Enrolador\GitHub\NuevoEnrolador\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.csproj.GenerateResource.Cache
+D:\Trabajo\Chile\Trabajo 2 - Enrolador\GitHub\NuevoEnrolador\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.csproj.CoreCompileInputs.cache
+D:\Trabajo\Chile\Trabajo 2 - Enrolador\GitHub\NuevoEnrolador\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.dll
+D:\Trabajo\Chile\Trabajo 2 - Enrolador\GitHub\NuevoEnrolador\EnroladorAccesoDatos\obj\Debug\EnroladorAccesoDatos.pdb

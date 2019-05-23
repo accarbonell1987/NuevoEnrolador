@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EnroladorStandAloneV2</RootNamespace>
     <AssemblyName>EnroladorStandAlone</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
@@ -40,7 +40,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -53,7 +53,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>CapaInterfazUsuario\Recursos\EnroladorStandAloneV2.ico</ApplicationIcon>
+    <ApplicationIcon>CapaInterfazUsuario\Recursos\EnroladorV2.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -174,6 +174,12 @@
       <DependentUpon>FrmAutorizacion.cs</DependentUpon>
     </Compile>
     <Compile Include="CapaInterfazUsuario\Interfaces\ICargaDatos.cs" />
+    <Compile Include="CapaInterfazUsuario\UCBarraInformacion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CapaInterfazUsuario\UCBarraInformacion.Designer.cs">
+      <DependentUpon>UCBarraInformacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="CapaInterfazUsuario\UCCargarDatos.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -210,6 +216,12 @@
     <Compile Include="CapaInterfazUsuario\UCSpashScreen.Designer.cs">
       <DependentUpon>UCSpashScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="CapaInterfazUsuario\FrmWait.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CapaInterfazUsuario\FrmWait.Designer.cs">
+      <DependentUpon>FrmWait.cs</DependentUpon>
+    </Compile>
     <Compile Include="CapaLogicaNegocio\NegocioEnrolador.cs" />
     <Compile Include="CapaLogicaNegocio\QueryableExtensions.cs" />
     <Compile Include="Connected Services\EnroladorServicioWeb\Reference.cs">
@@ -239,6 +251,16 @@
     <Compile Include="Herramientas\ValidadorRUT.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Resources\notes_16x16.png" />
+    <None Include="Resources\pielabelstooltips_16x16.png" />
+    <Content Include="CapaInterfazUsuario\Recursos\EnroladorV2.ico" />
+    <None Include="Resources\contentarrangeinrows_16x16.png" />
+    <None Include="Resources\Cancel16x16.png" />
+    <None Include="Resources\ManosLimpias.png" />
+    <None Include="Resources\OK16x16.png" />
+    <None Include="Resources\Cancel32x32.png" />
+    <None Include="Resources\OK32x32.png" />
+    <Content Include="TODO\Recomendable.txt" />
     <EmbeddedResource Include="CapaInterfazUsuario\Enrolar\UCEnrolador.resx">
       <DependentUpon>UCEnrolador.cs</DependentUpon>
     </EmbeddedResource>
@@ -266,6 +288,9 @@
     <EmbeddedResource Include="CapaInterfazUsuario\FrmNotificaciones.resx">
       <DependentUpon>FrmNotificaciones.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CapaInterfazUsuario\UCBarraInformacion.resx">
+      <DependentUpon>UCBarraInformacion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CapaInterfazUsuario\UCCargarDatos.resx">
       <DependentUpon>UCCargarDatos.cs</DependentUpon>
     </EmbeddedResource>
@@ -280,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CapaInterfazUsuario\UCSpashScreen.resx">
       <DependentUpon>UCSpashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CapaInterfazUsuario\FrmWait.resx">
+      <DependentUpon>FrmWait.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSplashScreen.resx">
       <DependentUpon>FrmSplashScreen.cs</DependentUpon>
@@ -340,6 +368,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="TODO\Memorias Masisa.docx" />
+    <EmbeddedResource Include="TODO\Roll.sqlite3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="AxZKFPEngXControl">
@@ -379,6 +411,15 @@
     <Content Include="CapaInterfazUsuario\Recursos\Logo_Biometria_Aplicada.png" />
     <Content Include="CapaInterfazUsuario\Recursos\Manos.png" />
     <Content Include="CapaInterfazUsuario\Recursos\SplashScreen.png" />
+    <None Include="Resources\cancel_16x163.png" />
+    <None Include="Resources\cancel_32x32.png" />
+    <None Include="Resources\checkbox_32x32.png" />
+    <None Include="Resources\close_32x32.png" />
+    <None Include="Resources\about_32x32.png" />
+    <None Include="Resources\apply_32x321.png" />
+    <None Include="Resources\employee_16x16.png" />
+    <None Include="Resources\usergroup_16x16.png" />
+    <None Include="Resources\cancel_16x162.png" />
     <None Include="Resources\apply_16x161.png" />
     <None Include="Resources\monthview_16x16.png" />
     <None Include="Resources\today_32x32.png" />

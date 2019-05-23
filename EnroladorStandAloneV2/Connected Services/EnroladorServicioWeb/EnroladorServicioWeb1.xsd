@@ -18,14 +18,24 @@
   </xs:complexType>
   <xs:element name="ArrayOfPOCOHuella" nillable="true" type="tns:ArrayOfPOCOHuella" />
   <xs:complexType name="POCOHuella">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Data" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="GuidEmpleado" type="ser:guid" />
-      <xs:element minOccurs="0" name="GuidHuella" type="ser:guid" />
-      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos" minOccurs="0" name="Tipo" type="q1:TipoHuella" />
-    </xs:sequence>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:POCOGlobal">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Data" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="GuidEmpleado" type="ser:guid" />
+          <xs:element minOccurs="0" name="GuidHuella" type="ser:guid" />
+          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos" minOccurs="0" name="Tipo" type="q1:TipoHuella" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name="POCOHuella" nillable="true" type="tns:POCOHuella" />
+  <xs:complexType name="POCOGlobal">
+    <xs:sequence>
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos" minOccurs="0" name="EstadoObjeto" type="q2:EstadoObjeto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="POCOGlobal" nillable="true" type="tns:POCOGlobal" />
   <xs:complexType name="ArrayOfPOCOCadena">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="POCOCadena" nillable="true" type="tns:POCOCadena" />
@@ -64,16 +74,20 @@
   </xs:complexType>
   <xs:element name="ArrayOfPOCODispositivo" nillable="true" type="tns:ArrayOfPOCODispositivo" />
   <xs:complexType name="POCODispositivo">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="GuidDispositivo" type="ser:guid" />
-      <xs:element minOccurs="0" name="GuidInstalacion" type="ser:guid" />
-      <xs:element minOccurs="0" name="Host" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NombreCadena" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NombreDispositivo" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NombreInstalacion" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Puerto" type="xs:int" />
-      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos" minOccurs="0" name="Tipo" type="q2:TipoDispositivo" />
-    </xs:sequence>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:POCOGlobal">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="GuidDispositivo" type="ser:guid" />
+          <xs:element minOccurs="0" name="GuidInstalacion" type="ser:guid" />
+          <xs:element minOccurs="0" name="Host" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="NombreCadena" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="NombreDispositivo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="NombreInstalacion" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Puerto" type="xs:int" />
+          <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos" minOccurs="0" name="Tipo" type="q3:TipoDispositivo" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name="POCODispositivo" nillable="true" type="tns:POCODispositivo" />
   <xs:complexType name="ArrayOfPOCOServicioCasino">
@@ -130,23 +144,27 @@
   </xs:complexType>
   <xs:element name="ArrayOfPOCOContrato" nillable="true" type="tns:ArrayOfPOCOContrato" />
   <xs:complexType name="POCOContrato">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="CodigoContrato" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ConsideraAsistencia" type="xs:boolean" />
-      <xs:element minOccurs="0" name="ConsideraCasino" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
-      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos" minOccurs="0" name="Estado" type="q3:EstadoContrato" />
-      <xs:element minOccurs="0" name="FinVigencia" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="GuidCargo" type="ser:guid" />
-      <xs:element minOccurs="0" name="GuidContrato" type="ser:guid" />
-      <xs:element minOccurs="0" name="GuidCuenta" type="ser:guid" />
-      <xs:element minOccurs="0" name="GuidEmpleado" type="ser:guid" />
-      <xs:element minOccurs="0" name="GuidEmpresa" type="ser:guid" />
-      <xs:element minOccurs="0" name="InicioVigencia" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="NombreCargo" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NombreCuenta" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NombreEmpresa" nillable="true" type="xs:string" />
-    </xs:sequence>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:POCOGlobal">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CodigoContrato" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ConsideraAsistencia" type="xs:boolean" />
+          <xs:element minOccurs="0" name="ConsideraCasino" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+          <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/EnroladorAccesoDatos" minOccurs="0" name="Estado" type="q4:EstadoContrato" />
+          <xs:element minOccurs="0" name="FinVigencia" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="GuidCargo" type="ser:guid" />
+          <xs:element minOccurs="0" name="GuidContrato" type="ser:guid" />
+          <xs:element minOccurs="0" name="GuidCuenta" type="ser:guid" />
+          <xs:element minOccurs="0" name="GuidEmpleado" type="ser:guid" />
+          <xs:element minOccurs="0" name="GuidEmpresa" type="ser:guid" />
+          <xs:element minOccurs="0" name="InicioVigencia" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="NombreCargo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="NombreCuenta" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="NombreEmpresa" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name="POCOContrato" nillable="true" type="tns:POCOContrato" />
   <xs:complexType name="ArrayOfPOCOCuenta">
@@ -171,10 +189,14 @@
   </xs:complexType>
   <xs:element name="ArrayOfPOCOEmpleadoDispositivo" nillable="true" type="tns:ArrayOfPOCOEmpleadoDispositivo" />
   <xs:complexType name="POCOEmpleadoDispositivo">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="GuidDispositivo" type="ser:guid" />
-      <xs:element minOccurs="0" name="GuidEmpleado" type="ser:guid" />
-    </xs:sequence>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:POCOGlobal">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="GuidDispositivo" type="ser:guid" />
+          <xs:element minOccurs="0" name="GuidEmpleado" type="ser:guid" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name="POCOEmpleadoDispositivo" nillable="true" type="tns:POCOEmpleadoDispositivo" />
   <xs:complexType name="ArrayOfPOCOEmpresa">
@@ -199,21 +221,26 @@
   </xs:complexType>
   <xs:element name="ArrayOfPOCOEmpleado" nillable="true" type="tns:ArrayOfPOCOEmpleado" />
   <xs:complexType name="POCOEmpleado">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Apellidos" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Contraseña" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Contratos" nillable="true" type="tns:ArrayOfPOCOContrato" />
-      <xs:element minOccurs="0" name="Correo" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Dispositivos" nillable="true" type="tns:ArrayOfPOCODispositivo" />
-      <xs:element minOccurs="0" name="EnrollId" type="xs:int" />
-      <xs:element minOccurs="0" name="GuidEmpleado" type="ser:guid" />
-      <xs:element minOccurs="0" name="Huellas" nillable="true" type="tns:ArrayOfPOCOHuella" />
-      <xs:element minOccurs="0" name="Nombres" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NumeroTelefono" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="RUT" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="TieneContraseña" type="xs:boolean" />
-      <xs:element minOccurs="0" name="TipoIdentificacion" nillable="true" type="xs:string" />
-    </xs:sequence>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:POCOGlobal">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Apellidos" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Contraseña" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Contratos" nillable="true" type="tns:ArrayOfPOCOContrato" />
+          <xs:element minOccurs="0" name="Correo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Dispositivos" nillable="true" type="tns:ArrayOfPOCODispositivo" />
+          <xs:element minOccurs="0" name="EnrollId" type="xs:int" />
+          <xs:element minOccurs="0" name="GuidEmpleado" type="ser:guid" />
+          <xs:element minOccurs="0" name="Huellas" nillable="true" type="tns:ArrayOfPOCOHuella" />
+          <xs:element minOccurs="0" name="Nombres" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="NumeroTelefono" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RUT" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TieneContraseña" type="xs:boolean" />
+          <xs:element minOccurs="0" name="TipoIdentificacion" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TurnoServicioCasino" nillable="true" type="tns:ArrayOfPOCOEmpleadoTurnoServicioCasino" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name="POCOEmpleado" nillable="true" type="tns:POCOEmpleado" />
   <xs:complexType name="ArrayOfPOCOEmpleadoTurnoServicioCasino">
@@ -223,16 +250,20 @@
   </xs:complexType>
   <xs:element name="ArrayOfPOCOEmpleadoTurnoServicioCasino" nillable="true" type="tns:ArrayOfPOCOEmpleadoTurnoServicioCasino" />
   <xs:complexType name="POCOEmpleadoTurnoServicioCasino">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="GuidEmpleado" type="ser:guid" />
-      <xs:element minOccurs="0" name="GuidTurnoServicio" type="ser:guid" />
-      <xs:element minOccurs="0" name="HoraFin" type="ser:duration" />
-      <xs:element minOccurs="0" name="HoraInicio" type="ser:duration" />
-      <xs:element minOccurs="0" name="NombreCasino" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NombreServicio" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NombreTurno" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Vigente" type="xs:boolean" />
-    </xs:sequence>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:POCOGlobal">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="GuidEmpleado" type="ser:guid" />
+          <xs:element minOccurs="0" name="GuidTurnoServicio" type="ser:guid" />
+          <xs:element minOccurs="0" name="HoraFin" type="ser:duration" />
+          <xs:element minOccurs="0" name="HoraInicio" type="ser:duration" />
+          <xs:element minOccurs="0" name="NombreCasino" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="NombreServicio" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="NombreTurno" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Vigente" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name="POCOEmpleadoTurnoServicioCasino" nillable="true" type="tns:POCOEmpleadoTurnoServicioCasino" />
 </xs:schema>

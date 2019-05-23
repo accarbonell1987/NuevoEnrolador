@@ -24,6 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCManejarAsistencia));
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             this.DevGridControlAsistencias = new DevExpress.XtraGrid.GridControl();
             this.bsEmpleadoDispositivos = new System.Windows.Forms.BindingSource(this.components);
             this.DevGridViewAsistencias = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -36,7 +38,9 @@
             this.colPuerto = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTipo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colEliminar = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.DevRepositoryItemButtonEditEliminar = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.DevGroupControlAsistencia = new DevExpress.XtraEditors.GroupControl();
+            this.DevSimpleButtonAdicionarTodosDispositivo = new DevExpress.XtraEditors.SimpleButton();
             this.DevSimpleButtonNuevo = new DevExpress.XtraEditors.SimpleButton();
             this.DevSimpleButtonModificar = new DevExpress.XtraEditors.SimpleButton();
             this.DevSimpleButtonDescartar = new DevExpress.XtraEditors.SimpleButton();
@@ -52,6 +56,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlAsistencias)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEmpleadoDispositivos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewAsistencias)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevRepositoryItemButtonEditEliminar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlAsistencia)).BeginInit();
             this.DevGroupControlAsistencia.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControl)).BeginInit();
@@ -75,6 +80,8 @@
             this.DevGridControlAsistencias.Location = new System.Drawing.Point(3, 3);
             this.DevGridControlAsistencias.MainView = this.DevGridViewAsistencias;
             this.DevGridControlAsistencias.Name = "DevGridControlAsistencias";
+            this.DevGridControlAsistencias.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.DevRepositoryItemButtonEditEliminar});
             this.DevGridControlAsistencias.Size = new System.Drawing.Size(441, 150);
             this.DevGridControlAsistencias.TabIndex = 0;
             this.DevGridControlAsistencias.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -98,24 +105,26 @@
             this.colEliminar});
             this.DevGridViewAsistencias.GridControl = this.DevGridControlAsistencias;
             this.DevGridViewAsistencias.Name = "DevGridViewAsistencias";
-            this.DevGridViewAsistencias.OptionsBehavior.Editable = false;
             this.DevGridViewAsistencias.OptionsView.ShowGroupPanel = false;
             // 
             // colGuidDispositivo
             // 
             this.colGuidDispositivo.FieldName = "GuidDispositivo";
             this.colGuidDispositivo.Name = "colGuidDispositivo";
+            this.colGuidDispositivo.OptionsColumn.AllowEdit = false;
             // 
             // colGuidInstalacion
             // 
             this.colGuidInstalacion.FieldName = "GuidInstalacion";
             this.colGuidInstalacion.Name = "colGuidInstalacion";
+            this.colGuidInstalacion.OptionsColumn.AllowEdit = false;
             // 
             // colNombreCadena
             // 
             this.colNombreCadena.Caption = "Cadena";
             this.colNombreCadena.FieldName = "NombreCadena";
             this.colNombreCadena.Name = "colNombreCadena";
+            this.colNombreCadena.OptionsColumn.AllowEdit = false;
             this.colNombreCadena.Visible = true;
             this.colNombreCadena.VisibleIndex = 0;
             // 
@@ -124,6 +133,7 @@
             this.colNombreInstalacion.Caption = "Instalacion";
             this.colNombreInstalacion.FieldName = "NombreInstalacion";
             this.colNombreInstalacion.Name = "colNombreInstalacion";
+            this.colNombreInstalacion.OptionsColumn.AllowEdit = false;
             this.colNombreInstalacion.Visible = true;
             this.colNombreInstalacion.VisibleIndex = 1;
             // 
@@ -132,6 +142,7 @@
             this.colNombreDispositivo.Caption = "Dispositivo";
             this.colNombreDispositivo.FieldName = "NombreDispositivo";
             this.colNombreDispositivo.Name = "colNombreDispositivo";
+            this.colNombreDispositivo.OptionsColumn.AllowEdit = false;
             this.colNombreDispositivo.Visible = true;
             this.colNombreDispositivo.VisibleIndex = 2;
             // 
@@ -139,6 +150,7 @@
             // 
             this.colHost.FieldName = "Host";
             this.colHost.Name = "colHost";
+            this.colHost.OptionsColumn.AllowEdit = false;
             this.colHost.Visible = true;
             this.colHost.VisibleIndex = 3;
             // 
@@ -146,6 +158,7 @@
             // 
             this.colPuerto.FieldName = "Puerto";
             this.colPuerto.Name = "colPuerto";
+            this.colPuerto.OptionsColumn.AllowEdit = false;
             this.colPuerto.Visible = true;
             this.colPuerto.VisibleIndex = 4;
             // 
@@ -153,22 +166,36 @@
             // 
             this.colTipo.FieldName = "Tipo";
             this.colTipo.Name = "colTipo";
+            this.colTipo.OptionsColumn.AllowEdit = false;
             this.colTipo.Visible = true;
             this.colTipo.VisibleIndex = 5;
             // 
             // colEliminar
             // 
             this.colEliminar.Caption = "Eliminar";
-            this.colEliminar.FieldName = "Eliminar";
+            this.colEliminar.ColumnEdit = this.DevRepositoryItemButtonEditEliminar;
+            this.colEliminar.FieldName = "NombreDispositivo";
             this.colEliminar.Name = "colEliminar";
             this.colEliminar.ToolTip = "Eliminar Dispositivo";
             this.colEliminar.Visible = true;
             this.colEliminar.VisibleIndex = 6;
             // 
+            // DevRepositoryItemButtonEditEliminar
+            // 
+            this.DevRepositoryItemButtonEditEliminar.AutoHeight = false;
+            this.DevRepositoryItemButtonEditEliminar.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.DevRepositoryItemButtonEditEliminar.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("DevRepositoryItemButtonEditEliminar.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            this.DevRepositoryItemButtonEditEliminar.ButtonsStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.DevRepositoryItemButtonEditEliminar.Name = "DevRepositoryItemButtonEditEliminar";
+            this.DevRepositoryItemButtonEditEliminar.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.DevRepositoryItemButtonEditEliminar.Click += new System.EventHandler(this.DevRepositoryItemButtonEditEliminar_Click);
+            // 
             // DevGroupControlAsistencia
             // 
             this.DevGroupControlAsistencia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DevGroupControlAsistencia.Controls.Add(this.DevSimpleButtonAdicionarTodosDispositivo);
             this.DevGroupControlAsistencia.Controls.Add(this.DevSimpleButtonNuevo);
             this.DevGroupControlAsistencia.Controls.Add(this.DevSimpleButtonModificar);
             this.DevGroupControlAsistencia.Controls.Add(this.DevSimpleButtonDescartar);
@@ -179,20 +206,37 @@
             this.DevGroupControlAsistencia.TabIndex = 1;
             this.DevGroupControlAsistencia.Text = "Adicionar Asistencia";
             // 
+            // DevSimpleButtonAdicionarTodosDispositivo
+            // 
+            this.DevSimpleButtonAdicionarTodosDispositivo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.DevSimpleButtonAdicionarTodosDispositivo.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.DevSimpleButtonAdicionarTodosDispositivo.Enabled = false;
+            this.DevSimpleButtonAdicionarTodosDispositivo.Image = global::EnroladorStandAloneV2.Properties.Resources.contentarrangeinrows_16x16;
+            this.DevSimpleButtonAdicionarTodosDispositivo.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.DevSimpleButtonAdicionarTodosDispositivo.Location = new System.Drawing.Point(381, 86);
+            this.DevSimpleButtonAdicionarTodosDispositivo.Name = "DevSimpleButtonAdicionarTodosDispositivo";
+            this.DevSimpleButtonAdicionarTodosDispositivo.Size = new System.Drawing.Size(43, 23);
+            this.DevSimpleButtonAdicionarTodosDispositivo.TabIndex = 8;
+            this.DevSimpleButtonAdicionarTodosDispositivo.ToolTip = "Adiciona todos los dispositivos para la instalacion seleccionada";
+            this.DevSimpleButtonAdicionarTodosDispositivo.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information;
+            this.DevSimpleButtonAdicionarTodosDispositivo.ToolTipTitle = "Adicionar Todos Dispositivos";
+            this.DevSimpleButtonAdicionarTodosDispositivo.Visible = false;
+            this.DevSimpleButtonAdicionarTodosDispositivo.Click += new System.EventHandler(this.DevSimpleButtonAdicionarTodosDispositivo_Click);
+            // 
             // DevSimpleButtonNuevo
             // 
             this.DevSimpleButtonNuevo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.DevSimpleButtonNuevo.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             this.DevSimpleButtonNuevo.Enabled = false;
-            this.DevSimpleButtonNuevo.Image = global::EnroladorStandAloneV2.Properties.Resources.additem_16x16;
+            this.DevSimpleButtonNuevo.Image = ((System.Drawing.Image)(resources.GetObject("DevSimpleButtonNuevo.Image")));
             this.DevSimpleButtonNuevo.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.DevSimpleButtonNuevo.Location = new System.Drawing.Point(15, 86);
             this.DevSimpleButtonNuevo.Name = "DevSimpleButtonNuevo";
             this.DevSimpleButtonNuevo.Size = new System.Drawing.Size(43, 23);
             this.DevSimpleButtonNuevo.TabIndex = 7;
-            this.DevSimpleButtonNuevo.ToolTip = "Adiciona un nuevo contrato...";
+            this.DevSimpleButtonNuevo.ToolTip = "Adiciona un nuevo dispositivo donde marcar";
             this.DevSimpleButtonNuevo.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information;
-            this.DevSimpleButtonNuevo.ToolTipTitle = "Nuevo Contrato";
+            this.DevSimpleButtonNuevo.ToolTipTitle = "Nuevo";
             this.DevSimpleButtonNuevo.Click += new System.EventHandler(this.DevSimpleButtonNuevo_Click);
             // 
             // DevSimpleButtonModificar
@@ -200,22 +244,22 @@
             this.DevSimpleButtonModificar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.DevSimpleButtonModificar.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             this.DevSimpleButtonModificar.Enabled = false;
-            this.DevSimpleButtonModificar.Image = global::EnroladorStandAloneV2.Properties.Resources.edit_16x16;
+            this.DevSimpleButtonModificar.Image = ((System.Drawing.Image)(resources.GetObject("DevSimpleButtonModificar.Image")));
             this.DevSimpleButtonModificar.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.DevSimpleButtonModificar.Location = new System.Drawing.Point(64, 86);
             this.DevSimpleButtonModificar.Name = "DevSimpleButtonModificar";
             this.DevSimpleButtonModificar.Size = new System.Drawing.Size(43, 23);
             this.DevSimpleButtonModificar.TabIndex = 6;
-            this.DevSimpleButtonModificar.ToolTip = "Modifica el contrato actual seleccionado...";
+            this.DevSimpleButtonModificar.ToolTip = "Modifica la relacion...";
             this.DevSimpleButtonModificar.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information;
-            this.DevSimpleButtonModificar.ToolTipTitle = "Modificar Contrato";
+            this.DevSimpleButtonModificar.ToolTipTitle = "Modificar";
             this.DevSimpleButtonModificar.Visible = false;
             // 
             // DevSimpleButtonDescartar
             // 
             this.DevSimpleButtonDescartar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.DevSimpleButtonDescartar.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.DevSimpleButtonDescartar.Image = global::EnroladorStandAloneV2.Properties.Resources.clear_16x16;
+            this.DevSimpleButtonDescartar.Image = ((System.Drawing.Image)(resources.GetObject("DevSimpleButtonDescartar.Image")));
             this.DevSimpleButtonDescartar.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.DevSimpleButtonDescartar.Location = new System.Drawing.Point(113, 86);
             this.DevSimpleButtonDescartar.Name = "DevSimpleButtonDescartar";
@@ -339,6 +383,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DevGridControlAsistencias)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEmpleadoDispositivos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGridViewAsistencias)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevRepositoryItemButtonEditEliminar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlAsistencia)).EndInit();
             this.DevGroupControlAsistencia.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControl)).EndInit();
@@ -382,5 +427,7 @@
         private DevExpress.XtraEditors.SimpleButton DevSimpleButtonNuevo;
         private DevExpress.XtraEditors.SimpleButton DevSimpleButtonModificar;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit DevRepositoryItemButtonEditEliminar;
+        private DevExpress.XtraEditors.SimpleButton DevSimpleButtonAdicionarTodosDispositivo;
     }
 }

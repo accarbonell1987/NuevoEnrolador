@@ -27,6 +27,7 @@
             this.DevGroupControlRUT = new DevExpress.XtraEditors.GroupControl();
             this.DevLookUpEditRUTEmpleado = new DevExpress.XtraEditors.LookUpEdit();
             this.bsEmpleados = new System.Windows.Forms.BindingSource(this.components);
+            this.DevTextEditRUT = new DevExpress.XtraEditors.TextEdit();
             this.DevGroupControlDatosEmpleado = new DevExpress.XtraEditors.GroupControl();
             this.DevPanelControlDatosEmpleado = new DevExpress.XtraEditors.PanelControl();
             this.DevGroupControlAccesos = new DevExpress.XtraEditors.GroupControl();
@@ -39,6 +40,7 @@
             this.DevGroupControlRUT.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DevLookUpEditRUTEmpleado.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEmpleados)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevTextEditRUT.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlDatosEmpleado)).BeginInit();
             this.DevGroupControlDatosEmpleado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DevPanelControlDatosEmpleado)).BeginInit();
@@ -56,6 +58,7 @@
             // DevGroupControlRUT
             // 
             this.DevGroupControlRUT.Controls.Add(this.DevLookUpEditRUTEmpleado);
+            this.DevGroupControlRUT.Controls.Add(this.DevTextEditRUT);
             this.DevGroupControlRUT.Dock = System.Windows.Forms.DockStyle.Top;
             this.DevGroupControlRUT.Location = new System.Drawing.Point(0, 0);
             this.DevGroupControlRUT.Name = "DevGroupControlRUT";
@@ -66,7 +69,7 @@
             // 
             // DevLookUpEditRUTEmpleado
             // 
-            this.DevLookUpEditRUTEmpleado.Location = new System.Drawing.Point(7, 4);
+            this.DevLookUpEditRUTEmpleado.Location = new System.Drawing.Point(5, 5);
             this.DevLookUpEditRUTEmpleado.Name = "DevLookUpEditRUTEmpleado";
             this.DevLookUpEditRUTEmpleado.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -93,6 +96,15 @@
             // 
             this.bsEmpleados.DataSource = typeof(EnroladorAccesoDatos.Dominio.POCOEmpleado);
             // 
+            // DevTextEditRUT
+            // 
+            this.DevTextEditRUT.Location = new System.Drawing.Point(370, 5);
+            this.DevTextEditRUT.Name = "DevTextEditRUT";
+            this.DevTextEditRUT.Size = new System.Drawing.Size(214, 20);
+            this.DevTextEditRUT.TabIndex = 2;
+            this.DevTextEditRUT.Visible = false;
+            this.DevTextEditRUT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DevTextEditRUT_KeyPress);
+            // 
             // DevGroupControlDatosEmpleado
             // 
             this.DevGroupControlDatosEmpleado.Controls.Add(this.DevPanelControlDatosEmpleado);
@@ -107,6 +119,7 @@
             // DevPanelControlDatosEmpleado
             // 
             this.DevPanelControlDatosEmpleado.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DevPanelControlDatosEmpleado.Enabled = false;
             this.DevPanelControlDatosEmpleado.Location = new System.Drawing.Point(2, 20);
             this.DevPanelControlDatosEmpleado.Name = "DevPanelControlDatosEmpleado";
             this.DevPanelControlDatosEmpleado.Size = new System.Drawing.Size(364, 647);
@@ -140,6 +153,7 @@
             // DevPanelControlAsistencia
             // 
             this.DevPanelControlAsistencia.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DevPanelControlAsistencia.Enabled = false;
             this.DevPanelControlAsistencia.Location = new System.Drawing.Point(0, 0);
             this.DevPanelControlAsistencia.Name = "DevPanelControlAsistencia";
             this.DevPanelControlAsistencia.Size = new System.Drawing.Size(443, 299);
@@ -148,6 +162,7 @@
             // DevPanelControlCasinos
             // 
             this.DevPanelControlCasinos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DevPanelControlCasinos.Enabled = false;
             this.DevPanelControlCasinos.Location = new System.Drawing.Point(0, 0);
             this.DevPanelControlCasinos.Name = "DevPanelControlCasinos";
             this.DevPanelControlCasinos.Size = new System.Drawing.Size(443, 343);
@@ -166,6 +181,7 @@
             // DevPanelControlContratos
             // 
             this.DevPanelControlContratos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DevPanelControlContratos.Enabled = false;
             this.DevPanelControlContratos.Location = new System.Drawing.Point(2, 20);
             this.DevPanelControlContratos.Name = "DevPanelControlContratos";
             this.DevPanelControlContratos.Size = new System.Drawing.Size(487, 647);
@@ -187,6 +203,7 @@
             this.DevGroupControlRUT.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DevLookUpEditRUTEmpleado.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEmpleados)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DevTextEditRUT.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DevGroupControlDatosEmpleado)).EndInit();
             this.DevGroupControlDatosEmpleado.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DevPanelControlDatosEmpleado)).EndInit();
@@ -209,12 +226,13 @@
         private DevExpress.XtraEditors.GroupControl DevGroupControlDatosEmpleado;
         private DevExpress.XtraEditors.GroupControl DevGroupControlAccesos;
         private DevExpress.XtraEditors.GroupControl DevGroupControlContratos;
-        private DevExpress.XtraEditors.LookUpEdit DevLookUpEditRUTEmpleado;
         private DevExpress.XtraEditors.SplitContainerControl DevSplitContainerControlAccesos;
         private DevExpress.XtraEditors.PanelControl DevPanelControlAsistencia;
         private DevExpress.XtraEditors.PanelControl DevPanelControlCasinos;
         private DevExpress.XtraEditors.PanelControl DevPanelControlContratos;
         private DevExpress.XtraEditors.PanelControl DevPanelControlDatosEmpleado;
         private System.Windows.Forms.BindingSource bsEmpleados;
+        private DevExpress.XtraEditors.LookUpEdit DevLookUpEditRUTEmpleado;
+        private DevExpress.XtraEditors.TextEdit DevTextEditRUT;
     }
 }

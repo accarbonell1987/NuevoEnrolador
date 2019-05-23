@@ -31,6 +31,7 @@
             this.DevLayoutControlItemClave = new DevExpress.XtraLayout.LayoutControlItem();
             this.DevLayoutControlItemRevalidarClave = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxErrorProvider = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+            this.DevSimpleButtonAplicar = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlComponentesAcceso)).BeginInit();
             this.DevLayoutControlComponentesAcceso.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DevTextEditRevalidarClave.Properties)).BeginInit();
@@ -45,7 +46,7 @@
             // 
             this.DevLayoutControlComponentesAcceso.Controls.Add(this.DevTextEditRevalidarClave);
             this.DevLayoutControlComponentesAcceso.Controls.Add(this.DevTextClave);
-            this.DevLayoutControlComponentesAcceso.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DevLayoutControlComponentesAcceso.Dock = System.Windows.Forms.DockStyle.Top;
             this.DevLayoutControlComponentesAcceso.Location = new System.Drawing.Point(0, 0);
             this.DevLayoutControlComponentesAcceso.Name = "DevLayoutControlComponentesAcceso";
             this.DevLayoutControlComponentesAcceso.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(47, 121, 450, 400);
@@ -112,15 +113,32 @@
             // 
             this.dxErrorProvider.ContainerControl = this;
             // 
+            // DevSimpleButtonAplicar
+            // 
+            this.DevSimpleButtonAplicar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.DevSimpleButtonAplicar.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.DevSimpleButtonAplicar.Enabled = false;
+            this.DevSimpleButtonAplicar.Image = global::EnroladorStandAloneV2.Properties.Resources.apply_16x161;
+            this.DevSimpleButtonAplicar.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.DevSimpleButtonAplicar.Location = new System.Drawing.Point(169, 62);
+            this.DevSimpleButtonAplicar.Name = "DevSimpleButtonAplicar";
+            this.DevSimpleButtonAplicar.Size = new System.Drawing.Size(43, 23);
+            this.DevSimpleButtonAplicar.TabIndex = 8;
+            this.DevSimpleButtonAplicar.ToolTip = "Aplicar cambios de contraseña...";
+            this.DevSimpleButtonAplicar.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information;
+            this.DevSimpleButtonAplicar.ToolTipTitle = "Aplicar cambios";
+            this.DevSimpleButtonAplicar.Click += new System.EventHandler(this.DevSimpleButtonAplicar_Click);
+            // 
             // UCEnrolarClave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.DevSimpleButtonAplicar);
             this.Controls.Add(this.DevLayoutControlComponentesAcceso);
             this.DoubleBuffered = true;
             this.MinimumSize = new System.Drawing.Size(224, 69);
             this.Name = "UCEnrolarClave";
-            this.Size = new System.Drawing.Size(224, 69);
+            this.Size = new System.Drawing.Size(224, 89);
             ((System.ComponentModel.ISupportInitialize)(this.DevLayoutControlComponentesAcceso)).EndInit();
             this.DevLayoutControlComponentesAcceso.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DevTextEditRevalidarClave.Properties)).EndInit();
@@ -142,5 +160,6 @@
         private DevExpress.XtraEditors.TextEdit DevTextEditRevalidarClave;
         private DevExpress.XtraLayout.LayoutControlItem DevLayoutControlItemRevalidarClave;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider;
+        private DevExpress.XtraEditors.SimpleButton DevSimpleButtonAplicar;
     }
 }

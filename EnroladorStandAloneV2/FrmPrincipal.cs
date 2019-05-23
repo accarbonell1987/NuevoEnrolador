@@ -23,6 +23,8 @@ using EnroladorStandAloneV2.CapaInterfazUsuario.Interfaces;
 using System.Transactions;
 using DevExpress.XtraBars.Navigation;
 using EnroladorStandAloneV2.CapaInterfazUsuario.Enrolar;
+using System.Data.SQLite;
+using System.Diagnostics;
 
 namespace EnroladorStandAloneV2 {
     public partial class FrmPrincipal : DevExpress.XtraBars.Ribbon.RibbonForm {
@@ -38,6 +40,8 @@ namespace EnroladorStandAloneV2 {
             //Si la pantalla no es full HD minimizo los botones
             if (Height < 800) DevRibbonControl.Minimized = true;
 
+            
+            
             Negocio = new NegocioEnrolador();
 
             //mostar splash
@@ -50,6 +54,26 @@ namespace EnroladorStandAloneV2 {
         #endregion
 
         #region Eventos Form
+        private void FrmPrincipal_FormClosing(object sender, FormClosingEventArgs e) {
+            try {
+                if (!Negocio.Actualizando && Negocio.ExistenDatos && Negocio.CantidadAccionesPorEnviar > 0) {
+                    DialogResult dRes = XtraMessageBox.Show("Hay acciones que no han sido enviadas. Enviar ahora?", "Acciones no enviadas", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
+                    if (dRes != DialogResult.No) {
+                        e.Cancel = true;
+                        if (dRes == DialogResult.Yes) {
+                            DevBarButtonSincronizar_ItemClick(sender, null);
+                        }
+                        return;
+                    }
+                }
+                if (Negocio.mHuellero != null) {
+                    Negocio.mHuellero.Dispose();
+                    Negocio.mHuellero = null;
+                }
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+            }
+        }
         private void BarButtonItemSalir_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
             //Chequear:
             //1. Actualizando?
@@ -58,30 +82,16 @@ namespace EnroladorStandAloneV2 {
             // Mostrar Mensaje "¿Hay acciones que no han sido enviadas. Enviar ahora?"
 
             //Destruir Huellero
-
-            //if (!actualizando && dataLoaded && accionesPorEnviar.Count() > 0) {
-            //    DialogResult res = MessageBox.Show("Hay acciones que no han sido enviadas. Enviar ahora?", "Acciones no enviadas", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
-            //    if (res != DialogResult.No) {
-            //        e.Cancel = true;
-            //        if (res == DialogResult.Yes) {
-            //            recargar_ItemClick(this, null);
-            //        }
-            //        return;
-            //    }
-            //}
-            //if (huellero != null) {
-            //    huellero.Dispose();
-            //    huellero = null;
-            //}
+            FrmPrincipal_FormClosing(sender, new FormClosingEventArgs(CloseReason.UserClosing, false));
         }
 
         private async void FrmPrincipal_Load(object sender, EventArgs e) {
             DevGroupControlNotificacionesAcciones.Controls.Clear();
             DevGroupControlNotificacionesAcciones.Controls.Add(Negocio.ObtenerUCNotificaciones("Inicializando el sistema, espere por favor..."));
 
-            DesactivarSistema();
+            EstablecerEstadoSistema(EstadoUsoSistema.Inhabilitado);
             await InicializarSistema();
-            ActivarSistema();
+            EstablecerEstadoSistema(EstadoUsoSistema.Habilitado);
         }
         #endregion
 
@@ -135,8 +145,7 @@ namespace EnroladorStandAloneV2 {
             }
 
 #if DEBUG
-            //ACCM da un error en el ActiveX
-            //Negocio.mHuellero = new Huellero();
+            Negocio.mHuellero = new Huellero();
 #else
             while (!(await Task<bool>.Factory.StartNew(() =>
             {
@@ -175,23 +184,25 @@ namespace EnroladorStandAloneV2 {
 
             if (!Negocio.Online && diasDesdeUltimaConexion > NegocioEnrolador.DiasRecomendandosParaConectar) {
                 if (XtraMessageBox.Show(string.Format("Han pasado {0} días desde la última sincronización. Desea sincronizar ahora?", diasDesdeUltimaConexion), "Sincronizar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
-                    //await Sincronizar();
+                    await SincronizarDatos();
                     return;
                 }
             }
 
-            Negocio.AdicionarNotificacionProcesoRealizadoCorrectamente("Inicializar Sistema");
-
             CargarGridEmpleados();
-
-            //mostrar las notificaciones
+            Negocio.AdicionarNotificacionProcesoRealizadoCorrectamente("Inicializar Sistema");
         }
 
-        private void DesactivarSistema() {
-            DevRibbonControl.Enabled = false;
-        }
-        private void ActivarSistema() {
-            DevRibbonControl.Enabled = true;
+        private void EstablecerEstadoSistema(EstadoUsoSistema estado) {
+            Negocio.EstadoUsoSistema = estado;
+
+            if (estado == EstadoUsoSistema.Habilitado) {
+                DevRibbonControl.Enabled = true;
+                DevPanelControlPrincipal.Enabled = true;
+            } else {
+                DevRibbonControl.Enabled = false;
+                DevPanelControlPrincipal.Enabled = false;
+            }
         }
         #endregion
 
@@ -289,584 +300,26 @@ namespace EnroladorStandAloneV2 {
                 return false;
             }
         }
-
-        private async Task<List<POCOCadena>> CargarCadenas(ICargaDatos iCargaDatos) {
-            try {
-                List<POCOCadena> sList = await Negocio.CargarCadenas();
-
-                iCargaDatos.PrimerPaso(13, sList.Count, "Cargando Cadenas");
-                Application.DoEvents();
-
-                int contadorElementos = 0;
-                
-                //eliminar todos los registros
-                Negocio.EliminarTodosRegistros("Cadena");
-
-                foreach (var pCadena in sList) {
-                    //transformar datos
-                    var tCadena = TransformacionDatos.DePOCOCadenaACadena(pCadena);
-
-                    //adicionar al contexto
-                    Negocio.mContext.Cadena.Add(tCadena);
-
-                    iCargaDatos.AvanzarActual();
-
-                    //salvar cada 1000 elementos
-                    if (contadorElementos++ % 1000 == 0) {
-                        Negocio.mContext.SaveChanges();
-                        Application.DoEvents();
-                    }
-                }
-
-                //salvar restantes
-                Negocio.mContext.SaveChanges();
-
-                return sList;
-            } catch (Exception eX) {
-                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
-                return null;
-            }
-        }
-        private async Task<List<POCOInstalacion>> CargarInstalaciones(ICargaDatos iCargaDatos, List<POCOCadena> cadenas) {
-            try {
-                List<POCOInstalacion> sList = await Negocio.CargarInstalaciones();
-                List<POCOInstalacion> lInstalaciones = new List<POCOInstalacion>();
-
-                iCargaDatos.SiguientePaso(sList.Count, "Cargando Instalaciones");
-                Application.DoEvents();
-
-                //eliminar todos los registros
-                Negocio.EliminarTodosRegistros("Instalacion");
-
-                int contadorElementos = 0;
-
-                foreach (var pInstalacion in sList) {
-                    //saber si existe la instalacion en la cadena
-                    bool cadenaContieneInstalacion = cadenas.Any(p => p.GuidCadena == pInstalacion.GuidCadena);
-
-                    if (cadenaContieneInstalacion) {
-                        //transformar datos
-                        var tInstalacion = TransformacionDatos.DePOCOInstalacionAInstalacion(pInstalacion);
-
-                        //adicionar al contexto
-                        Negocio.mContext.Instalacion.Add(tInstalacion);
-
-                        lInstalaciones.Add(pInstalacion);
-                    }
-
-                    iCargaDatos.AvanzarActual();
-
-                    //salvar cada 1000 elementos
-                    if (contadorElementos++ % 1000 == 0) {
-                        Negocio.mContext.SaveChanges();
-                        Application.DoEvents();
-                    }
-                }
-
-                //salvar restantes
-                Negocio.mContext.SaveChanges();
-
-                return lInstalaciones;
-            } catch (Exception eX) {
-                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
-                return null;
-            }
-        }
-        private async Task<List<POCODispositivo>> CargarDispositivos(ICargaDatos iCargaDatos, List<POCOInstalacion> instalaciones) {
-
-            List<POCODispositivo> sList = await Negocio.CargarDispositivos();
-            List<POCODispositivo> lDispositivos = new List<POCODispositivo>();
-
-            try {
-                iCargaDatos.SiguientePaso(sList.Count, "Cargando Dispositivos");
-                Application.DoEvents();
-
-                int contadorElementos = 0;
-
-                //eliminar todos los registros
-                Negocio.EliminarTodosRegistros("Dispositivo");
-
-                foreach (var pDispositivo in sList) {
-                    pDispositivo.Tipo = TipoDispositivo.Reloj;
-                    //saber si existe la dispositivo en instalacion
-                    bool instalacionContieneDispositivo = instalaciones.Any(p => p.GuidInstalacion == pDispositivo.GuidInstalacion);
-
-                    if ((pDispositivo.Tipo != TipoDispositivo.Invalido) && (instalacionContieneDispositivo)) {
-                        //transformar datos
-                        var tDispositivo = TransformacionDatos.DePOCODispositivoADispositivo(pDispositivo);
-
-                        //adicionar al contexto
-                        Negocio.mContext.Dispositivo.Add(tDispositivo);
-
-                        lDispositivos.Add(pDispositivo);
-                    }
-
-                    iCargaDatos.AvanzarActual();
-
-                    //salvar cada 1000 elementos
-                    if (contadorElementos++ % 1000 == 0) {
-                        Negocio.mContext.SaveChanges();
-                        Application.DoEvents();
-                    }
-                }
-
-                //salvar restantes
-                Negocio.mContext.SaveChanges();
-
-                return lDispositivos;
-            } catch (Exception eX) {
-                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
-                return null;
-            }
-        }
-        private async Task<List<POCOEmpresa>> CargarEmpresas(ICargaDatos iCargaDatos) {
-
-            List<POCOEmpresa> sList = await Negocio.CargarEmpresas();
-            List<POCOEmpresa> lDispositivos = new List<POCOEmpresa>();
-
-            try {
-                iCargaDatos.SiguientePaso(sList.Count, "Cargando Empresas");
-                Application.DoEvents();
-
-                //eliminar todos los registros
-                Negocio.EliminarTodosRegistros("Empresa");
-
-                int contadorElementos = 0;
-
-                foreach (var pEmpresa in sList) {
-                    //transformar datos
-                    var tEmpresa = TransformacionDatos.DePOCOEmpresaAEmpresa(pEmpresa);
-
-                    //adicionar al contexto
-                    Negocio.mContext.Empresa.Add(tEmpresa);
-
-                    iCargaDatos.AvanzarActual();
-
-                    //salvar cada 1000 elementos
-                    if (contadorElementos++ % 1000 == 0) {
-                        Negocio.mContext.SaveChanges();
-                        Application.DoEvents();
-                    }
-                }
-
-                //salvar restantes
-                Negocio.mContext.SaveChanges();
-
-                return sList;
-            } catch (Exception eX) {
-                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
-                return null;
-            }
-        }
-        private async Task<List<POCOCargo>> CargarCargos(ICargaDatos iCargaDatos, List<POCOEmpresa> empresas) {
-
-            List<POCOCargo> sList = await Negocio.CargarCargos();
-            List<POCOCargo> lCargos = new List<POCOCargo>();
-
-            try {
-                iCargaDatos.SiguientePaso(sList.Count, "Cargando Cargos");
-                Application.DoEvents();
-
-                //eliminar todos los registros
-                Negocio.EliminarTodosRegistros("Cargo");
-
-                int contadorElementos = 0;
-
-                foreach (var pCargo in sList) {
-
-                    //saber si existe la cargo en empresas
-                    bool empresaContieneCargo = empresas.Any(p => p.GuidEmpresa == pCargo.GuidEmpresa);
-
-                    if (empresaContieneCargo) {
-                        //transformar datos
-                        var tCargo = TransformacionDatos.DePOCOCargoACargo(pCargo);
-
-                        //adicionar al contexto
-                        Negocio.mContext.Cargo.Add(tCargo);
-
-                        lCargos.Add(pCargo);
-                    }
-
-                    iCargaDatos.AvanzarActual();
-
-                    //salvar cada 1000 elementos
-                    if (contadorElementos++ % 1000 == 0) {
-                        Negocio.mContext.SaveChanges();
-                        Application.DoEvents();
-                    }
-                }
-
-                //salvar restantes
-                Negocio.mContext.SaveChanges();
-
-                return lCargos;
-            } catch (Exception eX) {
-                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
-                return null;
-            }
-        }
-        private async Task<List<POCOCuenta>> CargarCuentas(ICargaDatos iCargaDatos, List<POCOEmpresa> empresas) {
-
-            List<POCOCuenta> sList = await Negocio.CargarCuentas();
-            List<POCOCuenta> lCuentas = new List<POCOCuenta>();
-
-            try {
-                iCargaDatos.SiguientePaso(sList.Count, "Cargando Cuentas");
-                Application.DoEvents();
-
-                //eliminar todos los registros
-                Negocio.EliminarTodosRegistros("Cuenta");
-
-                foreach (var pCuenta in sList) {
-
-                    //saber si existe la cuenta en empresas
-                    bool empresaContieneCuenta = empresas.Any(p => p.GuidEmpresa == pCuenta.GuidEmpresa);
-
-                    if (empresaContieneCuenta) {
-                        //transformar datos
-                        var tCuenta = TransformacionDatos.DePOCOCuentaACuenta(pCuenta);
-
-                        //adicionar al contexto
-                        Negocio.mContext.Cuenta.Add(tCuenta);
-
-                        lCuentas.Add(pCuenta);
-                    }
-
-                    iCargaDatos.AvanzarActual();
-                }
-
-                Negocio.mContext.SaveChanges();
-                return lCuentas;
-            } catch (Exception eX) {
-                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
-                return null;
-            }
-        }
-        private async Task<List<POCOEmpleado>> CargarEmpleados(ICargaDatos iCargaDatos) {
-
-            List<POCOEmpleado> sList = await Negocio.CargarEmpleados();
-            List<POCOEmpleado> lEmpleados = new List<POCOEmpleado>();
-
-            try {
-                iCargaDatos.SiguientePaso(sList.Count, "Cargando Empleados");
-                Application.DoEvents();
-
-                int contadorElementos = 0;
-
-                //eliminar todos los registros
-                Negocio.EliminarTodosRegistros("Empleado");
-
-                foreach (var pEmpleado in sList) {
-
-                    string RUT = pEmpleado.RUT;
-                    //si no se puede validar continua, si puede corrige la RUT
-                    if (!ValidadorRUT.Validar(RUT, out RUT)) {
-                        iCargaDatos.AvanzarActual();
-                        continue;
-                    }
-                    pEmpleado.RUT = RUT;
-
-                    //transformar datos
-                    var tEmpleado = TransformacionDatos.DePOCOEmpleadoAEmpleado(pEmpleado);
-
-                    //adicionar al contexto
-                    Negocio.mContext.Empleado.Add(tEmpleado);
-
-                    lEmpleados.Add(pEmpleado);
-
-                    iCargaDatos.AvanzarActual();
-                    
-                    //salvar cada 1000 elementos
-                    if (contadorElementos++ % 1000 == 0) {
-                        Negocio.mContext.SaveChanges();
-                        Application.DoEvents();
-                    }
-                }
-
-                //salvar restantes
-                Negocio.mContext.SaveChanges();
-                return lEmpleados;
-            } catch (Exception eX) {
-                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
-                return null;
-            }
-        }
-        private async Task<List<POCOHuella>> CargarHuellas(ICargaDatos iCargaDatos, List<POCOEmpleado> empleados) {
-
-            List<POCOHuella> sList = await Negocio.CargarHuellas();
-            List<POCOHuella> lHuellas = new List<POCOHuella>();
-
-            try {
-                iCargaDatos.SiguientePaso(sList.Count, "Cargando Huellas");
-                Application.DoEvents();
-
-                //eliminar todos los registros
-                Negocio.EliminarTodosRegistros("Huella");
-
-                int contadorElementos = 0;
-
-                foreach (var pHuella in sList) {
-
-                    //saber si existe la huella en empleados
-                    bool empleadoContieneHuella = empleados.Any(p => p.GuidEmpleado == pHuella.GuidEmpleado);
-
-                    if ((empleadoContieneHuella)&&(Enum.IsDefined(typeof(TipoHuella), pHuella.Tipo))) {
-                        //transformar datos
-                        var tHuella = TransformacionDatos.DePOCOHuellaAHuella(pHuella);
-
-                        //adicionar al contexto
-                        Negocio.mContext.Huella.Add(tHuella);
-
-                        lHuellas.Add(pHuella);
-                    }
-
-                    //salvar cada 1000 elementos
-                    if (contadorElementos++ % 1000 == 0) {
-                        Negocio.mContext.SaveChanges();
-                        Application.DoEvents();
-                    }
-
-                    iCargaDatos.AvanzarActual();
-                }
-
-                //salvar restantes
-                Negocio.mContext.SaveChanges();
-                return lHuellas;
-            } catch (Exception eX) {
-                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
-                return null;
-            }
-        }
-        private async Task<List<POCOEmpleadoDispositivo>> CargarEmpleadoDispositivos(ICargaDatos iCargaDatos, List<POCOEmpleado> empleados, List<POCODispositivo> dispositivos) {
-
-            List<POCOEmpleadoDispositivo> sList = await Negocio.CargarEmpleadoDispositivos();
-            List<POCOEmpleadoDispositivo> lEmpleadoDispositivos = new List<POCOEmpleadoDispositivo>();
-
-            try {
-                iCargaDatos.SiguientePaso(sList.Count, "Cargando Relacion entre Empleados y Dispositivos");
-                Application.DoEvents();
-
-                //eliminar todos los registros
-                Negocio.EliminarTodosRegistros("EmpleadoDispositivo");
-
-                int contadorElementos = 0;
-
-                foreach (var pEmpleadoDispositivo in sList) {
-
-                    //saber si existe la empleadoDispositivo en empleados y dispositivos
-                    bool empleadoContieneEmpleadoDispositivo = empleados.Any(p => p.GuidEmpleado == pEmpleadoDispositivo.GuidEmpleado);
-                    bool dispositivoContieneEmpleadoDispositivo = dispositivos.Any(p => p.GuidDispositivo == pEmpleadoDispositivo.GuidDispositivo);
-
-                    if ((empleadoContieneEmpleadoDispositivo) && (dispositivoContieneEmpleadoDispositivo)) {
-                        //transformar datos
-                        var tEmpleadoDispositivo = TransformacionDatos.DePOCOEmpleadoDispositivoAEmpleadoDispositivo(pEmpleadoDispositivo);
-
-                        //adicionar al contexto
-                        Negocio.mContext.EmpleadoDispositivo.Add(tEmpleadoDispositivo);
-
-                        lEmpleadoDispositivos.Add(pEmpleadoDispositivo);
-                    }
-
-                    //salvar cada 1000 elementos
-                    if (contadorElementos++ % 1000 == 0) {
-                        Negocio.mContext.SaveChanges();
-                        Application.DoEvents();
-                    }
-
-                    iCargaDatos.AvanzarActual();
-                }
-
-                //salvar restantes
-                Negocio.mContext.SaveChanges();
-                return lEmpleadoDispositivos;
-            } catch (Exception eX) {
-                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
-                return null;
-            }
-        }
-        private async Task<List<POCOContrato>> CargarContratos(ICargaDatos iCargaDatos, List<POCOEmpleado> empleados, List<POCOEmpresa> empresas, List<POCOCuenta> cuentas, List<POCOCargo> cargos) {
-
-            List<POCOContrato> sList = await Negocio.CargarContratos();
-            List<POCOContrato> lContratos = new List<POCOContrato>();
-
-            try {
-                iCargaDatos.SiguientePaso(sList.Count, "Cargando Contratos");
-
-                Application.DoEvents();
-
-                //eliminar todos los registros
-                Negocio.EliminarTodosRegistros("Contrato");
-
-                int contadorElementos = 0;
-
-                foreach (var pContrato in sList) {
-
-                    //saber si existe la contrato en empleados, empresa, cuenta y cargo
-                    bool empleadoContieneContrato = empleados.Any(p => p.GuidEmpleado == pContrato.GuidEmpleado);
-
-                    bool empresaContieneContrato = empresas.Any(p => p.GuidEmpresa == pContrato.GuidEmpresa);
-
-                    bool cuentaContieneContrato = cuentas.Any(p => p.GuidCuenta == pContrato.GuidCuenta);
-
-                    bool cargoContieneContrato = cargos.Any(p => p.GuidCargo == pContrato.GuidCargo);
-
-                    //condicional que habia en la carga de contratos
-                    if (pContrato.GuidContrato.ToString().ToUpper().Equals("2D4554D6-6A05-4B08-BA50-874C1C2989F9")) {
-                        iCargaDatos.SiguientePaso(sList.Count, "Cargando Contratos Entré");
-                    }
-
-                    if ((empleadoContieneContrato) && (empresaContieneContrato) && (cuentaContieneContrato) && (cargoContieneContrato)) {
-                        //transformar datos
-                        var tContrato = TransformacionDatos.DePOCOContratoAContrato(pContrato);
-
-                        //adicionar al contexto
-                        Negocio.mContext.Contrato.Add(tContrato);
-
-                        lContratos.Add(pContrato);
-                    }
-
-                    //salvar cada 1000 elementos
-                    if (contadorElementos++ % 1000 == 0) {
-                        Negocio.mContext.SaveChanges();
-                        Application.DoEvents();
-                    }
-
-                    iCargaDatos.AvanzarActual();
-                }
-
-                //salvar restantes
-                Negocio.mContext.SaveChanges();
-                return lContratos;
-            } catch (Exception eX) {
-                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
-                return null;
-            }
-        }
-        private async Task<List<POCOEmpleadoTurnoServicioCasino>> CargarEmpleadoTurnoServicioCasinos(ICargaDatos iCargaDatos) {
-
-            List<POCOEmpleadoTurnoServicioCasino> sList = await Negocio.CargarEmpleadoTurnoServicioCasinos();
-            List<POCOEmpleadoTurnoServicioCasino> lEmpleadoTurnoServicioCasinoTurnoServicioCasinos = new List<POCOEmpleadoTurnoServicioCasino>();
-
-            try {
-                iCargaDatos.SiguientePaso(sList.Count, "Cargando Relacion entre Empleado, TurnoServicio, ServicioCasino");
-                Application.DoEvents();
-
-                //eliminar todos los registros
-                Negocio.EliminarTodosRegistros("EmpleadoTurnoServicioCasino");
-
-                int contadorElementos = 0;
-
-                foreach (var pEmpleadoTurnoServicioCasino in sList) {
-
-                    //transformar datos
-                    var tEmpleadoTurnoServicioCasino = TransformacionDatos.DePOCOEmpleadoTurnoServicioCasinoAEmpleadoTurnoServicioCasino(pEmpleadoTurnoServicioCasino);
-
-                    //adicionar al contexto
-                    Negocio.mContext.EmpleadoTurnoServicioCasino.Add(tEmpleadoTurnoServicioCasino);
-
-                    lEmpleadoTurnoServicioCasinoTurnoServicioCasinos.Add(pEmpleadoTurnoServicioCasino);
-
-                    iCargaDatos.AvanzarActual();
-
-                    //salvar cada 1000 elementos
-                    if (contadorElementos++ % 1000 == 0) {
-                        Negocio.mContext.SaveChanges();
-                        Application.DoEvents();
-                    }
-                }
-
-                //salvar restantes
-                Negocio.mContext.SaveChanges();
-                return lEmpleadoTurnoServicioCasinoTurnoServicioCasinos;
-            } catch (Exception eX) {
-                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
-                return null;
-            }
-        }
-        private async Task<List<POCOServicioCasino>> CargarServicioCasinos(ICargaDatos iCargaDatos) {
-
-            List<POCOServicioCasino> sList = await Negocio.CargarServicioCasinos();
-            List<POCOServicioCasino> lServicioCasinoTurnoServicioCasinos = new List<POCOServicioCasino>();
-
-            try {
-                iCargaDatos.SiguientePaso(sList.Count, "Cargando ServicioCasino");
-                Application.DoEvents();
-
-                //eliminar todos los registros
-                Negocio.EliminarTodosRegistros("ServicioCasino");
-
-                int contadorElementos = 0;
-
-                foreach (var pServicioCasino in sList) {
-
-                    //transformar datos
-                    var tServicioCasino = TransformacionDatos.DePOCOServicioCasinoAServicioCasino(pServicioCasino);
-
-                    //adicionar al contexto
-                    Negocio.mContext.ServicioCasino.Add(tServicioCasino);
-
-                    lServicioCasinoTurnoServicioCasinos.Add(pServicioCasino);
-
-                    iCargaDatos.AvanzarActual();
-
-                    //salvar cada 1000 elementos
-                    if (contadorElementos++ % 1000 == 0) {
-                        Negocio.mContext.SaveChanges();
-                        Application.DoEvents();
-                    }
-                }
-
-                //salvar restantes
-                Negocio.mContext.SaveChanges();
-                return lServicioCasinoTurnoServicioCasinos;
-            } catch (Exception eX) {
-                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
-                return null;
-            }
-        }
-        private async Task<List<POCOTurnoServicio>> CargarTurnoServicios(ICargaDatos iCargaDatos) {
-
-            List<POCOTurnoServicio> sList = await Negocio.CargarTurnoServicios();
-            List<POCOTurnoServicio> lTurnoServicioTurnoTurnoServicios = new List<POCOTurnoServicio>();
-
-            try {
-                iCargaDatos.SiguientePaso(sList.Count, "Cargando TurnoServicio");
-                Application.DoEvents();
-
-                //eliminar todos los registros
-                Negocio.EliminarTodosRegistros("TurnoServicio");
-
-                int contadorElementos = 0;
-
-                foreach (var pTurnoServicio in sList) {
-
-                    //transformar datos
-                    var tTurnoServicio = TransformacionDatos.DePOCOTurnoServicioATurnoServicio(pTurnoServicio);
-
-                    //adicionar al contexto
-                    Negocio.mContext.TurnoServicio.Add(tTurnoServicio);
-
-                    lTurnoServicioTurnoTurnoServicios.Add(pTurnoServicio);
-
-                    iCargaDatos.AvanzarActual();
-
-                    //salvar cada 1000 elementos
-                    if (contadorElementos++ % 1000 == 0) {
-                        Negocio.mContext.SaveChanges();
-                        Application.DoEvents();
-                    }
-                }
-
-                //salvar restantes
-                Negocio.mContext.SaveChanges();
-                return lTurnoServicioTurnoTurnoServicios;
-            } catch (Exception eX) {
-                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
-                return null;
-            }
-        }
+        /// <summary>
+        /// Sincronizacion de datos, envio las acciones luego intento leer nuevamente los datos Online
+        /// </summary>
+        /// <returns></returns>
         private async Task<bool> SincronizarDatos() {
+            //No hay conexion
+            if (!await Negocio.IdentificarHardwareOnline()) {
+                Negocio.AdicionarNotificacion("Al parecer no existe conexion con los servicios, compruebe su conexión y vuelva a intentarlo", TipoNotificacion.Cuidado);
+                return false;
+            }
+            
+            //desactivar propiedades del contexto para optimizar el tiempo de salva
+            Negocio.mContext.Configuration.AutoDetectChangesEnabled = false;
+            Negocio.mContext.Configuration.ValidateOnSaveEnabled = false;
+
+            MostrarNotificaciones();
+
             UCCargarDatos uCargarDatos = null;
+
+            var trans = Negocio.mContext.Database.BeginTransaction();
 
             try {
                 //inicializar user control
@@ -877,7 +330,6 @@ namespace EnroladorStandAloneV2 {
                 DevGroupControlNotificacionesAcciones.Controls.Clear();
                 DevGroupControlNotificacionesAcciones.Controls.Add(uCargarDatos);
 
-                //ACCM
                 //se deben de realizar los cambios en los progress bar
                 Negocio.EnviarAcciones();
 
@@ -886,6 +338,11 @@ namespace EnroladorStandAloneV2 {
                 //adicionar una notificacion en caso de que este la lista vacia
                 if (cadenas == null)
                     Negocio.AdicionarNotificacionListadoVacio("cadenas");
+
+                //cargar Contrato
+                List<POCOContrato> contratos = await CargarContratos(uCargarDatos);
+                if (contratos == null)
+                    Negocio.AdicionarNotificacionListadoVacio("contratos");
 
                 //cargar Instalaciones
                 List<POCOInstalacion> instalaciones = await CargarInstalaciones(uCargarDatos, cadenas);
@@ -927,11 +384,6 @@ namespace EnroladorStandAloneV2 {
                 if (empleadoDispositivos == null)
                     Negocio.AdicionarNotificacionListadoVacio("empleadoDispositivos");
 
-                //cargar Contrato
-                List<POCOContrato> contratos = await CargarContratos(uCargarDatos, empleados, empresas, cuentas, cargos);
-                if (contratos == null)
-                    Negocio.AdicionarNotificacionListadoVacio("contratos");
-
                 //cargar EmpleadoTurnoServicioCasinos
                 List<POCOEmpleadoTurnoServicioCasino> empleadoTurnoServicioCasinos = await CargarEmpleadoTurnoServicioCasinos(uCargarDatos);
                 if (empleadoTurnoServicioCasinos == null)
@@ -947,31 +399,591 @@ namespace EnroladorStandAloneV2 {
                 if (turnoServicioss == null)
                     Negocio.AdicionarNotificacionListadoVacio("turnoServicioss");
 
-                //ACCM
-                //ReaplicarAcciones();
-
                 Negocio.AdicionarSincronizacion();
+
+                trans.Commit();
+
+                //cargar grid
+                CargarGridEmpleados();
+
                 return true;
             } catch (Exception eX) {
+                trans.Rollback();
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
                 return false;
             } finally {
                 if (uCargarDatos != null) {
                     DevGroupControlNotificacionesAcciones.Controls.Clear();
                 }
+                //activar propiedades del contexto para optimizar el tiempo de salva
+                Negocio.mContext.Configuration.AutoDetectChangesEnabled = true;
+                Negocio.mContext.Configuration.ValidateOnSaveEnabled = true;
+            }
+        }
+
+        private async Task<List<POCOCadena>> CargarCadenas(ICargaDatos iCargaDatos) {
+            try {
+                List<POCOCadena> sList = await Negocio.CargarCadenas();
+                //List<Cadena> dbList = new List<Cadena>();
+
+                iCargaDatos.PrimerPaso(13, sList.Count, "Cargando Cadenas");
+                Application.DoEvents();
+
+                int contadorElementos = 0;
+                
+                //eliminar todos los registros
+                Negocio.EliminarTodosRegistros("Cadena");
+
+                foreach (var pCadena in sList) {
+                    //transformar datos
+                    var tCadena = TransformacionDatos.DePOCOCadenaACadena(pCadena);
+                    Negocio.mContext.Cadena.Add(tCadena);
+
+                    //dbList.Add(tCadena);
+                    iCargaDatos.AvanzarActual();
+
+                    //mostar progreso cada 100 elementos
+                    if (contadorElementos++ % 100 == 0) {
+                        Negocio.mContext.SaveChanges();
+                        Application.DoEvents();
+                    }
+                }
+
+                //Negocio.SalvarLote(dbList);
+                Negocio.mContext.SaveChanges();
+
+                return sList;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+                return null;
+            }
+        }
+        private async Task<List<POCOInstalacion>> CargarInstalaciones(ICargaDatos iCargaDatos, List<POCOCadena> cadenas) {
+            try {
+                List<POCOInstalacion> sList = await Negocio.CargarInstalaciones();
+                List<POCOInstalacion> lInstalaciones = new List<POCOInstalacion>();
+                //List<Instalacion> dbList = new List<Instalacion>();
+
+                iCargaDatos.SiguientePaso(sList.Count, "Cargando Instalaciones");
+                Application.DoEvents();
+
+                //eliminar todos los registros
+                Negocio.EliminarTodosRegistros("Instalacion");
+
+                int contadorElementos = 0;
+
+                foreach (var pInstalacion in sList) {
+                    //saber si existe la instalacion en la cadena
+                    bool cadenaContieneInstalacion = cadenas.Any(p => p.GuidCadena == pInstalacion.GuidCadena);
+
+                    if (cadenaContieneInstalacion) {
+                        //transformar datos
+                        var tInstalacion = TransformacionDatos.DePOCOInstalacionAInstalacion(pInstalacion);
+                        Negocio.mContext.Instalacion.Add(tInstalacion);
+
+                        //dbList.Add(tInstalacion);
+                        lInstalaciones.Add(pInstalacion);
+                    }
+
+                    iCargaDatos.AvanzarActual();
+
+                    //salvar cada 100 elementos
+                    if (contadorElementos++ % 100 == 0) {
+                        Negocio.mContext.SaveChanges();
+                        Application.DoEvents();
+                    }
+                }
+
+                Negocio.mContext.SaveChanges();
+                //Negocio.SalvarLote(dbList);
+
+                return lInstalaciones;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+                return null;
+            }
+        }
+        private async Task<List<POCODispositivo>> CargarDispositivos(ICargaDatos iCargaDatos, List<POCOInstalacion> instalaciones) {
+
+            List<POCODispositivo> sList = await Negocio.CargarDispositivos();
+            List<POCODispositivo> lDispositivos = new List<POCODispositivo>();
+            //List<Dispositivo> dbList = new List<Dispositivo>();
+
+            try {
+                iCargaDatos.SiguientePaso(sList.Count, "Cargando Dispositivos");
+                Application.DoEvents();
+
+                int contadorElementos = 0;
+
+                //eliminar todos los registros
+                Negocio.EliminarTodosRegistros("Dispositivo");
+
+                foreach (var pDispositivo in sList) {
+                    pDispositivo.Tipo = TipoDispositivo.Reloj;
+                    //saber si existe la dispositivo en instalacion
+                    bool instalacionContieneDispositivo = instalaciones.Any(p => p.GuidInstalacion == pDispositivo.GuidInstalacion);
+
+                    if ((pDispositivo.Tipo != TipoDispositivo.Invalido) && (instalacionContieneDispositivo)) {
+                        //transformar datos
+                        var tDispositivo = TransformacionDatos.DePOCODispositivoADispositivo(pDispositivo);
+                        Negocio.mContext.Dispositivo.Add(tDispositivo);
+
+                        //dbList.Add(tDispositivo);
+                        lDispositivos.Add(pDispositivo);
+                    }
+
+                    iCargaDatos.AvanzarActual();
+
+                    //salvar cada 100 elementos
+                    if (contadorElementos++ % 100 == 0) {
+                        Negocio.mContext.SaveChanges();
+                        Application.DoEvents();
+                    }
+                }
+
+                Negocio.mContext.SaveChanges();
+                //Negocio.SalvarLote(dbList);
+                return lDispositivos;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+                return null;
+            }
+        }
+        private async Task<List<POCOEmpresa>> CargarEmpresas(ICargaDatos iCargaDatos) {
+
+            List<POCOEmpresa> sList = await Negocio.CargarEmpresas();
+            List<POCOEmpresa> lDispositivos = new List<POCOEmpresa>();
+            //List<Empresa> dbList = new List<Empresa>();
+
+            try {
+                iCargaDatos.SiguientePaso(sList.Count, "Cargando Empresas");
+                Application.DoEvents();
+
+                //eliminar todos los registros
+                Negocio.EliminarTodosRegistros("Empresa");
+
+                int contadorElementos = 0;
+
+                foreach (var pEmpresa in sList) {
+                    //transformar datos
+                    var tEmpresa = TransformacionDatos.DePOCOEmpresaAEmpresa(pEmpresa);
+                    Negocio.mContext.Empresa.Add(tEmpresa);
+                    
+                    //dbList.Add(tEmpresa);
+                    iCargaDatos.AvanzarActual();
+
+                    //salvar cada 100 elementos
+                    if (contadorElementos++ % 100 == 0) {
+                        Negocio.mContext.SaveChanges();
+                        Application.DoEvents();
+                    }
+                }
+
+                Negocio.mContext.SaveChanges();
+                //Negocio.SalvarLote(dbList);
+                return sList;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+                return null;
+            }
+        }
+        private async Task<List<POCOCargo>> CargarCargos(ICargaDatos iCargaDatos, List<POCOEmpresa> empresas) {
+
+            List<POCOCargo> sList = await Negocio.CargarCargos();
+            List<POCOCargo> lCargos = new List<POCOCargo>();
+            //List<Cargo> dbList = new List<Cargo>();
+
+            try {
+                iCargaDatos.SiguientePaso(sList.Count, "Cargando Cargos");
+                Application.DoEvents();
+
+                //eliminar todos los registros
+                Negocio.EliminarTodosRegistros("Cargo");
+
+                int contadorElementos = 0;
+
+                foreach (var pCargo in sList) {
+
+                    //saber si existe la cargo en empresas
+                    bool empresaContieneCargo = empresas.Any(p => p.GuidEmpresa == pCargo.GuidEmpresa);
+
+                    if (empresaContieneCargo) {
+                        //transformar datos
+                        var tCargo = TransformacionDatos.DePOCOCargoACargo(pCargo);
+                        Negocio.mContext.Cargo.Add(tCargo);
+
+                        //dbList.Add(tCargo);
+                        lCargos.Add(pCargo);
+                    }
+
+                    iCargaDatos.AvanzarActual();
+
+                    //salvar cada 100 elementos
+                    if (contadorElementos++ % 100 == 0) {
+                        Negocio.mContext.SaveChanges();
+                        Application.DoEvents();
+                    }
+                }
+
+                Negocio.mContext.SaveChanges();
+                //Negocio.SalvarLote(dbList);
+
+                return lCargos;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+                return null;
+            }
+        }
+        private async Task<List<POCOCuenta>> CargarCuentas(ICargaDatos iCargaDatos, List<POCOEmpresa> empresas) {
+
+            List<POCOCuenta> sList = await Negocio.CargarCuentas();
+            List<POCOCuenta> lCuentas = new List<POCOCuenta>();
+            //List<Cuenta> dbList = new List<Cuenta>();
+            try {
+                iCargaDatos.SiguientePaso(sList.Count, "Cargando Cuentas");
+                Application.DoEvents();
+
+                //eliminar todos los registros
+                Negocio.EliminarTodosRegistros("Cuenta");
+
+                int contadorElementos = 0;
+
+                foreach (var pCuenta in sList) {
+                    //saber si existe la cuenta en empresas
+                    bool empresaContieneCuenta = empresas.Any(p => p.GuidEmpresa == pCuenta.GuidEmpresa);
+
+                    if (empresaContieneCuenta) {
+                        //transformar datos
+                        var tCuenta = TransformacionDatos.DePOCOCuentaACuenta(pCuenta);
+                        Negocio.mContext.Cuenta.Add(tCuenta);
+
+                        //dbList.Add(tCuenta);
+                        lCuentas.Add(pCuenta);
+                    }
+
+                    iCargaDatos.AvanzarActual();
+
+                    //salvar cada 100 elementos
+                    if (contadorElementos++ % 100 == 0) {
+                        Negocio.mContext.SaveChanges();
+                        Application.DoEvents();
+                    }
+                }
+
+                Negocio.mContext.SaveChanges();
+                //Negocio.SalvarLote(dbList);
+                return lCuentas;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+                return null;
+            }
+        }
+        private async Task<List<POCOEmpleado>> CargarEmpleados(ICargaDatos iCargaDatos) {
+
+            List<POCOEmpleado> sList = await Negocio.CargarEmpleados();
+            List<POCOEmpleado> lEmpleados = new List<POCOEmpleado>();
+            //List<Empleado> dbList = new List<Empleado>();
+
+            try {
+                iCargaDatos.SiguientePaso(sList.Count, "Cargando Empleados");
+                Application.DoEvents();
+
+                int contadorElementos = 0;
+
+                //eliminar todos los registros
+                Negocio.EliminarTodosRegistros("Empleado");
+
+                foreach (var pEmpleado in sList) {
+
+                    string RUT = pEmpleado.RUT;
+                    //si no se puede validar continua, si puede corrige la RUT
+                    if (!ValidadorRUT.Validar(RUT, out RUT)) {
+                        iCargaDatos.AvanzarActual();
+                        continue;
+                    }
+                    pEmpleado.RUT = RUT;
+
+                    //transformar datos
+                    var tEmpleado = TransformacionDatos.DePOCOEmpleadoAEmpleado(pEmpleado);
+                    Negocio.mContext.Empleado.Add(tEmpleado);
+
+                    //dbList.Add(tEmpleado);
+                    lEmpleados.Add(pEmpleado);
+
+                    iCargaDatos.AvanzarActual();
+
+                    //salvar cada 100 elementos
+                    if (contadorElementos++ % 100 == 0) {
+                        Negocio.mContext.SaveChanges();
+                        Application.DoEvents();
+                    }
+                }
+
+                Negocio.mContext.SaveChanges();
+                //Negocio.SalvarLote(dbList);
+                return lEmpleados;
+
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+                return null;
+            }
+        }
+        private async Task<List<POCOHuella>> CargarHuellas(ICargaDatos iCargaDatos, List<POCOEmpleado> empleados) {
+
+            List<POCOHuella> sList = await Negocio.CargarHuellas();
+            List<POCOHuella> lHuellas = new List<POCOHuella>();
+            //List<Huella> dbList = new List<Huella>();
+            try {
+                iCargaDatos.SiguientePaso(sList.Count, "Cargando Huellas");
+                Application.DoEvents();
+
+                //eliminar todos los registros
+                Negocio.EliminarTodosRegistros("Huella");
+
+                int contadorElementos = 0;
+
+                foreach (var pHuella in sList) {
+
+                    //saber si existe la huella en empleados
+                    //bool empleadoContieneHuella = empleados.Any(p => p.GuidEmpleado == pHuella.GuidEmpleado);
+
+                    //if ((empleadoContieneHuella) && (Enum.IsDefined(typeof(TipoHuella), pHuella.Tipo)))
+                    if (Enum.IsDefined(typeof(TipoHuella), pHuella.Tipo)) {
+                        //transformar datos
+                        var tHuella = TransformacionDatos.DePOCOHuellaAHuella(pHuella);
+                        Negocio.mContext.Huella.Add(tHuella);
+
+                        //dbList.Add(tHuella);
+                        lHuellas.Add(pHuella);
+                    }
+
+                    //salvar cada 100 elementos
+                    if (contadorElementos++ % 100 == 0) { 
+                        Negocio.mContext.SaveChanges();
+                        Application.DoEvents();
+                    }
+
+                    iCargaDatos.AvanzarActual();
+                }
+
+                Negocio.mContext.SaveChanges();
+                //Negocio.SalvarLote(dbList);
+
+                return lHuellas;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+                return null;
+            }
+        }
+        private async Task<List<POCOEmpleadoDispositivo>> CargarEmpleadoDispositivos(ICargaDatos iCargaDatos, List<POCOEmpleado> empleados, List<POCODispositivo> dispositivos) {
+
+            List<POCOEmpleadoDispositivo> sList = await Negocio.CargarEmpleadoDispositivos();
+            List<POCOEmpleadoDispositivo> lEmpleadoDispositivos = new List<POCOEmpleadoDispositivo>();
+            //List<EmpleadoDispositivo> dbList = new List<EmpleadoDispositivo>();
+            try {
+                iCargaDatos.SiguientePaso(sList.Count, "Cargando Relacion entre Empleados y Dispositivos");
+                Application.DoEvents();
+
+                //eliminar todos los registros
+                Negocio.EliminarTodosRegistros("EmpleadoDispositivo");
+
+                int contadorElementos = 0;
+
+                foreach (var pEmpleadoDispositivo in sList) {
+                    //transformar datos
+                    var tEmpleadoDispositivo = TransformacionDatos.DePOCOEmpleadoDispositivoAEmpleadoDispositivo(pEmpleadoDispositivo);
+                    Negocio.mContext.EmpleadoDispositivo.Add(tEmpleadoDispositivo);
+
+                    //dbList.Add(tEmpleadoDispositivo);
+                    lEmpleadoDispositivos.Add(pEmpleadoDispositivo);
+                    
+                    //salvar cada 100 elementos
+                    if (contadorElementos++ % 100 == 0) {
+                        Negocio.mContext.SaveChanges();
+                        Application.DoEvents();
+                    }
+
+                    iCargaDatos.AvanzarActual();
+                }
+
+                Negocio.mContext.SaveChanges();
+                //Negocio.SalvarLote(dbList);
+                return lEmpleadoDispositivos;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+                return null;
+            }
+        }
+        private async Task<List<POCOContrato>> CargarContratos(ICargaDatos iCargaDatos) {
+
+            List<POCOContrato> sList = await Negocio.CargarContratos();
+            List<POCOContrato> lContratos = new List<POCOContrato>();
+            //List<Contrato> dbList = new List<Contrato>();
+
+            try {
+                iCargaDatos.SiguientePaso(sList.Count, "Cargando Contratos");
+
+                Application.DoEvents();
+
+                //eliminar todos los registros
+                Negocio.EliminarTodosRegistros("Contrato");
+
+                int contadorElementos = 0;
+
+                foreach (var pContrato in sList) {
+
+                    //condicional que habia en la carga de contratos
+                    if (pContrato.GuidContrato.ToString().ToUpper().Equals("2D4554D6-6A05-4B08-BA50-874C1C2989F9")) {
+                        iCargaDatos.SiguientePaso(sList.Count, "Cargando Contratos Entré");
+                    }
+                    
+                    //transformar datos
+                    var tContrato = TransformacionDatos.DePOCOContratoAContrato(pContrato);
+                    Negocio.mContext.Contrato.Add(tContrato);
+
+                    //dbList.Add(tContrato);
+                    lContratos.Add(pContrato);
+                    
+                    //salvar cada 100 elementos
+                    if (contadorElementos++ % 100 == 0) {
+                        Negocio.mContext.SaveChanges();
+                        Application.DoEvents();
+                    }
+
+                    iCargaDatos.AvanzarActual();
+                }
+
+                Negocio.mContext.SaveChanges();
+                //Negocio.SalvarLote(dbList);
+                return lContratos;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+                return null;
+            }
+        }
+        private async Task<List<POCOEmpleadoTurnoServicioCasino>> CargarEmpleadoTurnoServicioCasinos(ICargaDatos iCargaDatos) {
+
+            List<POCOEmpleadoTurnoServicioCasino> sList = await Negocio.CargarEmpleadoTurnoServicioCasinos();
+            List<POCOEmpleadoTurnoServicioCasino> lEmpleadoTurnoServicioCasinoTurnoServicioCasinos = new List<POCOEmpleadoTurnoServicioCasino>();
+            //List<EmpleadoTurnoServicioCasino> dbList = new List<EmpleadoTurnoServicioCasino>();
+            try {
+                iCargaDatos.SiguientePaso(sList.Count, "Cargando Relacion entre Empleado, TurnoServicio, ServicioCasino");
+                Application.DoEvents();
+
+                //eliminar todos los registros
+                Negocio.EliminarTodosRegistros("EmpleadoTurnoServicioCasino");
+
+                int contadorElementos = 0;
+
+                foreach (var pEmpleadoTurnoServicioCasino in sList) {
+
+                    //transformar datos
+                    var tEmpleadoTurnoServicioCasino = TransformacionDatos.DePOCOEmpleadoTurnoServicioCasinoAEmpleadoTurnoServicioCasino(pEmpleadoTurnoServicioCasino);
+                    Negocio.mContext.EmpleadoTurnoServicioCasino.Add(tEmpleadoTurnoServicioCasino);
+
+                    //dbList.Add(tEmpleadoTurnoServicioCasino);
+                    lEmpleadoTurnoServicioCasinoTurnoServicioCasinos.Add(pEmpleadoTurnoServicioCasino);
+
+                    iCargaDatos.AvanzarActual();
+
+                    //salvar cada 100 elementos
+                    if (contadorElementos++ % 100 == 0) {
+                        Negocio.mContext.SaveChanges();
+                        Application.DoEvents();
+                    }
+                }
+
+                Negocio.mContext.SaveChanges();
+                //Negocio.SalvarLote(dbList);
+                return lEmpleadoTurnoServicioCasinoTurnoServicioCasinos;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+                return null;
+            }
+        }
+        private async Task<List<POCOServicioCasino>> CargarServicioCasinos(ICargaDatos iCargaDatos) {
+
+            List<POCOServicioCasino> sList = await Negocio.CargarServicioCasinos();
+            List<POCOServicioCasino> lServicioCasinoTurnoServicioCasinos = new List<POCOServicioCasino>();
+            //List<ServicioCasino> dbList = new List<ServicioCasino>();
+            try {
+                iCargaDatos.SiguientePaso(sList.Count, "Cargando ServicioCasino");
+                Application.DoEvents();
+
+                //eliminar todos los registros
+                Negocio.EliminarTodosRegistros("ServicioCasino");
+
+                int contadorElementos = 0;
+
+                foreach (var pServicioCasino in sList) {
+
+                    //transformar datos
+                    var tServicioCasino = TransformacionDatos.DePOCOServicioCasinoAServicioCasino(pServicioCasino);
+                    Negocio.mContext.ServicioCasino.Add(tServicioCasino);
+                    
+                    //.Add(tServicioCasino);
+                    lServicioCasinoTurnoServicioCasinos.Add(pServicioCasino);
+
+                    iCargaDatos.AvanzarActual();
+
+                    //salvar cada 100 elementos
+                    if (contadorElementos++ % 100 == 0) {
+                        Negocio.mContext.SaveChanges();
+                        Application.DoEvents();
+                    }
+                }
+
+                Negocio.mContext.SaveChanges();
+                //Negocio.SalvarLote(dbList);
+                return lServicioCasinoTurnoServicioCasinos;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+                return null;
+            }
+        }
+        private async Task<List<POCOTurnoServicio>> CargarTurnoServicios(ICargaDatos iCargaDatos) {
+
+            List<POCOTurnoServicio> sList = await Negocio.CargarTurnoServicios();
+            List<POCOTurnoServicio> lTurnoServicioTurnoTurnoServicios = new List<POCOTurnoServicio>();
+            //List<TurnoServicio> dbList = new List<TurnoServicio>();
+            try {
+                iCargaDatos.SiguientePaso(sList.Count, "Cargando TurnoServicio");
+                Application.DoEvents();
+
+                //eliminar todos los registros
+                Negocio.EliminarTodosRegistros("TurnoServicio");
+
+                int contadorElementos = 0;
+
+                foreach (var pTurnoServicio in sList) {
+
+                    //transformar datos
+                    var tTurnoServicio = TransformacionDatos.DePOCOTurnoServicioATurnoServicio(pTurnoServicio);
+                    Negocio.mContext.TurnoServicio.Add(tTurnoServicio);
+
+                    //dbList.Add(tTurnoServicio);
+                    lTurnoServicioTurnoTurnoServicios.Add(pTurnoServicio);
+
+                    iCargaDatos.AvanzarActual();
+
+                    //salvar cada 100 elementos
+                    if (contadorElementos++ % 100 == 0) {
+                        Negocio.mContext.SaveChanges();
+                        Application.DoEvents();
+                    }
+                }
+
+                Negocio.mContext.SaveChanges();
+                //Negocio.SalvarLote(dbList);
+                return lTurnoServicioTurnoTurnoServicios;
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+                return null;
             }
         }
         #endregion
 
-        #region Metodos Y Eventos
-        private void CargarGridEmpleados() {
-            try {
-                CrearPaginaNavegacion("Empleados", "Todos");
-            } catch (Exception eX) {
-                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
-            }
-        }
-
+        #region Accion de Botones
         private void DevBarButtonEnrolar_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
             try {
                 CrearPaginaNavegacion("Enrolar", "Nuevo");
@@ -980,7 +992,57 @@ namespace EnroladorStandAloneV2 {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
+        private void DevBarButtonItemGuardar_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
+            try {
+                if (DevNavigationPanePrincipal.SelectedPage.Caption.Split('-')[0] == "Enrolar") {
+                    //buscar la pagina del tab que se mando a guardar
+                    var framePage = DevNavigationPanePrincipal.SelectedPage;
+                    NavigationPageBase page = DevNavigationPanePrincipal.Pages.Where(p => p.Caption == framePage.Caption).FirstOrDefault();
+                    UCEnrolador uCEnrolador = (UCEnrolador)page.Controls[0];
+                    
+                    //capturar el empleado
+                    var empleado = uCEnrolador.empleado;
 
+                    //buscar la pagina de la grid
+                    NavigationPageBase gridPage = DevNavigationPanePrincipal.Pages.FirstOrDefault(p => p.Caption.Split('-')[0] != "Enrolar");
+                    UCGridDatos uCGrid = (UCGridDatos)gridPage.Controls[0];
+                    //actualizar la row del empleado
+                    if (Negocio.lEmpleados.Exists(p => p == empleado))
+                        uCGrid.ActualizarRowDelEmpleado(empleado);
+                    //else
+                    //    uCGrid.AdicionarRowDelEmpleado(empleado);
+
+                    //salvar los cambios
+                    Negocio.SalvarCambios(uCEnrolador.empleado);
+                    DevNavigationPanePrincipal.Pages.Remove(page);
+                }
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+            }
+        }
+        private void DevBarButtonItemDescartar_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
+            try {
+                if (DevNavigationPanePrincipal.SelectedPage.Caption.Split('-')[0] == "Enrolar") {
+                    var framePage = DevNavigationPanePrincipal.SelectedPage;
+                    NavigationPageBase page = DevNavigationPanePrincipal.Pages.Where(p => p.Caption == framePage.Caption).FirstOrDefault();
+                    UCEnrolador uC = (UCEnrolador)page.Controls[0];
+                    uC.DescartarCambios();
+                    DevNavigationPanePrincipal.Pages.Remove(page);
+                }
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+            }
+        }
+        #endregion
+
+        #region Panel de Navegacion
+        private void CargarGridEmpleados() {
+            try {
+                CrearPaginaNavegacion("Empleados", "Todos");
+            } catch (Exception eX) {
+                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
+            }
+        }
         public void CrearPaginaNavegacion(string tituloPagina, string PageName) {
             try {
                 NavigationPage navigationPage = new NavigationPage {
@@ -999,7 +1061,6 @@ namespace EnroladorStandAloneV2 {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
-
         private void DevNavigationPanePrincipal_QueryControl(object sender, QueryControlEventArgs e) {
             try {
                 NavigationPageBase page = null;
@@ -1016,7 +1077,7 @@ namespace EnroladorStandAloneV2 {
 
                 nombrePage = page.Caption.Split('-')[0];
                 string RUT = page.Name;
-                
+
                 XtraUserControl uControl;
 
                 switch (nombrePage) {
@@ -1031,34 +1092,21 @@ namespace EnroladorStandAloneV2 {
                 }
 
                 e.Control = uControl;
-                
+
                 MostrarNotificaciones();
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
         }
-
-        private void DevBarButtonItemDescartar_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
-            try {
-                var framePage = DevNavigationPanePrincipal.SelectedPage;
-                var page = DevNavigationPanePrincipal.Pages.Where(p => p.Caption == framePage.Caption).FirstOrDefault();
-
-                if (page == null) return;
-
-                DevNavigationPanePrincipal.Pages.Remove(page);
-
-            } catch (Exception eX) {
-                AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
-            }
-        }
-
         private void DevNavigationPanePrincipal_SelectedPageChanged(object sender, SelectedPageChangedEventArgs e) {
             if (DevNavigationPanePrincipal.SelectedPage.Caption.Split('-')[0] != "Enrolar")
                 DevRibbonPageGroupEnrolar.Visible = false;
             else
                 DevRibbonPageGroupEnrolar.Visible = true;
         }
+        #endregion
 
+        #region Notificaciones
         //Estos metodos se usan para chequear cada 2 seg si hay alguna notificacion nueva y mostrarlas
         private void BackgroundWorkerChequeoNotificaciones_DoWork(object sender, DoWorkEventArgs e) {
             while (true) {
@@ -1185,9 +1233,15 @@ namespace EnroladorStandAloneV2 {
         private async void DevBarButtonSincronizar_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             try {
+                //desactivar sistema
+                EstablecerEstadoSistema(EstadoUsoSistema.Inhabilitado);
+
                 var sincronizo = await SincronizarDatos();
                 if (sincronizo) Negocio.AdicionarNotificacionProcesoRealizadoCorrectamente("Sincronizacion Correcta");
-                else Negocio.AdicionarNotificacion("No se pudo sincronizar", TipoNotificacion.Critica);
+                else Negocio.AdicionarNotificacion("No se pudo sincronizar", TipoNotificacion.Cuidado);
+
+                //activar sistema
+                EstablecerEstadoSistema(EstadoUsoSistema.Habilitado);
             } catch (Exception eX) {
                 AyudanteLogs.Log(eX, "EnroladorStandAloneV2", MethodBase.GetCurrentMethod().Name, Negocio.lNotificaciones);
             }
@@ -1232,8 +1286,12 @@ namespace EnroladorStandAloneV2 {
                 return cp;
             }
         }
+
         #endregion
 
-
+        private void FrmPrincipal_Resize(object sender, EventArgs e) {
+            if (MaximizeBox)
+                ucBarraInformacion.Location = new Point(ucBarraInformacion.Location.X, 30);
+        }
     }
 }
